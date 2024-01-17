@@ -26,8 +26,8 @@
 
 • User hoặc Admin có quyền tạo sản phẩm thêm bớt xoá….(Chỉ có admin có quyền chỉnh sửa quyền User.)
 
-
-*Quy trình 3: ( quản lý tác phẩm )*
+*Quy trình 3: ( quản lý tác phẩm )
+•
 
     *Quy trình 4 ( lấy chi tiết sản phẩm)
 
