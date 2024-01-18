@@ -58,7 +58,7 @@
 
 • Go to payment
 
-    *Process 6 (Payment management)
+    *Process 6: (Payment management)
 
 • The store allows customers to choose payment methods in many ways:
 
