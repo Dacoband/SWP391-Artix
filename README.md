@@ -2,18 +2,18 @@
 # Artix - Artwork Sharing Platform
 ![Artix Logo](https://github.com/Dacoband/SWP391-Artix/blob/62aa4f36bb0872b9c6c5a69567e522bb032b1ca2/images/codeBurn.png)
 ## Table Of Contents
-- ## [Specifications](#specifications)
+- ### [Specifications](#specifications)
   - [Process 1](#process-1-register-an-account)
   - [Process 2](#process-2-check-login-information)
   - [Process 3](#process-3-product-management)
   - [Process 4](#process-4-get-product-details)
   - [Process 5](#process-5-cart-management)
   - [Process 6](#process-6-payment-management)
-- ## Technologies
-- ## Use Case Diagram
-- ## GUI Mock Up
-- ## Future Advancement
-- ## Limitation
+- ### Technologies
+- ### Use Case Diagram
+- ### GUI Mock Up
+- ### Future Advancement
+- ### Limitation
  
 
 # Specifications
