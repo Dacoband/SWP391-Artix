@@ -1,6 +1,6 @@
 
 # Artix - Artwork Sharing Platform
-![Artix Logo]()
+![Artix Logo](https://github.com/Dacoband/SWP391-Artix/blob/62aa4f36bb0872b9c6c5a69567e522bb032b1ca2/images/codeBurn.png)
 ## Table Of Contents
 - [Specifications](#specifications)
   - [Process 1](#process-1-register-an-account)
