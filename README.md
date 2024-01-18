@@ -2,13 +2,13 @@
 # Artix - Artwork Sharing Platform
 ![Artix Logo]()
 ## Table Of Contents
-- [Specification](#specifications)
-  - [Process 1](Process-1:-Register-for-a-User-account)
-  - [Process 2](Process-2:-Check-Login-Information)
-  - [Process 3](Process-3:-Product-Management)
-  - [Process 4](Process-4:-Get-Product-Details)
-  - [Process 5](Process-5:-Cart-Management)
-  - [Process 6](Process-6:-Payment-Management)
+- [Specifications](#specifications)
+  - [Specifications](#specifications)
+  - [Specifications](#specifications)
+  - [Specifications](#specifications)
+  - [Specifications](#specifications)
+  - [Specifications](#specifications)
+  - [Specifications](#specifications)
 - Technologies
 - Use Case Diagram
 - GUI Mock Up
@@ -17,7 +17,7 @@
  
 
 # Specifications
-## Process 1: Register an account
+## Process 1: Register An Account
 
 • Send form to Guest to register
 
