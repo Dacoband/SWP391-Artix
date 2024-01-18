@@ -1,8 +1,23 @@
 
 # Artix - Artwork Sharing Platform
-## Table of Contents
+![Artix Logo]()
+## Table Of Contents
+- [Specification](#specifications)
+  - [Process 1](Process-1:-Register-for-a-User-account)
+  - [Process 2](Process-2:-Check-Login-Information)
+  - [Process 3](Process-3:-Product-Management)
+  - [Process 4](Process-4:-Get-Product-Details)
+  - [Process 5](Process-5:-Cart-Management)
+  - [Process 6](Process-6:-Payment-Management)
+- Technologies
+- Use Case Diagram
+- GUI Mock Up
+- Future Advancement
+- Limitation
+ 
 
-    *Process 1: (Register for a User account)
+# Specifications
+## Process 1: Register an account
 
 • Send form to Guest to register
 
@@ -16,7 +31,7 @@
 
 • Automatically assign roleid to user
 
-    *Process 2: (Check user, login)
+## Process 2: Check Login Information
 
 • Get user information
 
@@ -26,11 +41,11 @@
 
 • User or Admin has the right to create products, add, remove, delete... (Only admin has the right to edit User rights.)
 
-    *Process 3: (Product management)
+## Process 3: Product Management
 • 
     
 
-    *Process 4: (Get product details)
+## Process 4: Get Product Details
 
 • The website sends detailed information about the work to customers in a new website
 
@@ -42,7 +57,7 @@
 
 • Add wishlist
 
-    *Process 5: (Cart management)
+## Process 5: Cart Management
 
 • Create a cart if the cart is empty
 
@@ -58,7 +73,7 @@
 
 • Go to payment
 
-    *Process 6: (Payment management)
+## Process 6: Payment Management
 
 • The store allows customers to choose payment methods in many ways:
 
