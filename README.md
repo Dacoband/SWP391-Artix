@@ -1,8 +1,8 @@
-# Welcome to project SWP 
-## Artix - Artwork Sharing Platform
-# Table of Contents
 
-    *Quy trình 1: ( đăng kí tài khoản User)
+# Artix - Artwork Sharing Platform
+## Table of Contents
+
+Quy trình 1: đăng kí tài khoản User
 
 • Gửi form cho Guest đăng kí
 
@@ -16,7 +16,7 @@
 
 • Tự động cấp roleid là user
 
-    *Quy trình 2: ( kiểm tra người dùng, login)
+    *Quy trình 2:  kiểm tra người dùng, login
 
 • Lấy thông tin người dùng
 
@@ -26,7 +26,7 @@
 
 • User hoặc Admin có quyền tạo sản phẩm thêm bớt xoá….(Chỉ có admin có quyền chỉnh sửa quyền User.)
 
-    *Quy trình 3 ( quản lý sản phẩm)
+    *Quy trình 3  quản lý sản phẩm)
 • 
     
 
