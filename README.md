@@ -1,7 +1,19 @@
 
 # Artix - Artwork Sharing Platform
 ![Artix Logo](https://github.com/Dacoband/SWP391-Artix/blob/62aa4f36bb0872b9c6c5a69567e522bb032b1ca2/images/codeBurn.png)
-## Table Of Contents
+# **Project Synopsis:**
+  - **Class:** SWP391-SE1705-SP2024
+  - **Project Supervisor:** Nguyen The Hoang - HoangNT20
+  - **Group:** Topic 10 (Artix)
+  - **Authors:**
+    - Nguyễn Dương Gia Bảo - SE171697 - Rous1141 - FE | PM 
+    - Huỳnh Thiện Nhân - SE171117 - Dacoband - BE | Data Desgin
+    - Trần Ánh Tuyết - SE***** - ..... - FE
+    - Nguyễn Minh Thức - SE170592 - ...... - BE
+- **Project:** Store Management - E-commerce - Business to Consumer
+- **Techs:** mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Recapchant 
+- **Structure:** Using MVC2 Design Pattern 
+# **Table Of Contents**
 - ### [Specifications](#specifications)
   - [Process 1](#process-1-register-an-account)
   - [Process 2](#process-2-check-login-information)
