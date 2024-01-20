@@ -8,8 +8,8 @@
   - **Authors:**
     - Nguyễn Dương Gia Bảo - SE171697 - Rous1141 - FE | BE | PM
     - Huỳnh Thiện Nhân - SE171117 - Dacoband - BE | Database Desgin
-    - Trần Ánh Tuyết - SE170234 - GUI Design - FE
-    - Nguyễn Minh Thức - SE170592 - Database Design - BE
+    - Trần Ánh Tuyết - SE170234 - GUI Design | FE
+    - Nguyễn Minh Thức - SE170592 - Database Design | BE
     - Phạm Minh Triều - SE172937 - Documentation
 - **Project:** Arkworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
 - **Techs:** mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Recapchant 
