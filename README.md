@@ -27,27 +27,27 @@
   - ### Design Figma - Draw GUIs
     - ### **Login & Sign Up :**
       - Login Page :
-        ![LoginPage](figma/Login.png)
+        ![LoginPage](Figma/Login.png)
       - Sign Up Page :
-        ![SignUpPage](figma/SignUp.png)
+        ![SignUpPage](Figma/SignUp.png)
     - ### **Admin Page :**
       - *Manage* :
         - Statistics :
-          ![StatisticsPage](figma/AdminStatictisc.png)
+          ![StatisticsPage](Figma/AdminStatictisc.png)
         - Transaction Logs : 
-          ![TransactionLogsPage](figma/TransactionLogs.png)
+          ![TransactionLogsPage](Figma/TransactionLogs.png)
         - Manage Users :
-          ![ManageUsersPage](figma/ManageUsers.png)
+          ![ManageUsersPage](Figma/ManageUsers.png)
       - *Moderator* :
         - View Reports :
-          ![ViewReportsPage](figma/ViewReports.png)
+          ![ViewReportsPage](Figma/ViewReports.png)
         - Mod Supports :
-          ![ModSupportPage](figma/ModSupport.png)
+          ![ModSupportPage](Figma/ModSupport.png)
         - Banned Listed :
-          ![BannedListPage](figma/BannedList.png)
+          ![BannedListPage](Figma/BannedList.png)
     - ### **Users Page :**
       - *Home Page* :
-        ![HomePagePage](figma/Screenshot%202024-01-31%20130937.png)
+        ![HomePagePage](Figma/Screenshot%202024-01-31%20130937.png)
       <!-- Sẽ cập nhật sau -->
   - ### Future Advancement
   - ### Limitation
