@@ -1,7 +1,7 @@
 
-# Artix - Artwork Sharing Platform
+- # Artix - Artwork Sharing Platform
 ![Artix Logo](https://github.com/Dacoband/SWP391-Artix/blob/62aa4f36bb0872b9c6c5a69567e522bb032b1ca2/images/codeBurn.png)
-# **Project Synopsis:**
+- # **Project Synopsis :**
   - **Class:** SWP391-SE1705-SP2024
   - **Project Supervisor:** Nguyen The Hoang - HoangNT20
   - **Topic:** Topic 10 (Artix)
@@ -11,23 +11,47 @@
     - Trần Ánh Tuyết - SE170234 - GUI Design | FE
     - Nguyễn Minh Thức - SE170592 - Database Design | BE
     - Phạm Minh Triều - SE172937 - Documentation
-- **Project:** Arkworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
-- **Techs:** mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Recapchant 
-- **Structure:** Using MVC2 Structure 
-# **Table Of Contents**
-- ### [Specifications](#specifications)
-  - [Process 1](#process-1-register-an-account)
-  - [Process 2](#process-2-check-login-information)
-  - [Process 3](#process-3-product-management)
-  - [Process 4](#process-4-get-product-details)
-  - [Process 5](#process-5-cart-management)
-  - [Process 6](#process-6-payment-management)
-- ### Technologies
-- ### Use Case Diagram
-- ### GUI Mock Up
-- ### Future Advancement
-- ### Limitation
- 
+  - **Project:** Arkworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
+  - **Techs:** RestfulAPI - mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Paypal - MUI - .NET 8 with C# - Vercel - Azure - Avien 
+  - **Structure:** Using MVC1 Structure 
+- # **Table Of Contents**
+  - ### [Specifications](#specifications)
+    - [Process 1](#process-1-register-an-account)
+    - [Process 2](#process-2-check-login-information)
+    - [Process 3](#process-3-product-management)
+    - [Process 4](#process-4-get-product-details)
+    - [Process 5](#process-5-cart-management)
+    - [Process 6](#process-6-payment-management)
+  - ### Technologies
+  - ### Use Case Diagram
+  - ### Design Figma - Draw GUIs
+    - ### **Login & Sign Up :**
+      - Login Page :
+        ![LoginPage](figma/Login.png)
+      - Sign Up Page :
+        ![SignUpPage](figma/SignUp.png)
+    - ### **Admin Page :**
+      - *Manage* :
+        - Statistics :
+          ![StatisticsPage](figma/AdminStatictisc.png)
+        - Transaction Logs : 
+          ![TransactionLogsPage](figma/TransactionLogs.png)
+        - Manage Users :
+          ![ManageUsersPage](figma/ManageUsers.png)
+      - *Moderator* :
+        - View Reports :
+          ![ViewReportsPage](figma/ViewReports.png)
+        - Mod Supports :
+          ![ModSupportPage](figma/ModSupport.png)
+        - Banned Listed :
+          ![BannedListPage](figma/BannedList.png)
+    - ### **Users Page :**
+      - *Home Page* :
+        ![HomePagePage](figma/Screenshot%202024-01-31%20130937.png)
+      <!-- Sẽ cập nhật sau -->
+  - ### Future Advancement
+  - ### Limitation
+
 
 # Specifications
 ## Process 1 Register An Account
