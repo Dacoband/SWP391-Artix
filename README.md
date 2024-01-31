@@ -1,6 +1,7 @@
 
 - # Artix - Artwork Sharing Platform
-![Artix Logo](https://github.com/Dacoband/SWP391-Artix/blob/62aa4f36bb0872b9c6c5a69567e522bb032b1ca2/images/codeBurn.png)
+  - ### Logo
+    ![Artix Logo](images/Logo.jpg)
 - # **Project Synopsis :**
   - **Class:** SWP391-SE1705-SP2024
   - **Project Supervisor:** Nguyen The Hoang - HoangNT20
