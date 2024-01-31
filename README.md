@@ -54,30 +54,19 @@
   - ### Limitation
 
 
-# Specifications
-## Process 1 Register An Account
-
-• Send form to Guest to register
-
-• Phone Number
-
-• Email
-
-• Password
-
-• Conform password
-
-• Automatically assign roleid to user
-
-## Process 2 Check Login Information
-
-• Get user information
-
-• Check whether it is a guest or a user to grant permissions to the user
-
-• If you are a guest, you do not have the right to buy, sell or post works on the website
-
-• User or Admin has the right to create products, add, remove, delete... (Only admin has the right to edit User rights.)
+- # Specifications
+   - ### Process 1 Register An Account :
+      - Send form to Guest to register
+      - Phone Number
+      - Email
+      - Password
+      - Conform password
+      - Automatically assign roleid to user
+   - ## Process 2 Check Login Information :
+      - Get user information
+      - Check whether it is a guest or a user to grant permissions to the user
+      - If you are a guest, you do not have the right to buy, sell or post works on the website
+      - User or Admin has the right to create products, add, remove, delete... (Only admin has the right to edit User rights.)
 
 ## Process 3 Product Management
 • 
