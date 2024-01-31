@@ -4,15 +4,16 @@
 # **Project Synopsis:**
   - **Class:** SWP391-SE1705-SP2024
   - **Project Supervisor:** Nguyen The Hoang - HoangNT20
-  - **Group:** Topic 10 (Artix)
+  - **Topic:** Topic 10 (Artix)
   - **Authors:**
-    - Nguyễn Dương Gia Bảo - SE171697 - Rous1141 - FE | PM 
-    - Huỳnh Thiện Nhân - SE171117 - Dacoband - BE | Data Desgin
-    - Trần Ánh Tuyết - SE***** - ..... - FE
-    - Nguyễn Minh Thức - SE170592 - ...... - BE
-- **Project:** Store Management - E-commerce - Business to Consumer
+    - Nguyễn Dương Gia Bảo - SE171697 - Rous1141 - FE | BE | PM
+    - Huỳnh Thiện Nhân - SE171117 - Dacoband - BE | Database Desgin
+    - Trần Ánh Tuyết - SE170234 - GUI Design | FE
+    - Nguyễn Minh Thức - SE170592 - Database Design | BE
+    - Phạm Minh Triều - SE172937 - Documentation
+- **Project:** Arkworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
 - **Techs:** mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Recapchant 
-- **Structure:** Using MVC2 Design Pattern 
+- **Structure:** Using MVC2 Structure 
 # **Table Of Contents**
 - ### [Specifications](#specifications)
   - [Process 1](#process-1-register-an-account)
