@@ -13,7 +13,7 @@ export default function Navigation2() {
     
     <div className='Navigation2'>
     <div className='home'>
-      <h3>HOME</h3>
+      <h3>HOME1</h3>
         <nav>
           <ul>
           
