@@ -1,38 +1,63 @@
-.App {
-  text-align: center;
+main {
+  
+  display: flex;
+  justify-content: space-between;
+  /* flex: 1; */
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Navigation2 {
+  /* flex:1; */
+  /* float: left; Đặt container này ở phía trái */
+  width: 18%; /* Chiếm 30% dung lượng */
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  
+  border-right: 1px solid #dbdbdb ;
+  position: fixed; /* Đảm bảo navigation dọc luôn hiển thị ở một vị trí cố định trên trang */
+  top: 65px; /* Hiển thị navigation dọc ở phía trên cùng của trang */
+  bottom: 0; /* Hiển thị navigation dọc ở phía dưới cùng của trang */
+  left: 0; /* Hiển thị navigation dọc ở phía bên trái của trang */
+ 
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao của navigation dọc */
+ 
+}
+.Navigation2 > div {
+  flex: 1; /* Phân chia không gian cho hai hàng */
+  display: flex; /* Sử dụng Flexbox cho các hàng */
+  flex-direction: column; /* Chia các hàng thành một cột dọc */
+}
+.Navigation2 h3{
+  text-align: center;
+}
+.container {
+  margin-top: 60px;
+  padding: 20px;
+  width: 82%; /* Chiếm 82% dung lượng */
+  float: right; /* Đặt .container bên phải */
+}
+.Navigation2 ul {
+  list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
+  padding: 0; /* Xóa padding */
+  margin-left: 25px; /* Xóa margin */
 }
 
-.App-link {
-  color: #61dafb;
+.Navigation2 ul li {
+  width: 100%;
+  margin-bottom: 15px;
+   /* Khoảng cách giữa các mục */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Navigation2 ul li a {
+  text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
+  color: black;
+  padding: 10px;
+  padding-right: 20px;
+  
+}
+.home{
+  
+  border-bottom:1px solid  #dbdbdb ;
+
+  
+  
 }

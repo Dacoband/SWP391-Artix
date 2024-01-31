@@ -1,16 +1,27 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Container from './components/Container';
+
+import Navigation from './components/Navigation';
+import Navigation2 from './components/Navigation2'
+
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-       
-      </header>
+      <header>
+      <Navigation/></header>
+      <main>
+        <Navigation2/>
+        <Container/>
+      </main>
+      
+      
+     
+     
+      
+      
     </div>
   );
 }
