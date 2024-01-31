@@ -17,7 +17,7 @@
   - **Structure:** Using MVC1 Structure 
 - # **Table Of Contents**
   - ### [Specifications](#specifications)
-    - [Process 1](#process-1-register-an-account)
+    - [Process 1](#process-1-Register-An-Account)
     - [Process 2](#process-2-check-login-information)
     - [Process 3](#process-3-product-management)
     - [Process 4](#process-4-get-product-details)
