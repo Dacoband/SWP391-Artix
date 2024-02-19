@@ -1,8 +1,8 @@
 main {
   
-  display: flex;
+  /* display: flex;
   justify-content: space-between;
-  /* flex: 1; */
+  flex: 1; */
 }
 .Navigation2 {
   /* flex:1; */
@@ -29,12 +29,14 @@ main {
 .Navigation2 h3{
   text-align: center;
 }
-.container {
+/* .container {
   margin-top: 60px;
-  padding: 20px;
-  width: 82%; /* Chiếm 82% dung lượng */
-  float: right; /* Đặt .container bên phải */
-}
+  padding: 20px; */
+  /* width: 85%;  */
+  /* Chiếm 82% dung lượng */
+  /* float: right;  */
+  /* Đặt .container bên phải */
+/* } */
 .Navigation2 ul {
   list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
   padding: 0; /* Xóa padding */
@@ -60,4 +62,12 @@ main {
 
   
   
+}
+.container{
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.item1{
+  height: 200px;
 }
