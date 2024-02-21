@@ -1,11 +1,11 @@
 
 import './App.css';
-import Container from './components/Container';
+// import Container from './components/Container';
 
-import Navigation from './components/Navigation';
-import Navigation2 from './components/Navigation2'
+// import Navigation from './components/Navigation';
+// import Navigation2 from './components/Navigation2';
 
-import TestIcon from './components/TestIcon'
+import TestIcon from './components/TestIcon';
 
 function App() {
   return (
