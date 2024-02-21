@@ -53,6 +53,7 @@ export default function TestIcon() {
         }
       </script> */}
     <script>
+      {
       let btn = document.getElementById("btn");
       let spans = document.getElementsByTagName("span");
 
@@ -68,7 +69,7 @@ export default function TestIcon() {
 
    }
 
-
+}
     </script>
     </>
   );
