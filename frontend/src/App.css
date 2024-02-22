@@ -253,16 +253,16 @@ background: transparent;
 }
 .button{
   position: relative;
-  padding: 10px 22px;
-  background:#7d2ea8 ;
-  border-radius: 6px;
-  color: #fff;
+  padding: 0px 0px;
+  background:#fff ;
+  /* border-radius: 6px; */
+  color: #7d2ea8;
   border: none;
   font-size: 18px;
   font-weight: 400;
   cursor: pointer;
   transition: transform 0.2s ease;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
 
 }
 .button:active{
@@ -276,7 +276,7 @@ background: transparent;
   transform: translateX(-50%);
   height: 100%;
   width: 150%;
-  z-index: -1;
+  /* z-index: -1; */
   background-repeat: no-repeat;
 }
 .button.animate::before{

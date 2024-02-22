@@ -21,6 +21,7 @@
 //     });
 // </script>
 import React, { useEffect } from 'react';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function TestIcon2() {
   useEffect(() => {
@@ -50,7 +51,8 @@ export default function TestIcon2() {
 
   return (
     <div className='test2'>
-      <button className='button'>Click 2</button>
+      <button className='button'> <FavoriteIcon /> {/* Icon trái tim từ Material-UI */}
+        </button>
     </div>
   );
 }
