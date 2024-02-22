@@ -33,7 +33,7 @@ export default function TestIcon() {
         </button>
         
     </div>
-    {/* <script>
+    <script>
         {
           // Chờ cho tất cả các phần tử span được render trước khi thêm sự kiện click
           window.onload = function() {
@@ -51,8 +51,8 @@ export default function TestIcon() {
             };
           }
         }
-      </script> */}
-    <script>
+      </script>
+    {/* <script>
       {
       let btn = document.getElementById("btn");
       let spans = document.getElementsByTagName("span");
@@ -70,7 +70,7 @@ export default function TestIcon() {
    }
 
 }
-    </script>
+    </script> */}
     </>
   );
 } 

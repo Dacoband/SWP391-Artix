@@ -240,3 +240,39 @@ background: transparent;
   }
   
 }
+
+
+
+/* test icon2 */
+.test2{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.button{
+  position: relative;
+  padding: 10px 22px;
+  background:#7d2ea8 ;
+  border-radius: 6px;
+  color: #fff;
+  border: none;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+
+}
+.button:active{
+  transform: scale(0.96);
+}
+.button::before,
+.button::after{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 150%;
+  
+}

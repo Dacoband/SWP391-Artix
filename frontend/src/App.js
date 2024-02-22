@@ -6,6 +6,7 @@ import './App.css';
 // import Navigation2 from './components/Navigation2';
 
 import TestIcon from './components/TestIcon';
+import TestIcon2 from './components/TestIcon2';
 
 function App() {
   return (
@@ -14,8 +15,8 @@ function App() {
       {/* <Navigation/>
        <Container/> */}
       
-     <TestIcon/>
-     
+     {/* <TestIcon/> */}
+     <TestIcon2/>
       
       
     </div>
