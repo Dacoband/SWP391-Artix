@@ -75,6 +75,7 @@
 //   );
 // } 
 import React, { useEffect, useRef } from 'react';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 export default function TestIcon() {
   const spansRef = useRef([]);
@@ -102,7 +103,7 @@ export default function TestIcon() {
   return (
     <>
       <div className='hero'>
-        <button className='btn' id="btn">click here 
+        <button className='btn' id="btn"><FavoriteIcon />
           <span ref={(el) => (spansRef.current.push(el))}></span>
           <span ref={(el) => (spansRef.current.push(el))}></span>
           <span ref={(el) => (spansRef.current.push(el))}></span>
