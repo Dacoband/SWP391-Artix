@@ -1,7 +1,11 @@
-﻿namespace backend.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace backend.Entities
 {
     public class Commission
     {
-        public int CommissionID { get; set; } // PK
+        [Key]
+        public int CommissionID { get; set; } // Pk
+
     }
 }

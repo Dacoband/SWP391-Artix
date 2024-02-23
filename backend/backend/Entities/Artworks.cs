@@ -5,6 +5,7 @@ namespace backend.Entities
 {
     public class Artworks
     {
+        [Key]
         public int ArtworkID { get; set; } // PK
         public int CreatorID { get; set; } // FK
         public int TagID { get; set; } // FK

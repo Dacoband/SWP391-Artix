@@ -5,7 +5,7 @@ namespace backend.Entities
 {
     public class Creator
     {
-
+        [Key]
         public int CreatorID { get; set; } // PK
         public int FollowID { get; set; } // FK
         public int PaypalAccount { get; set; } // FK

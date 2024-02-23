@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace backend.Entities
 {
     public class Order
     {
-        
+        [Key]
+        public int OrderID { get; set; }
+        public int CreatorID { get; set; }
     }
 }
