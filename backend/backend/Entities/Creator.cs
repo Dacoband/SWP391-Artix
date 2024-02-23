@@ -1,13 +1,22 @@
-﻿namespace backend.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
+
+namespace backend.Entities
 {
     public class Creator
     {
-        public int Id { get; set; }
+
+        public int CreatorID { get; set; } // PK
+        public int FollowID { get; set; } // FK
+        public int PaypalAccount { get; set; } // FK
         public string UserName { get; set; }
-        public float Followers { get; set; }
-        public string Phone {  get; set; }
+        public double Follower { get; set; }
+        public byte[] ProfilePicture { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Address { get; set; }
-        public DateTime? LastLogDate { get; set; }
+        public string Phone { get; set; }
+        public DateTime LastLogDate { get; set; }
         public bool AllowCommission { get; set; }
 
     }
