@@ -41,7 +41,7 @@ Dựa vào thông tin từ hình ảnh, đây là cấu trúc cơ sở dữ li�
   - PK: OrderID (int)
   - FK: CreatorID (int)
 - OrderDetail
-  - PK: OrderID (int)
+  - FK: OrderID (int)
   - FK: ArtWorkID (int)
   - DateOfPurchase (datetime)
   - Price (double)
