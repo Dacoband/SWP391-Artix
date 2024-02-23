@@ -63,18 +63,27 @@ Dựa vào thông tin từ hình ảnh, đây là cấu trúc cơ sở dữ li�
   - Username  (string)
   - Password  (string)
   - Email (string)
-  - Key: Field (Type)
+- Artworks
+  - PK: ArtworkID (int)
+  - FK: CreatorID (int)
+  - FK: TagID (int)
+  - FK: CategoryID (int)
+  - Description (string)
+  - DateCreated (datetime)
+  - Likes (int)
+  - Purchasable (boolean)
+  - Price (double)
 - Roles
-  - PK: RoleID
-  - RoleName
-  - Description
+  - PK: RoleID (int)
+  - RoleName (string)
+  - Description (string)
 - PayPalAccount
-  - PK: CreatorID
-  - AccountID
-  - QR
+  - PK: PayPalAccount (int)
+  - CreatorID  (int)
+  - QR (string)
 - Tags
-  - PK: TagID
-  - int Tag
+  - PK: TagID (int)
+  - TagName (string)
 
 ### Luồng
 

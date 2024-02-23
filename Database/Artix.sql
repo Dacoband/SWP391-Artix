@@ -1,141 +1,156 @@
--- Tạo database Artix
 CREATE DATABASE Artix;
 
--- Sử dụng database Artix
 USE Artix;
 
--- Tạo bảng ViewReport
-CREATE TABLE ViewReport (
-  ModeratorID INT NOT NULL, -- Khóa ngoại đến bảng Moderators (chưa tạo)
-  ReportID INT NOT NULL, -- Khóa ngoại đến bảng Reports (đã tạo)
-  PRIMARY KEY (ModeratorID, ReportID),
-  FOREIGN KEY (ModeratorID) REFERENCES Moderators(ModeratorID),
-  FOREIGN KEY (ReportID) REFERENCES Reports(ReportID)
+-- Create Tables in specific order to avoid foreign key errors
+
+-- 1. Roles
+CREATE TABLE Roles (
+  RoleID INT PRIMARY KEY AUTO_INCREMENT,
+  RoleName VARCHAR(255) NOT NULL,
+  Description TEXT
 );
 
--- Tạo bảng Reports
-CREATE TABLE Reports (
-  ReportID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  ArtWorkID INT NOT NULL, -- Khóa ngoại đến bảng ArtWork (chưa tạo)
-  CommentID INT, -- Khóa ngoại đến bảng Comments (đã tạo), có thể null
-  CreatorID INT NOT NULL, -- Khóa ngoại đến bảng Creators (đã tạo)
-  PRIMARY KEY (ReportID),
-  FOREIGN KEY (ArtWorkID) REFERENCES ArtWork(ArtWorkID),
-  FOREIGN KEY (CommentID) REFERENCES Comments(CommentID),
-  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID)
+-- 2. Tags
+CREATE TABLE Tags (
+  TagID INT PRIMARY KEY AUTO_INCREMENT,
+  TagName VARCHAR(255) NOT NULL
 );
 
--- Tạo bảng Follows
-CREATE TABLE Follows (
-  FollowerID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  PRIMARY KEY (FollowerID)
-);
-
--- Tạo bảng Notification
-CREATE TABLE Notification (
-  FollowID INT NOT NULL, -- Khóa ngoại đến bảng Follows (đã tạo)
-  CreatorID INT NOT NULL, -- Khóa ngoại đến bảng Creators (đã tạo)
-  ArtWorkID INT, -- Khóa ngoại đến bảng ArtWork (chưa tạo), có thể null
-  View BOOLEAN NOT NULL, -- Kiểu bool
-  PRIMARY KEY (FollowID),
-  FOREIGN KEY (FollowID) REFERENCES Follows(FollowID),
-  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID),
-  FOREIGN KEY (ArtWorkID) REFERENCES ArtWork(ArtWorkID)
-);
-
--- Tạo bảng Creators
+-- 3. Creators
 CREATE TABLE Creators (
-  CreatorID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  FollowID INT, -- Khóa ngoại đến bảng Follows (đã tạo), có thể null
-  PayPalAccountID INT, -- Khóa ngoại đến bảng PayPalAccount (chưa tạo)
-  Username VARCHAR(255) NOT NULL UNIQUE, -- Username duy nhất
-  FollowerCount INT DEFAULT 0, -- Số người theo dõi
-  ProfilePicture BLOB, -- Ảnh đại diện (kiểu dữ liệu BLOB)
-  FirstName VARCHAR(255) NOT NULL,
-  LastName VARCHAR(255) NOT NULL,
+  CreatorID INT PRIMARY KEY AUTO_INCREMENT,
+  FollowID INT,
+  PaypalAccount INT FOREIGN KEY REFERENCES PayPalAccount(PayPalAccount),
+  UserName VARCHAR(255) NOT NULL UNIQUE,
+  Follower DOUBLE DEFAULT 0,
+  ProfilePicture BLOB,
+  FirstName VARCHAR(255),
+  LastName VARCHAR(255),
   Address VARCHAR(255),
   Phone VARCHAR(255),
   LastLogDate DATETIME,
-  AllowCommission BOOLEAN DEFAULT 0, -- Kiểu bool
-  PRIMARY KEY (CreatorID),
-  FOREIGN KEY (FollowID) REFERENCES Follows(FollowID),
-  FOREIGN KEY (PayPalAccountID) REFERENCES PayPalAccount(PayPalAccountID)
+  AllowCommission BOOLEAN DEFAULT 0,
+  FOREIGN KEY (FollowID) REFERENCES Follows(FollowerID)
 );
 
-CREATE TABLE Comments (
-  CommentID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  CreatorID INT NOT NULL, -- Khóa ngoại đến bảng Creators (đã tạo)
-  ArtWorkID INT NOT NULL, -- Khóa ngoại đến bảng ArtWork (đã tạo)
-  CommentText VARCHAR(1000) NOT NULL, -- Nội dung bình luận
-  DateCreated DATETIME NOT NULL, -- Ngày tạo bình luận
-  PRIMARY KEY (CommentID),
-  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID),
-  FOREIGN KEY (ArtWorkID) REFERENCES ArtWork(ArtWorkID)
-);
-
-CREATE TABLE Orders (
-  OrderID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  CreatorID INT NOT NULL, -- Khóa ngoại đến bảng Creators (đã tạo)
-  DateCreated DATETIME NOT NULL, -- Ngày tạo đơn hàng
-  OrderStatus VARCHAR(255) NOT NULL, -- Trạng thái đơn hàng
-  ShippingAddress VARCHAR(255), -- Địa chỉ giao hàng
-  ShippingMethod VARCHAR(255), -- Phương thức giao hàng
-  ShippingCost DECIMAL(10,2), -- Chi phí vận chuyển
-  TotalCost DECIMAL(10,2) NOT NULL, -- Tổng chi phí
-  PRIMARY KEY (OrderID),
+-- 4. PayPalAccount
+CREATE TABLE PayPalAccount (
+  PayPalAccount INT PRIMARY KEY AUTO_INCREMENT,
+  CreatorID INT NOT NULL UNIQUE,
+  QR VARCHAR(255) NOT NULL,
   FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID)
 );
 
-CREATE TABLE OrderDetail (
-  OrderID INT NOT NULL, -- Khóa ngoại đến bảng Orders (đã tạo)
-  ArtWorkID INT NOT NULL, -- Khóa ngoại đến bảng ArtWork (đã tạo)
-  Quantity INT NOT NULL, -- Số lượng sản phẩm
-  Price DECIMAL(10,2) NOT NULL, -- Giá sản phẩm
-  PRIMARY KEY (OrderID, ArtWorkID),
-  FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-  FOREIGN KEY (ArtWorkID) REFERENCES ArtWork(ArtWorkID)
-);
-
-CREATE TABLE Commission (
-  CommissionID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  CreatorID INT NOT NULL, -- Khóa ngoại đến bảng Creators (đã tạo)
-  ArtWorkID INT NOT NULL, -- Khóa ngoại đến bảng ArtWork (đã tạo)
-  Description VARCHAR(1000), -- Mô tả hoa hồng
-  Amount DECIMAL(10,2) NOT NULL, -- Số tiền hoa hồng
-  DateRequested DATETIME, -- Ngày yêu cầu hoa hồng
-  DatePaid DATETIME, -- Ngày thanh toán hoa hồng
-  Status VARCHAR(255) NOT NULL, -- Trạng thái hoa hồng
-  PRIMARY KEY (CommissionID),
-  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID),
-  FOREIGN KEY (ArtWorkID) REFERENCES ArtWork(ArtWorkID)
-);
-
-CREATE TABLE CommissionForm (
-  CommissionID INT NOT NULL, -- Khóa ngoại đến bảng Commission (đã tạo)
-  RequestorID INT NOT NULL, -- Khóa ngoại đến bảng Creators (đã tạo)
-  Description VARCHAR(1000), -- Mô tả yêu cầu hoa hồng
-  DateSubmitted DATETIME NOT NULL, -- Ngày gửi yêu cầu hoa hồng
-  PRIMARY KEY (CommissionID),
-  FOREIGN KEY (CommissionID) REFERENCES Commission(CommissionID),
-  FOREIGN KEY (RequestorID) REFERENCES Creators(CreatorID)
-);
-
-CREATE TABLE Moderators (
-  ModeratorID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  AccountID INT NOT NULL, -- Khóa ngoại đến bảng Account (chưa tạo)
-  PRIMARY KEY (ModeratorID),
-  FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
-);
-
+-- 5. Account
 CREATE TABLE Account (
-  AccountID INT NOT NULL AUTO_INCREMENT, -- Khóa chính
-  RoleID INT NOT NULL, -- Khóa ngoại đến bảng Roles (chưa tạo)
-  Type VARCHAR(255) NOT NULL, -- Loại tài khoản
-  Username VARCHAR(255) NOT NULL UNIQUE, -- Username duy nhất
-  Password VARCHAR(255) NOT NULL, -- Mật khẩu
-  Email VARCHAR(255) NOT NULL, -- Email
-  PRIMARY KEY (AccountID),
+  AccountID INT PRIMARY KEY AUTO_INCREMENT,
+  RoleID INT NOT NULL FOREIGN KEY REFERENCES Roles(RoleID),
+  IdRole INT, -- Redundant field, can be removed
+  Username VARCHAR(255) NOT NULL UNIQUE,
+  Password VARCHAR(255) NOT NULL,
+  Email VARCHAR(255) NOT NULL UNIQUE,
   FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
 
+-- 6. Moderators
+CREATE TABLE Moderators (
+  ModeratorID INT PRIMARY KEY AUTO_INCREMENT,
+  ReportID INT,
+  AccountID INT NOT NULL FOREIGN KEY REFERENCES Account(AccountID),
+  FOREIGN KEY (ReportID) REFERENCES Reports(ReportID)
+);
+
+-- 7. Artworks
+CREATE TABLE Artworks (
+  ArtworkID INT PRIMARY KEY AUTO_INCREMENT,
+  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
+  TagID INT FOREIGN KEY REFERENCES Tags(TagID),
+  CategoryID INT, -- Not defined in provided schema
+  Description TEXT,
+  DateCreated DATETIME NOT NULL,
+  Likes INT DEFAULT 0,
+  Purchasable BOOLEAN DEFAULT 0,
+  Price DOUBLE
+);
+
+-- 8. Comments
+CREATE TABLE Comments (
+  CommentID INT PRIMARY KEY AUTO_INCREMENT,
+  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
+  ArtworkID INT NOT NULL FOREIGN KEY REFERENCES Artworks(ArtworkID),
+  CommentText TEXT NOT NULL,
+  DateCreated DATETIME NOT NULL
+);
+
+-- 9. Reports
+CREATE TABLE Reports (
+  ReportID INT PRIMARY KEY AUTO_INCREMENT,
+  ArtWorkID INT FOREIGN KEY REFERENCES Artworks(ArtworkID),
+  CommentID INT FOREIGN KEY REFERENCES Comments(CommentID),
+  CreatorID INT FOREIGN KEY REFERENCES Creators(CreatorID)
+);
+
+-- 10. Follows
+CREATE TABLE Follows (
+  FollowerID INT PRIMARY KEY AUTO_INCREMENT
+);
+
+-- 11. Notification
+CREATE TABLE Notification (
+  FollowID INT FOREIGN KEY REFERENCES Follows(FollowerID),
+  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
+  ArtworkID INT,
+  View BOOLEAN DEFAULT 0,
+  FOREIGN KEY (ArtworkID) REFERENCES Artworks(ArtworkID)
+);
+
+-- 12. ViewReport
+CREATE TABLE ViewReport (
+  ModeratorID INT NOT NULL FOREIGN KEY REFERENCES Moderators(ModeratorID),
+  ReportID INT NOT NULL FOREIGN KEY REFERENCES Reports(ReportID),
+  PRIMARY KEY (ModeratorID, ReportID)
+);
+
+-- 13. Orders
+CREATE TABLE Orders (
+  OrderID INT PRIMARY KEY AUTO_INCREMENT,
+  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID)
+);
+
+-- 14. OrderDetail
+CREATE TABLE OrderDetail (
+  OrderID INT NOT NULL FOREIGN KEY REFERENCES Orders(OrderID),
+  ArtworkID INT NOT NULL FOREIGN KEY REFERENCES Artworks(ArtworkID),
+  DateOfPurchase DATETIME NOT NULL,
+  Price DOUBLE NOT NULL,
+  PRIMARY KEY (OrderID, ArtworkID)
+);
+
+-- 15. Commission
+CREATE TABLE Commission (
+  CommissionID INT PRIMARY KEY AUTO_INCREMENT
+);
+
+-- 16. CommissionForm
+CREATE TABLE CommissionForm (
+  CommissionID INT NOT NULL
+FOREIGN KEY REFERENCES Commission(CommissionID),
+  ReceiverID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
+  RequestorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
+  Description TEXT
+);
+
+-- Các ràng buộc khóa ngoại đã được thiết lập trong các câu lệnh CREATE TABLE.
+
+-- Chèn dữ liệu mẫu (tùy chọn)
+
+-- Ví dụ: thêm một vài vai trò
+
+-- INSERT INTO Roles (RoleName, Description) VALUES
+--   ('Artist', 'Người sáng tạo nội dung'),
+--   ('Customer', 'Khách hàng'),
+--   ('Admin', 'Quản trị viên');
+
+-- Thêm dữ liệu cho các bảng khác theo cách tương tự
 
