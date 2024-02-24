@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class ModeratorsController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public ModeratorsController(YourDbContext context)
+    public ModeratorsController(ApplicationDbContext context)
     {
         _context = context;
     }

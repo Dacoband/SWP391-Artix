@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class OrderDetailController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public OrderDetailController(YourDbContext context)
+    public OrderDetailController(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -45,7 +45,7 @@ public class OrderDetailController : ControllerBase
         _context.OrderDetails.Add(orderDetail);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetOrderDetail), new { orderId = orderDetail.OrderID, artworkId = orderDetail.ArtworkID }, orderDetail);
+        return CreatedAtAction(nameof(GetOrderDetail), new { orderId = orderDetail.OrderID, artworkId = orderDetail.ArtWorkID }, orderDetail);
     }
 
     // DELETE: api/OrderDetail/5

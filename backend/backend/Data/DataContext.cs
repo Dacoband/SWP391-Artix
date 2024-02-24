@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using ArtworkSharingPlatform.Models;
 using backend.Entities;
 using System.Data;
 
-namespace ArtworkSharingPlatform.Models
+namespace backend.Entities
 {
     public class ApplicationDbContext : DbContext
     {
