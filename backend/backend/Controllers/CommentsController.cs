@@ -9,7 +9,7 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class CommentsController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly  _context;
 
     public CommentsController(YourDbContext context)
     {
