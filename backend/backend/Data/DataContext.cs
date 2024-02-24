@@ -1,6 +1,6 @@
 ﻿namespace backend.Data
 {
-    public class DataContext
+    public class DbContext 
     {
     }
 }

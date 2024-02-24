@@ -1,7 +1,11 @@
-﻿namespace backend.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace backend.Entities
 {
     public class Follow
     {
-        public int FollowId { get; set; }
+        [Key]
+        public int FollowId { get; set; } //Primary Key 
+
     }
 }

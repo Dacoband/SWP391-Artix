@@ -1,8 +1,5 @@
-CREATE DATABASE Artix;
-
-USE Artix;
-
--- Create Tables in specific order to avoid foreign key errors
+CREATE DATABASE Artix ;
+USE Artix ;
 
 -- 1. Roles
 CREATE TABLE Roles (
@@ -17,13 +14,17 @@ CREATE TABLE Tags (
   TagName VARCHAR(255) NOT NULL
 );
 
--- 3. Creators
+-- 3. Follows
+CREATE TABLE Follows (
+  FollowerID INT PRIMARY KEY AUTO_INCREMENT
+);
+
 CREATE TABLE Creators (
   CreatorID INT PRIMARY KEY AUTO_INCREMENT,
-  FollowID INT,
-  PaypalAccount INT FOREIGN KEY REFERENCES PayPalAccount(PayPalAccount),
+  PaypalAccount INT,
   UserName VARCHAR(255) NOT NULL UNIQUE,
   Follower DOUBLE DEFAULT 0,
+  FollowID INT, -- Thêm cột FollowID
   ProfilePicture BLOB,
   FirstName VARCHAR(255),
   LastName VARCHAR(255),
@@ -31,10 +32,11 @@ CREATE TABLE Creators (
   Phone VARCHAR(255),
   LastLogDate DATETIME,
   AllowCommission BOOLEAN DEFAULT 0,
-  FOREIGN KEY (FollowID) REFERENCES Follows(FollowerID)
+  FOREIGN KEY (FollowID) REFERENCES Follows(FollowerID) -- Tạo khóa ngoại trên cột FollowID tham chiếu đến bảng Follows
 );
 
--- 4. PayPalAccount
+
+-- 5. PayPalAccount
 CREATE TABLE PayPalAccount (
   PayPalAccount INT PRIMARY KEY AUTO_INCREMENT,
   CreatorID INT NOT NULL UNIQUE,
@@ -42,89 +44,99 @@ CREATE TABLE PayPalAccount (
   FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID)
 );
 
--- 5. Account
+-- 6. Account
 CREATE TABLE Account (
   AccountID INT PRIMARY KEY AUTO_INCREMENT,
-  RoleID INT NOT NULL FOREIGN KEY REFERENCES Roles(RoleID),
-  IdRole INT, -- Redundant field, can be removed
+  RoleID INT NOT NULL,
   Username VARCHAR(255) NOT NULL UNIQUE,
   Password VARCHAR(255) NOT NULL,
   Email VARCHAR(255) NOT NULL UNIQUE,
   FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
 );
 
--- 6. Moderators
-CREATE TABLE Moderators (
-  ModeratorID INT PRIMARY KEY AUTO_INCREMENT,
-  ReportID INT,
-  AccountID INT NOT NULL FOREIGN KEY REFERENCES Account(AccountID),
-  FOREIGN KEY (ReportID) REFERENCES Reports(ReportID)
-);
-
--- 7. Artworks
+-- 8. Artworks
 CREATE TABLE Artworks (
   ArtworkID INT PRIMARY KEY AUTO_INCREMENT,
-  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
-  TagID INT FOREIGN KEY REFERENCES Tags(TagID),
-  CategoryID INT, -- Not defined in provided schema
+  CreatorID INT NOT NULL,
+  TagID INT,
+  CategoryID INT,
   Description TEXT,
   DateCreated DATETIME NOT NULL,
   Likes INT DEFAULT 0,
   Purchasable BOOLEAN DEFAULT 0,
-  Price DOUBLE
+  Price DOUBLE,
+  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID),
+  FOREIGN KEY (TagID) REFERENCES Tags(TagID)
 );
 
--- 8. Comments
+-- 9. Comments
 CREATE TABLE Comments (
   CommentID INT PRIMARY KEY AUTO_INCREMENT,
-  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
-  ArtworkID INT NOT NULL FOREIGN KEY REFERENCES Artworks(ArtworkID),
+  CreatorID INT NOT NULL,
+  ArtworkID INT NOT NULL,
   CommentText TEXT NOT NULL,
-  DateCreated DATETIME NOT NULL
+  DateCreated DATETIME NOT NULL,
+  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID),
+  FOREIGN KEY (ArtworkID) REFERENCES Artworks(ArtworkID)
 );
-
--- 9. Reports
+-- 10. Reports
 CREATE TABLE Reports (
   ReportID INT PRIMARY KEY AUTO_INCREMENT,
-  ArtWorkID INT FOREIGN KEY REFERENCES Artworks(ArtworkID),
-  CommentID INT FOREIGN KEY REFERENCES Comments(CommentID),
-  CreatorID INT FOREIGN KEY REFERENCES Creators(CreatorID)
+  ArtWorkID INT,
+  CommentID INT,
+  CreatorID INT,
+  FOREIGN KEY (ArtWorkID) REFERENCES Artworks(ArtworkID),
+  FOREIGN KEY (CommentID) REFERENCES Comments(CommentID),
+  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID)
 );
 
--- 10. Follows
-CREATE TABLE Follows (
-  FollowerID INT PRIMARY KEY AUTO_INCREMENT
+-- 7. Moderators
+CREATE TABLE Moderators (
+  ModeratorID INT PRIMARY KEY AUTO_INCREMENT,
+  ReportID INT,
+  AccountID INT NOT NULL,
+  FOREIGN KEY (ReportID) REFERENCES Reports(ReportID),
+  FOREIGN KEY (AccountID) REFERENCES Account(AccountID)
 );
 
 -- 11. Notification
 CREATE TABLE Notification (
-  FollowID INT FOREIGN KEY REFERENCES Follows(FollowerID),
-  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
+  NotificationID INT PRIMARY KEY AUTO_INCREMENT, -- Thêm một cột NotificationID là khóa chính
+  FollowID INT,
+  CreatorID INT NOT NULL,
   ArtworkID INT,
   View BOOLEAN DEFAULT 0,
+  FOREIGN KEY (FollowID) REFERENCES Follows(FollowerID),
+  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID),
   FOREIGN KEY (ArtworkID) REFERENCES Artworks(ArtworkID)
 );
 
+
 -- 12. ViewReport
 CREATE TABLE ViewReport (
-  ModeratorID INT NOT NULL FOREIGN KEY REFERENCES Moderators(ModeratorID),
-  ReportID INT NOT NULL FOREIGN KEY REFERENCES Reports(ReportID),
-  PRIMARY KEY (ModeratorID, ReportID)
+  ModeratorID INT NOT NULL,
+  ReportID INT NOT NULL,
+  PRIMARY KEY (ModeratorID, ReportID),
+  FOREIGN KEY (ModeratorID) REFERENCES Moderators(ModeratorID),
+  FOREIGN KEY (ReportID) REFERENCES Reports(ReportID)
 );
 
 -- 13. Orders
 CREATE TABLE Orders (
   OrderID INT PRIMARY KEY AUTO_INCREMENT,
-  CreatorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID)
+  CreatorID INT NOT NULL,
+  FOREIGN KEY (CreatorID) REFERENCES Creators(CreatorID)
 );
 
 -- 14. OrderDetail
 CREATE TABLE OrderDetail (
-  OrderID INT NOT NULL FOREIGN KEY REFERENCES Orders(OrderID),
-  ArtworkID INT NOT NULL FOREIGN KEY REFERENCES Artworks(ArtworkID),
+  OrderID INT NOT NULL,
+  ArtworkID INT NOT NULL,
   DateOfPurchase DATETIME NOT NULL,
   Price DOUBLE NOT NULL,
-  PRIMARY KEY (OrderID, ArtworkID)
+  PRIMARY KEY (OrderID, ArtworkID),
+  FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+  FOREIGN KEY (ArtworkID) REFERENCES Artworks(ArtworkID)
 );
 
 -- 15. Commission
@@ -134,23 +146,12 @@ CREATE TABLE Commission (
 
 -- 16. CommissionForm
 CREATE TABLE CommissionForm (
-  CommissionID INT NOT NULL
-FOREIGN KEY REFERENCES Commission(CommissionID),
-  ReceiverID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
-  RequestorID INT NOT NULL FOREIGN KEY REFERENCES Creators(CreatorID),
-  Description TEXT
+  CommissionFormID INT PRIMARY KEY AUTO_INCREMENT,
+  CommissionID INT NOT NULL,
+  ReceiverID INT NOT NULL,
+  RequestorID INT NOT NULL,
+  Description TEXT,
+  FOREIGN KEY (CommissionID) REFERENCES Commission(CommissionID),
+  FOREIGN KEY (ReceiverID) REFERENCES Creators(CreatorID),
+  FOREIGN KEY (RequestorID) REFERENCES Creators(CreatorID)
 );
-
--- Các ràng buộc khóa ngoại đã được thiết lập trong các câu lệnh CREATE TABLE.
-
--- Chèn dữ liệu mẫu (tùy chọn)
-
--- Ví dụ: thêm một vài vai trò
-
--- INSERT INTO Roles (RoleName, Description) VALUES
---   ('Artist', 'Người sáng tạo nội dung'),
---   ('Customer', 'Khách hàng'),
---   ('Admin', 'Quản trị viên');
-
--- Thêm dữ liệu cho các bảng khác theo cách tương tự
-
