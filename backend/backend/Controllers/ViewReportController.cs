@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class ViewReportController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public ViewReportController(YourDbContext context)
+    public ViewReportController(ApplicationDbContext context)
     {
         _context = context;
     }

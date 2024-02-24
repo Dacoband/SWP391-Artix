@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class CommissionController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public CommissionController(YourDbContext context)
+    public CommissionController(ApplicationDbContext context)
     {
         _context = context;
     }

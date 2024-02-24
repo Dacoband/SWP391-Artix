@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class NotificationController : ControllerBase
 {
-    private readonly yourdbcontext _context;
+    private readonly ApplicationDbContext _context;
 
-    public NotificationController(yourdbcontext context)
+    public NotificationController(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -45,7 +45,7 @@ public class NotificationController : ControllerBase
         _context.Notifications.Add(notification);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetNotification), new { id = notification.NotificationID }, notification);
+        return CreatedAtAction(nameof(GetNotification), new { id = notification.ArtWorkID }, notification);
     }
 
     // PUT: api/Notification/5
@@ -96,6 +96,6 @@ public class NotificationController : ControllerBase
 
     private bool NotificationExists(int id)
     {
-        return _context.Notifications.Any(e => e.NotificationID == id);
+        return _context.Notifications.Any(e => e.ArtWorkID == id);
     }
 }

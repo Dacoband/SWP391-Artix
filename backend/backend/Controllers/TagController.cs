@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class TagController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public TagController(YourDbContext context)
+    public TagController(ApplicationDbContext context)
     {
         _context = context;
     }

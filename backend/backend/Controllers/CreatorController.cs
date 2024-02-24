@@ -11,9 +11,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class CreatorController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public CreatorController(YourDbContext context)
+    public CreatorController(ApplicationDbContext context)
     {
         _context = context;
     }
