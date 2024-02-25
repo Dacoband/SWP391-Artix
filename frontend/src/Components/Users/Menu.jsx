@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import CustomizedDrawer from '../StyledMUI/CustomizedDrawer.jsx';
+import AppLogo from '../StyledMUI/AppLogo.jsx';
 
 
 export default function Menu() {
@@ -17,7 +18,7 @@ export default function Menu() {
         <AppBar sx={{transition:theme.transition,color:theme.color,backgroundColor: theme.backgroundColor }} position="static">
           <Toolbar>
               <CustomizedDrawer/>
-              <img style={{width:"82px",height:"32px"}} src = "/sliderImages/icon_demo.png" alt="App Icon" />
+              <AppLogo/>
             <Typography color="inherit" variant="h5" component="div" sx={{flexGrow: 1, fontFamily:theme.fontFamily}}>
               Gensokyo
             </Typography>
