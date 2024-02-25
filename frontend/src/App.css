@@ -49,3 +49,9 @@ a{
 .loading{
   margin: auto; 
 }
+
+.app-logo{
+  margin-left: 2vw;
+  width: 82px;
+  height: 32px;
+}
