@@ -21,13 +21,14 @@ const Theme = {
     backgroundColor:'#FFF',
     backgroundImage: lightimages,
     transition: "all 1s ease-in-out",
-
+    
   },
   dark:{
     color:'#61dafb',
     backgroundColor:'#1a1a2e',
     backgroundImage: darkimages,
     transition: "all 1s ease-in-out",
+    
   },
 }
 
