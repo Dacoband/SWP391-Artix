@@ -21,14 +21,14 @@ const Theme = {
     backgroundColor:'#FFF',
     backgroundImage: lightimages,
     transition: "all 1s ease-in-out",
-    
+    borderColor:"cyan",
   },
   dark:{
     color:'#61dafb',
     backgroundColor:'#1a1a2e',
     backgroundImage: darkimages,
     transition: "all 1s ease-in-out",
-    
+    borderColor:"red",
   },
 }
 
@@ -37,7 +37,6 @@ const initialState = {
   theme: Theme.light,
   change: false,
   toggleTheme: () => {},
-  switchImage: () => {},
 }
 
 const ThemeContext = React.createContext(initialState);
@@ -46,15 +45,11 @@ function ThemeProvider({children}) {
   const [dark,SetDark] = useState(false)
   const [change,SetChange] = useState(false)
   const toggleTheme = () => {
-    !dark ? SetDark(true) : SetDark(false)
-    SetChange(true)
-  }
-  const switchImage = () =>{
-    SetChange(false)
+    SetDark(prevDark => !prevDark); // Toggles dark mode without a separate state change
   }
   const theme = dark ? Theme.dark : Theme.light
   return (
-    <ThemeContext.Provider value={{theme,dark,change,toggleTheme,switchImage}}>
+    <ThemeContext.Provider value={{theme,dark,change,toggleTheme}}>
       {children}
     </ThemeContext.Provider>
   )
