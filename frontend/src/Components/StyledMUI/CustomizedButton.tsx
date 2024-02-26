@@ -3,8 +3,8 @@ import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import {ThemeContext} from "../Themes/ThemeProvider.tsx"
 
-function CustomizedButton({ label, ...props }) {
-    const { dark } = useContext(ThemeContext);
+function CustomizedButton({children, ...props}) {
+    const { dark,theme } = useContext(ThemeContext);
     const classes = useStyles();
   
     return (
@@ -12,7 +12,7 @@ function CustomizedButton({ label, ...props }) {
         className={dark ? classes.darkButton : classes.lightButton}
         {...props}
       >
-        {label}
+        {children}
       </Button>
     );
   }
@@ -20,14 +20,14 @@ function CustomizedButton({ label, ...props }) {
 const useStyles = makeStyles( ({
   darkButton: {
     color: '#61dafb', // White text for better contrast
-    backgroundColor: '#1565C0', // Darker Blue
+    backgroundColor: '#', // Darker Blue
     '&:hover': {
       backgroundColor: '#302e4d', // Lighter blue on hover for dark mode
     },
   },
   lightButton: {
     color: '#0096FA', // Dark text for better contrast in light mode
-    backgroundColor: '#2196F3', // Blue
+    backgroundColor: '#', // Blue
     '&:hover': {
       backgroundColor: '#F5F5F5', // Grey on hover for light mode
     },
