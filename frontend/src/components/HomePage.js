@@ -1,19 +1,25 @@
 import React from 'react'
-import { ListTag } from '../share/ListofTag'
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+
 import CarouselTag from'./CarouselTag';
+import RecommendedWorks from './RecommendedWords'
 export default function HomePage() {
   return (
    
- 
-    
     <div className='homepage'>
 
       <div className='carouseltag'>
         <div className='seemore'>See More</div>
         <CarouselTag/>
+      </div>
+      < div className='recommendedwork'>
+        <div className='headrecommended'>
+          <h3>Recommended Words</h3>
+          <div className='seemore'>See More</div></div>
+
+       <div className='recommendedimg'>
+        <RecommendedWorks/></div>
+
+
       </div>
 
 
@@ -21,9 +27,9 @@ export default function HomePage() {
 
 
 
+   </div>
 
 
-
-    </div>
+    
   )
 }

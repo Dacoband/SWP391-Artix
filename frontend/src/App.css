@@ -335,6 +335,7 @@ main {
   color: #25B9C3;
   text-decoration: underline;
   text-align: right;
+  cursor: pointer;
 }
 
 
@@ -366,17 +367,6 @@ main {
 /* Hiệu ứng hover */
  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
-.itemtag:hover {
-  background-color: #007bff; /* Màu nền khi hover */
-  color: #fff; /* Màu chữ khi hover */
-}
-
-/* Hiệu ứng hover: Khi được nhấn */
-.itemtag:active {
-  background-color: #0056b3; /* Màu nền khi nhấn */
-  color: #fff; /* Màu chữ khi nhấn */
-}
-
 
 .slick-next:before {
   font-family: 'slick';
@@ -386,4 +376,25 @@ main {
   color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+
+.css-uym98a-MuiImageList-root {
+
+  overflow-y: unset;
+}
+.recommendedwork{
+  margin-top: 60px;
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+}
+.headrecommended{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.recommendedimg{
+  display: flex;
+  justify-content: center;
 }
