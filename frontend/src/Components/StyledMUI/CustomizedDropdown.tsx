@@ -11,11 +11,10 @@ import { styled } from '@mui/material/styles';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 
   
-  // Custom style for the Menu component
   
-
 export default function CustomizedDropdown() {
     const {theme,toggleTheme,dark} = useContext(ThemeContext)
+    // Custom style for the Menu component
     const CustomizedMenu = styled(Menu)(() => ({
       '& .MuiPaper-root': {
         backgroundColor: theme.backgroundColor,
