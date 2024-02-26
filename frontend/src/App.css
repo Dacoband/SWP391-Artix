@@ -378,16 +378,12 @@ main {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-.css-uym98a-MuiImageList-root {
-
-  overflow-y: unset;
-}
 .recommendedwork{
   margin-top: 60px;
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
+  margin-bottom: 40px;
 }
 .headrecommended{
   display: flex;
@@ -397,4 +393,64 @@ main {
 .recommendedimg{
   display: flex;
   justify-content: center;
+  padding-bottom: 10px;
+}
+.cardrecommended{
+  margin: 10px 5px;
+}
+/* .userofworks{
+  padding: 4px;
+} */
+
+
+.recommendedusers{
+  margin-top: 30px;
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.imguser{
+  width: 80px;
+  height: 80px;
+ padding: 10px;
+  
+}
+.imgu{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.inforuser{ 
+  display: flex;
+  align-items: center;
+  background-color: #61dafb;
+  color:black;
+  padding-bottom: 10px;
+ 
+}
+.contentuser{
+  margin-left: 10px;
+}
+.user-container{
+  margin: 18px;
+
+}
+
+.card-follow-button {
+  display: flex;
+  justify-content: center; 
+
+}
+
+
+.Randomimg{
+  margin-top: 30px;
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+  margin-bottom: 40px;
 }
