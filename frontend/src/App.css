@@ -1,3 +1,7 @@
+*{
+  margin: 0;
+  padding: 0;
+}
 main {
   
   /* display: flex;
@@ -315,4 +319,70 @@ main {
     background-size:0% 0% , 0% 0%,0% 0% , 0% 0%,0% 0% , 0% 0% ;
   }
   
+}
+
+
+
+
+/* HomePage */
+.carouseltag{
+  margin-top: 40px;
+  margin-left: 70px;
+  margin-right: 70px;
+  position: relative;
+}
+.ListofTag{
+  display: flex;
+  list-style-type: none;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  
+}
+.itemtag{
+  display: inline-block;
+  white-space: nowrap; /* Ngăn ngừa việc ngắt dòng */
+  overflow: hidden; /* Ngăn việc tràn vượt phần tử cha */
+  height:30px ;
+  margin-right: 8px;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: none; 
+  border-radius: 5px;
+  color: #fff;
+  background-color: #ff1876;
+/* Hiệu ứng hover */
+ transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+.itemtag:hover {
+  background-color: #007bff; /* Màu nền khi hover */
+  color: #fff; /* Màu chữ khi hover */
+}
+
+/* Hiệu ứng hover: Khi được nhấn */
+.itemtag:active {
+  background-color: #0056b3; /* Màu nền khi nhấn */
+  color: #fff; /* Màu chữ khi nhấn */
+}
+.arrow-left , .arrow-right{
+  
+  padding: 7px 7px;
+  background:#636363;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  position:absolute;
+  top:75%;
+  transform: translateY(-50%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 23);
+
+}
+.arrow-left{
+  left: -34px;
+}
+.arrow-right{
+  right: -34px;
 }
