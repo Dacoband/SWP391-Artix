@@ -8,11 +8,17 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import CollectionsIcon from '@mui/icons-material/Collections';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
+import ExploreIcon from '@mui/icons-material/Explore';
+import StarsIcon from '@mui/icons-material/Stars';
+import MarkunreadMailboxRoundedIcon from '@mui/icons-material/MarkunreadMailboxRounded';
+import DesignServicesRoundedIcon from '@mui/icons-material/DesignServicesRounded';
+import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import {ThemeContext} from '../Themes/ThemeProvider.tsx'
 import AppLogo from './AppLogo.jsx';
 
@@ -22,36 +28,53 @@ export default function CustomizedDrawer() {
   const toggleDrawer = (action) => {
     SetDrawer(action)
   }
+  const IconListHomePage = [
+    <CollectionsIcon />,
+    <WhatshotIcon/>,
+    <StarsIcon/>,
+    <ExploreIcon/>,
+  ]
+  const IconListPersonal = [
+    <CropOriginalIcon/>,
+    <MarkunreadMailboxRoundedIcon/>,
+    <DesignServicesRoundedIcon/>
+  ]
+
 
   const MyDrawerList = (
 
-    <Box sx={{ width: "20vw" }} role="presentation" onClick={() => toggleDrawer(false)}>
+    <Box sx={{ width: "20rem",color:theme.color }} role="presentation" onClick={() => toggleDrawer(false)}>
       <Toolbar>
         <IconButton onClick={() => toggleDrawer(false)}>
           <MenuOpenIcon sx={{color:theme.color}} />  {/* Change the icon when clicked */}
         </IconButton>
        <AppLogo/>
       </Toolbar>
+      {/* "&::before, &::after": WILL CHANGE Divider Line Color With Text children init */}
+      <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
+        <Typography variant='h6'>Home Page</Typography>
+      </Divider>
       <List>
-        <Divider variant='middle'>Community</Divider>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+        {['View All', 'Hot Topic', 'You Loved These', 'Explore'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ListItemIcon sx={{color:theme.color}}>
+                  {IconListHomePage[index]}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider variant='middle'>Personal</Divider>
+      <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
+        <Typography variant='h6'>Personal</Typography>
+      </Divider>
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['Your Works', 'Your Commisions', 'Your Requests'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              <ListItemIcon sx={{color:theme.color}}>
+                {IconListPersonal[index]}
               </ListItemIcon>
               <ListItemText primary={text} />
             </ListItemButton>
