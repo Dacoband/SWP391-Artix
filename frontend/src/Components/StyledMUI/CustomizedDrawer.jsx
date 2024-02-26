@@ -5,7 +5,6 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -21,6 +20,7 @@ import DesignServicesRoundedIcon from '@mui/icons-material/DesignServicesRounded
 import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import {ThemeContext} from '../Themes/ThemeProvider.tsx'
 import AppLogo from './AppLogo.jsx';
+import CustomizedListedButton from '../StyledMUI/CustomizedListedButton.tsx'
 
 export default function CustomizedDrawer() {
   const {theme} = useContext(ThemeContext)
@@ -43,7 +43,7 @@ export default function CustomizedDrawer() {
 
   const MyDrawerList = (
 
-    <Box sx={{ width: "20rem",color:theme.color }} role="presentation" onClick={() => toggleDrawer(false)}>
+    <Box sx={{ width: "16rem",color:theme.color }} role="presentation" onClick={() => toggleDrawer(false)}>
       <Toolbar>
         <IconButton onClick={() => toggleDrawer(false)}>
           <MenuOpenIcon sx={{color:theme.color}} />  {/* Change the icon when clicked */}
@@ -57,12 +57,12 @@ export default function CustomizedDrawer() {
       <List>
         {['View All', 'Hot Topic', 'You Loved These', 'Explore'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <CustomizedListedButton >
               <ListItemIcon sx={{color:theme.color}}>
                   {IconListHomePage[index]}
               </ListItemIcon>
               <ListItemText primary={text} />
-            </ListItemButton>
+            </CustomizedListedButton>
           </ListItem>
         ))}
       </List>
@@ -72,12 +72,12 @@ export default function CustomizedDrawer() {
       <List>
         {['Your Works', 'Your Commisions', 'Your Requests'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <CustomizedListedButton >
               <ListItemIcon sx={{color:theme.color}}>
                 {IconListPersonal[index]}
               </ListItemIcon>
               <ListItemText primary={text} />
-            </ListItemButton>
+              </CustomizedListedButton >
           </ListItem>
         ))}
       </List>

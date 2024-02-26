@@ -19,17 +19,17 @@ function CustomizedButton({ label, ...props }) {
 
 const useStyles = makeStyles( ({
   darkButton: {
-    color: '#FFFFFF', // White text for better contrast
+    color: '#61dafb', // White text for better contrast
     backgroundColor: '#1565C0', // Darker Blue
     '&:hover': {
-      backgroundColor: '#1976D2', // Brighter Blue on hover
+      backgroundColor: '#302e4d', // Lighter blue on hover for dark mode
     },
   },
   lightButton: {
-    color: 'GhostWhite', // Dark text for better contrast in light mode
+    color: '#0096FA', // Dark text for better contrast in light mode
     backgroundColor: '#2196F3', // Blue
     '&:hover': {
-      backgroundColor: '#64B5F6', // Lighter Blue on hover
+      backgroundColor: '#F5F5F5', // Grey on hover for light mode
     },
   },
 }));
