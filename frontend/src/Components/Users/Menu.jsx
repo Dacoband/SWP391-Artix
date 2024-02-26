@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import CustomizedDrawer from '../StyledMUI/CustomizedDrawer.jsx';
 import AppLogo from '../StyledMUI/AppLogo.jsx';
-
+import ExpandingSearchBar from '../StyledMUI/CustomizedSearchBar.jsx'
 
 export default function Menu() {
   const { theme, toggleTheme, dark } = useContext(ThemeContext);
@@ -19,9 +19,7 @@ export default function Menu() {
           <Toolbar>
               <CustomizedDrawer/>
               <AppLogo/>
-            <Typography color="inherit" variant="h5" component="div" sx={{flexGrow: 1, fontFamily:theme.fontFamily}}>
-              Gensokyo
-            </Typography>
+              <ExpandingSearchBar/>
             <Button color="inherit"><Link to={"/"}>Home</Link></Button>
             <Button color="inherit"><Link to={"create"}>Create</Link></Button>
             <Button color="inherit" onClick={toggleTheme}>{dark?"Dark":"Light"}</Button>
