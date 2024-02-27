@@ -19,6 +19,7 @@ const Theme = {
   light:{
     color:'#0096FA',
     backgroundColor:'#FFF',
+    rgbBackgroundColor:"255, 255, 255",
     backgroundImage: lightimages,
     transition: "all 1s ease-in-out",
     borderColor:"cyan",
@@ -26,6 +27,7 @@ const Theme = {
   dark:{
     color:'#61dafb',
     backgroundColor:'#1a1a2e',
+    rgbBackgroundColor:"26, 26, 46",
     backgroundImage: darkimages,
     transition: "all 1s ease-in-out",
     borderColor:"red",
