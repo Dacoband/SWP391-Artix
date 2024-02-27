@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Switch from '@mui/material/Switch';
 import Menu from '@mui/material/Menu';
@@ -27,18 +27,16 @@ export default function CustomizedDropdown() {
       }
       // Any additional styles you want to apply
     }));
-    
-  const [anchorEl, setAnchorEl] = useState(null)
-  const [open,setOpen] = useState(false)
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-    setOpen(!open)
-  };
-  const handleClose = () => {
-    setAnchorEl(null)
-    setOpen(!open)
-  };
-
+    const [anchorEl, setAnchorEl] = useState(null)
+    const [open,setOpen] = useState(false)
+  useEffect(()=>{
+   
+}
+)
+const handleClick = (event) => {
+  setAnchorEl(event.currentTarget)
+  setOpen(!open)
+};
   return (
     <div>
       <IconButton
@@ -55,7 +53,7 @@ export default function CustomizedDropdown() {
         id="basic-menu"
         anchorEl={anchorEl}
         open={open}
-        onClose={handleClose}
+        onClose={handleClick}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',
@@ -69,18 +67,18 @@ export default function CustomizedDropdown() {
         <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
         <Typography variant='caption'>Account</Typography>
         </Divider>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My Dashboard</MenuItem>
-        <MenuItem onClick={handleClose}>My Account</MenuItem>
+        <MenuItem onClick={handleClick}>Profile</MenuItem>
+        <MenuItem onClick={handleClick}>My Dashboard</MenuItem>
+        <MenuItem onClick={handleClick}>My Account</MenuItem>
         <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
         <Typography variant='caption'>Theme</Typography>
         </Divider>
         <MenuItem onClick={toggleTheme}>
           {dark ? "Dark" : "Light"}
-          <Switch checked={dark} />
+          <Switch  checked={dark} />
           </MenuItem>
         <Divider sx={{"backgroundColor":{backgroundColor:theme.color}}} variant='middle'/>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem onClick={handleClick}>Logout</MenuItem>
         </Box>
       </CustomizedMenu>
     </div>
