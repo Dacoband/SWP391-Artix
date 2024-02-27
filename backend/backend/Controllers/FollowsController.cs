@@ -21,11 +21,22 @@ public class FollowsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Follow>>> GetFollows()
     {
-        return await _context.Follows.ToListAsync();
-    }
 
-    // GET: api/Follows/5
-    [HttpGet("{id}")]
+        var follow = await _context.Follows
+        .Select(f => new Follow
+        {
+             //Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
+            FollowerID = f.FollowerID,
+            // Other properties...
+        })
+            .ToListAsync();
+
+        return follow;
+    
+}
+
+// GET: api/Follows/5
+[HttpGet("{id}")]
     public async Task<ActionResult<Follow>> GetFollow(int id)
     {
         var follow = await _context.Follows.FindAsync(id);
@@ -45,14 +56,14 @@ public class FollowsController : ControllerBase
         _context.Follows.Add(follow);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetFollow), new { id = follow.FollowId }, follow);
+        return CreatedAtAction(nameof(GetFollow), new { id = follow.FollowerID }, follow);
     }
 
     // PUT: api/Follows/5
     [HttpPut("{id}")]
     public async Task<IActionResult> PutFollow(int id, Follow follow)
     {
-        if (id != follow.FollowId)
+        if (id != follow.FollowerID)
         {
             return BadRequest();
         }
@@ -96,6 +107,6 @@ public class FollowsController : ControllerBase
 
     private bool FollowExists(int id)
     {
-        return _context.Follows.Any(e => e.FollowId == id);
+        return _context.Follows.Any(e => e.FollowerID == id);
     }
 }
