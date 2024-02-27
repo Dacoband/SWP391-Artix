@@ -13,7 +13,7 @@ export default function HomePage() {
         <div className='seemore'>See More</div>
         <CarouselTag/>
       </div>
-      <Box sx={{color: theme.color, backgroundColor: `rgba(${theme.backgroundColor},0.8)`}}>
+      <Box sx={{color: theme.color, backgroundColor: `rgba(${theme.rgbBackgroundColor},0.9)`,transition:theme.transition}}>
       < div className='recommendedwork'>
         <div className='headrecommended'>
           <h3>Recommended Works</h3>
