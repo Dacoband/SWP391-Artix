@@ -5,7 +5,7 @@ namespace backend.Entities
     public class Follow
     {
         [Key]
-        public int FollowId { get; set; } //Primary Key 
+        public int FollowerID { get; set; } //Primary Key 
 
     }
 }
