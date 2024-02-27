@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class OrdersController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public OrdersController(YourDbContext context)
+    public OrdersController(ApplicationDbContext context)
     {
         _context = context;
     }

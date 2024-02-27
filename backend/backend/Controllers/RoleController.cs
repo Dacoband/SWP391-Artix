@@ -9,9 +9,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class RoleController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public RoleController(YourDbContext context)
+    public RoleController(ApplicationDbContext context)
     {
         _context = context;
     }

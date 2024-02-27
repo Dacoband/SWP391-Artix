@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class PayPalAccountController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public PayPalAccountController(YourDbContext context)
+    public PayPalAccountController(ApplicationDbContext context)
     {
         _context = context;
     }
