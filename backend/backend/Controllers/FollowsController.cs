@@ -45,7 +45,7 @@ public class FollowsController : ControllerBase
         _context.Follows.Add(follow);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetFollow), new { id = Follow. }, follow);
+        return CreatedAtAction(nameof(GetFollow), new { id = follow.FollowId }, follow);
     }
 
     // PUT: api/Follows/5
