@@ -11,7 +11,7 @@ namespace backend.Entities
         public int PaypalAccount { get; set; } // FK
         public string UserName { get; set; }
         public double Follower { get; set; }
-        public byte[] ProfilePicture { get; set; }
+        public byte[] ProfilePicture { get; set; } // Có thể 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
