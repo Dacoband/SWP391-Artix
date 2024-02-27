@@ -1,13 +1,16 @@
 import React from 'react'
 import { Route, Routes, Outlet } from "react-router-dom"
-// import Page from './Page.jsx';
+// eslint-disable-next-line
+import HomePage from './MainPage/HomePage.tsx';
+// eslint-disable-next-line 
+import Page from './Page.jsx';
 import Footer from './Footer.jsx';
 import PeopleDetail from './PeopleDetail.jsx';
 import UpdatePeople from './UpdatePeople.jsx';
 import Menu from './Menu.jsx';
 import CreatePeople from './CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
-import HomePage from './MainPage/HomePage.tsx';
+
 
 
 export default function Users() {
