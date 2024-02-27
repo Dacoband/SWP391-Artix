@@ -25,7 +25,7 @@ export default function CreatePeople() {
   const URL = "https://peopleapi1141.azurewebsites.net/api/people";
   const navigate = useNavigate();
   const redirect = () => {
-    navigate(`/`);
+    navigate(`/characters`);
   }
     const axiosConfig = {
       headers: {
@@ -59,7 +59,7 @@ export default function CreatePeople() {
       SetOpen(false)
     };
   return (
-    <div className='page'>
+    <Box className='page'>
     <Container className='container' component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -143,11 +143,6 @@ export default function CreatePeople() {
         </Box>
     </Container>
 
-    <p>{name}</p>
-    <p>{age}</p>
-    <p>{job}</p>
-    <p>{image}</p>
-
     <Dialog
 open={open}
 onClose={handleClose}
@@ -169,6 +164,6 @@ aria-describedby="alert-dialog-description"
   </Button>
 </DialogActions>
 </Dialog>
-</div>
+</Box>
   )
 }
