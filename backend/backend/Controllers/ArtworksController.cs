@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class ArtworksController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public ArtworksController(YourDbContext context)
+    public ArtworksController(ApplicationDbContext context)
     {
         _context = context;
     }

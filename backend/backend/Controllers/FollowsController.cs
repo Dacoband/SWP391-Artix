@@ -10,9 +10,9 @@ using backend.Entities;
 [Route("api/[controller]")]
 public class FollowsController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public FollowsController(YourDbContext context)
+    public FollowsController(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -45,7 +45,7 @@ public class FollowsController : ControllerBase
         _context.Follows.Add(follow);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetFollow), new { id = Follow. }, follow);
+        return CreatedAtAction(nameof(GetFollow), new { id = follow.FollowId}, follow);
     }
 
     // PUT: api/Follows/5
@@ -96,6 +96,6 @@ public class FollowsController : ControllerBase
 
     private bool FollowExists(int id)
     {
-        return _context.Follows.Any(e => e.FollowerID == id);
+        return _context.Follows.Any(e => e.FollowId == id);
     }
 }
