@@ -22,10 +22,6 @@
     "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
-  "peerDependencies": {
-  "react": "^17.0.0 || ^18.0.0",
-  "react-dom": "^17.0.0 || ^18.0.0"
-},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -50,4 +46,6 @@
       "last 1 safari version"
     ]
   }
+  
+  
 }
