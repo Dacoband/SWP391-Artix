@@ -332,8 +332,8 @@ main {
   font-size: 15px;
   margin-bottom: 10px;
   margin-right:10px ;
-  color: #25B9C3;
-  text-decoration: underline;
+  color: #218EC2;
+ 
   text-align: right;
   cursor: pointer;
 }
@@ -453,4 +453,10 @@ main {
   margin-right: 90px;
   position: relative;
   margin-bottom: 40px;
+}
+.foryouimg{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+
 }

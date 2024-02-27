@@ -2,9 +2,9 @@
 import './App.css';
 
 
-import TestIcon from './components/TestIcon';
-import TestIcon2 from './components/TestIcon2';
-import HomePage from './components/HomePage';
+import TestIcon from './Components/TestIcon';
+import TestIcon2 from './Components/TestIcon2';
+import HomePage from './Components/HomePage';
 function App() {
   return (
     <div className="App">

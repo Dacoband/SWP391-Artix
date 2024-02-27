@@ -35,7 +35,7 @@ export default function HomePage() {
       <div className='headrecommended'>
           <h3>For You</h3>
           <div className='seemore'>See More</div></div>
-          <div>
+          <div className='foryouimg'>
             <ImgForyou/>
           </div>
 
