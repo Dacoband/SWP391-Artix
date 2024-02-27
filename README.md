@@ -1,7 +1,7 @@
 
 - # Artix - Artwork Sharing Platform
   - ### Logo
-    ![Artix Logo](images/Logo.jpg)
+    ![Artix Logo](images/icon_demo.png)
 - # **Project Synopsis :**
   - **Class:** SWP391-SE1705-SP2024
   - **Project Supervisor:** Nguyen The Hoang - HoangNT20
