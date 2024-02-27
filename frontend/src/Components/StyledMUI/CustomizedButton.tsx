@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 import {ThemeContext} from "../Themes/ThemeProvider.tsx"
 
 function CustomizedButton({children, ...props}) {
+  // eslint-disable-next-line
     const { dark,theme } = useContext(ThemeContext);
     const classes = useStyles();
   

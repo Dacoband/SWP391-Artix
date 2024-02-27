@@ -35,7 +35,6 @@ const Theme = {
 const initialState = {
   dark: false,
   theme: Theme.light,
-  change: false,
   toggleTheme: () => {},
 }
 
@@ -43,13 +42,12 @@ const ThemeContext = React.createContext(initialState);
 
 function ThemeProvider({children}) {
   const [dark,SetDark] = useState(false)
-  const [change,SetChange] = useState(false)
   const toggleTheme = () => {
     SetDark(prevDark => !prevDark); // Toggles dark mode without a separate state change
   }
   const theme = dark ? Theme.dark : Theme.light
   return (
-    <ThemeContext.Provider value={{theme,dark,change,toggleTheme}}>
+    <ThemeContext.Provider value={{theme,dark,toggleTheme}}>
       {children}
     </ThemeContext.Provider>
   )
