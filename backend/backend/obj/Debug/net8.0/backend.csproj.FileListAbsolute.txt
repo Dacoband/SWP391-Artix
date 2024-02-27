@@ -30,3 +30,14 @@
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.pdb
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/ref/backend.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.AssemblyReference.cache
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.AssemblyInfoInputs.cache
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.AssemblyInfo.cs
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.CoreCompileInputs.cache
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.MvcApplicationPartsAssemblyInfo.cs
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.MvcApplicationPartsAssemblyInfo.cache
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.sourcelink.json
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\refint\backend.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.pdb
