@@ -15,20 +15,19 @@ export default function RecommendedWords() {
 
   return (
 
-    <ImageList sx={{ width: 1100, height: 500 ,overflow: 'hidden'}} cols={5} rowHeight={200} >
+    <ImageList sx={{ width: 1000, height: 500 ,overflow: 'hidden'}} cols={5} >
       {top10Work.map((work) => (
         <Card className='cardrecommended'>
         <CardActionArea>
-          <CardMedia  style={{ objectFit: 'cover', width: '100%', height: '180px' }}>
-          <ImageListItem style={{ width:'210px',height: '180px'}} key={work.id}>
-          <img
-            srcSet={`${work.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            src={`${work.img}?w=164&h=164&fit=crop&auto=format`}
+        <ImageListItem style={{ width:'184px',height: '184px'}} key={work.id}>
+          <CardMedia
+            component="img"
+            style={{ backgroundImage:'', width: '100%', height: 'auto' }}
+            image={`${work.img}`}
             alt={work.img}
             loading="lazy"
-          />
+            />
         </ImageListItem>
-          </CardMedia>
           <CardContent>
             <div className='userofworks'>{work.author}</div>
           </CardContent>

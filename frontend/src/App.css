@@ -74,6 +74,7 @@ a{
 }
 
 .itemtag{
+  background-color: rgba(red, green, blue, alpha);
   display: inline-block;
   white-space: nowrap; /* Ngăn ngừa việc ngắt dòng */
   overflow: hidden; /* Ngăn việc tràn vượt phần tử cha */
