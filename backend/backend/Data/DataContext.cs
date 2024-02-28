@@ -28,7 +28,7 @@ namespace backend.Entities
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ViewReport> ViewReports { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Commission> Commission { get; set; }
         public DbSet<CommissionForm> CommissionForm { get; set; }
         // Thêm DbSet cho các bảng khác nếu cần
