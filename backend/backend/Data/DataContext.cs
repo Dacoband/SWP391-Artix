@@ -17,7 +17,7 @@ namespace backend.Entities
         // Các DbSet
         public DbSet<Creator> Creators { get; set; }
         public DbSet<Tags> Tags { get; set; }
-        public DbSet<PaypalAccount> PayPalAccounts { get; set; }
+        public DbSet<PaypalAccount> PayPalAccount { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Moderators> Moderators { get; set; }
@@ -26,7 +26,7 @@ namespace backend.Entities
         public DbSet<Report> Reports { get; set; }
         public DbSet<Follow> Follows { get; set; }
         public DbSet<Notification> Notifications { get; set; }
-        public DbSet<ViewReport> ViewReports { get; set; }
+        public DbSet<ViewReport> ViewReport { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }
         public DbSet<Commission> Commission { get; set; }

@@ -10,6 +10,5 @@ namespace backend.Entities
         public int ArtWorkID { get; set; }
         public string CommentText { get; set; }
         public DateTime DateCreated { get; set; }
-        public Artworks Artworks { get; set; }
     }
 }
