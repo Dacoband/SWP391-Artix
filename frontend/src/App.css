@@ -55,6 +55,7 @@ main {
    /* Khoảng cách giữa các mục */
 }
 
+
 .Navigation2 ul li a {
   text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
   color: black;
@@ -77,13 +78,6 @@ main {
 .item1{
   height: 200px;
 }
-
-
-
-
-
-
-
 
 .hero{
   width: 100%;
@@ -237,7 +231,51 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: #fff;}
+
+.background{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card:first-child{
+  margin-top: 10%;
+}
+
+.card{
+  width: 60%;
+  margin: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.container{
+  margin-top: 10%;
+  margin-bottom: 5%;
+  background-color: aliceblue;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.loadingscreen{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 1000vh;
+  z-index: 9999;
+
 }
 .button{
   position: relative;
@@ -251,6 +289,10 @@ main {
   cursor: pointer;
   transition: transform 0.2s ease;
   /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
+}
+
+.loading{
+  margin: auto; 
 
 }
 .button:active{
@@ -277,8 +319,6 @@ main {
   radial-gradient(circle,#7d2ea8 20%,transparent 20%),
   radial-gradient(circle,#7d2ea8 20%,transparent 20%),
   radial-gradient(circle,#7d2ea8 20%,transparent 20%)
-
-  
   ;
   background-size: 10% 10%,20% 20%,15% 15%,20% 20%, 18% 18%,10% 10%,15% 15%,10% 10%, 18% 18%;
   background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,40% 90%, 55% 90%, 70% 90%;
@@ -326,6 +366,13 @@ main {
 
 
 
+.app-logo{
+  margin-left: 2vw;
+  width: 82px;
+  height: 32px;
+}
+
+
 /* HomePage */
 
 .seemore{
@@ -333,16 +380,12 @@ main {
   margin-bottom: 10px;
   margin-right:10px ;
   color: #218EC2;
- 
   text-align: right;
   cursor: pointer;
 }
 
-
-
-
 .carouseltag{
-  margin-top: 60px;
+
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
@@ -352,11 +395,12 @@ main {
   display: inline-block;
   white-space: nowrap; /* Ngăn ngừa việc ngắt dòng */
   overflow: hidden; /* Ngăn việc tràn vượt phần tử cha */
-  height:30px ;
+  height:60px ;
   margin-right: 4px;
   margin-left: 4px;
   padding: 7px 10px;
-  font-size: 12px;
+  font-size: 14px;
+
   font-weight: bold;
   text-align: center;
   cursor: pointer;
@@ -379,7 +423,9 @@ main {
 }
 
 .recommendedwork{
-  margin-top: 60px;
+
+  margin-top: 20px;
+  padding-top: 10px;
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
@@ -389,6 +435,7 @@ main {
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+
 }
 .recommendedimg{
   display: flex;
@@ -443,16 +490,14 @@ main {
 .card-follow-button {
   display: flex;
   justify-content: center; 
-
 }
-
-
 .Randomimg{
   margin-top: 30px;
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
-  margin-bottom: 40px;
+  border: 2px;
+  border-bottom: #218EC2;
 }
 .foryouimg{
   display: flex;
@@ -461,15 +506,15 @@ main {
 
 }
 /* styles.css */
-.Banneruser {
-  /* Add styles for the banner container */
+/* .Banneruser {
+  
   width: 100%;
-  height: 200px; /* Adjust height as needed */
+  height: 200px; 
   overflow: hidden;
 }
 
 .backgrounduser {
-  /* Add styles for the background image container */
+  
   width: 100%;
   height: auto;
   background-size: cover;
@@ -478,4 +523,4 @@ main {
 .backgrounduser img{
   width: 100%;
   height: auto;
-}
+} */
