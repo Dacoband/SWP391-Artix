@@ -35,7 +35,8 @@ export default function HomePage() {
         <div className='recommendedusers'>
           <div className='headrecommended'>
             <h3>Recommended Users</h3>
-            <div className='seemore'>See More</div></div>
+            <div className='seemore'>See More</div>
+            </div>
           <div>
             <RecommendedUsers />
           </div>

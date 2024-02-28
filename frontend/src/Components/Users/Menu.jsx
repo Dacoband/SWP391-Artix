@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
-import CustomizedDrawer from '../StyledMUI/CustomizedDrawer.jsx';
+import CustomizedDrawer from '../StyledMUI/CustomizedDrawer.tsx';
 import AppLogo from '../StyledMUI/AppLogo.jsx';
 import ExpandingSearchBar from '../StyledMUI/CustomizedSearchBar.jsx'
 import CustomizedDropdown from '../StyledMUI/CustomizedDropdown.tsx';
