@@ -1,20 +1,25 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { CardActionArea } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
 import { Work } from '../../../share/ListofWork';
 export default function StandardImageList() {
   const randomWork = Work.sort(() => 0.5 - Math.random()).slice(0, 10);
   return (
-    <ImageList sx={{ width: 1200, height: 450 ,overflow: 'hidden'}} cols={5} rowHeight={210}>
+    <ImageList cols={5}>
     {randomWork.map((work) => (
+      <CardActionArea>
       <ImageListItem key={work.id}>
-        <img
-          srcSet={`${work.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-          src={`${work.img}?w=164&h=164&fit=crop&auto=format`}
-          alt={work.img}
-          loading="lazy"
-        />
+      <CardMedia
+            component="img"
+            style={{ objectFit:"fill",  width:'15rem' ,height: '15rem' ,borderRadius:'5px' }}
+            image={`${work.img}`}
+            alt={work.img}
+            loading="lazy"
+            />
       </ImageListItem>
+      </CardActionArea>
     ))}
   </ImageList>
   );

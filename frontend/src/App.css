@@ -58,11 +58,16 @@ a{
 
 /* HomePage */
 
+.homepage{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
 .seemore{
   font-size: 15px;
-  margin-bottom: 10px;
   margin-right:10px ;
-  color: #218EC2;
+  color: #8b999f;
   text-align: right;
   cursor: pointer;
 }
@@ -71,7 +76,9 @@ a{
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
+  margin-bottom: 15px;
 }
+
 
 .itemtag{
   background-color: rgba(red, green, blue, alpha);
@@ -104,6 +111,14 @@ a{
   -moz-osx-font-smoothing: grayscale;
 }
 
+.carouseluser{
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
 .recommendedwork{
   margin-top: 20px;
   padding-top: 10px;
@@ -122,13 +137,12 @@ a{
   justify-content: center;
   padding-bottom: 10px;
 }
-.cardrecommended{
-  margin: 10px 5px;
-}
-/* .userofworks{
-  padding: 4px;
-} */
 
+.recommendedImages{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
 
 .recommendedusers{
   margin-top: 30px;
@@ -178,7 +192,7 @@ a{
   margin-top: 30px;
   margin-left: 90px;
   margin-right: 90px;
-  position: relative;
+  
   border: 2px;
   border-bottom: #218EC2;
 }

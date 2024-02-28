@@ -3,8 +3,6 @@ import React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { Work } from '../../../share/ListofWork';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 export default function RecommendedWords() {
@@ -14,25 +12,19 @@ export default function RecommendedWords() {
   const top10Work = sortedWork.slice(0, 10);
 
   return (
-
-    <ImageList sx={{ width: 1000, height: 500 ,overflow: 'hidden'}} cols={5} >
+    <ImageList className='recommendedImages' cols={5} >
       {top10Work.map((work) => (
-        <Card className='cardrecommended'>
         <CardActionArea>
-        <ImageListItem style={{ width:'184px',height: '184px'}} key={work.id}>
+        <ImageListItem key={work.id}>
           <CardMedia
             component="img"
-            style={{ backgroundImage:'', width: '100%', height: 'auto' }}
+            style={{ objectFit:"fill",  width:'15rem' ,height: '15rem' ,borderRadius:'5px' }}
             image={`${work.img}`}
             alt={work.img}
             loading="lazy"
             />
         </ImageListItem>
-          <CardContent>
-            <div className='userofworks'>{work.author}</div>
-          </CardContent>
         </CardActionArea>
-      </Card>
       ))}
     </ImageList>
 

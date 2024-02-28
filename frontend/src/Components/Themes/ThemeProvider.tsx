@@ -23,6 +23,7 @@ const Theme = {
     backgroundImage: lightimages,
     transition: "all 1s ease-in-out",
     borderColor:"cyan",
+    hoverBackgroundColor:"#F5F5F5",
   },
   dark:{
     color:'#61dafb',
@@ -31,6 +32,7 @@ const Theme = {
     backgroundImage: darkimages,
     transition: "all 1s ease-in-out",
     borderColor:"red",
+    hoverBackgroundColor:"#302e4d",
   },
 }
 
