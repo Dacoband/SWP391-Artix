@@ -509,7 +509,7 @@ a{
 .headeruser {
   
   width: 100%;
-  height: 480px; 
+  height: 435px; 
   overflow: hidden;
 }
 
@@ -539,18 +539,25 @@ a{
   /* outline nên chỉnh theo dark mode */
  
 }
-.infouser{
+.infouser1{
   display: flex;
  
   height:90px ;
+  justify-content: space-between;
   
+}
+.infousername{
+  display: flex;
 }
 .headerusername{
   margin-top: 0px;
   margin-left: 20px;
 }
-.buttonfollow{
-  position: absolute;
-  top:345px;
-  right: 150px;
+.buttonheaderuser{
+  margin-right: 100px;
+  margin-top: 25px;
+  display: flex;
+}
+.navuser{
+  margin-left:110px ;
 }
