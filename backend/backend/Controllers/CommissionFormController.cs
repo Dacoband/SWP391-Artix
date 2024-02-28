@@ -1,18 +1,19 @@
 ﻿using backend.Entities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.M;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Entities;
+using Microsoft.EntityFrameworkCore;
 
 [ApiController]
 [Route("api/[controller]")]
 public class CommissionFormController : ControllerBase
 {
-    private readonly YourDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public CommissionFormController(YourDbContext context)
+    public CommissionFormController(ApplicationDbContext context)
     {
         _context = context;
     }
