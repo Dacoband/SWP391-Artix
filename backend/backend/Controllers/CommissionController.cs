@@ -21,14 +21,14 @@ public class CommissionController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Commission>>> GetCommissions()
     {
-        return await _context.Commissions.ToListAsync();
+        return await _context.Commission.ToListAsync();
     }
 
     // GET: api/Commission/5
     [HttpGet("{commissionId}")]
     public async Task<ActionResult<Commission>> GetCommission(int commissionId)
     {
-        var commission = await _context.Commissions.FindAsync(commissionId);
+        var commission = await _context.Commission.FindAsync(commissionId);
 
         if (commission == null)
         {
@@ -42,7 +42,7 @@ public class CommissionController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Commission>> PostCommission(Commission commission)
     {
-        _context.Commissions.Add(commission);
+        _context.Commission.Add(commission);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetCommission), new { commissionId = commission.CommissionID }, commission);
@@ -82,13 +82,13 @@ public class CommissionController : ControllerBase
     [HttpDelete("{commissionId}")]
     public async Task<IActionResult> DeleteCommission(int commissionId)
     {
-        var commission = await _context.Commissions.FindAsync(commissionId);
+        var commission = await _context.Commission.FindAsync(commissionId);
         if (commission == null)
         {
             return NotFound();
         }
 
-        _context.Commissions.Remove(commission);
+        _context.Commission.Remove(commission);
         await _context.SaveChangesAsync();
 
         return NoContent();
@@ -96,6 +96,6 @@ public class CommissionController : ControllerBase
 
     private bool CommissionExists(int commissionId)
     {
-        return _context.Commissions.Any(e => e.CommissionID == commissionId);
+        return _context.Commission.Any(e => e.CommissionID == commissionId);
     }
 }

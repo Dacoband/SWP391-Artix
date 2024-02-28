@@ -28,8 +28,8 @@ namespace backend.Entities
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ViewReport> ViewReports { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Commission> Commissions { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
+        public DbSet<Commission> Commission { get; set; }
         public DbSet<CommissionForm> CommissionForms { get; set; }
         // Thêm DbSet cho các bảng khác nếu cần
 
@@ -42,8 +42,16 @@ namespace backend.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            // Cấu hình các mối quan hệ, index, constraints nếu cần
+            modelBuilder.Entity<Artworks>()
+                .HasMany(a => a.Comments)
+                .WithOne(c => c.Artworks)
+                .HasForeignKey(c => c.ArtWorkID)
+                .OnDelete(DeleteBehavior.Cascade); // Cấu hình xóa tự động
         }
+
+
+
+
+
     }
 }
