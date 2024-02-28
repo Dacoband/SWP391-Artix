@@ -10,7 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -71,6 +71,7 @@ function RecommendedUsers() {
               <CardActionArea>
                 <CardMedia >
                      <div className="inforuser">
+                  <Link to={`/profile/${user.id}`}>    
                   <div className="imguser">
                     <img
                       srcSet={`${user.avatar}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
@@ -78,7 +79,7 @@ function RecommendedUsers() {
                       alt={user.avatar}
                       loading="lazy" className="imgu"
                     />
-                  </div>
+                  </div></Link>
                   <div className="contentuser">
                   <h2>{user.User}</h2>
                   <h4>Follower: {user.like}</h4>

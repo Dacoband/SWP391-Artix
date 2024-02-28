@@ -177,8 +177,12 @@ export default function TestIcon() {
   return (
     <div className='hero'>
       <button className={`btn ${isClicked ? 'active' : ''}`} id="btn">
-       
-        <FavoriteIcon style={{ color: isClicked ? '#ff1876' : '#000'}} />
+      {isClicked ? (
+          <FavoriteIcon style={{ color: '#ff1876' }} />
+        ) : (
+          <FavoriteBorderIcon style={{ color: '#000' }} />
+        )}
+        {/* <FavoriteIcon style={{ color: isClicked ? '#ff1876' : '#000'}} /> */}
         {Array.from({ length: 16 }).map((_, index) => (
           <span key={index} ref={(el) => (spansRef.current[index] = el)}></span>
         ))}
