@@ -22,14 +22,14 @@ public class CommissionFormController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CommissionForm>>> GetCommissionForms()
     {
-        return await _context.CommissionForms.ToListAsync();
+        return await _context.CommissionForm.ToListAsync();
     }
 
     // GET: api/CommissionForm/5
     [HttpGet("{commissionId}")]
     public async Task<ActionResult<CommissionForm>> GetCommissionForm(int commissionId)
     {
-        var commissionForm = await _context.CommissionForms.FindAsync(commissionId);
+        var commissionForm = await _context.CommissionForm.FindAsync(commissionId);
 
         if (commissionForm == null)
         {
@@ -43,7 +43,7 @@ public class CommissionFormController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<CommissionForm>> PostCommissionForm(CommissionForm commissionForm)
     {
-        _context.CommissionForms.Add(commissionForm);
+        _context.CommissionForm.Add(commissionForm);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetCommissionForm), new { commissionId = commissionForm.CommissionID }, commissionForm);
@@ -83,13 +83,13 @@ public class CommissionFormController : ControllerBase
     [HttpDelete("{commissionId}")]
     public async Task<IActionResult> DeleteCommissionForm(int commissionId)
     {
-        var commissionForm = await _context.CommissionForms.FindAsync(commissionId);
+        var commissionForm = await _context.CommissionForm.FindAsync(commissionId);
         if (commissionForm == null)
         {
             return NotFound();
         }
 
-        _context.CommissionForms.Remove(commissionForm);
+        _context.CommissionForm.Remove(commissionForm);
         await _context.SaveChangesAsync();
 
         return NoContent();
@@ -97,6 +97,6 @@ public class CommissionFormController : ControllerBase
 
     private bool CommissionFormExists(int commissionId)
     {
-        return _context.CommissionForms.Any(e => e.CommissionID == commissionId);
+        return _context.CommissionForm.Any(e => e.CommissionID == commissionId);
     }
 }

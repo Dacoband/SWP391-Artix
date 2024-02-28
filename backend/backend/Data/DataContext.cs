@@ -29,8 +29,8 @@ namespace backend.Entities
         public DbSet<ViewReport> ViewReports { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
-        public DbSet<Commission> Commissions { get; set; }
-        public DbSet<CommissionForm> CommissionForms { get; set; }
+        public DbSet<Commission> Commission { get; set; }
+        public DbSet<CommissionForm> CommissionForm { get; set; }
         // Thêm DbSet cho các bảng khác nếu cần
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
