@@ -26,7 +26,14 @@ public class ArtworksController : ControllerBase
      {
          // Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
         ArtworkID = a.ArtworkID,
-         // Other properties...
+         CreatorID = a.CreatorID,
+         TagID = a.TagID,
+         CategoryID = a.CategoryID,
+         Description = a.Description,
+         DateCreated = a.DateCreated,
+         Likes = a.Likes,
+         Purchasable = a.Purchasable,
+         Price = a.Price
      })
      .ToListAsync();
 
@@ -100,17 +107,38 @@ public class ArtworksController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArtwork(int id)
     {
-        var artwork = await _context.Artworks.FindAsync(id);
-        if (artwork == null)
+        using (var transaction = _context.Database.BeginTransaction())
         {
-            return NotFound();
+            
+                // Xóa tất cả các bình luận liên quan
+                var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
+
+                if (commentsToDelete.Any())
+                {
+                    _context.Comments.RemoveRange(commentsToDelete);
+                    await _context.SaveChangesAsync();
+                }
+
+                // Xóa bức tranh
+                var artwork = await _context.Artworks.FindAsync(id);
+                if (artwork == null)
+                {
+                    transaction.Rollback();
+                    return NotFound();
+                }
+
+                _context.Artworks.Remove(artwork);
+                await _context.SaveChangesAsync();
+
+                transaction.Commit();
+
+                return NoContent();
+            
         }
-
-        _context.Artworks.Remove(artwork);
-        await _context.SaveChangesAsync();
-
-        return NoContent();
     }
+    
+
+
 
     private bool ArtworkExists(int id)
     {
