@@ -69,9 +69,11 @@ function RecommendedUsers() {
           <div key={user.id} className="user-container" >
             <Card className="carouseluser" sx={{ maxWidth: 300 }}>
               <CardActionArea>
+
+                <Link to={`/profile/${user.id}`}> 
                 <CardMedia >
                      <div className="inforuser">
-                  <Link to={`/profile/${user.id}`}>    
+                     
                   <div className="imguser">
                     <img
                       srcSet={`${user.avatar}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
@@ -79,12 +81,12 @@ function RecommendedUsers() {
                       alt={user.avatar}
                       loading="lazy" className="imgu"
                     />
-                  </div></Link>
+                  </div>
                   <div className="contentuser">
                   <h2>{user.User}</h2>
                   <h4>Follower: {user.like}</h4>
                   </div></div>
-                </CardMedia>
+                </CardMedia></Link>
                 {/* <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
                     {user.User}
