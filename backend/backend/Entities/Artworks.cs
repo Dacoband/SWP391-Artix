@@ -15,6 +15,5 @@ namespace backend.Entities
         public int Likes { get; set; }
         public bool Purchasable { get; set; }
         public double Price { get; set; }
-        public ICollection<Comments> Comments { get; set; }
     }
 }

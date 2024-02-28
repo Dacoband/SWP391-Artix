@@ -23,13 +23,10 @@ function App() {
         <Routes>
           <Route path='/' element={<FrontPage/>}/>
           <Route path="/admin" element={<Admin/>}>
-
             </Route>
           <Route path="/mod" element={<Mod/>}>
-
             </Route>
           <Route path="/characters/*" element={<Users/>}>
-
           </Route>
         </Routes>
     </div>
