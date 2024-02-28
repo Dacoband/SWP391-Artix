@@ -506,10 +506,10 @@ a{
 
 }
 /* styles.css */
-.Banneruser {
+.headeruser {
   
   width: 100%;
-  height: 350px; 
+  height: 480px; 
   overflow: hidden;
 }
 
@@ -518,11 +518,39 @@ a{
  background-repeat: no-repeat;;
 
   width: 100%;
-  height: 350px;
+  height: 300px;
   background-size: cover;
   background-position: center;
+  
 }
 .backgrounduser img{
   width: 100%;
   height: auto;
+}
+
+.avataruser img{
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 100%;
+  transform: translateY(-40%);
+  margin-left: 100px;
+  outline: 4px solid #fff;
+  /* outline nên chỉnh theo dark mode */
+ 
+}
+.infouser{
+  display: flex;
+ 
+  height:90px ;
+  
+}
+.headerusername{
+  margin-top: 0px;
+  margin-left: 20px;
+}
+.buttonfollow{
+  position: absolute;
+  top:345px;
+  right: 150px;
 }
