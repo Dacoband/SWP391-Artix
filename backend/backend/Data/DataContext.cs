@@ -19,7 +19,7 @@ namespace backend.Entities
         public DbSet<Tags> Tags { get; set; }
         public DbSet<PaypalAccount> PayPalAccount { get; set; }
         public DbSet<Roles> Roles { get; set; }
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Account> Account { get; set; }
         public DbSet<Moderators> Moderators { get; set; }
         public DbSet<Artworks> Artworks { get; set; }
         public DbSet<Comments> Comments { get; set; }
