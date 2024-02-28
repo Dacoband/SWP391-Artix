@@ -19,14 +19,14 @@ function CustomizedButton({ ...props }) {
 const useStyles = makeStyles( ({
   darkButton: {
     color: 'inherit', // White text for better contrast
-    backgroundColor: 'none', // Darker Blue
+    backgroundColor: 'none',
     '&:hover': {
       backgroundColor: '#302e4d', // Lighter blue on hover for dark mode
     },
   },
   lightButton: {
     color: 'inherit', // Dark text for better contrast in light mode
-    backgroundColor: 'none', // Blue
+    backgroundColor: 'none',
     '&:hover': {
       backgroundColor: '#F5F5F5', // smokey color on hover for light mode
     },
