@@ -7,13 +7,13 @@ import { Work } from '../../../share/ListofWork';
 export default function StandardImageList() {
   const randomWork = Work.sort(() => 0.5 - Math.random()).slice(0, 10);
   return (
-    <ImageList cols={5}>
+    <ImageList className='recommendedImages' cols={5}>
     {randomWork.map((work) => (
       <CardActionArea>
       <ImageListItem key={work.id}>
       <CardMedia
             component="img"
-            style={{ objectFit:"fill",  width:'15rem' ,height: '15rem' ,borderRadius:'5px' }}
+            style={{ objectFit:"fill",  width:'15vw' ,height: '15vw' ,borderRadius:'5px',minWidth:'182px',minHeight:'182px' }}
             image={`${work.img}`}
             alt={work.img}
             loading="lazy"
