@@ -9,7 +9,7 @@ export default function StandardImageList() {
   return (
     <ImageList className='recommendedImages' cols={5}>
     {randomWork.map((work) => (
-      <CardActionArea>
+      <CardActionArea key={work.id}>
       <ImageListItem key={work.id}>
       <CardMedia
             component="img"

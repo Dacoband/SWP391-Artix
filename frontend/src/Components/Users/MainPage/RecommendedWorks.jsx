@@ -14,7 +14,7 @@ export default function RecommendedWords() {
   return (
     <ImageList className='recommendedImages' cols={5} >
       {top10Work.map((work) => (
-        <CardActionArea>
+        <CardActionArea key={work.id}>
         <ImageListItem key={work.id}>
           <CardMedia
             component="img"
