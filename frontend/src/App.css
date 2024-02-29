@@ -375,11 +375,16 @@ a{
 
 /* HomePage */
 
+.homepage{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
 .seemore{
   font-size: 15px;
-  margin-bottom: 10px;
   margin-right:10px ;
-  color: #218EC2;
+  color: #8b999f;
   text-align: right;
   cursor: pointer;
 }
@@ -389,9 +394,12 @@ a{
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
+  margin-bottom: 15px;
 }
 
+
 .itemtag{
+  background-color: rgba(red, green, blue, alpha);
   display: inline-block;
   white-space: nowrap; /* Ngăn ngừa việc ngắt dòng */
   overflow: hidden; /* Ngăn việc tràn vượt phần tử cha */
@@ -422,6 +430,13 @@ a{
   -moz-osx-font-smoothing: grayscale;
 }
 
+.carouseluser{
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
 .recommendedwork{
 
   margin-top: 20px;
@@ -442,20 +457,38 @@ a{
   justify-content: center;
   padding-bottom: 10px;
 }
-.cardrecommended{
-  margin: 10px 5px;
-}
-/* .userofworks{
-  padding: 4px;
-} */
 
+.recommendedImages{
+  display: flex;
+  justify-content: first baseline;
+  padding-bottom: 10px;
+  min-width: 450px;
+}
 
 .recommendedusers{
   margin-top: 30px;
+  margin-right: 90px;
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
   margin-bottom: 40px;
+
+}
+
+.groupOfCarousel{
+  display: flex;
+  flex-direction: row;
+  justify-content: first baseline;
+  overflow: auto;
+  min-width: 400px;
+
+}
+
+.carouselCustom{
+  display: block;
+  width: 18vw;
+  min-width: 250px;
+  margin: 2px 2px 2px 2px;
 }
 
 .imguser{
@@ -481,10 +514,7 @@ a{
 }
 .contentuser{
   margin-left: 10px;
-}
-.user-container{
-  margin: 18px;
-
+  margin-right: 10px;
 }
 
 .card-follow-button {
@@ -495,7 +525,6 @@ a{
   margin-top: 30px;
   margin-left: 90px;
   margin-right: 90px;
-  position: relative;
   border: 2px;
   border-bottom: #218EC2;
 }
@@ -503,4 +532,20 @@ a{
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
+}
+
+.form{
+  padding-top: 2%;
+  padding-bottom: 5%;
+}
+
+.userInfoForm{
+  width: 60vw;
+  border-radius: 5px;
+  min-width: 400px;
+  margin: auto;
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2%;
 }

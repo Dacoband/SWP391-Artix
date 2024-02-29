@@ -6,7 +6,7 @@ import {ThemeContext} from "../Themes/ThemeProvider.tsx"
 function CustomizedButton({ ...props }) {
     const { dark } = useContext(ThemeContext);
     const classes = useStyles();
-  
+
     return (
       <ListItemButton
         className={dark ? classes.darkButton : classes.lightButton}
