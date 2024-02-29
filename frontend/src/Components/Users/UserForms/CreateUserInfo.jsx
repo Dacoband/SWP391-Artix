@@ -1,8 +1,10 @@
 import React,{useContext, useState} from 'react';
-import { FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel,Typography } from '@mui/material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import CustomizedButton from '../../StyledMUI/CustomizedButton.tsx';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
 import CustomizedTextField from '../../StyledMUI/CustomizedTextField.tsx'
+import CustomizedSwitch from '../../StyledMUI/CustomizedSwitch.jsx'
 const UserInfoForm = () => {
 
     const {theme} = useContext(ThemeContext)
@@ -30,6 +32,11 @@ const UserInfoForm = () => {
         console.log('Form submitted with:', userInfo);
       };
 
+      const switchCustomText = (
+        <Typography color='error' sx={{display:"flex"}}>
+          Happy Working <FavoriteIcon color='error' />
+        </Typography>
+      )
   return (
     <div className='form'>
    <div className='userInfoForm' style={{backgroundColor:`rgba(${theme.rgbBackgroundColor},0.9)`}}>
@@ -88,14 +95,15 @@ const UserInfoForm = () => {
       />
       <FormControlLabel
         control={
-          <Switch
+          <CustomizedSwitch
             checked={userInfo.openToCommissions}
             onChange={handleChange}
             name="openToCommissions"
           />
         }
-        label="Open to Commissions"
+        label={userInfo.openToCommissions? switchCustomText:"Open to Commissions?"}
         margin="normal"
+        style={{color:theme.color}}
       />
       <CustomizedTextField
         name="bio"
@@ -108,7 +116,7 @@ const UserInfoForm = () => {
         margin="normal"
       />
       <CustomizedButton type="submit" variant="contained">
-        Submit
+       Welcome Aboard
       </CustomizedButton>
     </form>
     </div>

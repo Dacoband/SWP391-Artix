@@ -217,17 +217,17 @@ a{
 }
 
 .form{
-  padding: 2%;
+  padding-top: 2%;
+  padding-bottom: 5%;
 }
 
 .userInfoForm{
   width: 60vw;
+  border-radius: 5px;
   min-width: 400px;
   margin: auto;
   padding-top: 3%;
-  padding-bottom: 5%;
   padding-left: 5%;
   padding-right: 5%;
-  margin-bottom: 5%;
-  
+  padding-bottom: 2%;
 }
