@@ -11,6 +11,7 @@ import Menu from './Menu.jsx';
 import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
+import UploadArtwork from './UserForms/UploadArtwork.jsx';
 
 
 
@@ -25,7 +26,8 @@ export default function Users() {
           <Route path={`:id`} element={<PeopleDetail />} />
           <Route path={`:id/edit`} element={<UpdatePeople />} />
           <Route path={`create`} element={<CreatePeople />} />
-          <Route path={`creatorform`} element={<UserInfoForm/>}></Route>
+          <Route path={`creatorform`} element={<UserInfoForm/>}/>
+          <Route path={`artworkform`} element={<UploadArtwork/>}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
