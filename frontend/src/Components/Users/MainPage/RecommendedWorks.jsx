@@ -18,7 +18,7 @@ export default function RecommendedWords() {
         <ImageListItem key={work.id}>
           <CardMedia
             component="img"
-            style={{ objectFit:"fill",  width:'15rem' ,height: '15rem' ,borderRadius:'5px' }}
+            style={{ objectFit:"fill",  width:'15vw' ,height: '15vw' ,borderRadius:'5px',minWidth:'182px',minHeight:'182px' }}
             image={`${work.img}`}
             alt={work.img}
             loading="lazy"
