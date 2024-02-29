@@ -139,8 +139,9 @@ a{
 
 .recommendedImages{
   display: flex;
-  justify-content: center;
+  justify-content: first baseline;
   padding-bottom: 10px;
+  min-width: 450px;
 }
 
 .recommendedusers{
@@ -156,12 +157,17 @@ a{
 .groupOfCarousel{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: first baseline;
+  overflow: auto;
+  min-width: 400px;
+
 }
 
 .carouselCustom{
   display: block;
   width: 18vw;
+  min-width: 250px;
+  margin: 2px 2px 2px 2px;
 }
 
 .imguser{
@@ -208,4 +214,20 @@ a{
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
+}
+
+.form{
+  padding: 2%;
+}
+
+.userInfoForm{
+  width: 60vw;
+  min-width: 400px;
+  margin: auto;
+  padding-top: 3%;
+  padding-bottom: 5%;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-bottom: 5%;
+  
 }
