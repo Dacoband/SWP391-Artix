@@ -25,7 +25,7 @@ export default function Menu() {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Button color="inherit"><Link to={"/"}>Home</Link></Button>
-              <Button color="inherit"><Link to={"create"}>Publish Your Works</Link></Button>
+              <Button color="inherit"><Link to={"artworkform"}>Publish Your Works</Link></Button>
              <CustomizedDropdown/>
             </Box>
           </Toolbar>
