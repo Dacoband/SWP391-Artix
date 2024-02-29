@@ -21,14 +21,14 @@ public class PayPalAccountController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PaypalAccount>>> GetPayPalAccounts()
     {
-        return await _context.PayPalAccounts.ToListAsync();
+        return await _context.PayPalAccount.ToListAsync();
     }
 
     // GET: api/PayPalAccount/5
     [HttpGet("{id}")]
     public async Task<ActionResult<PaypalAccount>> GetPayPalAccount(int id)
     {
-        var payPalAccount = await _context.PayPalAccounts.FindAsync(id);
+        var payPalAccount = await _context.PayPalAccount.FindAsync(id);
 
         if (payPalAccount == null)
         {
@@ -42,7 +42,7 @@ public class PayPalAccountController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<PaypalAccount>> PostPayPalAccount(PaypalAccount payPalAccount)
     {
-        _context.PayPalAccounts.Add(payPalAccount);
+        _context.PayPalAccount.Add(payPalAccount);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetPayPalAccount), new { id = payPalAccount.PayPalAccountID }, payPalAccount);
@@ -82,13 +82,13 @@ public class PayPalAccountController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePayPalAccount(int id)
     {
-        var payPalAccount = await _context.PayPalAccounts.FindAsync(id);
+        var payPalAccount = await _context.PayPalAccount.FindAsync(id);
         if (payPalAccount == null)
         {
             return NotFound();
         }
 
-        _context.PayPalAccounts.Remove(payPalAccount);
+        _context.PayPalAccount.Remove(payPalAccount);
         await _context.SaveChangesAsync();
 
         return NoContent();
@@ -96,6 +96,6 @@ public class PayPalAccountController : ControllerBase
 
     private bool PayPalAccountExists(int id)
     {
-        return _context.PayPalAccounts.Any(e => e.PayPalAccountID == id);
+        return _context.PayPalAccount.Any(e => e.PayPalAccountID == id);
     }
 }

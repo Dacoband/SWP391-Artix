@@ -22,8 +22,31 @@ public class CreatorController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Creator>>> GetCreators()
     {
-        return await _context.Creators.ToListAsync();
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                PaypalAccount = c.PaypalAccount,
+                UserName = c.UserName,
+                FollowerID = c.FollowerID, // Kiểm tra giá trị NULL trước khi gán
+                ProfilePicture = c.ProfilePicture != null ? (byte[])c.ProfilePicture : new byte[0], // Kiểm tra giá trị null trước khi gán
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Address = c.Address,
+                Phone = c.Phone,
+                LastLogDate = c.LastLogDate,
+                AllowCommission = c.AllowCommission
+                // Các thuộc tính khác...
+            })
+            .ToListAsync();
+
+        return creators;
     }
+
+
+
+
+
 
     // GET: api/Creator/5
     [HttpGet("{id}")]
