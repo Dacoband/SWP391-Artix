@@ -19,7 +19,6 @@ function UploadArtwork() {
     const initialArtForm = {
         selectedFile: null,
         description: '',
-        category: '',
         tags: [],
         createdtime: '',
         isPurchasable: false,
@@ -29,8 +28,16 @@ function UploadArtwork() {
     const [artForm, setArtForm] = useState(initialArtForm)
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setArtForm({ ...artForm, [name]: value });
+        const { name, files } = e.target;
+        if (name === "selectedFile") { // Assuming the name of your file input is "file"
+            // Files is a FileList object, you can grab the first file using indexing if you're accepting single files
+            const file = files[0]; 
+            // Now you can set the file to your state, make sure you have a state property to hold it
+            setArtForm({ ...artForm, [name]: file });
+        } else {
+            const { value } = e.target;
+            setArtForm({ ...artForm, [name]: value });
+        }
     };
     const handleSwitchChange = (e) => {
         setArtForm({ ...artForm, isPurchasable: e.target.checked });
@@ -65,8 +72,10 @@ function UploadArtwork() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setArtForm({ ...artForm, createdtime: new Date().toISOString() });
+        const time = new Date()
+        setArtForm({ ...artForm, createdtime: time.toISOString() }); 
         // Submit your form logic...
+        console.log(artForm)
     };
 
     return (
@@ -74,6 +83,7 @@ function UploadArtwork() {
             <div className='userInfoForm' style={{ backgroundColor: `rgba(${theme.rgbBackgroundColor},0.9)` }}>
                 <form onSubmit={handleSubmit}>
                     <CustomizedTextField
+                        name="selectedFile" // Make sure this corresponds with your state's property name for the file
                         type="file"
                         inputProps={{ accept: ".png,.jpeg,.jpg,.tiff,.gif" }}
                         onChange={handleInputChange}
