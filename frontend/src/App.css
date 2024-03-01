@@ -570,8 +570,8 @@ a{
   margin-top: 4px;
 }
 .boxintroduct{
-  display: table-cell;
-
+  margin: auto;
+  width: 80%;
 }
 .headintroduct{
   margin-left: 25px;

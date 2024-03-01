@@ -147,16 +147,8 @@ export default function ProfileUser() {
         hihis
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-     
       <Box
-      height= {150}
-      width={800}
-      my={4}
-    
-      gap={4}
-      p={2}
       style={{ 
-      
       border: '2px solid grey',
      }} className='boxintroduct'
     >
@@ -176,13 +168,6 @@ export default function ProfileUser() {
     </Box>
 
       </div>
-
-
-
-
-
-
-      
     </div>
   );
 }
