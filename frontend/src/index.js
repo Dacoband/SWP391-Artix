@@ -7,10 +7,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { ThemeProvider } from './Components/Themes/ThemeProvider.tsx';
 import {AuthProvider} from './Components/AuthenContext.tsx';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
     <Router>
       <ThemeProvider>
         <AuthProvider>
@@ -21,6 +17,7 @@ root.render(
       </ThemeProvider>
     </Router>
   </React.StrictMode>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
