@@ -558,6 +558,36 @@ a{
   margin-top: 25px;
   display: flex;
 }
+.navofuser{
+  display: flex;
+  justify-content: space-between;
+}
 .navuser{
   margin-left:110px ;
+}
+.buttonSubcribe{
+  margin-right: 100px;
+  margin-top: 4px;
+}
+.boxintroduct{
+  display: table-cell;
+
+}
+.headintroduct{
+  margin-left: 25px;
+  margin-bottom: 5px;
+}
+.bilointroduct{
+  display: flex;
+  justify-content: space-between;
+}
+.contentintroduct{
+  margin-left: 25px;
+  margin-right: 25px;
+  font-size: 18px;
+
+}
+.iconintroduct{
+  margin-top: 5px;
+  margin-right: 6px;
 }

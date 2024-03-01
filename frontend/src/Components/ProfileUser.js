@@ -15,9 +15,13 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-
-
-
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import CakeIcon from '@mui/icons-material/Cake';
+import RoomIcon from '@mui/icons-material/Room';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import PaymentIcon from '@mui/icons-material/Payment';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -126,7 +130,7 @@ export default function ProfileUser() {
       <div className='inforuser2'>
       <Box sx={{ width: '100%' }}>
    
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className='navofuser'>
         <div className='navuser'>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Home" {...a11yProps(0)} />
@@ -134,26 +138,36 @@ export default function ProfileUser() {
           <Tab label="Shop" {...a11yProps(2)} />
         </Tabs>
         </div>
+        <div className='buttonSubcribe'>
+        <Button variant="contained" href="#contained-buttons"> <ShoppingBagIcon style={{marginRight:'5px'}}/>  Subcribe</Button>
+        <Button variant="contained" href="#contained-buttons" style={{marginLeft:'20px'}}>Report</Button>
+        </div>
       </Box>
       <CustomTabPanel value={value} index={0}>
         hihis
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
+     
       <Box
-      height= {300}
-      width={1200}
+      height= {150}
+      width={800}
       my={4}
     
       gap={4}
       p={2}
-      sx={{ border: '2px solid grey' }}
+      style={{ 
+      
+      border: '2px solid grey',
+     }} className='boxintroduct'
     >
-    <div>name</div>
-    <div>Birday ,Location</div>
-    <div>email</div>
-    <div>Phone</div>
-    <div>my bio: t nghĩ cái này nên giới hạn số kí tự lỡ có người viết nhiều quá </div>
-    <div>có phải thêm 1 dòng tk paypal không?</div>
+    <h2  className='headintroduct'>About {selectedUser.User}:</h2>
+    <div className='bilointroduct'>
+    <div className='contentintroduct'><CakeIcon className='iconintroduct'/>Birday: {selectedUser.birday} </div>
+    <div className='contentintroduct' style={{marginRight:'300px'}}><RoomIcon  className='iconintroduct'/>Location: {selectedUser.location}</div></div>
+    <div className='contentintroduct'><EmailIcon  className='iconintroduct'/>Email: {selectedUser.email} </div>
+    <div className='contentintroduct'><PhoneIcon  className='iconintroduct'/>Phone: {selectedUser.Phone}</div>
+    <div className='contentintroduct'> <AutoAwesomeIcon  className='iconintroduct'/>My Bio: {selectedUser.bio}  </div>
+    
     </Box>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
