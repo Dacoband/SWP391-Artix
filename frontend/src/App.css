@@ -548,3 +548,22 @@ a{
   padding-right: 5%;
   padding-bottom: 2%;
 }
+
+.tagHolder::-webkit-scrollbar {
+  display: none;
+}
+.tagHolder{
+  height: 5vh;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  overflow-x: auto;
+}
+
+.previewImage{
+  height: 300px;
+  width: 300px;
+  object-fit: fill;
+  float: right;
+}
+
+
