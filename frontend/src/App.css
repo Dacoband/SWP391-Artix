@@ -223,8 +223,6 @@ main {
   
 }
 
-
-
 /* test icon2 */
 .test2{
   height: 100vh;
@@ -232,7 +230,7 @@ main {
   align-items: center;
   justify-content: center;
   background: #fff;
-
+}
 .background{
   background-size: cover;
   background-repeat: no-repeat;
@@ -277,6 +275,7 @@ a{
   z-index: 9999;
 
 }
+
 .button{
   position: relative;
   padding: 0px 0px;
@@ -290,7 +289,7 @@ a{
   transition: transform 0.2s ease;
   /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
 
-
+}
 .loading{
   margin: auto; 
 
