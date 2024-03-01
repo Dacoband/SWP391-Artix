@@ -293,6 +293,7 @@ a{
 
 .loading{
   margin: auto; 
+<<<<<<< HEAD
 
 }
 .button:active{
@@ -365,11 +366,15 @@ a{
 
 
 
+=======
+}
+>>>>>>> origin/Volka
 
 .app-logo{
   margin-left: 2vw;
   width: 82px;
   height: 32px;
+<<<<<<< HEAD
 }
 
 
@@ -503,4 +508,6 @@ a{
   display: flex;
   justify-content: center;
   padding-bottom: 10px;
+=======
+>>>>>>> origin/Volka
 }
