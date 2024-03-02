@@ -7,9 +7,9 @@ namespace backend.Entities
     {
         [Key]
         public int? CreatorID { get; set; } // PK
-        public int? FollowerID { get; set; } // FK
         public int? PaypalAccount { get; set; } // FK
         public string UserName { get; set; }
+        public int? FollowerID { get; set; } // FK
         public byte[] ProfilePicture { get; set; } // Có thể 
         public string FirstName { get; set; }
         public string LastName { get; set; }

@@ -20,7 +20,7 @@ export default function PeopleDetail() {
     const [person,SetPerson] = useState([]);
     const [open,SetOpen] = useState(false);
     const [loading,SetLoading] = useState(true);
-    const {theme,switchImage} = useContext(ThemeContext);
+    const {theme} = useContext(ThemeContext);
     let {id} = useParams();
     //const URL = "https://localhost:7049/api/people/" + id; //- Local .NET API
     const URL = "https://peopleapi1141.azurewebsites.net/api/people/" + id; // Cloud .NET API
@@ -76,8 +76,8 @@ function Characters(){
             </Typography>
           </CardContent>
           <CardActions>
-            <Button onClick={switchImage()} size="small"><Link to={`/characters`}>Return Home</Link></Button>
-            <Button onClick={switchImage()} size="small"><Link to={`edit`}>Update Detail</Link></Button>
+            <Button size="small"><Link to={`/characters`}>Return Home</Link></Button>
+            <Button size="small"><Link to={`edit`}>Update Detail</Link></Button>
             <Button onClick={handleClick} sx={{color:"red"}} size="small">Delete</Button>
           </CardActions>
         </Card>
