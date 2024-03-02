@@ -20,15 +20,33 @@ function CustomizedButton({children, ...props}) {
 
 const useStyles = makeStyles( ({
   darkButton: {
+<<<<<<< HEAD
     color: 'inherit', // White text for better contrast
     backgroundColor: 'none',
+=======
+    color: '#61dafb', // White text for better contrast
+<<<<<<< HEAD
+    backgroundColor: '#', // Darker Blue
+=======
+    backgroundColor: '#1565C0', // Darker Blue
+>>>>>>> origin/Volka
+>>>>>>> Volka
     '&:hover': {
       backgroundColor: '#302e4d', // Lighter blue on hover for dark mode
     },
   },
   lightButton: {
+<<<<<<< HEAD
     color: 'inherit', // Dark text for better contrast in light mode
     backgroundColor: 'none',
+=======
+    color: '#0096FA', // Dark text for better contrast in light mode
+<<<<<<< HEAD
+    backgroundColor: '#', // Blue
+=======
+    backgroundColor: '#2196F3', // Blue
+>>>>>>> origin/Volka
+>>>>>>> Volka
     '&:hover': {
       backgroundColor: '#F5F5F5', // smokey color on hover for light mode
     },

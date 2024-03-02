@@ -1,14 +1,12 @@
 
-import React from 'react';
+import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { Work } from '../../../share/ListofWork';
-<<<<<<< HEAD
-=======
+import { Work } from '../share/ListofWork';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
->>>>>>> Volka
 import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 export default function RecommendedWords() {
     // Sắp xếp danh sách công việc theo số lượng like giảm dần
@@ -17,21 +15,6 @@ export default function RecommendedWords() {
   const top10Work = sortedWork.slice(0, 10);
 
   return (
-<<<<<<< HEAD
-    <ImageList className='recommendedImages' cols={5} >
-      {top10Work.map((work) => (
-        <CardActionArea key={work.id}>
-        <ImageListItem key={work.id}>
-          <CardMedia
-            component="img"
-            style={{ objectFit:"fill",  width:'15vw' ,height: '15vw' ,borderRadius:'5px',minWidth:'182px',minHeight:'182px' }}
-            image={`${work.img}`}
-            alt={work.img}
-            loading="lazy"
-            />
-        </ImageListItem>
-        </CardActionArea>
-=======
 
     <ImageList sx={{ width: 1100, height: 500 ,overflow: 'hidden'}} cols={5} rowHeight={200} >
       {top10Work.map((work) => (
@@ -45,15 +28,29 @@ export default function RecommendedWords() {
             alt={work.img}
             loading="lazy"
           />
+          
         </ImageListItem>
           </CardMedia>
           <CardContent>
+            
             <div className='userofworks'>{work.author}</div>
+            
+            
           </CardContent>
         </CardActionArea>
       </Card>
->>>>>>> Volka
+
+
+
+
+       
+        
+
+
       ))}
+
+
+
     </ImageList>
 
 
