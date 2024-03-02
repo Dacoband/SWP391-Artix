@@ -47,8 +47,7 @@ public class ArtworksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
-        var artworkss = await _context.Artworks
-            .Where(a => a.ArtworkID == id) // Filter by the specified ArtworkID
+        var artwork = await _context.Artworks
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
@@ -62,29 +61,21 @@ public class ArtworksController : ControllerBase
                 Price = a.Price,
                 ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
-        if (artworkss == null)
+        if (artwork == null)
         {
-            return NotFound(); // Return a 404 Not Found if the artwork with the specified ID is not found
+            return NotFound();
         }
 
-        return artworkss;
+        return artwork;
     }
-<<<<<<< HEAD
-    [HttpGet("{CreatorID}")]
-    public async Task<ActionResult<Artworks>> GetArtworkByID(int Crid)
-    {
-        var artworksss = await _context.Artworks
-            .Where(a => a.CreatorID == Crid) // Filter by the specified ArtworkID
-=======
     // GET: api/Artworks/ByCreator/{Crid}
     [HttpGet("ByCreator/{Crid}")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
     {
         var artworks = await _context.Artworks
             .Where(a => a.CreatorID == Crid)
->>>>>>> THUCVIP
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
@@ -95,24 +86,17 @@ public class ArtworksController : ControllerBase
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
-<<<<<<< HEAD
-                Price = a.Price
-               
-            })
-            .FirstOrDefaultAsync();
-=======
                 Price = a.Price,
                 ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
             .ToListAsync();
->>>>>>> THUCVIP
 
-        if (artworksss == null)
+        if (artworks == null || artworks.Count == 0)
         {
-            return NotFound(); 
+            return NotFound();
         }
 
-        return artworksss;
+        return artworks;
     }
 
 
