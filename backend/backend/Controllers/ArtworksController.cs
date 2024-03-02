@@ -47,36 +47,20 @@ public class ArtworksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
-<<<<<<< HEAD
         var artworkss = await _context.Artworks
             .Where(a => a.ArtworkID == id) // Filter by the specified ArtworkID
-=======
-        var artwork = await _context.Artworks
->>>>>>> THUCVIP
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
                 TagID = a.TagID,
-<<<<<<< HEAD
-                CategoryID = a.CategoryID,
-=======
                 ArtworkName = a.ArtworkName,
->>>>>>> THUCVIP
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
-<<<<<<< HEAD
-                Price = a.Price
-=======
                 Price = a.Price,
                 ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-            })
-            .FirstOrDefaultAsync(a => a.ArtworkID == id);
->>>>>>> THUCVIP
-
-                // Other properties...
             })
             .FirstOrDefaultAsync();
 
@@ -97,7 +81,7 @@ public class ArtworksController : ControllerBase
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
                 TagID = a.TagID,
-                CategoryID = a.CategoryID,
+                ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
