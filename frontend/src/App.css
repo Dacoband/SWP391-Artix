@@ -814,13 +814,12 @@ a{
 
 }
 
-}
 
 .tagHolder::-webkit-scrollbar {
   display: none;
 }
 .tagHolder{
-  height: 5vh;
+  height: 8vh;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   overflow-x: auto;
