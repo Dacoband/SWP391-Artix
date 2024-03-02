@@ -70,11 +70,25 @@ public class ArtworksController : ControllerBase
 
         return artwork;
     }
+    // GET: api/Artworks/ByCreator/{Crid}
     [HttpGet("ByCreator/{Crid}")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
     {
         var artworks = await _context.Artworks
             .Where(a => a.CreatorID == Crid)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
             .ToListAsync();
 
         if (artworks == null || artworks.Count == 0)
@@ -84,6 +98,7 @@ public class ArtworksController : ControllerBase
 
         return artworks;
     }
+
 
     // POST: api/Artworks
     [HttpPost]
