@@ -167,19 +167,15 @@ public class ArtworksController : ControllerBase
             return StatusCode(500, $"Internal Server Error: {ex.Message}");
         }
     }
-<<<<<<< HEAD
-=======
 
 
->>>>>>> THUCVIP
     private bool ArtworkExists(int id)
     {
         return _context.Comments.Any(e => e.CommentID == id);
     }
 
 
-<<<<<<< HEAD
-    // GET: api/Artworks/TopLiked
+
     [HttpGet("TopLiked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
     {
@@ -208,8 +204,5 @@ public class ArtworksController : ControllerBase
 
         return topLikedArtworks;
     }
-=======
 
-   
->>>>>>> THUCVIP
 }
