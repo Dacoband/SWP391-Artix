@@ -25,15 +25,17 @@ public class ArtworksController : ControllerBase
      .Select(a => new Artworks
      {
          // Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
-        ArtworkID = a.ArtworkID,
+         ArtworkID = a.ArtworkID,
          CreatorID = a.CreatorID,
          TagID = a.TagID,
-         CategoryID = a.CategoryID,
+         ArtworkName = a.ArtworkName,
          Description = a.Description,
          DateCreated = a.DateCreated,
          Likes = a.Likes,
          Purchasable = a.Purchasable,
-         Price = a.Price
+         Price = a.Price,
+         ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+
      })
      .ToListAsync();
 
@@ -46,6 +48,19 @@ public class ArtworksController : ControllerBase
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
         var artwork = await _context.Artworks
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
         if (artwork == null)
@@ -55,11 +70,25 @@ public class ArtworksController : ControllerBase
 
         return artwork;
     }
+    // GET: api/Artworks/ByCreator/{Crid}
     [HttpGet("ByCreator/{Crid}")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
     {
         var artworks = await _context.Artworks
             .Where(a => a.CreatorID == Crid)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
             .ToListAsync();
 
         if (artworks == null || artworks.Count == 0)
@@ -70,15 +99,17 @@ public class ArtworksController : ControllerBase
         return artworks;
     }
 
+
     // POST: api/Artworks
     [HttpPost]
-    public async Task<ActionResult<Artworks>> PostArtwork(Artworks artwork)
+    public async Task<ActionResult<Artworks>> PostComment(Artworks Artwork)
     {
-        _context.Artworks.Add(artwork);
+        _context.Artworks.Add(Artwork);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetArtwork), new { id = artwork.ArtworkID }, artwork);
+        return CreatedAtAction(nameof(GetArtwork), new { id = Artwork.ArtworkID }, Artwork);
     }
+
 
     // PUT: api/Artworks/5
     [HttpPut("{id}")]
@@ -114,41 +145,64 @@ public class ArtworksController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArtwork(int id)
     {
-        using (var transaction = _context.Database.BeginTransaction())
+        var artwork = await _context.Artworks.FindAsync(id);
+
+        if (artwork == null)
         {
-            
-                // Xóa tất cả các bình luận liên quan
-                var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
+            return NotFound(); // Return 404 if the artwork is not found
+        }
 
-                if (commentsToDelete.Any())
-                {
-                    _context.Comments.RemoveRange(commentsToDelete);
-                    await _context.SaveChangesAsync();
-                }
+        try
+        {
+            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
 
-                // Xóa bức tranh
-                var artwork = await _context.Artworks.FindAsync(id);
-                if (artwork == null)
-                {
-                    transaction.Rollback();
-                    return NotFound();
-                }
+            _context.Artworks.Remove(artwork);
+            await _context.SaveChangesAsync();
 
-                _context.Artworks.Remove(artwork);
-                await _context.SaveChangesAsync();
-
-                transaction.Commit();
-
-                return NoContent();
-            
+            return NoContent(); // Return 204 No Content upon successful deletion
+        }
+        catch (Exception ex)
+        {
+            // Handle any exception that might occur during deletion
+            return StatusCode(500, $"Internal Server Error: {ex.Message}");
         }
     }
-    
-
 
 
     private bool ArtworkExists(int id)
     {
-        return _context.Artworks.Any(e => e.ArtworkID == id);
+        return _context.Comments.Any(e => e.CommentID == id);
     }
+
+
+
+    [HttpGet("TopLiked")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
+    {
+        var topLikedArtworks = await _context.Artworks
+            .OrderByDescending(a => a.Likes)
+            .Take(10)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
+            .ToListAsync();
+
+        if (topLikedArtworks == null || topLikedArtworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return topLikedArtworks;
+    }
+
 }
