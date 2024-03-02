@@ -171,6 +171,7 @@ export default function ProfileUser() {
      
       </CustomTabPanel>
 
+
       <CustomTabPanel value={value} index={1} className='tabintroduct'>
      
       <Box
@@ -180,6 +181,8 @@ export default function ProfileUser() {
     
       gap={4}
       p={2}
+
+
 
       style={{ 
       border: '2px solid grey',
