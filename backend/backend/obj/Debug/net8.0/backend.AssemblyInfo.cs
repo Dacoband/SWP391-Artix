@@ -14,15 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b4c6f87a8d23063d26981b7d4327a1994fbe290")]
-=======
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5948960b9ac9ae1030607456976b787d0d6a69b")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+618508c0faef9b23efd9eca42fd740351b2ad0dd")]
->>>>>>> THUCVIP
->>>>>>> Volka
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3d63966cddf6f8fd2ae5369223b7e8d717cf9347")]
 [assembly: System.Reflection.AssemblyProductAttribute("backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

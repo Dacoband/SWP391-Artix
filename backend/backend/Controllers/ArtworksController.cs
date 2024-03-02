@@ -25,7 +25,7 @@ public class ArtworksController : ControllerBase
      .Select(a => new Artworks
      {
          // Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
-        ArtworkID = a.ArtworkID,
+         ArtworkID = a.ArtworkID,
          CreatorID = a.CreatorID,
          TagID = a.TagID,
          ArtworkName = a.ArtworkName,
@@ -47,58 +47,58 @@ public class ArtworksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
-        var artworkss = await _context.Artworks
-            .Where(a => a.ArtworkID == id) // Filter by the specified ArtworkID
+        var artwork = await _context.Artworks
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
                 TagID = a.TagID,
-                CategoryID = a.CategoryID,
+                ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
-                Price = a.Price
-
-                // Other properties...
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
-        if (artworkss == null)
+        if (artwork == null)
         {
-            return NotFound(); // Return a 404 Not Found if the artwork with the specified ID is not found
+            return NotFound();
         }
 
-        return artworkss;
+        return artwork;
     }
-    [HttpGet("{CreatorID}")]
-    public async Task<ActionResult<Artworks>> GetArtworkByID(int Crid)
+    // GET: api/Artworks/ByCreator/{Crid}
+    [HttpGet("ByCreator/{Crid}")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
     {
-        var artworksss = await _context.Artworks
-            .Where(a => a.CreatorID == Crid) // Filter by the specified ArtworkID
+        var artworks = await _context.Artworks
+            .Where(a => a.CreatorID == Crid)
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
                 TagID = a.TagID,
-                CategoryID = a.CategoryID,
+                ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
-                Price = a.Price
-               
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
-            .FirstOrDefaultAsync();
+            .ToListAsync();
 
-        if (artworksss == null)
+        if (artworks == null || artworks.Count == 0)
         {
-            return NotFound(); 
+            return NotFound();
         }
 
-        return artworksss;
+        return artworks;
     }
+
 
     // POST: api/Artworks
     [HttpPost]
@@ -146,34 +146,34 @@ public class ArtworksController : ControllerBase
     {
         using (var transaction = _context.Database.BeginTransaction())
         {
-            
-                // Xóa tất cả các bình luận liên quan
-                var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
 
-                if (commentsToDelete.Any())
-                {
-                    _context.Comments.RemoveRange(commentsToDelete);
-                    await _context.SaveChangesAsync();
-                }
+            // Xóa tất cả các bình luận liên quan
+            var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
 
-                // Xóa bức tranh
-                var artwork = await _context.Artworks.FindAsync(id);
-                if (artwork == null)
-                {
-                    transaction.Rollback();
-                    return NotFound();
-                }
-
-                _context.Artworks.Remove(artwork);
+            if (commentsToDelete.Any())
+            {
+                _context.Comments.RemoveRange(commentsToDelete);
                 await _context.SaveChangesAsync();
+            }
 
-                transaction.Commit();
+            // Xóa bức tranh
+            var artwork = await _context.Artworks.FindAsync(id);
+            if (artwork == null)
+            {
+                transaction.Rollback();
+                return NotFound();
+            }
 
-                return NoContent();
-            
+            _context.Artworks.Remove(artwork);
+            await _context.SaveChangesAsync();
+
+            transaction.Commit();
+
+            return NoContent();
+
         }
     }
-    
+
 
 
 
