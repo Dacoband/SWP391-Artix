@@ -209,5 +209,4 @@ public class ArtworksController : ControllerBase
 
         return topLikedArtworks;
     }
-
 }
