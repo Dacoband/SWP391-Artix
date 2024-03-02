@@ -16,17 +16,20 @@ import {
     Chip,
     MenuItem,
 } from '@mui/material';
-import { Axios } from 'axios';
-import { dark } from '@mui/material/styles/createPalette';
+
 function UploadArtwork() {
     const { theme } = useContext(ThemeContext)
     const initialArtForm = {
-        selectedFile: null,
+        artworkID,
+        creatorID,
+        tagID,
+        artworkName,
         description: '',
-        tags: [],
-        createdtime: '',
-        isPurchasable: false,
-        price: '',
+        dateCreated:null,
+        Likes:0,
+        purchasable:false,
+        price:0,
+        imageFile: null,
     };
 
     const [artForm, setArtForm] = useState(initialArtForm)
@@ -45,16 +48,16 @@ function UploadArtwork() {
 
     const handleInputChange = (e) => {
         const { name, files } = e.target;
-        if (name === "selectedFile") { 
+        if (name === "imageFile") { 
             // Files is a FileList object, you can grab the first file using indexing if you're accepting single files
             const file = files[0];
             // Now you can set the file to your state, make sure you have a state property to hold it
             setArtForm({ ...artForm, [name]: file });
-            console.log(artForm.selectedFile)
-            // blobToBase64(file,function(base64Image){
-            //     setArtForm({...artForm, [name]: base64Image})
-            //     //console.log(base64Image)
-            // })
+            console.log(artForm.imageFile)
+            blobToBase64(file,function(base64Image){
+                setArtForm({...artForm, [name]: base64Image})
+                //console.log(base64Image)
+            })
 
         } else {
             const { value } = e.target;
@@ -82,7 +85,7 @@ function UploadArtwork() {
     };
 
     const handlePriceVisibility = () => {
-        return artForm.isPurchasable && (
+        return artForm.purchasable && (
             <CustomizedTextField
                 sx={{margin:'0 0 0 0'}}
                 name="price"
@@ -95,13 +98,16 @@ function UploadArtwork() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const time = new Date()
-        setArtForm({ ...artForm, createdtime: time.toISOString() });
+        setArtForm({ ...artForm, dateCreated: time.toISOString() });
         //Call the convertion function
         // TODO: Submit your form logic...
         console.log(artForm)
 
         const url = "https://localhost:7233/api/Artworks";
-        axios.get(url)
+        axios.post(url,
+            {
+                artForm
+            })
         .then(response => response.data)
         .then(data => {console.log(data)})
         .catch(error => console.log(error))

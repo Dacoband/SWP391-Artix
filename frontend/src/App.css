@@ -5,12 +5,7 @@
 
 }
 
-main {
-  
-  /* display: flex;
-  justify-content: space-between;
-  flex: 1; */
-}
+
 .Navigation2 {
   /* flex:1; */
   /* float: left; Đặt container này ở phía trái */
@@ -814,6 +809,10 @@ a{
 
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
+}
 
 .tagHolder::-webkit-scrollbar {
   display: none;
