@@ -181,7 +181,7 @@ public class ArtworksController : ControllerBase
     {
         var topLikedArtworks = await _context.Artworks
             .OrderByDescending(a => a.Likes)
-            .Take(1)
+            .Take(10)
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
