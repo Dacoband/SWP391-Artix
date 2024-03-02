@@ -15,6 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 <<<<<<< HEAD
+<<<<<<< HEAD
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b4c6f87a8d23063d26981b7d4327a1994fbe290")]
 =======
 <<<<<<< HEAD
@@ -23,6 +24,9 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+618508c0faef9b23efd9eca42fd740351b2ad0dd")]
 >>>>>>> THUCVIP
 >>>>>>> Volka
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+004663b5ace6c7db5e1ef989a44647d9927a78f8")]
+>>>>>>> THUCVIP
 [assembly: System.Reflection.AssemblyProductAttribute("backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
