@@ -6,7 +6,7 @@ import {ThemeContext} from "../Themes/ThemeProvider.tsx"
 function CustomizedButton({ ...props }) {
     const { dark } = useContext(ThemeContext);
     const classes = useStyles();
-  
+
     return (
       <ListItemButton
         className={dark ? classes.darkButton : classes.lightButton}
@@ -22,8 +22,12 @@ const useStyles = makeStyles( ({
 <<<<<<< HEAD
     backgroundColor: 'none',
 =======
+<<<<<<< HEAD
+    backgroundColor: 'none',
+=======
     backgroundColor: 'none', // Darker Blue
 >>>>>>> origin/Volka
+>>>>>>> Volka
     '&:hover': {
       backgroundColor: '#302e4d', // Lighter blue on hover for dark mode
     },
@@ -33,8 +37,12 @@ const useStyles = makeStyles( ({
 <<<<<<< HEAD
     backgroundColor: 'none',
 =======
+<<<<<<< HEAD
+    backgroundColor: 'none',
+=======
     backgroundColor: 'none', // Blue
 >>>>>>> origin/Volka
+>>>>>>> Volka
     '&:hover': {
       backgroundColor: '#F5F5F5', // smokey color on hover for light mode
     },
