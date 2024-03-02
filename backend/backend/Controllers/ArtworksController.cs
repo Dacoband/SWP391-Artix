@@ -28,12 +28,14 @@ public class ArtworksController : ControllerBase
         ArtworkID = a.ArtworkID,
          CreatorID = a.CreatorID,
          TagID = a.TagID,
-         CategoryID = a.CategoryID,
+         ArtworkName = a.ArtworkName,
          Description = a.Description,
          DateCreated = a.DateCreated,
          Likes = a.Likes,
          Purchasable = a.Purchasable,
-         Price = a.Price
+         Price = a.Price,
+         ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+
      })
      .ToListAsync();
 
