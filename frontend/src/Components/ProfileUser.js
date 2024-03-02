@@ -1,4 +1,7 @@
 import React from 'react'
+import { Work } from '../share/ListofWork';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 import { useState } from 'react';
 import {Route, Routes} from 'react-router-dom';
 import { ListofUsers } from '../share/ListofUsers';
@@ -21,7 +24,8 @@ import RoomIcon from '@mui/icons-material/Room';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import PaymentIcon from '@mui/icons-material/Payment';
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import Avatar from '@mui/material/Avatar';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -89,13 +93,20 @@ export default function ProfileUser() {
         <Card sx={{ width: '100%' }}>
       
         <div className='backgrounduser' style={{ backgroundImage: `url('${selectedUser.background}')` }}>
-            
+        <Button  className='button-edit-background'style={{color:'#04a1fd',backgroundColor:'#1A1A2E',borderRadius:'10px',fontSize:'14px',top:'80%',left:'85%'}}><CameraAltIcon/> Edit Cover Image</Button>
         </div>
         <CardContent className='infouser1'>
 
           <div className='infousername'>
           <div className='avataruser' >
             <img src={selectedUser.avatar}/>
+            <div className='buttonavatar'>
+            <Button style={{color:'white',borderRadius:'50%'}}>
+            <Avatar style={{outline: '2px solid #fff'}}>
+            <CameraAltIcon/>
+      </Avatar>
+              </Button>
+            </div>
           </div>
           <div className='headerusername'>
           <Typography gutterBottom variant="h3" component="div"style={{ fontWeight: 700,marginBottom:'5px' }} >
@@ -143,20 +154,34 @@ export default function ProfileUser() {
         <Button variant="contained" href="#contained-buttons" style={{marginLeft:'20px'}}>Report</Button>
         </div>
       </Box>
-      <CustomTabPanel value={value} index={0}>
-        hihis
+      <CustomTabPanel value={value} index={0} className='tabhome'>
+      <ImageList sx={{ width: 1100, height: 'auto',overflow: 'hidden'}} cols={5} rowHeight={200} >
+      {Work.map((work) => (
+        <ImageListItem style={{ width:'210px',height: '180px'}} key={work.id}>
+        <img
+          srcSet={`${work.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+          src={`${work.img}?w=164&h=164&fit=crop&auto=format`}
+          alt={work.img}
+          loading="lazy"
+        />
+        
+      </ImageListItem>
+      ))}
+    </ImageList>
+     
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={1}>
+
+      <CustomTabPanel value={value} index={1} className='tabintroduct'>
      
       <Box
-      height= {150}
+      // height= {150}
       width={800}
       my={4}
     
       gap={4}
       p={2}
+
       style={{ 
-      
       border: '2px solid grey',
      }} className='boxintroduct'
     >
@@ -170,19 +195,40 @@ export default function ProfileUser() {
     
     </Box>
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2}>
-        Item Three
+      <CustomTabPanel value={value} index={2} className='tabshop'>
+      {/* <ImageList sx={{ width:1200 , height: 450 ,overflow: 'hidden'}} cols={5} rowHeight={210}> */}
+      <ImageList sx={{ width: 1100, height:'auto' ,overflow: 'hidden'}} cols={5} rowHeight={200} >
+      {Work.map((work) => (
+        <Card className='cardrecommended'>
+        <CardActionArea>
+          <CardMedia  style={{ objectFit: 'cover', width: '100%', height: '180px' }}>
+          <ImageListItem style={{ width:'210px',height: '180px'}} key={work.id}>
+          <img
+            srcSet={`${work.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+            src={`${work.img}?w=164&h=164&fit=crop&auto=format`}
+            alt={work.img}
+            loading="lazy"
+          />
+          
+        </ImageListItem>
+          </CardMedia>
+          <CardContent>
+            
+            <div className='pricework'>Price:{work.price}$</div>
+            
+            
+          </CardContent>
+        </CardActionArea>
+      </Card>
+
+
+      ))}
+
+    </ImageList>
       </CustomTabPanel>
     </Box>
 
       </div>
-
-
-
-
-
-
-      
     </div>
   );
 }
