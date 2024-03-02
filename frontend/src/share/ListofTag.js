@@ -18,6 +18,10 @@ export const ListTag =[
     {id:17, nameTag:'Digitalillustration '},
     {id:18, nameTag:'Background'},
     {id:19, nameTag:'Animal'},
+<<<<<<< HEAD
     {id:20, nameTag:'Food'},
+=======
+    {id:18, nameTag:'Food'},
+>>>>>>> Volka
 
 ];;

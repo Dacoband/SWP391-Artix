@@ -46,22 +46,29 @@ public class ArtworksController : ControllerBase
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
         var artwork = await _context.Artworks
-            .Where(a => a.ArtworkID == id) // Filter by the specified ArtworkID
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                // Other properties...
-            })
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
         if (artwork == null)
         {
-            return NotFound(); // Return a 404 Not Found if the artwork with the specified ID is not found
+            return NotFound();
         }
 
         return artwork;
     }
+    [HttpGet("ByCreator/{Crid}")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
+    {
+        var artworks = await _context.Artworks
+            .Where(a => a.CreatorID == Crid)
+            .ToListAsync();
 
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return artworks;
+    }
 
     // POST: api/Artworks
     [HttpPost]

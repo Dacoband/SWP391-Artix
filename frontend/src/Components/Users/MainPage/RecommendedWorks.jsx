@@ -3,6 +3,11 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+
+import { Work } from '../../../share/ListofWork';
+
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 export default function RecommendedWords() {
@@ -40,6 +45,7 @@ function Sort(){
 
 
   return (
+
     <ImageList className='recommendedImages' cols={5} >
       {recommendedworkList.map((work) => (
         <CardActionArea key={work.ArtworkID}>
@@ -53,6 +59,7 @@ function Sort(){
             />
         </ImageListItem>
         </CardActionArea>
+
       ))}
     </ImageList>
 
