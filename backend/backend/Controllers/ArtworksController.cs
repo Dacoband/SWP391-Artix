@@ -34,7 +34,7 @@ public class ArtworksController : ControllerBase
          Likes = a.Likes,
          Purchasable = a.Purchasable,
          Price = a.Price,
-         ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+         ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
 
      })
      .ToListAsync();
@@ -59,7 +59,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
             })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
@@ -87,7 +87,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
             })
             .ToListAsync();
 
@@ -154,7 +154,7 @@ public class ArtworksController : ControllerBase
 
         try
         {
-            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
+            //artwork.ImageFile = artwork.ImageFile ?? Array.Empty<IFormFile>();
 
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
@@ -193,7 +193,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
             })
             .ToListAsync();
 
