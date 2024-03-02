@@ -71,11 +71,20 @@ public class ArtworksController : ControllerBase
 
         return artworkss;
     }
+<<<<<<< HEAD
     [HttpGet("{CreatorID}")]
     public async Task<ActionResult<Artworks>> GetArtworkByID(int Crid)
     {
         var artworksss = await _context.Artworks
             .Where(a => a.CreatorID == Crid) // Filter by the specified ArtworkID
+=======
+    // GET: api/Artworks/ByCreator/{Crid}
+    [HttpGet("ByCreator/{Crid}")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
+    {
+        var artworks = await _context.Artworks
+            .Where(a => a.CreatorID == Crid)
+>>>>>>> THUCVIP
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
@@ -86,10 +95,17 @@ public class ArtworksController : ControllerBase
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
+<<<<<<< HEAD
                 Price = a.Price
                
             })
             .FirstOrDefaultAsync();
+=======
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
+            .ToListAsync();
+>>>>>>> THUCVIP
 
         if (artworksss == null)
         {
@@ -98,6 +114,7 @@ public class ArtworksController : ControllerBase
 
         return artworksss;
     }
+
 
     // POST: api/Artworks
     [HttpPost]
