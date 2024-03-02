@@ -64,13 +64,39 @@ public class CreatorController : ControllerBase
 
     // POST: api/Creator
     [HttpPost]
-    public async Task<ActionResult<Creator>> PostCreator(Creator creator)
+    public async Task<ActionResult<Creator>> PostCreator([FromBody] Creator creator)
     {
-        _context.Creators.Add(creator);
-        await _context.SaveChangesAsync();
+        try
+        {
+            if (creator == null)
+            {
+                return BadRequest("Invalid data. Creator object is null.");
+            }
 
-        return CreatedAtAction(nameof(GetCreator), new { id = creator.CreatorID }, creator);
+            // Kiểm tra và xử lý mảng byte ProfilePicture nếu cần
+            if (Request.HasFormContentType && Request.Form.Files.Count > 0)
+            {
+                var file = Request.Form.Files[0];
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await file.CopyToAsync(ms);
+                    creator.ProfilePicture = ms.ToArray();
+                }
+            }
+
+            _context.Creators.Add(creator);
+            await _context.SaveChangesAsync();
+
+            // Trả về đối tượng đã được tạo
+            return Ok(creator);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal Server Error: {ex.Message}");
+        }
     }
+
+
 
     // PUT: api/Creator/5
     [HttpPut("{id}")]

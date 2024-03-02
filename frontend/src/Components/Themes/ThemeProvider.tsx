@@ -22,8 +22,16 @@ const Theme = {
     rgbBackgroundColor:"255, 255, 255",
     backgroundImage: lightimages,
     transition: "all 1s ease-in-out",
+<<<<<<< HEAD
     borderColor:"cyan",
     hoverBackgroundColor:"#F5F5F5",
+=======
+<<<<<<< HEAD
+    borderColor:"cyan",
+=======
+    
+>>>>>>> origin/Volka
+>>>>>>> Volka
   },
   dark:{
     color:'#61dafb',
@@ -31,8 +39,16 @@ const Theme = {
     rgbBackgroundColor:"26, 26, 46",
     backgroundImage: darkimages,
     transition: "all 1s ease-in-out",
+<<<<<<< HEAD
     borderColor:"red",
     hoverBackgroundColor:"#302e4d",
+=======
+<<<<<<< HEAD
+    borderColor:"red",
+=======
+    
+>>>>>>> origin/Volka
+>>>>>>> Volka
   },
 }
 
