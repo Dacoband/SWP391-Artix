@@ -45,23 +45,58 @@ public class ArtworksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
-        var artwork = await _context.Artworks
+        var artworkss = await _context.Artworks
             .Where(a => a.ArtworkID == id) // Filter by the specified ArtworkID
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                CategoryID = a.CategoryID,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price
+
                 // Other properties...
             })
             .FirstOrDefaultAsync();
 
-        if (artwork == null)
+        if (artworkss == null)
         {
             return NotFound(); // Return a 404 Not Found if the artwork with the specified ID is not found
         }
 
-        return artwork;
+        return artworkss;
     }
+    [HttpGet("{CreatorID}")]
+    public async Task<ActionResult<Artworks>> GetArtworkByID(int Crid)
+    {
+        var artworksss = await _context.Artworks
+            .Where(a => a.CreatorID == Crid) // Filter by the specified ArtworkID
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                CategoryID = a.CategoryID,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price
+               
+            })
+            .FirstOrDefaultAsync();
 
+        if (artworksss == null)
+        {
+            return NotFound(); 
+        }
+
+        return artworksss;
+    }
 
     // POST: api/Artworks
     [HttpPost]
