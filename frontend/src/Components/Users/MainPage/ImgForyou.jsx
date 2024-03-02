@@ -1,10 +1,6 @@
 import * as React from 'react';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-
-import { CardActionArea } from '@mui/material';
-import CardMedia from '@mui/material/CardMedia';
-
 import { Work } from '../../../share/ListofWork';
 export default function StandardImageList() {
   const randomWork = Work.sort(() => 0.5 - Math.random()).slice(0, 10);
