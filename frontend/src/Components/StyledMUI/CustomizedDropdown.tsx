@@ -9,10 +9,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
-=======
->>>>>>> Volka
 
   
   
@@ -71,11 +68,7 @@ const handleClick = (event) => {
         <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
         <Typography variant='caption'>Account</Typography>
         </Divider>
-<<<<<<< HEAD
         <MenuItem onClick={handleClick}><Link to={`creatorform`}>Profile</Link></MenuItem>
-=======
-        <MenuItem onClick={handleClick}>Profile</MenuItem>
->>>>>>> Volka
         <MenuItem onClick={handleClick}>My Dashboard</MenuItem>
         <MenuItem onClick={handleClick}>My Account</MenuItem>
         <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
