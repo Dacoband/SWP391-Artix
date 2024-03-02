@@ -173,12 +173,40 @@ public class ArtworksController : ControllerBase
 
         }
     }
-
-
-
-
     private bool ArtworkExists(int id)
     {
         return _context.Artworks.Any(e => e.ArtworkID == id);
     }
+
+
+    // GET: api/Artworks/TopLiked
+    [HttpGet("TopLiked")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
+    {
+        var topLikedArtworks = await _context.Artworks
+            .OrderByDescending(a => a.Likes)
+            .Take(10)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
+            .ToListAsync();
+
+        if (topLikedArtworks == null || topLikedArtworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return topLikedArtworks;
+    }
+
 }
