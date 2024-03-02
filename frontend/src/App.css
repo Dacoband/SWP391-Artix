@@ -1,6 +1,237 @@
-.App {
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  
+  /* display: flex;
+  justify-content: space-between;
+  flex: 1; */
+}
+.Navigation2 {
+  /* flex:1; */
+  /* float: left; Đặt container này ở phía trái */
+  width: 18%; /* Chiếm 30% dung lượng */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  border-right: 1px solid #dbdbdb ;
+  position: fixed; /* Đảm bảo navigation dọc luôn hiển thị ở một vị trí cố định trên trang */
+  top: 65px; /* Hiển thị navigation dọc ở phía trên cùng của trang */
+  bottom: 0; /* Hiển thị navigation dọc ở phía dưới cùng của trang */
+  left: 0; /* Hiển thị navigation dọc ở phía bên trái của trang */
+ 
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao của navigation dọc */
+ 
+}
+.Navigation2 > div {
+  flex: 1; /* Phân chia không gian cho hai hàng */
+  display: flex; /* Sử dụng Flexbox cho các hàng */
+  flex-direction: column; /* Chia các hàng thành một cột dọc */
+}
+.Navigation2 h3{
   text-align: center;
 }
+/* .container {
+  margin-top: 60px;
+  padding: 20px; */
+  /* width: 85%;  */
+  /* Chiếm 82% dung lượng */
+  /* float: right;  */
+  /* Đặt .container bên phải */
+/* } */
+.Navigation2 ul {
+  list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
+  padding: 0; /* Xóa padding */
+  margin-left: 25px; /* Xóa margin */
+}
+
+.Navigation2 ul li {
+  width: 100%;
+  margin-bottom: 15px;
+   /* Khoảng cách giữa các mục */
+}
+
+
+.Navigation2 ul li a {
+  text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
+  color: black;
+  padding: 10px;
+  padding-right: 20px;
+  
+}
+.home{
+  
+  border-bottom:1px solid  #dbdbdb ;
+
+  
+  
+}
+.container{
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.item1{
+  height: 200px;
+}
+
+.hero{
+  width: 100%;
+  height: 100vh;
+  display: flex ;
+  align-items: center;
+  justify-content: center;
+}
+.btn{
+ 
+  display: inline-block;
+  font-size: 18px;
+  padding: 10px 10px 3px 10px;
+  background:none;
+  /* color: #fff; */
+
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  
+  transition: box-shadow 0.25s;
+  z-index: 2;
+}
+.btn:active{
+  transform: scale(0.96);
+  background: #fff;
+  color: #ff1876;
+
+}
+.btn span{
+  background: #ff1876;
+  border: 1px solid #ff1876 ;
+  width: 5px;
+  height: 5px;
+  border-radius: 50px;
+  position: absolute;
+  /* z-index: -1; */
+  transform:scale(0);
+ 
+}
+.btn span:nth-child(1){
+  top:-80%;
+  left: -200%;
+}
+.btn span:nth-child(2){
+  top:10%;
+  left: -10%;
+  background: transparent;
+}
+.btn span:nth-child(3){
+  top:80%;
+  left:0%;
+  
+}
+
+
+.btn span:nth-child(4){
+  top:30%;
+  left: -20%;}
+  
+.btn span:nth-child(5){
+  top:50%;
+  left: -10%;
+  background: transparent;
+}
+
+
+.btn span:nth-child(6){
+  top:-20%;
+  left: 20%;
+  background: transparent;
+}
+.btn span:nth-child(7){
+  top:-20%;
+  left: 50%;
+  
+}
+.btn span:nth-child(8){
+  top:-20%;
+  left: 75%;
+  background: transparent;
+}
+.btn span:nth-child(9){
+  top:0%;
+  left: 90%;
+}
+.btn span:nth-child(10){
+  top:20%;
+  left: 100%;
+  background: transparent;
+}
+
+.btn span:nth-child(11){
+  top:40%;
+  left: 100%;
+
+}.btn span:nth-child(12){
+  top:60%;
+  left: 90%;
+ background: transparent;
+}
+
+
+.btn span:nth-child(13){
+  top:85%;
+  left: 80%;
+
+
+
+}.btn span:nth-child(14){
+  top:90%;
+  left: 60%;
+  background: transparent;
+
+}.btn span:nth-child(15){
+  top:100%;
+  left: 35%;
+
+}.btn span:nth-child(16){
+  top:100%;
+  left: 10%;
+  background: transparent;
+  
+}
+ 
+.anim{
+  animation: moving 0.7s linear reverse forwards;
+}
+@keyframes moving {
+  0%{
+    transform: scale(0);
+  }
+  10%{
+    transform: scale(1 );
+
+  }
+  100%{
+    top:50%;
+    left: 50%;
+  }
+  
+}
+
+
+
+/* test icon2 */
+.test2{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
 
 .background{
   background-size: cover;
@@ -44,14 +275,239 @@ a{
   width: 100vw;
   height: 1000vh;
   z-index: 9999;
+
 }
+.button{
+  position: relative;
+  padding: 0px 0px;
+  background:#fff ;
+  /* border-radius: 6px; */
+  color: #7d2ea8;
+  border: none;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
+
 
 .loading{
   margin: auto; 
+<<<<<<< HEAD
+
 }
+.button:active{
+  transform: scale(0.96);
+}
+.button::before,
+.button::after{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  width: 150%;
+  /* z-index: -1; */
+  background-repeat: no-repeat;
+}
+.button.animate::before{
+  top:-70%;
+  background-image: radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,transparent 20% ,#7d2ea8 20%,transparent 30%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,transparent 10%, #7d2ea8 15%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%)
+  ;
+  background-size: 10% 10%,20% 20%,15% 15%,20% 20%, 18% 18%,10% 10%,15% 15%,10% 10%, 18% 18%;
+  background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,40% 90%, 55% 90%, 70% 90%;
+  animation: topBubbles 0.6s ease-in-out forwards;
+ }
+ @keyframes topBubbles{
+  50%{
+    background-position: 0% 80%, 0% 20%,10% 40%,20% 0%,30% 30% 22% 50%,
+    50% 50%, 65% 20%, 90% 30%;
+  }
+  100%{
+    background-position:0% 70%,0% 10%, 10% 30%,20% -10%,30% 20%,22% 40%,
+    50% 40%,65% 10%,90% 20% ;
+    background-size:0% 0% , 0% 0%,0% 0% , 0% 0%,0% 0% , 0% 0% ;
+  }
+  
+ }
+.button.animate::after{
+  bottom: -70%;
+  background-image: radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,transparent 10%, #7d2ea8 15%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
+  radial-gradient(circle,#7d2ea8 20%,transparent 20%)
+  ;
+  background-size: 15% 15%,20% 20%, 18% 18%,20% 20%, 15% 15%, 20% 20%,18% 18%;
+  background-position: 10% 0%,30% 10%, 55% 0%,70% 0%,85% 0%,70% 0%, 70% 0%;
+  animation: bottomBubbles 0.6s ease-in-out forwards;
+}
+@keyframes bottomBubbles {
+  50%{
+    background-position:0% 80%,20% 80%, 45% 60%,60% 100%, 75% 70% ,95% 60%,
+    105% 0% ;
+  }
+  100%{
+    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
+    110% 10%;
+    background-size:0% 0% , 0% 0%,0% 0% , 0% 0%,0% 0% , 0% 0% ;
+  }
+  
+}
+
+
+
+=======
+}
+>>>>>>> origin/Volka
 
 .app-logo{
   margin-left: 2vw;
   width: 82px;
   height: 32px;
+<<<<<<< HEAD
+}
+
+
+/* HomePage */
+
+.seemore{
+  font-size: 15px;
+  margin-bottom: 10px;
+  margin-right:10px ;
+  color: #218EC2;
+  text-align: right;
+  cursor: pointer;
+}
+
+.carouseltag{
+
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+}
+
+.itemtag{
+  display: inline-block;
+  white-space: nowrap; /* Ngăn ngừa việc ngắt dòng */
+  overflow: hidden; /* Ngăn việc tràn vượt phần tử cha */
+  height:60px ;
+  margin-right: 4px;
+  margin-left: 4px;
+  padding: 7px 10px;
+  font-size: 14px;
+
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border: none; 
+  border-radius: 5px;
+  color: #fff;
+  /* background-color: #ff1876; */
+/* Hiệu ứng hover */
+ transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.slick-next:before {
+  font-family: 'slick';
+  font-size: 20px;
+  line-height: 1;
+  opacity: .75;
+  color: black;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.recommendedwork{
+
+  margin-top: 20px;
+  padding-top: 10px;
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+  margin-bottom: 40px;
+}
+.headrecommended{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+}
+.recommendedimg{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+.cardrecommended{
+  margin: 10px 5px;
+}
+/* .userofworks{
+  padding: 4px;
+} */
+
+
+.recommendedusers{
+  margin-top: 30px;
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.imguser{
+  width: 80px;
+  height: 80px;
+ padding: 10px;
+  
+}
+.imgu{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.inforuser{ 
+  display: flex;
+  align-items: center;
+  background-color: #61dafb;
+  color:black;
+  padding-bottom: 10px;
+ 
+}
+.contentuser{
+  margin-left: 10px;
+}
+.user-container{
+  margin: 18px;
+
+}
+
+.card-follow-button {
+  display: flex;
+  justify-content: center; 
+}
+.Randomimg{
+  margin-top: 30px;
+  margin-left: 90px;
+  margin-right: 90px;
+  position: relative;
+  border: 2px;
+  border-bottom: #218EC2;
+}
+.foryouimg{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+=======
+>>>>>>> origin/Volka
 }
