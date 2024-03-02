@@ -5,20 +5,28 @@ import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
-import CustomizedDrawer from '../StyledMUI/CustomizedDrawer.jsx';
+import CustomizedDrawer from '../StyledMUI/CustomizedDrawer.tsx';
 import AppLogo from '../StyledMUI/AppLogo.jsx';
 import ExpandingSearchBar from '../StyledMUI/CustomizedSearchBar.jsx'
 <<<<<<< HEAD
 import CustomizedDropdown from '../StyledMUI/CustomizedDropdown.tsx';
 
 =======
+<<<<<<< HEAD
+import CustomizedDropdown from '../StyledMUI/CustomizedDropdown.tsx';
+
+=======
 >>>>>>> origin/Volka
+>>>>>>> Volka
 
 export default function Menu() {
   const { theme } = useContext(ThemeContext);
   return (
     <div>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> Volka
       <Box sx={{ flexGrow: 1, boxShadow: '50px' }}>
         <AppBar sx={{ transition: theme.transition, color: theme.color, backgroundColor: theme.backgroundColor }} position="static">
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -29,6 +37,11 @@ export default function Menu() {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Button color="inherit"><Link to={"/"}>Home</Link></Button>
+<<<<<<< HEAD
+              <Button color="inherit"><Link to={"artworkform"}>Publish Your Works</Link></Button>
+             <CustomizedDropdown/>
+            </Box>
+=======
               <Button color="inherit"><Link to={"create"}>Publish Your Works</Link></Button>
              <CustomizedDropdown/>
             </Box>
@@ -43,6 +56,7 @@ export default function Menu() {
             <Button color="inherit"><Link to={"create"}>Create</Link></Button>
             <Button color="inherit" onClick={toggleTheme}>{dark?"Dark":"Light"}</Button>
 >>>>>>> origin/Volka
+>>>>>>> Volka
           </Toolbar>
         </AppBar>
       </Box>

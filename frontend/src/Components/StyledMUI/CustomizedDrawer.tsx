@@ -20,14 +20,18 @@ import DesignServicesRoundedIcon from '@mui/icons-material/DesignServicesRounded
 import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import {ThemeContext} from '../Themes/ThemeProvider.tsx'
 import AppLogo from './AppLogo.jsx';
-import CustomizedListedButton from '../StyledMUI/CustomizedListedButton.tsx'
+import CustomizedButton from './CustomizedListedButton.tsx';
 
 export default function CustomizedDrawer() {
   const {theme} = useContext(ThemeContext)
   const [drawer, SetDrawer] = useState(false)
-  const toggleDrawer = (action) => {
-    SetDrawer(action)
+  const toggleDrawer = () => {
+    SetDrawer(!drawer)
   }
+
+  const HomePage = ['View All', 'Hot Topic', 'You Loved These', 'Explore']
+  const Personal = ['Your Works', 'Your Commisions', 'Your Requests']
+
   const IconListHomePage = [
     <CollectionsIcon />,
     <WhatshotIcon/>,
@@ -39,30 +43,29 @@ export default function CustomizedDrawer() {
     <MarkunreadMailboxRoundedIcon/>,
     <DesignServicesRoundedIcon/>
   ]
-
-
   const MyDrawerList = (
 
-    <Box sx={{ width: "16rem",color:theme.color }} role="presentation" onClick={() => toggleDrawer(false)}>
+    <Box sx={{ width: "16rem",color:theme.color }} role="presentation" onClick={toggleDrawer}>
       <Toolbar>
-        <IconButton onClick={() => toggleDrawer(false)}>
+        <IconButton onClick={toggleDrawer}>
           <MenuOpenIcon sx={{color:theme.color}} />  {/* Change the icon when clicked */}
         </IconButton>
        <AppLogo/>
       </Toolbar>
+      
       {/* "&::before, &::after": WILL CHANGE Divider Line Color With Text children init */}
       <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
         <Typography variant='h6'>Home Page</Typography>
       </Divider>
       <List>
-        {['View All', 'Hot Topic', 'You Loved These', 'Explore'].map((text, index) => (
+        {HomePage.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <CustomizedListedButton >
+            <CustomizedButton >
               <ListItemIcon sx={{color:theme.color}}>
                   {IconListHomePage[index]}
               </ListItemIcon>
               <ListItemText primary={text} />
-            </CustomizedListedButton>
+            </CustomizedButton>
           </ListItem>
         ))}
       </List>
@@ -70,14 +73,14 @@ export default function CustomizedDrawer() {
         <Typography variant='h6'>Personal</Typography>
       </Divider>
       <List>
-        {['Your Works', 'Your Commisions', 'Your Requests'].map((text, index) => (
+        {Personal.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <CustomizedListedButton >
+            <CustomizedButton >
               <ListItemIcon sx={{color:theme.color}}>
                 {IconListPersonal[index]}
               </ListItemIcon>
               <ListItemText primary={text} />
-              </CustomizedListedButton >
+              </CustomizedButton >
           </ListItem>
         ))}
       </List>
@@ -86,14 +89,15 @@ export default function CustomizedDrawer() {
 
   return (
     <>
-      <IconButton sx={{color:theme.color}} onClick={() => toggleDrawer(true)}>
+      <IconButton sx={{color:theme.color}} onClick={toggleDrawer}>
         <MenuIcon />
       </IconButton>
       <Drawer 
         PaperProps={{sx:{backgroundColor:theme.backgroundColor}}} //Change the background of the menu bar
-        open={drawer} onClose={() => toggleDrawer(false)} 
+        open={drawer} onClose={toggleDrawer} 
         >
         {MyDrawerList}
+      
       </Drawer>
     </>
   )

@@ -12,7 +12,7 @@
     - Trần Ánh Tuyết - SE170234 - GUI Design | FE
     - Nguyễn Minh Thức - SE170592 - Database Design | BE
     - Phạm Minh Triều - SE172937 - Documentation
-  - **Project:** Arkworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
+  - **Project:** Artworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
   - **Techs:** RestfulAPI - mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Paypal - MUI - .NET 8 with C# - Vercel - Azure - Avien 
   - **Structure:** Using MVC1 Structure 
 - # **Table Of Contents**
