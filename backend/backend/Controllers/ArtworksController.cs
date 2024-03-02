@@ -28,12 +28,14 @@ public class ArtworksController : ControllerBase
         ArtworkID = a.ArtworkID,
          CreatorID = a.CreatorID,
          TagID = a.TagID,
-         CategoryID = a.CategoryID,
+         ArtworkName = a.ArtworkName,
          Description = a.Description,
          DateCreated = a.DateCreated,
          Likes = a.Likes,
          Purchasable = a.Purchasable,
-         Price = a.Price
+         Price = a.Price,
+         ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+
      })
      .ToListAsync();
 
@@ -45,29 +47,57 @@ public class ArtworksController : ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
-        var artwork = await _context.Artworks
-            .FirstOrDefaultAsync(a => a.ArtworkID == id);
+        var artworkss = await _context.Artworks
+            .Where(a => a.ArtworkID == id) // Filter by the specified ArtworkID
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                CategoryID = a.CategoryID,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price
 
-        if (artwork == null)
+                // Other properties...
+            })
+            .FirstOrDefaultAsync();
+
+        if (artworkss == null)
         {
-            return NotFound();
+            return NotFound(); // Return a 404 Not Found if the artwork with the specified ID is not found
         }
 
-        return artwork;
+        return artworkss;
     }
-    [HttpGet("ByCreator/{Crid}")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
+    [HttpGet("{CreatorID}")]
+    public async Task<ActionResult<Artworks>> GetArtworkByID(int Crid)
     {
-        var artworks = await _context.Artworks
-            .Where(a => a.CreatorID == Crid)
-            .ToListAsync();
+        var artworksss = await _context.Artworks
+            .Where(a => a.CreatorID == Crid) // Filter by the specified ArtworkID
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                CategoryID = a.CategoryID,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price
+               
+            })
+            .FirstOrDefaultAsync();
 
-        if (artworks == null || artworks.Count == 0)
+        if (artworksss == null)
         {
-            return NotFound();
+            return NotFound(); 
         }
 
-        return artworks;
+        return artworksss;
     }
 
     // POST: api/Artworks
