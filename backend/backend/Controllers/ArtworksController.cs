@@ -102,13 +102,14 @@ public class ArtworksController : ControllerBase
 
     // POST: api/Artworks
     [HttpPost]
-    public async Task<ActionResult<Artworks>> PostArtwork(Artworks artwork)
+    public async Task<ActionResult<Artworks>> PostComment(Artworks Artwork)
     {
-        _context.Artworks.Add(artwork);
+        _context.Artworks.Add(Artwork);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetArtwork), new { id = artwork.ArtworkID }, artwork);
+        return CreatedAtAction(nameof(GetArtwork), new { id = Artwork.ArtworkID }, Artwork);
     }
+
 
     // PUT: api/Artworks/5
     [HttpPut("{id}")]
