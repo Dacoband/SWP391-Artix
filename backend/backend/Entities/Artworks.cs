@@ -16,5 +16,7 @@ namespace backend.Entities
         public bool Purchasable { get; set; }
         public double Price { get; set; }
         public byte[] ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB
+        
+
     }
 }

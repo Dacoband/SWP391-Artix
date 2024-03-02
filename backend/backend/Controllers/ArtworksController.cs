@@ -145,41 +145,40 @@ public class ArtworksController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArtwork(int id)
     {
-        using (var transaction = _context.Database.BeginTransaction())
+        var artwork = await _context.Artworks.FindAsync(id);
+
+        if (artwork == null)
         {
+            return NotFound(); // Return 404 if the artwork is not found
+        }
 
-            // Xóa tất cả các bình luận liên quan
-            var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
-
-            if (commentsToDelete.Any())
-            {
-                _context.Comments.RemoveRange(commentsToDelete);
-                await _context.SaveChangesAsync();
-            }
-
-            // Xóa bức tranh
-            var artwork = await _context.Artworks.FindAsync(id);
-            if (artwork == null)
-            {
-                transaction.Rollback();
-                return NotFound();
-            }
+        try
+        {
+            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
 
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
 
-            transaction.Commit();
-
-            return NoContent();
-
+            return NoContent(); // Return 204 No Content upon successful deletion
+        }
+        catch (Exception ex)
+        {
+            // Handle any exception that might occur during deletion
+            return StatusCode(500, $"Internal Server Error: {ex.Message}");
         }
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> THUCVIP
     private bool ArtworkExists(int id)
     {
-        return _context.Artworks.Any(e => e.ArtworkID == id);
+        return _context.Comments.Any(e => e.CommentID == id);
     }
 
 
+<<<<<<< HEAD
     // GET: api/Artworks/TopLiked
     [HttpGet("TopLiked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -209,4 +208,8 @@ public class ArtworksController : ControllerBase
 
         return topLikedArtworks;
     }
+=======
+
+   
+>>>>>>> THUCVIP
 }
