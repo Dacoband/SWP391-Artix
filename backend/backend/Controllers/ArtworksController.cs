@@ -25,7 +25,7 @@ public class ArtworksController : ControllerBase
      .Select(a => new Artworks
      {
          // Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
-        ArtworkID = a.ArtworkID,
+         ArtworkID = a.ArtworkID,
          CreatorID = a.CreatorID,
          TagID = a.TagID,
          ArtworkName = a.ArtworkName,
@@ -48,6 +48,19 @@ public class ArtworksController : ControllerBase
     public async Task<ActionResult<Artworks>> GetArtwork(int id)
     {
         var artwork = await _context.Artworks
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                TagID = a.TagID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
         if (artwork == null)
@@ -118,34 +131,34 @@ public class ArtworksController : ControllerBase
     {
         using (var transaction = _context.Database.BeginTransaction())
         {
-            
-                // Xóa tất cả các bình luận liên quan
-                var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
 
-                if (commentsToDelete.Any())
-                {
-                    _context.Comments.RemoveRange(commentsToDelete);
-                    await _context.SaveChangesAsync();
-                }
+            // Xóa tất cả các bình luận liên quan
+            var commentsToDelete = _context.Comments.Where(c => c.ArtWorkID == id).ToList();
 
-                // Xóa bức tranh
-                var artwork = await _context.Artworks.FindAsync(id);
-                if (artwork == null)
-                {
-                    transaction.Rollback();
-                    return NotFound();
-                }
-
-                _context.Artworks.Remove(artwork);
+            if (commentsToDelete.Any())
+            {
+                _context.Comments.RemoveRange(commentsToDelete);
                 await _context.SaveChangesAsync();
+            }
 
-                transaction.Commit();
+            // Xóa bức tranh
+            var artwork = await _context.Artworks.FindAsync(id);
+            if (artwork == null)
+            {
+                transaction.Rollback();
+                return NotFound();
+            }
 
-                return NoContent();
-            
+            _context.Artworks.Remove(artwork);
+            await _context.SaveChangesAsync();
+
+            transaction.Commit();
+
+            return NoContent();
+
         }
     }
-    
+
 
 
 
