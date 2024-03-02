@@ -12,7 +12,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import ChatIcon from '@mui/icons-material/Chat';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -26,6 +25,11 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import Avatar from '@mui/material/Avatar';
+
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import ListSubheader from '@mui/material/ListSubheader';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -145,8 +149,8 @@ export default function ProfileUser() {
         <div className='navuser'>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Home" {...a11yProps(0)} />
-          <Tab label="Introduct" {...a11yProps(1)} />
-          <Tab label="Shop" {...a11yProps(2)} />
+          <Tab label="Shop" {...a11yProps(1)} />
+          <Tab label="Favourites" {...a11yProps(2)} />
         </Tabs>
         </div>
         <div className='buttonSubcribe'>
@@ -154,81 +158,112 @@ export default function ProfileUser() {
         <Button variant="contained" href="#contained-buttons" style={{marginLeft:'20px'}}>Report</Button>
         </div>
       </Box>
-      <CustomTabPanel value={value} index={0} className='tabhome'>
-      <ImageList sx={{ width: 1100, height: 'auto',overflow: 'hidden'}} cols={5} rowHeight={200} >
-      {Work.map((work) => (
-        <ImageListItem style={{ width:'210px',height: '180px'}} key={work.id}>
-        <img
-          srcSet={`${work.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-          src={`${work.img}?w=164&h=164&fit=crop&auto=format`}
-          alt={work.img}
-          loading="lazy"
-        />
-        
-      </ImageListItem>
-      ))}
-    </ImageList>
-     
-      </CustomTabPanel>
 
 
-      <CustomTabPanel value={value} index={1} className='tabintroduct'>
-     
-      <Box
+
+      <CustomTabPanel value={value} index={0} >
+      <div className='tabhome'>
+      <div className='biouser'>
+    <Box
       // height= {150}
-      width={800}
+      width={350}
       my={4}
     
       gap={4}
       p={2}
 
 
-
       style={{ 
       border: '2px solid grey',
+      position: 'sticky', // this will make it sticky
+      top: 0, // this defines the top position when it's sticky
+      zIndex: 10 // you may want to add a zIndex to ensure it stacks on top of other contents
+      
+      
      }} className='boxintroduct'
     >
     <h2  className='headintroduct'>About {selectedUser.User}:</h2>
-    <div className='bilointroduct'>
+   
     <div className='contentintroduct'><CakeIcon className='iconintroduct'/>Birday: {selectedUser.birday} </div>
-    <div className='contentintroduct' style={{marginRight:'300px'}}><RoomIcon  className='iconintroduct'/>Location: {selectedUser.location}</div></div>
+    <div className='contentintroduct'><RoomIcon  className='iconintroduct'/>Location: {selectedUser.location}</div>
     <div className='contentintroduct'><EmailIcon  className='iconintroduct'/>Email: {selectedUser.email} </div>
     <div className='contentintroduct'><PhoneIcon  className='iconintroduct'/>Phone: {selectedUser.Phone}</div>
     <div className='contentintroduct'> <AutoAwesomeIcon  className='iconintroduct'/>My Bio: {selectedUser.bio}  </div>
     
-    </Box>
+    </Box></div>
+      <div className='workofuser'>
+        <div className='head-workofuser'>
+        <h2> My Works:</h2></div>
+        <Box sx={{ width: 1000, height: 450, overflow: 'visible' }}>
+      <ImageList variant="masonry" cols={3} gap={8}>
+        {Work.map((work) => (
+          <ImageListItem key={work.id}>
+            <img
+              srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              src={`${work.img}?w=248&fit=crop&auto=format`}
+              alt={work.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box></div>
+    </div>  
+     
+     
       </CustomTabPanel>
-      <CustomTabPanel value={value} index={2} className='tabshop'>
+
+      <CustomTabPanel value={value} index={1} className='tabshop'>
       {/* <ImageList sx={{ width:1200 , height: 450 ,overflow: 'hidden'}} cols={5} rowHeight={210}> */}
-      <ImageList sx={{ width: 1100, height:'auto' ,overflow: 'hidden'}} cols={5} rowHeight={200} >
+      <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible'}} cols={4}>
+      {/* <ImageListItem key="Subheader" cols={2}>
+        <ListSubheader component="div">December</ListSubheader>
+      </ImageListItem> */}
       {Work.map((work) => (
-        <Card className='cardrecommended'>
-        <CardActionArea>
-          <CardMedia  style={{ objectFit: 'cover', width: '100%', height: '180px' }}>
-          <ImageListItem style={{ width:'210px',height: '180px'}} key={work.id}>
+        <ImageListItem key={work.id}>
           <img
-            srcSet={`${work.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-            src={`${work.img}?w=164&h=164&fit=crop&auto=format`}
-            alt={work.img}
+            srcSet={`${work.img}?w=240&fit=crop&auto=format&dpr=2 2x`}
+            src={`${work.img}?w=240&fit=crop&auto=format`}
+            alt={work.title}
             loading="lazy"
+            style={{height:'200px'}}
           />
-          
+          <ImageListItemBar
+            title={work.price}
+            subtitle={work.author}
+            actionIcon={
+              <IconButton
+                sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                aria-label={`info about ${work.author}`}
+              >
+                <InfoIcon />
+              </IconButton>
+            }
+          />
         </ImageListItem>
-          </CardMedia>
-          <CardContent>
-            
-            <div className='pricework'>Price:{work.price}$</div>
-            
-            
-          </CardContent>
-        </CardActionArea>
-      </Card>
-
-
       ))}
-
     </ImageList>
       </CustomTabPanel>
+
+
+      <CustomTabPanel value={value} index={2} className='tabfavourites'>
+     
+      <Box sx={{ width: 1200, height: 450, overflow: 'visible' }}>
+      <ImageList variant="masonry" cols={4} gap={8}>
+        {Work.map((work) => (
+          <ImageListItem key={work.id}>
+            <img
+              srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              src={`${work.img}?w=248&fit=crop&auto=format`}
+              alt={work.title}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box>
+      </CustomTabPanel>
+      
     </Box>
 
       </div>

@@ -82,7 +82,7 @@ function RecommendedUsers() {
                       loading="lazy" className="imgu"
                     />
                   </div>
-                  <div className="contentuser">
+                  <div className="contentuser" style={{ textDecoration:'none'}}>
                   <h2>{user.User}</h2>
                   <h4>Follower: {user.like}</h4>
                   </div></div>
