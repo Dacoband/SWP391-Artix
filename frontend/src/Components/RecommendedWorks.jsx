@@ -8,6 +8,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+
 export default function RecommendedWords() {
     // Sắp xếp danh sách công việc theo số lượng like giảm dần
   const sortedWork = [...Work].sort((a, b) => b.like - a.like);

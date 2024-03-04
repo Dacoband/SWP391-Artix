@@ -1,7 +1,7 @@
 import React from 'react'
-
+import RecommendedWorks from './RecommendedWorks';
 import CarouselTag from'./CarouselTag';
-import RecommendedWorks from './RecommendedWords';
+// import RecommendedWorks from './RecommendedWorks';
 import RecommendedUsers from './RecommendedUsers';
 import ImgForyou from './ImgForyou';
 export default function HomePage() {
@@ -16,7 +16,7 @@ export default function HomePage() {
 
       < div className='recommendedwork'>
         <div className='headrecommended'>
-          <h3>Recommended Words</h3>
+          <h3>Recommended Works</h3>
           <div className='seemore'>See More</div></div>
 
        <div className='recommendedimg'>

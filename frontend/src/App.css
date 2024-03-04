@@ -431,3 +431,41 @@
   justify-content: center;
  
 }
+
+
+
+/* POSTWORK */
+.info-postwork{
+  display: flex;
+  height: 600px;
+  margin-top: 50px;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+.imgpost{
+  height: 600px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  background-color:#F5F5F5 ;
+
+}
+.imgpost img{
+  margin: auto;
+  object-fit: cover;
+  height: 500px;
+}
+.contentpost{
+  flex: 1;
+  margin-left: 30px;
+}
+.infor-user-post{
+  margin-top: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  border-bottom: 2px solid #218EC2;
+}
+.name-user-post{
+  font-size: 20px;
+  margin: auto 15px;
+}
