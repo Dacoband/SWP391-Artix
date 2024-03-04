@@ -32,7 +32,11 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
+<<<<<<< HEAD
                 ImageFile = a.ImageFile
+=======
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+>>>>>>> THUCVIP
             })
             .ToListAsync();
 
@@ -176,7 +180,24 @@ public class ArtworksController : ControllerBase
     {
         var topLikedArtworks = await _context.Artworks
             .OrderByDescending(a => a.Likes)
+<<<<<<< HEAD
             .Take(10)
+=======
+            .Take(1)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
+>>>>>>> THUCVIP
             .ToListAsync();
 
         if (topLikedArtworks == null || topLikedArtworks.Count == 0)

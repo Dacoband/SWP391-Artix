@@ -42,8 +42,15 @@ namespace backend.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Artworks>()
+       .HasMany(a => a.ArtworkTags)
+       .WithOne(at => at.Artwork)
+       .HasForeignKey(at => at.ArtworkID);
 
+            modelBuilder.Entity<ArtworkTag>()
+                .HasKey(at => new { at.ArtworkID, at.TagID });
 
+            
             base.OnModelCreating(modelBuilder);
             // Cấu hình các mối quan hệ, index, constraints nếu cần
         }
