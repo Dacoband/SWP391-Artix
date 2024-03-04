@@ -22,25 +22,21 @@ public class ArtworksController : ControllerBase
     public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworks()
     {
         var artworks = await _context.Artworks
-     .Select(a => new Artworks
-     {
-         // Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
-         ArtworkID = a.ArtworkID,
-         CreatorID = a.CreatorID,
-         TagID = a.TagID,
-         ArtworkName = a.ArtworkName,
-         Description = a.Description,
-         DateCreated = a.DateCreated,
-         Likes = a.Likes,
-         Purchasable = a.Purchasable,
-         Price = a.Price,
-         ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
-
-     })
-     .ToListAsync();
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+            })
+            .ToListAsync();
 
         return artworks;
-
     }
 
     // GET: api/Artworks/5
@@ -52,14 +48,14 @@ public class ArtworksController : ControllerBase
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
-                TagID = a.TagID,
+                
                 ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
@@ -80,14 +76,13 @@ public class ArtworksController : ControllerBase
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
-                TagID = a.TagID,
                 ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
             .ToListAsync();
 
@@ -154,7 +149,7 @@ public class ArtworksController : ControllerBase
 
         try
         {
-            //artwork.ImageFile = artwork.ImageFile ?? Array.Empty<IFormFile>();
+            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
 
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
@@ -181,19 +176,19 @@ public class ArtworksController : ControllerBase
     {
         var topLikedArtworks = await _context.Artworks
             .OrderByDescending(a => a.Likes)
-            .Take(10)
+            .Take(1)
             .Select(a => new Artworks
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
-                TagID = a.TagID,
+                
                 ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (IFormFile)a.ImageFile : null,
+                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
             })
             .ToListAsync();
 
