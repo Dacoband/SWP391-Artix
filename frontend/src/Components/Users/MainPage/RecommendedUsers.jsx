@@ -29,8 +29,8 @@ function RecommendedUsers() {
                      <div className="inforuser">
                   <div className="imguser">
                     <img
-                      srcSet={`${user.avatar}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                      src={`${user.avatar}?w=164&h=164&fit=crop&auto=format`}
+                      srcSet={`${user.avatar}`}
+                      src={`${user.avatar}`}
                       alt={user.avatar}
                       loading="lazy" className="imgu"
                     />
