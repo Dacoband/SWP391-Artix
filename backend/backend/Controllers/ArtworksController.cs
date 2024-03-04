@@ -48,14 +48,13 @@ public class ArtworksController : ControllerBase
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
-                
                 ArtworkName = a.ArtworkName,
                 Description = a.Description,
                 DateCreated = a.DateCreated,
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile ?? null,
             })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
@@ -82,7 +81,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile ?? null,
             })
             .ToListAsync();
 
@@ -149,7 +148,7 @@ public class ArtworksController : ControllerBase
 
         try
         {
-            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
+           
 
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
@@ -188,7 +187,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile ?? null
             })
             .ToListAsync();
 
