@@ -39,7 +39,6 @@ function Sort(){
 
 
   return (
-
     <ImageList className='recommendedImages' cols={5} >
       {recommendedworkList.map((work) => (
         <CardActionArea key={work.ArtworkID}>

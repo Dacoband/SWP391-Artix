@@ -11,9 +11,11 @@
   background-attachment: fixed;
   background-position: center; /* Ensure the image is centered on the screen */
   width: 100vw; /* 100% of the viewport width */
-  height: 100vh; /* 100% of the viewport height */
+  height: auto; /* 100% of the viewport height */
+  min-height: 100vh;
   top: 0;
   left: 0;
+  display: fixed;
 }
 
 

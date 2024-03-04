@@ -58,7 +58,7 @@ export default function LoginForm({ handleClick, backdrop }) {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <LoginWithGoogle handleClick={handleClick} />
+            <LoginWithGoogle />
           </Grid>
           <Grid item xs={12}>
             <Divider sx={{ "&::before, &::after": { backgroundColor: "lightgray" } }} variant='middle'>

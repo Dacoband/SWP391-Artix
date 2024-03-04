@@ -6,7 +6,7 @@ import { makeStyles } from '@mui/styles';
 import LoginForm from './Forms/LoginForm';
 import {useHandleClick} from '../CustomHooks/HandleClick';
 import Background from './Themes/Background.jsx'
-import  AuthContext  from './AuthenContext.tsx';
+import  {AuthContext}  from './AuthenContext.tsx';
 const useStyles = makeStyles({
   card: {
     transition: 'transform 0.3s ease',
