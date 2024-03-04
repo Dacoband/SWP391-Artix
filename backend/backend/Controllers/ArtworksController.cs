@@ -32,7 +32,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile
             })
             .ToListAsync();
 
@@ -55,7 +55,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile
             })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
@@ -82,7 +82,7 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
+                ImageFile = a.ImageFile
             })
             .ToListAsync();
 
@@ -149,7 +149,7 @@ public class ArtworksController : ControllerBase
 
         try
         {
-            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
+            artwork.ImageFile = artwork.ImageFile ?? null;
 
             _context.Artworks.Remove(artwork);
             await _context.SaveChangesAsync();
@@ -176,19 +176,7 @@ public class ArtworksController : ControllerBase
     {
         var topLikedArtworks = await _context.Artworks
             .OrderByDescending(a => a.Likes)
-            .Take(1)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-            })
+            .Take(10)
             .ToListAsync();
 
         if (topLikedArtworks == null || topLikedArtworks.Count == 0)
