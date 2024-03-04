@@ -29,7 +29,7 @@ public class CreatorController : ControllerBase
                 PaypalAccount = c.PaypalAccount,
                 UserName = c.UserName,
                 FollowerID = c.FollowerID, // Kiểm tra giá trị NULL trước khi gán
-                ProfilePicture = c.ProfilePicture != null ? (byte[])c.ProfilePicture : new byte[0], // Kiểm tra giá trị null trước khi gán
+                ProfilePicture = c.ProfilePicture, // Kiểm tra giá trị null trước khi gán
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Address = c.Address,
