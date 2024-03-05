@@ -10,7 +10,7 @@ namespace backend.Entities
         public int? PaypalAccount { get; set; } // FK
         public string UserName { get; set; }
         public int? FollowerID { get; set; } // FK
-        public IFormFile ProfilePicture { get; set; } // Có thể 
+        public IFormFile? ProfilePicture { get; set; } // Có thể 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
