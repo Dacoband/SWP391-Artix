@@ -42,6 +42,8 @@ namespace backend.Entities
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Artworks>()
+            .Ignore(a => a.ImageFile);
 
             modelBuilder.Entity<ArtworkTag>()
        .HasKey(t => new { t.ArtworkID, t.TagID });

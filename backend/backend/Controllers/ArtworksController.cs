@@ -1,231 +1,188 @@
-﻿using backend.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using backend.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using backend.Entities;
 
-[ApiController]
-[Route("api/[controller]")]
-public class ArtworksController : ControllerBase
+
+namespace backend.Controllers
 {
-    private readonly ApplicationDbContext _context;
-
-    public ArtworksController(ApplicationDbContext context)
+    [ApiController]
+    [Route("api/artworks")]
+    public class ArtworksController : ControllerBase
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context; // Replace YourDbContext with your actual database context
 
-    // GET: api/Artworks
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworks()
-    {
-        var artworks = await _context.Artworks
-            .Include(a => a.ArtworkTag)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-                ArtworkTag = a.ArtworkTag // This should be handled by EF, you might not need to include it in the projection
-            })
-            .ToListAsync();
-
-        if (artworks == null || artworks.Count == 0)
+        public ArtworksController(ApplicationDbContext context)
         {
-            return NotFound();
+            _context = context;
         }
 
-        // Handle DBNull for ImageFile
-        artworks.ForEach(artwork =>
+        // GET: api/artworks
+        [HttpGet]
+        public async Task<IActionResult> GetArtworks()
         {
-            if (artwork.ImageFile is DBNull)
-            {
-                artwork.ImageFile = Array.Empty<byte>();
-            }
-        });
+            var artworks = await _context.Artworks
+                .Include(a => a.ArtworkTag)
+                .Select(a => new Artworks
+                {
+                    ArtworkID = a.ArtworkID,
+                    CreatorID = a.CreatorID,
+                    ArtworkName = a.ArtworkName,
+                    Description = a.Description,
+                    DateCreated = a.DateCreated,
+                    Likes = a.Likes,
+                    Purchasable = a.Purchasable,
+                    Price = a.Price,
+                    ImageFile = a.ImageFile,
+                    ArtworkTag = a.ArtworkTag
+                })
+                .ToListAsync();
 
-        return artworks;
-    }
-
-
-
-
-
-    // GET: api/Artworks/5
-    // GET: api/Artworks/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Artworks>> GetArtwork(int id)
-    {
-        var artwork = await _context.Artworks
-            .Include(a => a.ArtworkTag)
-               
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-                ArtworkTag = a.ArtworkTag // This should be handled by EF, you might not need to include it in the projection
-            })
-            .FirstOrDefaultAsync(a => a.ArtworkID == id);
-
-        if (artwork == null)
-        {
-            return NotFound();
+            return Ok(artworks);
         }
 
-        return artwork;
-    }
-
-    // GET: api/Artworks/ByCreator/{Crid}
-    [HttpGet("ByCreator/{Crid}")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
-    {
-        var artworks = await _context.Artworks
-            .Where(a => a.CreatorID == Crid)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-            })
-            .ToListAsync();
-
-        if (artworks == null || artworks.Count == 0)
+        // GET: api/artworks/{id}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetArtwork(int id)
         {
-            return NotFound();
-        }
+            var artwork = await _context.Artworks
+                .Include(a => a.ArtworkTag)
+                .Select(a => new Artworks
+                {
+                    ArtworkID = a.ArtworkID,
+                    CreatorID = a.CreatorID,
+                    ArtworkName = a.ArtworkName,
+                    Description = a.Description,
+                    DateCreated = a.DateCreated,
+                    Likes = a.Likes,
+                    Purchasable = a.Purchasable,
+                    Price = a.Price,
+                    ImageFile = a.ImageFile,
+                    ArtworkTag = a.ArtworkTag
+                })
+                .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
-        return artworks;
-    }
-
-
-    // POST: api/Artworks
-    [HttpPost]
-    public async Task<ActionResult<Artworks>> PostArtworkWithTags(Artworks Artwork)
-    {
-        // Thêm Artwork vào cơ sở dữ liệu
-        _context.Artworks.Add(Artwork);
-        await _context.SaveChangesAsync();
-
-       ; // Lưu thêm ArtworkTags vào cơ sở dữ liệu
-
-        return CreatedAtAction(nameof(GetArtwork), new { id = Artwork.ArtworkID }, Artwork);
-    }
-
-
-
-    // PUT: api/Artworks/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutArtwork(int id, Artworks artwork)
-    {
-        if (id != artwork.ArtworkID)
-        {
-            return BadRequest();
-        }
-
-        _context.Entry(artwork).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ArtworkExists(id))
+            if (artwork == null)
             {
                 return NotFound();
             }
-            else
+
+            return Ok(artwork);
+        }
+
+        // POST: api/artworks
+        [HttpPost]
+        public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
+        {
+            try
             {
-                throw;
+                // Kiểm tra xem CreatorID có tồn tại không
+                if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
+                {
+                    return BadRequest("CreatorID không tồn tại");
+                }
+
+                // Kiểm tra xem TagID có tồn tại không
+                if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
+                {
+                    var invalidTagIds = artwork.ArtworkTag
+                        .Where(at => !_context.Tags.Any(t => t.TagID == at.TagID))
+                        .Select(at => at.TagID)
+                        .ToList();
+
+                    if (invalidTagIds.Any())
+                    {
+                        return BadRequest($"TagID không tồn tại: {string.Join(", ", invalidTagIds)}");
+                    }
+                }
+
+                // Thêm artwork vào cơ sở dữ liệu
+                _context.Artworks.Add(artwork);
+                await _context.SaveChangesAsync();
+
+                // Thêm ArtworkTag vào cơ sở dữ liệu
+                foreach (var artworkTag in artwork.ArtworkTag)
+                {
+                    // Không cần thiết lập ArtworkID vì nó sẽ tự động tăng
+                    _context.ArtworkTag.Add(artworkTag);
+                }
+
+                await _context.SaveChangesAsync();
+
+                return Ok("Artwork created successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+
+                return BadRequest("An error occurred while saving the entity changes. See the inner exception for details.");
             }
         }
 
-        return NoContent();
-    }
-
-    // DELETE: api/Artworks/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteArtwork(int id)
-    {
-        var artwork = await _context.Artworks.FindAsync(id);
-
-        if (artwork == null)
+        // PUT: api/artworks/{id}
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutArtwork(int id, [FromBody] Artworks artworkRequest)
         {
-            return NotFound(); // Return 404 if the artwork is not found
-        }
-
-        try
-        {
-            artwork.ImageFile = artwork.ImageFile ?? Array.Empty<byte>();
-
-            _context.Artworks.Remove(artwork);
-            await _context.SaveChangesAsync();
-
-            return NoContent(); // Return 204 No Content upon successful deletion
-        }
-        catch (Exception ex)
-        {
-            // Handle any exception that might occur during deletion
-            return StatusCode(500, $"Internal Server Error: {ex.Message}");
-        }
-    }
-
-
-    private bool ArtworkExists(int id)
-    {
-        return _context.Comments.Any(e => e.CommentID == id);
-    }
-
-
-
-    [HttpGet("TopLiked")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
-    {
-        var topLikedArtworks = await _context.Artworks
-            .OrderByDescending(a => a.Likes)
-            .Take(1)
-            .Select(a => new Artworks
+            if (id != artworkRequest.ArtworkID)
             {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-            })
-            .ToListAsync();
+                return BadRequest("Invalid ID");
+            }
 
-        if (topLikedArtworks == null || topLikedArtworks.Count == 0)
-        {
-            return NotFound();
+            var existingArtwork = await _context.Artworks
+                .Include(a => a.ArtworkTag)
+                .FirstOrDefaultAsync(a => a.ArtworkID == id);
+
+            if (existingArtwork == null)
+            {
+                return NotFound();
+            }
+
+            existingArtwork.CreatorID = artworkRequest.CreatorID;
+            existingArtwork.ArtworkName = artworkRequest.ArtworkName;
+            existingArtwork.Description = artworkRequest.Description;
+            existingArtwork.DateCreated = artworkRequest.DateCreated;
+            existingArtwork.Likes = artworkRequest.Likes;
+            existingArtwork.Purchasable = artworkRequest.Purchasable;
+            existingArtwork.Price = artworkRequest.Price;
+            existingArtwork.ImageFile = artworkRequest.ImageFile;
+
+            // Update tags
+            existingArtwork.ArtworkTag.Clear();
+            existingArtwork.ArtworkTag = artworkRequest.ArtworkTag.Select(tag => new ArtworkTag
+            {
+                TagID = tag.TagID
+            }).ToList();
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ArtworkExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok("Artwork updated successfully");
         }
 
-        return topLikedArtworks;
+        private bool ArtworkExists(int id)
+        {
+            return _context.Artworks.Any(e => e.ArtworkID == id);
+        }
     }
-
 }
