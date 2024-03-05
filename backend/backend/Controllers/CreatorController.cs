@@ -61,9 +61,25 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
+    //GET: API/artwork/{Top10Liked}
+    [HttpGet("Top10Liked")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
+    {
+        var topLikedArtworks = await _context.Artworks
+            .OrderByDescending(a => a.Likes)
+            .Take(10)
+            .ToListAsync();
 
-    // POST: api/Creator
-    [HttpPost]
+        if (topLikedArtworks == null || topLikedArtworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return topLikedArtworks;
+    }
+
+   // POST: api/Creator
+   [HttpPost]
     public async Task<ActionResult<Creator>> PostCreator([FromBody] Creator creator)
     {
         try
