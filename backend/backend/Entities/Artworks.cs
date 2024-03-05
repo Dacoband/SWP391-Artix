@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 namespace backend.Entities
 {
     public class Artworks
@@ -7,25 +6,16 @@ namespace backend.Entities
         [Key]
         public int ArtworkID { get; set; } // PK
         public int CreatorID { get; set; } // FK
-        
-        public string  ArtworkName { get; set; } // FK
+
+        public string ArtworkName { get; set; } // FK
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         public int Likes { get; set; }
         public bool Purchasable { get; set; }
         public double Price { get; set; }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        public IFormFile ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB  
-        public List<ArtworkTag> ArtworkTags { get; set; }
-=======
-        public byte[] ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB
-=======
         public IFormFile? ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB
->>>>>>> THUCVIP
 
         public ICollection<ArtworkTag> ArtworkTag { get; set; }
 
->>>>>>> THUCVIP
     }
 }

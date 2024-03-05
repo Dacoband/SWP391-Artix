@@ -16,37 +16,7 @@ namespace backend.Controllers
     {
         private readonly ApplicationDbContext _context; // Replace YourDbContext with your actual database context
 
-<<<<<<< HEAD
-    // GET: api/Artworks
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworks()
-    {
-        var artworks = await _context.Artworks
-            .Include(a => a.ArtworkTag)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-<<<<<<< HEAD
-                ImageFile = a.ImageFile
-
-=======
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-                ArtworkTag = a.ArtworkTag // This should be handled by EF, you might not need to include it in the projection
->>>>>>> THUCVIP
-            })
-            .ToListAsync();
-
-        if (artworks == null || artworks.Count == 0)
-=======
         public ArtworksController(ApplicationDbContext context)
->>>>>>> THUCVIP
         {
             _context = context;
         }
@@ -72,83 +42,12 @@ namespace backend.Controllers
                 })
                 .ToListAsync();
 
-<<<<<<< HEAD
-        return artworks;
-    }
-
-
-
-
-
-    // GET: api/Artworks/5
-    // GET: api/Artworks/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Artworks>> GetArtwork(int id)
-    {
-        var artwork = await _context.Artworks
-            .Include(a => a.ArtworkTag)
-               
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-<<<<<<< HEAD
-                ArtworkTags = a.ArtworkTags,
-=======
->>>>>>> THUCVIP
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-<<<<<<< HEAD
-                ImageFile = a.ImageFile
-=======
-                ImageFile = a.ImageFile != null ? (byte[])a.ImageFile : new byte[0],
-                ArtworkTag = a.ArtworkTag // This should be handled by EF, you might not need to include it in the projection
->>>>>>> THUCVIP
-            })
-            .FirstOrDefaultAsync(a => a.ArtworkID == id);
-
-        if (artwork == null)
-        {
-            return NotFound();
-        }
-
-        return artwork;
-    }
-
-    // GET: api/Artworks/ByCreator/{Crid}
-    [HttpGet("ByCreator/{Crid}")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
-    {
-        var artworks = await _context.Artworks
-            .Where(a => a.CreatorID == Crid)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                ArtworkTags = a.ArtworkTags,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile
-            })
-            .ToListAsync();
-
-        if (artworks == null || artworks.Count == 0)
-=======
             return Ok(artworks);
         }
 
         // GET: api/artworks/{id}
         [HttpGet("{id}")]
         public async Task<IActionResult> GetArtwork(int id)
->>>>>>> THUCVIP
         {
             var artwork = await _context.Artworks
                 .Include(a => a.ArtworkTag)
@@ -232,61 +131,10 @@ namespace backend.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutArtwork(int id, [FromBody] Artworks artworkRequest)
         {
-<<<<<<< HEAD
-            return NotFound(); // Return 404 if the artwork is not found
-        }
-
-        try
-        {
-            artwork.ImageFile = artwork.ImageFile ?? null;
-
-            _context.Artworks.Remove(artwork);
-            await _context.SaveChangesAsync();
-
-            return NoContent(); // Return 204 No Content upon successful deletion
-        }
-        catch (Exception ex)
-        {
-            // Handle any exception that might occur during deletion
-            return StatusCode(500, $"Internal Server Error: {ex.Message}");
-        }
-    }
-
-
-    private bool ArtworkExists(int id)
-    {
-        return _context.Comments.Any(e => e.CommentID == id);
-    }
-
-
-
-    [HttpGet("TopLiked")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
-    {
-        var topLikedArtworks = await _context.Artworks
-            .OrderByDescending(a => a.Likes)
-            .Take(10)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                ArtworkTags = a.ArtworkTags,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile,
-                
-            })
-            .ToListAsync();
-=======
             if (id != artworkRequest.ArtworkID)
             {
                 return BadRequest("Invalid ID");
             }
->>>>>>> THUCVIP
 
             var existingArtwork = await _context.Artworks
                 .Include(a => a.ArtworkTag)
