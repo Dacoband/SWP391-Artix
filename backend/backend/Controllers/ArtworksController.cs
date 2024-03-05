@@ -181,7 +181,7 @@ public class ArtworksController : ControllerBase
         return _context.Artworks.Any(e => e.ArtworkID == id);
     }
 
-
+    //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
     {
