@@ -255,3 +255,4 @@ D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
 =======
 >>>>>>> Main
+D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.Up2Date
