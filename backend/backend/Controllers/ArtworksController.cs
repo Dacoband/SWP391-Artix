@@ -184,5 +184,23 @@ namespace backend.Controllers
         {
             return _context.Artworks.Any(e => e.ArtworkID == id);
         }
+
+
+        [HttpGet("Top10Liked")]
+        public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
+        {
+            var topLikedArtworks = await _context.Artworks
+                .OrderByDescending(a => a.Likes)
+                .Take(10)
+                .ToListAsync();
+
+            if (topLikedArtworks == null || topLikedArtworks.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return topLikedArtworks;
+        }
     }
+
 }
