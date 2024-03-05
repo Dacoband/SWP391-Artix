@@ -44,9 +44,11 @@ namespace backend.Entities
         {
             modelBuilder.Entity<Artworks>()
             .Ignore(a => a.ImageFile);
+            modelBuilder.Entity<Creator>()
+            .Ignore(c => c.ProfilePicture);
 
             modelBuilder.Entity<ArtworkTag>()
-       .HasKey(t => new { t.ArtworkID, t.TagID });
+            .HasKey(t => new { t.ArtworkID, t.TagID });
 
             // ... Các cấu hình khác
 
