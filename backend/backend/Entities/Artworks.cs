@@ -15,10 +15,14 @@ namespace backend.Entities
         public bool Purchasable { get; set; }
         public double Price { get; set; }
 <<<<<<< HEAD
+<<<<<<< HEAD
         public IFormFile ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB  
         public List<ArtworkTag> ArtworkTags { get; set; }
 =======
         public byte[] ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB
+=======
+        public IFormFile? ImageFile { get; set; } // Thêm cột ImageFile kiểu BLOB
+>>>>>>> THUCVIP
 
         public ICollection<ArtworkTag> ArtworkTag { get; set; }
 
