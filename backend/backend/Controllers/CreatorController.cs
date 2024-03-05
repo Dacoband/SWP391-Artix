@@ -61,55 +61,36 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
-    //GET: API/artwork/{Top10Liked}
-    [HttpGet("Top10Liked")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
+    
+    
+    // POST: api/Creator
+    [HttpPost]
+    public async Task<IActionResult> CreateArtwork([FromBody] Creator creatorModel)
     {
-        var topLikedArtworks = await _context.Artworks
-            .OrderByDescending(a => a.Likes)
-            .Take(10)
-            .ToListAsync();
-
-        if (topLikedArtworks == null || topLikedArtworks.Count == 0)
+        if (creatorModel == null)
         {
-            return NotFound();
+            return BadRequest("Invalid data. Creator object is null.");
         }
 
-        return topLikedArtworks;
-    }
-
-   // POST: api/Creator
-   [HttpPost]
-    public async Task<ActionResult<Creator>> PostCreator([FromBody] Creator creator)
-    {
-        try
+        // Xử lý tệp hình ảnh và lưu vào đối tượng Creator
+        if (creatorModel.ProfilePicture != null && creatorModel.ProfilePicture.Length > 0)
         {
-            if (creator == null)
+            using (MemoryStream ms = new MemoryStream())
             {
-                return BadRequest("Invalid data. Creator object is null.");
+                await creatorModel.ProfilePicture.CopyToAsync(ms);
+
+                // Create a new instance of FormFile with the updated content
+                creatorModel.ProfilePicture = new FormFile(ms, 0, ms.Length,
+                                                            creatorModel.ProfilePicture.Name,
+                                                            creatorModel.ProfilePicture.FileName);
             }
-
-            // Kiểm tra và xử lý mảng byte ProfilePicture nếu cần
-            if (Request.HasFormContentType && Request.Form.Files.Count > 0)
-            {
-                var file = Request.Form.Files[0];
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    await file.CopyToAsync(ms);
-                    creator.ProfilePicture = ms.ToArray();
-                }
-            }
-
-            _context.Creators.Add(creator);
-            await _context.SaveChangesAsync();
-
-            // Trả về đối tượng đã được tạo
-            return Ok(creator);
         }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Internal Server Error: {ex.Message}");
-        }
+
+        _context.Creators.Add(creatorModel);
+        await _context.SaveChangesAsync();
+
+        // Trả về đối tượng đã được tạo
+        return Ok(creatorModel);
     }
 
 
