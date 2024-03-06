@@ -25,7 +25,7 @@ const user = savedAuth ? JSON.parse(savedAuth) : null;
       <Box
         sx={{
           color: theme.color,
-          backgroundColor: `rgba(${theme.rgbBackgroundColor},0.9)`,
+          backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
           transition: theme.transition,
           width: '95%',
           margin: 'auto',

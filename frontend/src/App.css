@@ -686,13 +686,6 @@
 }
 
 
-.carouseluser{
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
 .recommendedwork{
 
   margin-top: 20px;
@@ -715,19 +708,6 @@
 }
 
 
-.recommendedImages{
-  display: flex;
-  justify-content: first baseline;
-  padding-bottom: 10px;
-  min-width: 450px;
-}
-
-.carouseluser{
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  border-radius: 5px;
-}
 
 .recommendedusers{
   margin-top: 30px;
@@ -739,16 +719,19 @@
 
 }
 
-
 .groupOfCarousel{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
+  overflow: auto;
+  min-width: 400px;
 }
 
 .carouselCustom{
   display: block;
   width: 18vw;
+  min-width: 250px;
+  margin: 5px 5px 5px 5px;
 }
 
 .imguser{
@@ -775,13 +758,14 @@
 .contentuser{
   margin-left: 10px;
   margin-right: 10px;
-
 }
 
 .card-follow-button {
   display: flex;
   justify-content: center; 
+
 }
+
 .Randomimg{
   margin-top: 30px;
   margin-left: 90px;

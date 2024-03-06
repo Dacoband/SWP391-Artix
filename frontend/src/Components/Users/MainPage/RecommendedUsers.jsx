@@ -12,7 +12,7 @@ function RecommendedUsers() {
 
   const sortedUsers = [...ListofUsers].sort((a, b) => b.like - a.like);
   
-  const top12Users = sortedUsers.slice(0, 11); // Get top 12 most 'liked' users
+  const top12Users = sortedUsers.slice(0, 12); // Get top 12 most 'liked' users
   
   /* What Next Is A Mess Of Randomness To Keep Things Fresh. Basically I will create 4 Carousel with 12 top users render 4 carousels in a row.
    PLEASE DON'T TOUCH IT */
