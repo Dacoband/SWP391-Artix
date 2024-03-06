@@ -1,34 +1,28 @@
 
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import FrontPage from './Components/FrontPage.jsx';
-import Admin from './Components/Admin/Admin.jsx'
-import Mod from './Components/Mods/Mod.jsx';
-import Users from './Components/Users/Users.jsx';
+
+import ProfileUser from './Components/ProfileUser';
+import TestIcon from './Components/TestIcon';
+import PostWork from './Components/PostWork';
+import HomePage from './Components/HomePage';
 function App() {
   return (
-    <div className='App'>
-        {/* <Menu />
-        <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}>
-        <Routes>
-          <Route path='/' element={<Page />}> </Route>
-          <Route path='/Details/:id' element={<PeopleDetail />}></Route>
-          <Route path='/Update/:id' element={<UpdatePeople />}></Route>
-          <Route path='/Create' element={<CreatePeople />}></Route>
-        </Routes>
-        </div>
-        <Footer /> 
-        These are later use :>
-        */}
-        <Routes>
-          <Route path='/' element={<FrontPage/>}/>
-          <Route path="/admin" element={<Admin/>}>
-            </Route>
-          <Route path="/mod" element={<Mod/>}>
-            </Route>
-          <Route path="/characters/*" element={<Users/>}>
-          </Route>
-        </Routes>
+    <div className="App">
+     
+      
+     {/* <TestIcon/> */}
+     {/* <TestIcon2/> */}
+      {/* <HomePage/> */}
+      
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/profile/:userId" element={<ProfileUser />} />
+        <Route path="/post/:workId" element={<PostWork/>}/>
+      </Routes>
+   
+      
+
     </div>
   );
 }
