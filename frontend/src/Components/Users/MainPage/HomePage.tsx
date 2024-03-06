@@ -5,7 +5,7 @@ import RecommendedUsers from './RecommendedUsers.jsx';
 import ImgForyou from './ImgForyou.jsx';
 import Box from '@mui/material/Box';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
-import { User } from '../../../Interfaces/UserInterface';
+import { Work} from '../../../share/ListofWork.js'
 
 export default function HomePage() {
     // Attempt to retrieve the auth state from sessionStorage
