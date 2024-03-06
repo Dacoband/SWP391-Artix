@@ -821,3 +821,174 @@ a{
 
 
 
+
+/* Profile */
+/* styles.css */
+.headeruser {
+  
+  width: 100%;
+  height: 435px; 
+  overflow: hidden;
+}
+
+.backgrounduser {
+  background-attachment: fixed;
+ background-repeat: no-repeat;;
+
+  width: 100%;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+  
+}
+.backgrounduser img{
+  width: 100%;
+  height: auto;
+}
+
+.avataruser{
+  position: relative;
+  display: inline-block;}
+.avataruser img{
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 100%;
+  transform: translateY(-40%);
+  margin-left: 100px;
+  outline: 4px solid #fff;
+  position: relative;
+  z-index: 1;
+  
+  /* outline nên chỉnh theo dark mode */
+ 
+}
+.buttonavatar button{
+  background-color:none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(10%, 100%);
+  z-index: 2;
+  
+  /* width: 40px;
+  height: 40px;
+  border-radius: 50%; */
+}
+.infouser1{
+  display: flex;
+ 
+  height:90px ;
+  justify-content: space-between;
+  
+}
+.infousername{
+  display: flex;
+}
+.headerusername{
+  margin-top: 0px;
+  margin-left: 20px;
+}
+.buttonheaderuser{
+  margin-right: 100px;
+  margin-top: 25px;
+  display: flex;
+}
+.navofuser{
+  display: flex;
+  justify-content: space-between;
+}
+.navuser{
+  margin-left:110px ;
+}
+.buttonSubcribe{
+  margin-right: 100px;
+  margin-top: 4px;
+}
+.boxintroduct{
+  margin: auto;
+
+  
+  height: auto;
+
+  width: 80%;
+
+}
+.headintroduct{
+  margin-left: 25px;
+  margin-bottom: 5px;
+}
+
+.contentintroduct{
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+
+}
+.iconintroduct{
+  margin-top: 5px;
+  margin-right: 6px;
+}
+.tabhome{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+  
+}
+.biouser{
+  margin-right: 40px;
+  margin-top: 22px;
+}
+.head-workofuser{
+  margin-bottom: 20px;
+}
+.tabshop{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+  margin-top: 40px;
+
+}
+.tabfavourites{
+  display: flex;
+  justify-content: center;
+ 
+}
+
+
+
+/* POSTWORK */
+.info-postwork{
+  display: flex;
+  height: 600px;
+  margin-top: 50px;
+  margin-left: 70px;
+  margin-right: 70px;
+}
+.imgpost{
+  height: 600px;
+  width: 1000px;
+  display: flex;
+  justify-content: center;
+  background-color:#F5F5F5 ;
+
+}
+.imgpost img{
+  margin: auto;
+  object-fit: cover;
+  height: 500px;
+}
+.contentpost{
+  flex: 1;
+  margin-left: 30px;
+}
+.infor-user-post{
+  margin-top: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  border-bottom: 2px solid #218EC2;
+}
+.name-user-post{
+  font-size: 20px;
+  margin: auto 15px;
+}
