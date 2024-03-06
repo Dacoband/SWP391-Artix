@@ -3,16 +3,13 @@ import { useParams } from 'react-router-dom';
 import { Work } from '../share/ListofWork';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-export default function PostWork() {
-  const { workId } = useParams();
-  const selectedWork = Work.find(work => work.id === parseInt(workId));
+export default function ArtPost() {
+  const { id } = useParams();
+  const selectedWork = Work.find(work => work.id === parseInt(id));
   if (!selectedWork) {
     return <div>Error</div>;
   }
   console.log(selectedWork)
-
-
-
   return (
     <div className='poswork'>
       <div className='info-postwork'>
@@ -35,14 +32,8 @@ export default function PostWork() {
             <div>{selectedWork.description}</div>
             <div>Tag:</div>
           </div>
-
         </div>
-
       </div>
-
-
-
-
     </div>
   )
 }

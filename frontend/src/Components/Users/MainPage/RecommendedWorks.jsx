@@ -6,6 +6,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import { Work} from '../../../share/ListofWork.js'
+import { Link } from 'react-router-dom';
 export default function RecommendedWords() {
   const recommendedwork = {
     ArtworkID:0, // PK
@@ -44,7 +45,8 @@ function Sort(){
 
   return (
     <ImageList className='recommendedImages' cols={5} >
-      {recommendedworkList.map((work) => (
+      {Work.map((work) => (
+        <Link to={`artwork/${work.id}`}>
         <CardActionArea key={work.ArtworkID}>
         <ImageListItem key={work.ArtworkID}>
           <CardMedia
@@ -56,6 +58,7 @@ function Sort(){
             />
         </ImageListItem>
         </CardActionArea>
+        </Link>
 
       ))}
     </ImageList>

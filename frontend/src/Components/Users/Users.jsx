@@ -13,6 +13,7 @@ import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.jsx';
 import ProfileUser from './ProfileUser.jsx';
+import ArtPost from '../ArtPost.jsx';
 
 export default function Users() {
   return (
@@ -26,6 +27,7 @@ export default function Users() {
           <Route path={`creatorform`} element={<UserInfoForm/>}/>
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
           <Route path={`profile/:id`} element={<ProfileUser />}/>
+          <Route path={`artwork/:id`} element={<ArtPost />}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
