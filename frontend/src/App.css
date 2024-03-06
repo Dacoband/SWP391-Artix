@@ -722,33 +722,33 @@
   min-width: 450px;
 }
 
+.carouseluser{
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
 .recommendedusers{
   margin-top: 30px;
   margin-right: 90px;
-
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
   margin-bottom: 40px;
 
-
 }
+
 
 .groupOfCarousel{
   display: flex;
   flex-direction: row;
-  justify-content: first baseline;
-  overflow: auto;
-  min-width: 400px;
-
+  justify-content: space-between;
 }
 
 .carouselCustom{
   display: block;
   width: 18vw;
-  min-width: 250px;
-  margin: 2px 2px 2px 2px;
-
 }
 
 .imguser{
