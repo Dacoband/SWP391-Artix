@@ -7,7 +7,8 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import { ThemeContext } from "../../Themes/ThemeProvider.tsx";
 import {Carousel} from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Work} from '../../../share/ListofWork.js'
+import { Link } from "react-router-dom";
+
 
 function RecommendedUsers() {
   const {theme} = useContext(ThemeContext)
@@ -58,6 +59,7 @@ function RecommendedUsers() {
           >
           {set.map((user) => (
             <div key={user.id} >
+              <Link to={`profile/${user.id}`}>
             <Card >
               <CardActionArea>
                 <CardMedia >
@@ -73,7 +75,8 @@ function RecommendedUsers() {
                   <div className="contentuser">
                   <h2>{user.User}</h2>
                   <h4>Follower: {user.like}</h4>
-                  </div></div>
+                  </div>
+                  </div>
                 </CardMedia>
               </CardActionArea>
               <CardActions className="card-follow-button">
@@ -82,6 +85,7 @@ function RecommendedUsers() {
                 </Button>
               </CardActions>
             </Card>
+            </Link>
           </div>
           ))}
           </Carousel>

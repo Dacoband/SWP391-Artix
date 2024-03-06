@@ -12,6 +12,7 @@ import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.jsx';
+import ProfileUser from './ProfileUser.jsx';
 
 export default function Users() {
   return (
@@ -21,11 +22,10 @@ export default function Users() {
       {/* <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}> */}
         <Routes>
           <Route path={`/`} element={<HomePage/>} />
-          <Route path={`:id`} element={<PeopleDetail />} />
-          <Route path={`:id/edit`} element={<UpdatePeople />} />
           <Route path={`create`} element={<CreatePeople />} />
           <Route path={`creatorform`} element={<UserInfoForm/>}/>
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
+          <Route path={`profile/:id`} element={<ProfileUser />}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
