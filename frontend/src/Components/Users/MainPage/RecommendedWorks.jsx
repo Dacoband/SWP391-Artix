@@ -5,6 +5,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
+import { Work} from '../../../share/ListofWork.js'
 export default function RecommendedWords() {
   const recommendedwork = {
     ArtworkID:0, // PK
@@ -17,7 +18,7 @@ export default function RecommendedWords() {
     Purchasable:false, 
     Price:0,
   }
-  const [recommendedworkList,setrecommendedworkList] = useState([recommendedwork])
+  const [recommendedworkList,setrecommendedworkList] = useState([])
   const url = "https://localhost:7233/api/Artworks"
   const [isLoading,setIsLoading] = useState(false)
   useEffect(()=>{
@@ -32,14 +33,16 @@ export default function RecommendedWords() {
   },[])
 function Sort(){
    // Sắp xếp danh sách công việc theo số lượng like giảm dần
-   const sortedWork = [...recommendedworkList].sort((a, b) => b.Likes - a.Likes);
+   // REAL DATABASE
+   //const sortedWork = [...recommendedworkList].sort((a, b) => b.Likes - a.Likes);
+   // FAKE DATABASE
+    const sortedWork = [...Work].sort((a, b) => b.like - a.like);
    // Lấy ra 9 phần tử đầu tiên
    setrecommendedworkList(sortedWork.slice(0, 10));
 }
 
 
   return (
-
     <ImageList className='recommendedImages' cols={5} >
       {recommendedworkList.map((work) => (
         <CardActionArea key={work.ArtworkID}>

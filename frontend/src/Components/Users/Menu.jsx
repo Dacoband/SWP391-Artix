@@ -12,6 +12,11 @@ import CustomizedDropdown from '../StyledMUI/CustomizedDropdown.tsx';
 
 export default function Menu() {
   const { theme } = useContext(ThemeContext);
+// Attempt to retrieve the auth state from sessionStorage
+const savedAuth = sessionStorage.getItem('auth');
+// Check if there's any auth data saved and parse it
+const user = savedAuth ? JSON.parse(savedAuth) : null;
+// Now 'auth' contains your authentication state or null if there's nothing saved
   return (
     <div>
       <Box sx={{ flexGrow: 1, boxShadow: '50px' }}>
@@ -26,7 +31,7 @@ export default function Menu() {
               <Button color="inherit"><Link to={"/"}>Home</Link></Button>
 
               <Button color="inherit"><Link to={"artworkform"}>Publish Your Works</Link></Button>
-             <CustomizedDropdown/>
+             <CustomizedDropdown user={user}/>
             </Box>
 
           </Toolbar>
