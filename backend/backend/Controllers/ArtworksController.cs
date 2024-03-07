@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -74,7 +75,7 @@ public class ArtworksController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
     {
-        try
+        using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
             // Kiểm tra xem CreatorID có tồn tại không
             if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
@@ -108,20 +109,11 @@ public class ArtworksController : ControllerBase
             }
 
             await _context.SaveChangesAsync();
-
+            scope.Complete();
             return Ok("Artwork created successfully");
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error: {ex.Message}");
-            if (ex.InnerException != null)
-            {
-                Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
-            }
-
-            return BadRequest("An error occurred while saving the entity changes. See the inner exception for details.");
-        }
-    }
+    }  
+    
 
     // PUT: api/artworks/{id}
     [HttpPut("{id}")]
