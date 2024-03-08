@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
-using backend.Identity;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -21,7 +20,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks
-    [AllowAnonymous]
+    
     [HttpGet]
     public async Task<IActionResult> GetArtworks()
     {
@@ -75,7 +74,7 @@ public class ArtworksController : ControllerBase
     }
 
     // POST: api/artworks
-    [Authorize]
+    
     [HttpPost]
     public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
     {
@@ -120,7 +119,6 @@ public class ArtworksController : ControllerBase
 
 
     // PUT: api/artworks/{id}
-    [Authorize(Policy = IdentityData.AdminUserPolicyName)]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutArtwork(int id, [FromBody] Artworks artworkRequest)
     {
@@ -179,8 +177,6 @@ public class ArtworksController : ControllerBase
     }
 
     //GET: API/artwork/{Top10Liked}
-    [Authorize]
-    [RequiresClaim(IdentityData.AdminUserClaimName, "true")]
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
     {
@@ -195,6 +191,21 @@ public class ArtworksController : ControllerBase
         }
 
         return topLikedArtworks;
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteArtwork(int id)
+    {
+        var artwork = await _context.Artworks.FindAsync(id);
+        if (artwork == null)
+        {
+            return NotFound();
+        }
+
+        _context.Artworks.Remove(artwork);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
 
 }
