@@ -256,3 +256,11 @@ D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
 =======
 >>>>>>> Main
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.Up2Date
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
