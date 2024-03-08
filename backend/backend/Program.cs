@@ -1,7 +1,11 @@
 ﻿using backend.Entities;
+using backend.Identity;
+using backend.Swagger;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -24,30 +28,36 @@ namespace backend
             builder.Services.AddControllers();
 
             // Configure JWT Authentication
-            builder.Services.AddAuthentication(options =>
+            builder.Services.AddAuthentication(x =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x =>
             {
-                o.TokenValidationParameters = new TokenValidationParameters
+                var config = builder.Configuration;
+
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-                    ValidAudience = builder.Configuration["Jwt:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"])),
+                    ValidIssuer = config["JwtSetting:Issuer"],
+                    ValidAudience = config["JwtSetting:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JwtSetting:Key"]!)),
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidateLifetime = false,
-                    ValidateIssuerSigningKey = true
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
                 };
             });
 
             // Add authorization services to your application
-            builder.Services.AddAuthorization();
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy(IdentityData.AdminUserPolicyName, p => p.RequireClaim(IdentityData.AdminUserClaimName, "true"));
+            });
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             builder.Services.AddDbContext<ApplicationDbContext>();
             builder.Services.AddLogging(logging =>
             {
@@ -74,41 +84,9 @@ namespace backend
             app.UseAuthentication();
             app.UseAuthorization();
 
-            // Example API with authorization
-            app.MapGet("/security/getMessage", () => "Hello World!").RequireAuthorization();
-
-            app.MapPost("/security/createToken", [AllowAnonymous] (User user) =>
-            {
-                if (user.UserName == "artix" && user.Password == "12345")
-                {
-                    var issuer = builder.Configuration["Jwt:Issuer"];
-                    var audience = builder.Configuration["Jwt:Audience"];
-                    var key = Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"]);
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        Subject = new ClaimsIdentity(new[]
-                        {
-                            new Claim("Id", Guid.NewGuid().ToString()),
-                            new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                            new Claim(JwtRegisteredClaimNames.Email, user.UserName),
-                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-                        }),
-                        Expires = DateTime.UtcNow.AddMinutes(5),
-                        Issuer = issuer,
-                        Audience = audience,
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
-                    };
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var token = tokenHandler.CreateToken(tokenDescriptor);
-                    var jwtToken = tokenHandler.WriteToken(token);
-                    var stringToken = tokenHandler.WriteToken(token);
-                    return Results.Ok(stringToken);
-                }
-                return Results.Unauthorized();
-            });
-
             // Map controllers
             app.MapControllers();
+            //app.MapPost("artworks", () => Results.Ok()).RequireAuthorization(IdentityData.AdminUserPolicyName);
 
             app.Run();
         }

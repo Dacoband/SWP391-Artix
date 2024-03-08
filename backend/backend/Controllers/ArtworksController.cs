@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
+using Microsoft.AspNetCore.Authorization;
+using backend.Identity;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -19,6 +21,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetArtworks()
     {
@@ -72,6 +75,7 @@ public class ArtworksController : ControllerBase
     }
 
     // POST: api/artworks
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
     {
@@ -112,10 +116,11 @@ public class ArtworksController : ControllerBase
             scope.Complete();
             return Ok("Artwork created successfully");
         }
-    }  
-    
+    }
+
 
     // PUT: api/artworks/{id}
+    [Authorize(Policy = IdentityData.AdminUserPolicyName)]
     [HttpPut("{id}")]
     public async Task<IActionResult> PutArtwork(int id, [FromBody] Artworks artworkRequest)
     {
@@ -174,6 +179,8 @@ public class ArtworksController : ControllerBase
     }
 
     //GET: API/artwork/{Top10Liked}
+    [Authorize]
+    [RequiresClaim(IdentityData.AdminUserClaimName, "true")]
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
     {

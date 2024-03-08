@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Entities;
+using Microsoft.AspNetCore.Authorization;
 [ApiController]
 [Route("api/[controller]")]
 
@@ -16,6 +17,7 @@ public class AccountController : ControllerBase
     {
         _context = context;
     }
+    [Authorize]
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Account>>> GetAccount()
     {
