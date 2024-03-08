@@ -1,35 +1,10 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import { Container, Card, CardContent, Typography, Grid } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import React from 'react'
 import LoginForm from './Forms/LoginForm';
 import {useHandleClick} from '../CustomHooks/HandleClick';
 import Background from './Themes/Background.jsx'
-import  {AuthContext}  from './AuthenContext.tsx';
-const useStyles = makeStyles({
-  card: {
-    transition: 'transform 0.3s ease',
-    '&:hover': {
-      transform: 'scale(1.05)',
-      borderColor: 'blue', // Change border color on hover
-    },
-  },
-});
-
-const StyledLink = ({ to, children }) => {
-  return (
-    <Link to={to} style={{ textDecoration: 'none', color: 'inherit' }}>
-      {children}
-    </Link>
-  );
-};
 
 export default function FrontPage() {
-  const classes = useStyles();
-  const [isOpen,handleClick] =  useHandleClick();
-  //Get the User from AuthContext
-  const {auth} = useContext(AuthContext)
+  const [handleClick] =  useHandleClick();
   return (
     // <Container sx={{ marginTop: "10%"}}>
     //   <Grid container spacing={4}>
@@ -98,7 +73,7 @@ export default function FrontPage() {
     //      </div>
     // </Container>
     <Background>
-    <LoginForm handleClick={(handleClick)} backdrop={""}/>
+    <LoginForm disableOutsideClick={true} alternative={true} backdrop={""}/>
     </Background>
   )
 }

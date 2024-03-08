@@ -5,8 +5,6 @@ import HomePage from './MainPage/HomePage.tsx';
 // eslint-disable-next-line 
 import Page from './Page.jsx';
 import Footer from './Footer.jsx';
-import PeopleDetail from './PeopleDetail.jsx';
-import UpdatePeople from './UserForms/UpdatePeople.jsx';
 import Menu from './Menu.jsx';
 import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';

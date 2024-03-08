@@ -2,7 +2,6 @@
 *{
   margin: 0;
   padding: 0;
-
 }
 
 .background{
@@ -18,34 +17,10 @@
   display: fixed;
 }
 
-
-
-/* test icon2 */
-.test2{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-
-}
-
-
 .page{
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.card:first-child{
-  margin-top: 10%;
-}
-
-.card{
-  width: 60%;
-  margin: auto;
-  margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 .container{
@@ -67,35 +42,8 @@
 
 
 }
-.button{
-  position: relative;
-  padding: 0px 0px;
-  background:#fff ;
-  /* border-radius: 6px; */
-  color: #7d2ea8;
-  border: none;
-  font-size: 18px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
 
-}
 
-.button{
-  position: relative;
-  padding: 0px 0px;
-  background:#fff ;
-  /* border-radius: 6px; */
-  color: #7d2ea8;
-  border: none;
-  font-size: 18px;
-  font-weight: 400;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); */
-
-}
 .loading{
   margin: auto; 
 
@@ -168,9 +116,6 @@
   }
   
 }
-
-
-
 
 
 .app-logo{
