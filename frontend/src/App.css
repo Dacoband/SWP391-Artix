@@ -4,23 +4,53 @@
   padding: 0;
 }
 
-.home{
-  
-  border-bottom:1px solid  #dbdbdb ;
+.background{
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; /* Ensure the image is centered on the screen */
+  width: 100vw; /* 100% of the viewport width */
+  height: auto; /* 100% of the viewport height */
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  display: fixed;
+}
 
-  
+.page{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
 .container{
-  margin-top: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
+  margin-top: 10%;
+  margin-bottom: 5%;
+  background-color: aliceblue;
 }
-.item1{
-  height: 200px;
+
+.loadingscreen{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 1000vh;
+  z-index: 9999;
+}
+
+.loading{
+  margin: auto; 
+}
+
+
+.app-logo{
+  margin-left: 2vw;
+  width: 82px;
+  height: 32px;
 }
 
 /* TESTICON */
-
 .hero{
   margin-left: 100px;
   display: flex;
@@ -49,7 +79,6 @@
 }
 .btn:active{
   transform: scale(0.96);
-  background: #fff;
   color: #ff1876;
 
 }
@@ -164,12 +193,13 @@
     top:50%;
     left: 50%;
   }
-  
+
 }
 .button-favourite{
   display: flex;
   align-items: center;
 }
+
 .iconcomment{
   margin-left: 30px;
   border: none;
@@ -180,15 +210,20 @@
   display: flex;
   align-items: center;
 }
-
+/* END TESTICON */
 
 /* HomePage */
+.homepage{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
 
 .seemore{
   font-size: 15px;
-  margin-bottom: 10px;
   margin-right:10px ;
-  color: #218EC2;
+  color: #8b999f;
+
   text-align: right;
   cursor: pointer;
 }
@@ -198,9 +233,14 @@
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
+
+  margin-bottom: 15px;
 }
 
+
 .itemtag{
+  background-color: rgba(red, green, blue, alpha);
+
   display: inline-block;
   white-space: nowrap; /* Ngăn ngừa việc ngắt dòng */
   overflow: hidden; /* Ngăn việc tràn vượt phần tử cha */
@@ -231,6 +271,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .recommendedwork{
 
   margin-top: 20px;
@@ -251,20 +292,32 @@
   justify-content: center;
   padding-bottom: 10px;
 }
-.cardrecommended{
-  margin: 10px 5px;
-}
-/* .userofworks{
-  padding: 4px;
-} */
+
 
 
 .recommendedusers{
   margin-top: 30px;
+  margin-right: 90px;
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
   margin-bottom: 40px;
+
+}
+
+.groupOfCarousel{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  overflow: auto;
+  min-width: 400px;
+}
+
+.carouselCustom{
+  display: block;
+  width: 18vw;
+  min-width: 250px;
+  margin: 5px 5px 5px 5px;
 }
 
 .imguser{
@@ -290,22 +343,19 @@
 }
 .contentuser{
   margin-left: 10px;
-  
-}
-.user-container{
-  margin: 18px;
-
+  margin-right: 10px;
 }
 
 .card-follow-button {
   display: flex;
   justify-content: center; 
+
 }
+
 .Randomimg{
   margin-top: 30px;
   margin-left: 90px;
   margin-right: 90px;
-  position: relative;
   border: 2px;
   border-bottom: #218EC2;
 }
@@ -315,6 +365,47 @@
   padding-bottom: 10px;
 
 }
+
+.form{
+  padding-top: 2%;
+  padding-bottom: 5%;
+}
+
+.userInfoForm{
+  width: 60vw;
+  border-radius: 5px;
+  min-width: 400px;
+  margin: auto;
+  padding-top: 3%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 2%;
+
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+.tagHolder::-webkit-scrollbar {
+  display: none;
+}
+.tagHolder{
+  height: 8vh;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  overflow-x: auto;
+}
+
+.previewImage{
+  height: 300px;
+  width: 300px;
+  object-fit: fill;
+  float: right;
+}
+
+
 
 
 /* Profile */
@@ -456,7 +547,7 @@
 .info-postwork{
   display: flex;
   height: 560px;
-  margin-top: 50px;
+  padding-top: 10px;
   margin-left: 100px;
   margin-right: 100px;
 }

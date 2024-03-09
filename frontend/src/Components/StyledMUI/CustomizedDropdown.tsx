@@ -9,11 +9,18 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthenContext.tsx';
+import { User } from '../../Interfaces/UserInterface';
 
-  
-  
-export default function CustomizedDropdown() {
+//Create an interface for your function to assign types to its props
+interface CustomizedDropdownProps{
+  user: User;
+  handleClickAsGuest:any;
+}
+export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedDropdownProps) {
     const {theme,toggleTheme,dark} = useContext(ThemeContext)
+    const {logout} = useAuth();
     // Custom style for the Menu component
     const CustomizedMenu = styled(Menu)(() => ({
       '& .MuiPaper-root': {
@@ -33,54 +40,71 @@ export default function CustomizedDropdown() {
    
 }
 )
-const handleClick = (event) => {
+const handleClickDropdown = (event) => {
+  if(user===null){
+    handleClickAsGuest()
+  }
+  else{
   setAnchorEl(event.currentTarget)
   setOpen(!open)
+  }
 };
+
+function Dropdown(){
+  return(
+<CustomizedMenu
+id="basic-menu"
+anchorEl={anchorEl}
+open={open}
+onClose={handleClickDropdown}
+anchorOrigin={{
+  vertical: 'bottom',
+  horizontal: 'center',
+}}
+transformOrigin={{
+  vertical: 'top',
+  horizontal: 'center',
+}}
+>
+<Box sx={{ display: 'flex', alignItems: 'left',flexDirection: 'column' }}>
+<Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
+<Typography variant='caption'>Account</Typography>
+</Divider>
+<MenuItem onClick={handleClickDropdown}><Link to={`creatorform`}>Profile</Link></MenuItem>
+<MenuItem onClick={handleClickDropdown}>My Dashboard</MenuItem>
+<MenuItem onClick={handleClickDropdown}>My Account</MenuItem>
+<Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
+<Typography variant='caption'>Theme</Typography>
+</Divider>
+<MenuItem onClick={toggleTheme}>
+  {dark ? "Dark" : "Light"}
+  <Switch  checked={dark} />
+  </MenuItem>
+<Divider sx={{"backgroundColor":{backgroundColor:theme.color}}} variant='middle'/>
+<MenuItem onClick={logout}>Logout</MenuItem>
+</Box>
+</CustomizedMenu>
+  )
+}
+
   return (
     <div>
-      <IconButton
-            onClick={handleClick}
-            size="small"
-            sx={{ ml: 2 }}
-            aria-controls={open ? 'account-menu' : ''}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : 'false'}
-          >
-            <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
-        </IconButton>
-      <CustomizedMenu
-        id="basic-menu"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClick}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
+       <IconButton
+        onClick={handleClickDropdown}
+        size="small"
+        sx={{ ml: 2 }}
+        aria-controls={open ? 'account-menu' : ''}
+        aria-haspopup="true"
+        aria-expanded={open ? 'true' : 'false'}
       >
-        <Box sx={{ display: 'flex', alignItems: 'left',flexDirection: 'column' }}>
-        <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
-        <Typography variant='caption'>Account</Typography>
-        </Divider>
-        <MenuItem onClick={handleClick}>Profile</MenuItem>
-        <MenuItem onClick={handleClick}>My Dashboard</MenuItem>
-        <MenuItem onClick={handleClick}>My Account</MenuItem>
-        <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
-        <Typography variant='caption'>Theme</Typography>
-        </Divider>
-        <MenuItem onClick={toggleTheme}>
-          {dark ? "Dark" : "Light"}
-          <Switch  checked={dark} />
-          </MenuItem>
-        <Divider sx={{"backgroundColor":{backgroundColor:theme.color}}} variant='middle'/>
-        <MenuItem onClick={handleClick}>Logout</MenuItem>
-        </Box>
-      </CustomizedMenu>
+        <Avatar src={user? user.picture : ""} sx={{ width: 32, height: 32 }}>{user ? user.given_name.charAt[0] : null}</Avatar>
+      </IconButton>
+      {
+        user===null?
+        <></>
+        :
+        <Dropdown/>
+      }
     </div>
   );
 }

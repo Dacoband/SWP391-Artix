@@ -7,16 +7,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import LoadingScreen from './LoadingScreen';
+import LoadingScreen from '../LoadingScreen.jsx'
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import { ThemeContext } from '../Themes/ThemeProvider.tsx';
-import CustomizedTextField from '../StyledMUI/CustomizedTextField.tsx'
-import CustomizedButton from '../StyledMUI/CustomizedButton.tsx'
-
+import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
+import CustomizedTextField from '../../StyledMUI/CustomizedTextField.tsx'
+import CustomizedButton from '../../StyledMUI/CustomizedButton.tsx'
 
 
 export default function UpdatePeople() {
