@@ -20,11 +20,13 @@
 }
 
 .hero{
-  width: 100%;
-  height: 100vh;
-  display: flex ;
+  margin-left: 100px;
+  display: flex;
+  /* width: 100%;
+  height: 100vh; */
+  /* display: flex ; */
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 }
 .btn{
  
@@ -161,6 +163,20 @@
     left: 50%;
   }
   
+}
+.button-favourite{
+  display: flex;
+  align-items: center;
+}
+.iconcomment{
+  margin-left: 30px;
+  border: none;
+  background: none;
+ 
+}
+.button-comment{
+  display: flex;
+  align-items: center;
 }
 
 
@@ -437,14 +453,14 @@
 /* POSTWORK */
 .info-postwork{
   display: flex;
-  height: 600px;
+  height: 560px;
   margin-top: 50px;
-  margin-left: 70px;
-  margin-right: 70px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 .imgpost{
-  height: 600px;
-  width: 1000px;
+  height: 560px;
+  width: 900px;
   display: flex;
   justify-content: center;
   background-color:#F5F5F5 ;
@@ -454,13 +470,14 @@
   margin: auto;
   object-fit: cover;
   height: 500px;
+  max-width: 800px;
 }
 .contentpost{
   flex: 1;
   margin-left: 30px;
 }
 .infor-user-post{
-  margin-top: 20px;
+  margin-top: 50px;
   padding-bottom: 10px;
   display: flex;
   border-bottom: 2px solid #218EC2;
@@ -468,4 +485,19 @@
 .name-user-post{
   font-size: 20px;
   margin: auto 15px;
+}
+
+
+/* COMMENT*/
+.inputcomment input{
+  height: 80px;
+  width: 900px;
+}
+.commented{
+  border: black solid 1px;
+  width: 900px;
+  margin-top: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; 
 }

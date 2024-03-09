@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Work } from '../share/ListofWork';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import TestIcon from './TestIcon';
+import Comments from './Comments';
 export default function PostWork() {
   const { workId } = useParams();
   const selectedWork = Work.find(work => work.id === parseInt(workId));
@@ -12,6 +14,7 @@ export default function PostWork() {
   console.log(selectedWork)
 
 
+  
 
   return (
     <div className='poswork'>
@@ -31,13 +34,30 @@ export default function PostWork() {
           <div className='name-user-post'> {selectedWork.author}</div>
           </div>
           <div className='content-post-img'>
-            <div>{selectedWork.namework}</div>
-            <div>{selectedWork.description}</div>
+            <div>Name Work:{selectedWork.namework}</div>
+            <div>Description:{selectedWork.description}</div>
             <div>Tag:</div>
           </div>
 
         </div>
 
+      </div>
+      <TestIcon/>
+      <div>
+        <Comments/>
+      </div>
+      
+
+      <div className=''>
+
+
+
+
+
+
+
+
+        
       </div>
 
 
