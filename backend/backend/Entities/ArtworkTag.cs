@@ -4,12 +4,6 @@ namespace backend.Entities
 {
     public class ArtworkTag
     {
-<<<<<<< HEAD
-        public int ArtworkID { get; set; }
-        public Artworks Artwork { get; set; }
-        public int TagID { get; set; }
-        public Tags Tag { get; set; }
-=======
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -17,10 +11,5 @@ namespace backend.Entities
 
         public int ArtworkID { get; set; } // Khóa ngoại
         public int TagID { get; set; } // Khóa ngoại
-
-        
-
-
->>>>>>> Volka
     }
 }

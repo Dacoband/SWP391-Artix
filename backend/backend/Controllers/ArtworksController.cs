@@ -20,7 +20,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks
-    
+
     [HttpGet]
     public async Task<IActionResult> GetArtworks()
     {
@@ -60,12 +60,8 @@ public class ArtworksController : ControllerBase
                 Likes = a.Likes,
                 Purchasable = a.Purchasable,
                 Price = a.Price,
-<<<<<<< HEAD
-                ImageFile = a.ImageFile ?? null,
-=======
                 ImageFile = a.ImageFile,
                 ArtworkTag = a.ArtworkTag
->>>>>>> Volka
             })
             .FirstOrDefaultAsync(a => a.ArtworkID == id);
 
@@ -76,31 +72,9 @@ public class ArtworksController : ControllerBase
 
         return Ok(artwork);
     }
-<<<<<<< HEAD
-    // GET: api/Artworks/ByCreator/{Crid}
-    [HttpGet("ByCreator/{Crid}")]
-    public async Task<ActionResult<IEnumerable<Artworks>>> GetArtworkByCreatorID(int Crid)
-    {
-        var artworks = await _context.Artworks
-            .Where(a => a.CreatorID == Crid)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile ?? null,
-            })
-            .ToListAsync();
-=======
->>>>>>> Volka
 
     // POST: api/artworks
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
     {
@@ -197,37 +171,6 @@ public class ArtworksController : ControllerBase
         return Ok("Artwork updated successfully");
     }
 
-<<<<<<< HEAD
-    // DELETE: api/Artworks/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteArtwork(int id)
-    {
-        var artwork = await _context.Artworks.FindAsync(id);
-
-        if (artwork == null)
-        {
-            return NotFound(); // Return 404 if the artwork is not found
-        }
-
-        try
-        {
-           
-
-            _context.Artworks.Remove(artwork);
-            await _context.SaveChangesAsync();
-
-            return NoContent(); // Return 204 No Content upon successful deletion
-        }
-        catch (Exception ex)
-        {
-            // Handle any exception that might occur during deletion
-            return StatusCode(500, $"Internal Server Error: {ex.Message}");
-        }
-    }
-
-
-=======
->>>>>>> Volka
     private bool ArtworkExists(int id)
     {
         return _context.Artworks.Any(e => e.ArtworkID == id);
@@ -239,24 +182,7 @@ public class ArtworksController : ControllerBase
     {
         var topLikedArtworks = await _context.Artworks
             .OrderByDescending(a => a.Likes)
-<<<<<<< HEAD
-            .Take(1)
-            .Select(a => new Artworks
-            {
-                ArtworkID = a.ArtworkID,
-                CreatorID = a.CreatorID,
-                
-                ArtworkName = a.ArtworkName,
-                Description = a.Description,
-                DateCreated = a.DateCreated,
-                Likes = a.Likes,
-                Purchasable = a.Purchasable,
-                Price = a.Price,
-                ImageFile = a.ImageFile ?? null
-            })
-=======
             .Take(10)
->>>>>>> Volka
             .ToListAsync();
 
         if (topLikedArtworks == null || topLikedArtworks.Count == 0)
