@@ -29,7 +29,7 @@ public class CreatorController : ControllerBase
                 PaypalAccount = c.PaypalAccount,
                 UserName = c.UserName,
                 FollowerID = c.FollowerID, // Kiểm tra giá trị NULL trước khi gán
-                ProfilePicture = c.ProfilePicture != null ? (byte[])c.ProfilePicture : new byte[0], // Kiểm tra giá trị null trước khi gán
+                ProfilePicture = c.ProfilePicture, // Kiểm tra giá trị null trước khi gán
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Address = c.Address,
@@ -61,39 +61,36 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
-
+    
+    
     // POST: api/Creator
     [HttpPost]
-    public async Task<ActionResult<Creator>> PostCreator([FromBody] Creator creator)
+    public async Task<IActionResult> CreateArtwork([FromBody] Creator creatorModel)
     {
-        try
+        if (creatorModel == null)
         {
-            if (creator == null)
-            {
-                return BadRequest("Invalid data. Creator object is null.");
-            }
-
-            // Kiểm tra và xử lý mảng byte ProfilePicture nếu cần
-            if (Request.HasFormContentType && Request.Form.Files.Count > 0)
-            {
-                var file = Request.Form.Files[0];
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    await file.CopyToAsync(ms);
-                    creator.ProfilePicture = ms.ToArray();
-                }
-            }
-
-            _context.Creators.Add(creator);
-            await _context.SaveChangesAsync();
-
-            // Trả về đối tượng đã được tạo
-            return Ok(creator);
+            return BadRequest("Invalid data. Creator object is null.");
         }
-        catch (Exception ex)
+
+        // Xử lý tệp hình ảnh và lưu vào đối tượng Creator
+        if (creatorModel.ProfilePicture != null && creatorModel.ProfilePicture.Length > 0)
         {
-            return StatusCode(500, $"Internal Server Error: {ex.Message}");
+            using (MemoryStream ms = new MemoryStream())
+            {
+                await creatorModel.ProfilePicture.CopyToAsync(ms);
+
+                // Create a new instance of FormFile with the updated content
+                creatorModel.ProfilePicture = new FormFile(ms, 0, ms.Length,
+                                                            creatorModel.ProfilePicture.Name,
+                                                            creatorModel.ProfilePicture.FileName);
+            }
         }
+
+        _context.Creators.Add(creatorModel);
+        await _context.SaveChangesAsync();
+
+        // Trả về đối tượng đã được tạo
+        return Ok(creatorModel);
     }
 
 
