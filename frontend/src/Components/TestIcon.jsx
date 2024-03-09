@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,useContext } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
-
+import { ThemeContext } from './Themes/ThemeProvider.tsx';
 export default function TestIcon() {
+  const { theme } = useContext(ThemeContext);
   const [isClicked, setIsClicked] = useState(false);
   const spansRef = useRef([]);
 
@@ -40,7 +41,7 @@ export default function TestIcon() {
       {isClicked ? (
           <FavoriteIcon sx={{ fontSize: 35 }} style={{ color: '#ff1876' }} />
         ) : (
-          <FavoriteBorderIcon  sx={{ backgroundColor:"none",fontSize: 35, color: '#000' }} />
+          <FavoriteBorderIcon  sx={{ backgroundColor:"none",fontSize: 35}} />
         )}
         {/* <FavoriteIcon style={{ color: isClicked ? '#ff1876' : '#000'}} /> */}
         {Array.from({ length: 16 }).map((_, index) => (
@@ -48,7 +49,7 @@ export default function TestIcon() {
         ))} 
       </button><h4 className='addfavourite'>Add to Favourites</h4></div>
       <div className='button-comment'>
-        <button className='iconcomment' ><CommentIcon sx={{ fontSize: 35 }} style={{paddingTop:'5px',marginRight:'10px'}}/></button>
+        <button className='iconcomment' ><CommentIcon sx={{color:theme.color, fontSize: 35,paddingTop:'5px',marginRight:'5px'}}/></button>
         <h4 className='addfavourite'>Comment</h4>
       </div>
     </div>

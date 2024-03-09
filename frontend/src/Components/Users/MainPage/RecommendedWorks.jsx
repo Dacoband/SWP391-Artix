@@ -28,8 +28,10 @@ export default function RecommendedWords() {
     .then(list => {setrecommendedworkList(list)})
     .then(console.log(recommendedworkList))
     .then(
-          setIsLoading(!isLoading)
+          setIsLoading(!isLoading),
+          Sort()
     )
+
     .catch(error => {console.log(error)})
   },[])
 function Sort(){
@@ -45,7 +47,7 @@ function Sort(){
 
   return (
     <ImageList className='recommendedImages' cols={5} >
-      {Work.map((work) => (
+      {recommendedworkList.map((work) => (
         <Link to={`artwork/${work.id}`}>
         <CardActionArea key={work.ArtworkID}>
         <ImageListItem key={work.ArtworkID}>
@@ -59,7 +61,6 @@ function Sort(){
         </ImageListItem>
         </CardActionArea>
         </Link>
-
       ))}
     </ImageList>
 

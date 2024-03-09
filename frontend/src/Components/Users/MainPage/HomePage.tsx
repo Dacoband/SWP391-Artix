@@ -9,6 +9,7 @@ import { Work} from '../../../share/ListofWork.js'
 import { User } from '../../../Interfaces/UserInterface.ts';
 import { Typography } from '@mui/material';
 
+
 export default function HomePage() {
 // Attempt to retrieve the auth state from sessionStorage
 const savedAuth = sessionStorage.getItem('auth');

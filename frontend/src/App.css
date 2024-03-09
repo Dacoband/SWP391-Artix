@@ -52,7 +52,6 @@
 
 /* TESTICON */
 .hero{
-  margin-left: 100px;
   display: flex;
   /* width: 100%;
   height: 100vh; */
@@ -61,10 +60,9 @@
   /* justify-content: center; */
 }
 .btn{
- 
   display: inline-block;
   font-size: 18px;
-  padding: 10px 10px 3px 10px;
+  padding: 10px 3px 10px;
   background:none;
   /* color: #fff; */
 
@@ -179,7 +177,7 @@
 }
  
 .anim{
-  animation: moving 0.7s linear reverse forwards;
+  animation: moving 0.5s linear reverse forwards;
 }
 @keyframes moving {
   0%{
@@ -537,26 +535,33 @@ a{
 }
 .tabfavourites{
   display: flex;
-  justify-content: center;
- 
+  justify-content: center; 
 }
 
 
+/* Art Post */
 
-/* POSTWORK */
+.poswork{
+  border-radius: 5px;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  min-height: 90vh;
+  margin-bottom: 10vh;
+}
+
 .info-postwork{
   display: flex;
-  height: 560px;
-  padding-top: 10px;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-right: 2.5%;
+
 }
+
 .imgpost{
+  border-radius: 5px;
   height: 560px;
-  width: 900px;
+  width: 70%;
   display: flex;
   justify-content: center;
-  background-color:#F5F5F5 ;
+  background-color: ghostwhite ;
 
 }
 .imgpost img{
@@ -580,17 +585,23 @@ a{
   margin: auto 15px;
 }
 
-
 /* COMMENT*/
+.comment-section{
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
 .inputcomment input{
   height: 80px;
   width: 900px;
 }
 .commented{
-  border: black solid 1px;
-  width: 900px;
+  border: solid 1px;
+  width: 70%;
   margin-top: 20px;
-  padding: 10px;
+  padding-left: 10px;
   display: flex;
   flex-direction: column; 
 }
+
+/* End Art Post */

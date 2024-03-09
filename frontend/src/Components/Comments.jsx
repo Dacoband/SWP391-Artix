@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SendIcon from '@mui/icons-material/Send';
 import { useState } from 'react';
-
+import CustomizedButton from './StyledMUI/CustomizedButton.tsx'
+import CustomizedTextField from'./StyledMUI/CustomizedTextField.tsx'
+import { ThemeContext } from './Themes/ThemeProvider.tsx';
 
 // interface Comment{
 //   id:String;
@@ -34,7 +36,6 @@ export default function Comments() {
   const[comments,setComments]=useState(dummyComments);
   // const[commnetBody,setCommentBody]=useState("");
   const onComment = (newComment) =>{
-    
       setComments((prev) =>[newComment,...prev]);
       
   };
@@ -44,23 +45,15 @@ export default function Comments() {
       <h2>Comments</h2>
       <div className='inputcomment' >
           <CommentInput onComment={onComment}/>
-          
       </div>
       <div>
         {comments.map(comment =>(
-       
             <CommentItem comment={comment}/>
         ))}
-
       </div>
-
     </div>
   )
 };
-
-
-
-
 
 const CommentItem =({comment})=>{
   const [isReplying,setIsReplying]=useState(false);
@@ -70,25 +63,28 @@ const CommentItem =({comment})=>{
   const onComment =(newComment) =>{
     setComments((prev) =>[newComment,...prev]);
   };
+  const {theme} = useContext(ThemeContext)
   return(
-    <div className='commented'>
+    <div className='commented'
+      style={{borderColor:theme.color,}}
+    >
       <div>
       <span>{comment.body}</span>
       {isReplying?(
-         <Button 
+         <CustomizedButton 
          variant="contained"
          size="small"
          onClick={()=> setIsReplying(false)}>
           Cancel
-         </Button>
+         </CustomizedButton>
          ):(
-         <Button 
+         <CustomizedButton 
            variant="contained"
            size="small"
            onClick={()=> setIsReplying(true)}
            endIcon={<SendIcon />}>
             Reply
-           </Button>
+           </CustomizedButton>
            )}
         </div>
         <div>
@@ -103,23 +99,28 @@ const CommentItem =({comment})=>{
   )
 };
 
-
-// interface CommentInputProps{
-//   onComment:(newComment) =>void;
-// }
-
-
-
 const CommentInput = ({onComment}) =>{
   const[commnetBody,setCommentBody]=useState("");
   return(
-    <div>
-    <input
+    <div style={{
+      display:'flex',
+      flexDirection:'column',
+      width:'70%',
+      
+    }}>
+    <CustomizedTextField
+    style={{width:'100%',}}
     value={commnetBody}
     onChange={(event)=> setCommentBody(event.target.value)}
-    placeholder="What are your thoughts?"/>
-    <div>
-          <Button 
+    placeholder="Share your thoughts..."
+    />
+    <div style={{
+    display: 'flex', // Set this div as a flex container
+    justifyContent: 'flex-end', // Align its children (the button) to the end of the flex container (right side)
+    marginTop:"1%",
+  }}>
+          <CustomizedButton 
+          sx={{}}
            variant="contained"
            onClick={() => {
             onComment({ body: commnetBody,comments:[]});
@@ -127,11 +128,7 @@ const CommentInput = ({onComment}) =>{
           }}
            endIcon={<SendIcon />}>
             Send
-           </Button></div>
-    
-    
-    
-    
+           </CustomizedButton></div>
     </div>
   )
 }

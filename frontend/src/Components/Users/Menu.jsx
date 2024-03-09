@@ -24,7 +24,9 @@ export default function Menu() {
 
   const [isOpen, handleClick] = useHandleClick()
 
+  const disabledButtons = () => {
 
+  }
 
   function LoginButton() {
     return (
@@ -53,7 +55,7 @@ export default function Menu() {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {user === null ? <LoginButton /> : ""}
-              <Button onClick={user === null ? () => handleClick() : ""}
+              <Button onClick={user === null ? () => handleClick() : () => disabledButtons()}
                 color="inherit"><Link to={user ? "artworkform" : ""}>Publish Your Works</Link></Button>
               <CustomizedDropdown
                 handleClickAsGuest={handleClick}
