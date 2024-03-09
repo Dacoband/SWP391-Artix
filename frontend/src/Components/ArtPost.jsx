@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Work } from '../share/ListofWork';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-export default function ArtPost() {
-  const { id } = useParams();
-  const selectedWork = Work.find(work => work.id === parseInt(id));
+import TestIcon from './TestIcon';
+import Comments from './Comments';
+export default function PostWork() {
+  const { workId } = useParams();
+  const selectedWork = Work.find(work => work.id === parseInt(workId));
   if (!selectedWork) {
     return <div>Error</div>;
   }
@@ -28,11 +30,17 @@ export default function ArtPost() {
           <div className='name-user-post'> {selectedWork.author}</div>
           </div>
           <div className='content-post-img'>
-            <div>{selectedWork.namework}</div>
-            <div>{selectedWork.description}</div>
+            <div>Name Work:{selectedWork.namework}</div>
+            <div>Description:{selectedWork.description}</div>
             <div>Tag:</div>
           </div>
         </div>
+      </div>
+      <TestIcon/>
+      <div>
+        <Comments/>
+      </div>
+      <div className=''>
       </div>
     </div>
   )
