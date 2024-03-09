@@ -5,9 +5,10 @@ import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import TestIcon from './TestIcon';
 import Comments from './Comments';
+import Box from '@mui/material/Box';
 export default function PostWork() {
-  const { workId } = useParams();
-  const selectedWork = Work.find(work => work.id === parseInt(workId));
+  const { id } = useParams();
+  const selectedWork = Work.find(work => work.id === parseInt(id));
   if (!selectedWork) {
     return <div>Error</div>;
   }
@@ -17,7 +18,6 @@ export default function PostWork() {
       <div className='info-postwork'>
         <div className='imgpost'>
         <img src={selectedWork.img}/>
-
         </div>
         <div className='contentpost'>
           <div className='infor-user-post'>
@@ -36,10 +36,12 @@ export default function PostWork() {
           </div>
         </div>
       </div>
+      <Box>
       <TestIcon/>
       <div>
         <Comments/>
       </div>
+      </Box>
       <div className=''>
       </div>
     </div>

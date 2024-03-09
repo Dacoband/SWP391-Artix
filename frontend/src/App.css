@@ -29,8 +29,6 @@
   background-color: aliceblue;
 }
 
-
-
 .loadingscreen{
   position: fixed;
   display: flex;
@@ -39,82 +37,10 @@
   width: 100vw;
   height: 1000vh;
   z-index: 9999;
-
-
 }
-
 
 .loading{
   margin: auto; 
-
-
-}
-.button:active{
-  transform: scale(0.96);
-}
-.button::before,
-.button::after{
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 100%;
-  width: 150%;
-  /* z-index: -1; */
-  background-repeat: no-repeat;
-}
-.button.animate::before{
-  top:-70%;
-  background-image: radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,transparent 20% ,#7d2ea8 20%,transparent 30%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,transparent 10%, #7d2ea8 15%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%)
-  ;
-  background-size: 10% 10%,20% 20%,15% 15%,20% 20%, 18% 18%,10% 10%,15% 15%,10% 10%, 18% 18%;
-  background-position: 5% 90%, 10% 90%, 10% 90%, 15% 90%, 25% 90%, 25% 90%,40% 90%, 55% 90%, 70% 90%;
-  animation: topBubbles 0.6s ease-in-out forwards;
- }
- @keyframes topBubbles{
-  50%{
-    background-position: 0% 80%, 0% 20%,10% 40%,20% 0%,30% 30% 22% 50%,
-    50% 50%, 65% 20%, 90% 30%;
-  }
-  100%{
-    background-position:0% 70%,0% 10%, 10% 30%,20% -10%,30% 20%,22% 40%,
-    50% 40%,65% 10%,90% 20% ;
-    background-size:0% 0% , 0% 0%,0% 0% , 0% 0%,0% 0% , 0% 0% ;
-  }
-  
- }
-.button.animate::after{
-  bottom: -70%;
-  background-image: radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,transparent 10%, #7d2ea8 15%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%),
-  radial-gradient(circle,#7d2ea8 20%,transparent 20%)
-  ;
-  background-size: 15% 15%,20% 20%, 18% 18%,20% 20%, 15% 15%, 20% 20%,18% 18%;
-  background-position: 10% 0%,30% 10%, 55% 0%,70% 0%,85% 0%,70% 0%, 70% 0%;
-  animation: bottomBubbles 0.6s ease-in-out forwards;
-}
-@keyframes bottomBubbles {
-  50%{
-    background-position:0% 80%,20% 80%, 45% 60%,60% 100%, 75% 70% ,95% 60%,
-    105% 0% ;
-  }
-  100%{
-    background-position: 0% 90%, 20% 90%, 45% 70%, 60% 110%, 75% 80%, 95% 70%,
-    110% 10%;
-    background-size:0% 0% , 0% 0%,0% 0% , 0% 0%,0% 0% , 0% 0% ;
-  }
-  
 }
 
 
@@ -122,12 +48,158 @@
   margin-left: 2vw;
   width: 82px;
   height: 32px;
+}
+
+/* TESTICON */
+.hero{
+  margin-left: 100px;
+  display: flex;
+  /* width: 100%;
+  height: 100vh; */
+  /* display: flex ; */
+  align-items: center;
+  /* justify-content: center; */
+}
+.btn{
+ 
+  display: inline-block;
+  font-size: 18px;
+  padding: 10px 10px 3px 10px;
+  background:none;
+  /* color: #fff; */
+
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  
+  transition: box-shadow 0.25s;
+  z-index: 2;
+}
+.btn:active{
+  transform: scale(0.96);
+  color: #ff1876;
+
+}
+.btn span{
+  background: #ff1876;
+  border: 1px solid #ff1876 ;
+  width: 5px;
+  height: 5px;
+  border-radius: 50px;
+  position: absolute;
+  /* z-index: -1; */
+  transform:scale(0);
+ 
+}
+.btn span:nth-child(1){
+  top:-80%;
+  left: -200%;
+}
+.btn span:nth-child(2){
+  top:10%;
+  left: -10%;
+  background: transparent;
+}
+.btn span:nth-child(3){
+  top:80%;
+  left:0%;
+  
+}
+
+
+.btn span:nth-child(4){
+  top:30%;
+  left: -20%;}
+  
+.btn span:nth-child(5){
+  top:50%;
+  left: -10%;
+  background: transparent;
+}
+
+
+.btn span:nth-child(6){
+  top:-20%;
+  left: 20%;
+  background: transparent;
+}
+.btn span:nth-child(7){
+  top:-20%;
+  left: 50%;
+  
+}
+.btn span:nth-child(8){
+  top:-20%;
+  left: 75%;
+  background: transparent;
+}
+.btn span:nth-child(9){
+  top:0%;
+  left: 90%;
+}
+.btn span:nth-child(10){
+  top:20%;
+  left: 100%;
+  background: transparent;
+}
+
+.btn span:nth-child(11){
+  top:40%;
+  left: 100%;
+
+}.btn span:nth-child(12){
+  top:60%;
+  left: 90%;
+ background: transparent;
+}
+
+
+.btn span:nth-child(13){
+  top:85%;
+  left: 80%;
+
+
+
+}.btn span:nth-child(14){
+  top:90%;
+  left: 60%;
+  background: transparent;
+
+}.btn span:nth-child(15){
+  top:100%;
+  left: 35%;
+
+}.btn span:nth-child(16){
+  top:100%;
+  left: 10%;
+  background: transparent;
+  
+}
+ 
+.anim{
+  animation: moving 0.7s linear reverse forwards;
+}
+@keyframes moving {
+  0%{
+    transform: scale(0);
+  }
+  10%{
+    transform: scale(1 );
+
+  }
+  100%{
+    top:50%;
+    left: 50%;
+  }
 
 }
 .button-favourite{
   display: flex;
   align-items: center;
 }
+
 .iconcomment{
   margin-left: 30px;
   border: none;
@@ -138,11 +210,9 @@
   display: flex;
   align-items: center;
 }
-
+/* END TESTICON */
 
 /* HomePage */
-
-
 .homepage{
   display: flex;
   flex-direction: column;
@@ -477,7 +547,7 @@ a{
 .info-postwork{
   display: flex;
   height: 560px;
-  margin-top: 50px;
+  padding-top: 10px;
   margin-left: 100px;
   margin-right: 100px;
 }
