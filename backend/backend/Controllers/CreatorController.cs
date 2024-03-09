@@ -22,8 +22,31 @@ public class CreatorController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Creator>>> GetCreators()
     {
-        return await _context.Creators.ToListAsync();
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                PaypalAccount = c.PaypalAccount,
+                UserName = c.UserName,
+                FollowerID = c.FollowerID, // Kiểm tra giá trị NULL trước khi gán
+                ProfilePicture = c.ProfilePicture != null ? (byte[])c.ProfilePicture : new byte[0], // Kiểm tra giá trị null trước khi gán
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Address = c.Address,
+                Phone = c.Phone,
+                LastLogDate = c.LastLogDate,
+                AllowCommission = c.AllowCommission
+                // Các thuộc tính khác...
+            })
+            .ToListAsync();
+
+        return creators;
     }
+
+
+
+
+
 
     // GET: api/Creator/5
     [HttpGet("{id}")]
@@ -41,13 +64,39 @@ public class CreatorController : ControllerBase
 
     // POST: api/Creator
     [HttpPost]
-    public async Task<ActionResult<Creator>> PostCreator(Creator creator)
+    public async Task<ActionResult<Creator>> PostCreator([FromBody] Creator creator)
     {
-        _context.Creators.Add(creator);
-        await _context.SaveChangesAsync();
+        try
+        {
+            if (creator == null)
+            {
+                return BadRequest("Invalid data. Creator object is null.");
+            }
 
-        return CreatedAtAction(nameof(GetCreator), new { id = creator.CreatorID }, creator);
+            // Kiểm tra và xử lý mảng byte ProfilePicture nếu cần
+            if (Request.HasFormContentType && Request.Form.Files.Count > 0)
+            {
+                var file = Request.Form.Files[0];
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    await file.CopyToAsync(ms);
+                    creator.ProfilePicture = ms.ToArray();
+                }
+            }
+
+            _context.Creators.Add(creator);
+            await _context.SaveChangesAsync();
+
+            // Trả về đối tượng đã được tạo
+            return Ok(creator);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Internal Server Error: {ex.Message}");
+        }
     }
+
+
 
     // PUT: api/Creator/5
     [HttpPut("{id}")]

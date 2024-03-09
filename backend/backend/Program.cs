@@ -23,7 +23,12 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         builder.Services.AddDbContext<ApplicationDbContext>();
-
+        builder.Services.AddLogging(logging =>
+        {
+            logging.AddConsole();
+            logging.AddDebug();
+            // Thêm các cấu hình logging khác nếu cần
+        });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -44,4 +49,5 @@ public class Program
 
         app.Run();
     }
+   
 }

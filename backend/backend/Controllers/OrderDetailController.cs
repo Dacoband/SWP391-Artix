@@ -21,14 +21,14 @@ public class OrderDetailController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetails()
     {
-        return await _context.OrderDetails.ToListAsync();
+        return await _context.OrderDetail.ToListAsync();
     }
 
     // GET: api/OrderDetail/5
     [HttpGet("{orderId}/{artworkId}")]
     public async Task<ActionResult<OrderDetail>> GetOrderDetail(int orderId, int artworkId)
     {
-        var orderDetail = await _context.OrderDetails.FindAsync(orderId, artworkId);
+        var orderDetail = await _context.OrderDetail.FindAsync(orderId, artworkId);
 
         if (orderDetail == null)
         {
@@ -42,7 +42,7 @@ public class OrderDetailController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<OrderDetail>> PostOrderDetail(OrderDetail orderDetail)
     {
-        _context.OrderDetails.Add(orderDetail);
+        _context.OrderDetail.Add(orderDetail);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetOrderDetail), new { orderId = orderDetail.OrderID, artworkId = orderDetail.ArtWorkID }, orderDetail);
@@ -52,13 +52,13 @@ public class OrderDetailController : ControllerBase
     [HttpDelete("{orderId}/{artworkId}")]
     public async Task<IActionResult> DeleteOrderDetail(int orderId, int artworkId)
     {
-        var orderDetail = await _context.OrderDetails.FindAsync(orderId, artworkId);
+        var orderDetail = await _context.OrderDetail.FindAsync(orderId, artworkId);
         if (orderDetail == null)
         {
             return NotFound();
         }
 
-        _context.OrderDetails.Remove(orderDetail);
+        _context.OrderDetail.Remove(orderDetail);
         await _context.SaveChangesAsync();
 
         return NoContent();

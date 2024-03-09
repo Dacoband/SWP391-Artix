@@ -6,11 +6,10 @@ namespace backend.Entities
     public class Creator
     {
         [Key]
-        public int CreatorID { get; set; } // PK
-        public int FollowID { get; set; } // FK
-        public int PaypalAccount { get; set; } // FK
+        public int? CreatorID { get; set; } // PK
+        public int? PaypalAccount { get; set; } // FK
         public string UserName { get; set; }
-        public double Follower { get; set; }
+        public int? FollowerID { get; set; } // FK
         public byte[] ProfilePicture { get; set; } // Có thể 
         public string FirstName { get; set; }
         public string LastName { get; set; }
