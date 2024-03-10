@@ -21,6 +21,8 @@ namespace backend.Entities
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Moderators> Moderators { get; set; }
+
+        public DbSet<ArtworkTag> ArtworkTag { get; set; }
         public DbSet<Artworks> Artworks { get; set; }
         public DbSet<Comments> Comments { get; set; }
         public DbSet<Report> Reports { get; set; }
@@ -32,27 +34,25 @@ namespace backend.Entities
         public DbSet<Commission> Commission { get; set; }
         public DbSet<CommissionForm> CommissionForm { get; set; }
         // Thêm DbSet cho các bảng khác nếu cần
-
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            // Kết nối đến MySQL với chuỗi kết nối từ cài đặt ứng dụng
+            // connect to mysql with connection string from app settings
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Artworks>()
-       .HasMany(a => a.ArtworkTags)
-       .WithOne(at => at.Artwork)
-       .HasForeignKey(at => at.ArtworkID);
+            .Ignore(a => a.ImageFile);
+            modelBuilder.Entity<Creator>()
+            .Ignore(c => c.ProfilePicture);
 
             modelBuilder.Entity<ArtworkTag>()
-                .HasKey(at => new { at.ArtworkID, at.TagID });
+            .HasKey(t => new { t.ArtworkID, t.TagID });
 
-            
+            // ... Các cấu hình khác
+
             base.OnModelCreating(modelBuilder);
-            // Cấu hình các mối quan hệ, index, constraints nếu cần
         }
     }
-}
+    }

@@ -16,6 +16,7 @@ public class AccountController : ControllerBase
     {
         _context = context;
     }
+    
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Account>>> GetAccount()
     {
@@ -121,7 +122,20 @@ public class AccountController : ControllerBase
         return NoContent();
     }
 
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAccount(int id)
+    {
+        var account = await _context.Account.FindAsync(id);
+        if (account == null)
+        {
+            return NotFound();
+        }
 
+        _context.Account.Remove(account);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
 
     private bool AccountExists(int id)
     {
