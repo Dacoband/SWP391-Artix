@@ -408,9 +408,9 @@ a{
 
 /* Profile */
 /* styles.css */
+
 .headeruser {
-  
-  width: 100%;
+  width: 100vw;
   height: 435px; 
   overflow: hidden;
 }
@@ -433,6 +433,7 @@ a{
 .avataruser{
   position: relative;
   display: inline-block;}
+
 .avataruser img{
   width: 170px;
   height: 170px;
@@ -461,7 +462,6 @@ a{
 }
 .infouser1{
   display: flex;
- 
   height:90px ;
   justify-content: space-between;
   
@@ -478,6 +478,25 @@ a{
   margin-top: 25px;
   display: flex;
 }
+
+/* Navigation Tabs */
+
+.tabsBackground{
+  width: 100%;
+  min-width: 800px;
+  height: auto;
+  margin-bottom: 5%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+.inforuser2{
+  display: flex;
+  width: 90%;
+}
+
 .navofuser{
   display: flex;
   justify-content: space-between;
@@ -491,10 +510,7 @@ a{
 }
 .boxintroduct{
   margin: auto;
-
-  
   height: auto;
-
   width: 80%;
 
 }
@@ -515,14 +531,24 @@ a{
 }
 .tabhome{
   display: flex;
-  justify-content: center;
-  padding-bottom: 10px;
+  justify-content: space-between;
+  height: auto;
   
 }
 .biouser{
-  margin-right: 40px;
-  margin-top: 22px;
+  margin-right: 5%;
+  position: 'sticky';
 }
+
+.workofuser{
+  display: flex;
+  max-width: 100vw;
+  max-height: 100vh;
+  width: 1000px;
+  height: 650px;
+  overflow: auto;
+}
+
 .head-workofuser{
   margin-bottom: 20px;
 }
@@ -605,3 +631,4 @@ a{
 }
 
 /* End Art Post */
+
