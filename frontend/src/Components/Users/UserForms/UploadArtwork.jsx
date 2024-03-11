@@ -151,10 +151,13 @@ function UploadArtwork() {
                 .then(response => response.data)
                 .then(data => console.log(data))
                 .catch(err => console.error(err))
-            
+
         },
-        
-        
+        validationSchema: Yup.object({
+            artworkName: Yup.string().required("NAME! I want a name! Please..."),
+            description: Yup.string().required("What? Tell me more about your work."),
+            imageFile: Yup.mixed().required("Where the image, mate?"),
+        }),
     })
     return (
         <>
@@ -238,11 +241,11 @@ function UploadArtwork() {
                                                             onBlur={formik.handleBlur}
                                                         >
                                                             {ListTag.map((tag) => {
-                                                                return(
-                                                                <MenuItem
-                                                                    key={tag.id} value={tag.id}>
-                                                                    {tag.nameTag}
-                                                                </MenuItem>
+                                                                return (
+                                                                    <MenuItem
+                                                                        key={tag.id} value={tag.id}>
+                                                                        {tag.nameTag}
+                                                                    </MenuItem>
                                                                 )
                                                             })}
 
