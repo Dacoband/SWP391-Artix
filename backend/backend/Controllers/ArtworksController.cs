@@ -74,12 +74,12 @@ public class ArtworksController : ControllerBase
     }
 
     // POST: api/artworks
-
     [HttpPost]
     public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
     {
         using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
         {
+
             // Kiểm tra xem CreatorID có tồn tại không
             if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
             {
