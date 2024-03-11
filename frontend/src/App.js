@@ -28,6 +28,7 @@ function App() {
             </Route>
           <Route path="/characters/*" element={<Users/>}>
           </Route>
+          
         </Routes>
     </div>
   );

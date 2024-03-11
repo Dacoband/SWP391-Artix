@@ -8,7 +8,7 @@ import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
 import { Work} from '../../../share/ListofWork.js'
 import { User } from '../../../Interfaces/UserInterface.ts';
 import { Typography } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 export default function HomePage() {
 // Attempt to retrieve the auth state from sessionStorage
 const savedAuth = sessionStorage.getItem('auth');
@@ -24,7 +24,7 @@ useEffect(() => {
   return (
     <Box className='homepage'>
       <div className='carouseltag'>
-        <div className='seemore'>See More</div>
+        {/* <div className='seemore'>See More</div> */}
         <CarouselTag />
       </div>
       <Box
@@ -40,7 +40,10 @@ useEffect(() => {
         < div className='recommendedwork'>
           <div className='headrecommended'>
             <Typography variant='h5'>Recommended Works  {user?.email_verified ? `For You, ${user.name}`:"From The Community"}</Typography>
-            <div className='seemore'>See More</div></div>
+            <Link to={`artwordrecomment`}>
+            <div className='seemore'>See More</div>
+            </Link>
+            </div>
 
           <div className='recommendedimg'>
             <RecommendedWorks /></div>
@@ -49,7 +52,8 @@ useEffect(() => {
         <div className='recommendedusers'>
           <div className='headrecommended'>
             <Typography variant='h5'>Recommended Users</Typography>
-            <div className='seemore'>See More</div>
+            <Link to={`userrecomment`}>
+            <div className='seemore'>See More</div></Link>
             </div>
           <div>
             <RecommendedUsers />
@@ -59,7 +63,8 @@ useEffect(() => {
         <div className='Randomimg'>
           <div className='headrecommended'>
           <Typography variant='h5'>Random Artworks, GO!!!</Typography>
-            <div className='seemore'>See More</div></div>
+          <Link to={`randomword`}>
+            <div className='seemore'>See More</div></Link></div>
           <div className='foryouimg'>
             <ImgForyou />
           </div>

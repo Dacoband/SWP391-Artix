@@ -1,0 +1,24 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột có kích thước bằng nhau */
+    grid-gap: 15px; /* Khoảng cách giữa các card */
+    margin: 20px 110px;
+}
+.grid-container .MuiCard-root {
+    width: 100%;
+}
+.infouser{
+    display: flex;
+}
+.avartar img{
+    /* border-radius: 100%; */
+    /* transform: translateY(-40%); */
+    /* margin-left: 100px; */
+    outline: 4px solid #fff;
+    position: relative;
+    z-index: 2;
+    object-fit: cover;
+}
+.avartar{
+    transform: translateY(-40%);
+}

@@ -12,7 +12,9 @@ import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.jsx';
 import ProfileUser from './ProfileUser.jsx';
 import ArtPost from '../ArtPost.jsx';
-
+import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
+import SeeMoreUser from './SeeMoreUser.jsx';
+import SeeMoreForYou from './SeeMoreForYou.jsx';
 export default function Users() {
   return (
     <div>
@@ -26,6 +28,10 @@ export default function Users() {
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
           <Route path={`profile/:id`} element={<ProfileUser />}/>
           <Route path={`artwork/:id`} element={<ArtPost />}/>
+          <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
+          <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
+          <Route path={`randomword`} element={<SeeMoreForYou/>}/>
+          
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
