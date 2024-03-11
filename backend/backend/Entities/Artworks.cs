@@ -6,7 +6,6 @@ namespace backend.Entities
         [Key]
         public int ArtworkID { get; set; } // PK
         public int CreatorID { get; set; } // FK
-
         public string ArtworkName { get; set; } // FK
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
