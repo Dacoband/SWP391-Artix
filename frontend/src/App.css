@@ -364,13 +364,17 @@
 
 }
 
+/* Artwork Create Form */
+
 .form{
   padding-top: 2%;
   padding-bottom: 5%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .userInfoForm{
-  width: 60vw;
+  width: 85vw;
   border-radius: 5px;
   min-width: 400px;
   margin: auto;
@@ -378,12 +382,29 @@
   padding-left: 5%;
   padding-right: 5%;
   padding-bottom: 2%;
-
+  height: auto;
+  
 }
+
+.artTextField{
+  width: 80%;
+  margin-bottom: 2%;
+}
+
 
 a{
   text-decoration: none;
   color: inherit;
+}
+
+.tagAndpreviewBox{
+  display: flex;
+  flex-direction: row;
+}
+
+.tagField{
+  width: 50%;
+  margin-left: 5%;
 }
 
 .tagHolder::-webkit-scrollbar {
@@ -397,13 +418,18 @@ a{
 }
 
 .previewImage{
-  height: 300px;
-  width: 300px;
+  max-width: 500px;
+  width: auto;
+  height: auto;
+  min-height: 350px;
+  min-width: 350px;
   object-fit: fill;
-  float: right;
+  border-radius: 5px;
 }
 
 
+
+/* End Artwork Form */
 
 
 /* Profile */
