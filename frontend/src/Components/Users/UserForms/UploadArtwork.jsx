@@ -131,12 +131,17 @@ function UploadArtwork() {
             purchasable: false,
             price: 0,
             imageFile: preview,
-            artworkTag: []
+            artworkTag: [ {
+                "artworkTagID": 0,
+                "artworkID": 0,
+                "tagID": 0
+              },]
         },
         onSubmit: (values) => {
             const time = new Date()
             values.dateCreated = time.toISOString()
-            values.imageFile = blobImage
+            values.imageFile = blobImage.split(',')[1]; 
+            // Split Data URL Base64 (data:image/jpeg,base64) => (base64)
             values.price = artForm.Price
             values.purchasable = artForm.Purchasable
             axios.post(url, values)
@@ -168,7 +173,7 @@ function UploadArtwork() {
                             fullWidth
                         />
 
-                        {formik.errors.imageFile && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
+                        {formik.errors.imageFile && (<Typography variant="body2" color="red">{formik.errors.imageFile}</Typography>)}
                         <div className='allFieldForm'>
                             <Box className="textFieldBox">
                                 <div className='artTextField' style={{ marginBottom: '2%' }}>
@@ -179,7 +184,7 @@ function UploadArtwork() {
                                         onChange={formik.handleChange}
                                         fullWidth
                                     />
-                                    {formik.errors.artworkName && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
+                                    {formik.errors.artworkName && (<Typography variant="body2" color="red">{formik.errors.artworkName}</Typography>)}
                                 </div>
                                 <div className='artTextField'>
                                     <CustomizedTextField
@@ -191,7 +196,7 @@ function UploadArtwork() {
                                         fullWidth
                                         rows={4}
                                     />
-                                    {formik.errors.description && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
+                                    {formik.errors.description && (<Typography variant="body2" color="red">{formik.errors.description}</Typography>)}
                                 </div>
                             </Box>
                             <Box className="priceBox"

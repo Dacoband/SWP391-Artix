@@ -95,9 +95,9 @@ public class ArtworksController : ControllerBase
                     artwork.ImageFile = Convert.ToBase64String(imageBytes); // Chuyển đổi trở lại chuỗi Base64 nếu muốn giữ nguyên
                     // Lưu imageBytes vào cơ sở dữ liệu hoặc thực hiện các bước xử lý khác tùy thuộc vào yêu cầu của bạn
                 }
-                catch (FormatException)
+                catch (FormatException e)
                 {
-                    return BadRequest("Định dạng hình ảnh không hợp lệ");
+                    return BadRequest("Định dạng hình ảnh không hợp lệ:\n"+ e);
                 }
             }
 
