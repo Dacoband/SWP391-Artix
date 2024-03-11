@@ -73,48 +73,56 @@ public class ArtworksController : ControllerBase
         return Ok(artwork);
     }
 
+    //// POST: api/Artworks
+    //[HttpPost]
+    //public async Task<ActionResult<Artworks>> PostComment(Artworks Artwork)
+    //{
+    //    _context.Artworks.Add(Artwork);
+    //    await _context.SaveChangesAsync();
+
+    //    return CreatedAtAction(nameof(GetArtwork), new { id = Artwork.ArtworkID }, Artwork);
+    //}
+
     // POST: api/artworks
     [HttpPost]
-    public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
+    public async Task<IActionResult> CreateArtwork(Artworks artwork)
     {
-        using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+        using var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+        // Kiểm tra xem CreatorID có tồn tại không
+        if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
         {
-
-            // Kiểm tra xem CreatorID có tồn tại không
-            if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
-            {
-                return BadRequest("CreatorID không tồn tại");
-            }
-
-            // Kiểm tra xem TagID có tồn tại không
-            if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
-            {
-                var invalidTagIds = artwork.ArtworkTag
-                    .Where(at => !_context.Tags.Any(t => t.TagID == at.TagID))
-                    .Select(at => at.TagID)
-                    .ToList();
-
-                if (invalidTagIds.Any())
-                {
-                    return BadRequest($"TagID không tồn tại: {string.Join(", ", invalidTagIds)}");
-                }
-            }
-
-            // Thêm artwork vào cơ sở dữ liệu
-            _context.Artworks.Add(artwork);
-            await _context.SaveChangesAsync();
-
-            // Thêm ArtworkTag vào cơ sở dữ liệu
-            foreach (var artworkTag in artwork.ArtworkTag)
-            {
-                // Không cần thiết lập ArtworkID vì nó sẽ tự động tăng
-                _context.ArtworkTag.Add(artworkTag);
-            }
-
-            await _context.SaveChangesAsync();
-            scope.Complete();
-            return Ok("Artwork created successfully");
+            return BadRequest("CreatorID không tồn tại");
         }
+
+        // Kiểm tra xem TagID có tồn tại không
+        if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
+        {
+            var invalidTagIds = artwork.ArtworkTag
+                .Where(at => !_context.Tags.Any(t => t.TagID == at.TagID))
+                .Select(at => at.TagID)
+                .ToList();
+
+            if (invalidTagIds.Any())
+            {
+                return BadRequest($"TagID không tồn tại: {string.Join(", ", invalidTagIds)}");
+            }
+        }
+
+        // Thêm artwork vào cơ sở dữ liệu
+        _context.Artworks.Add(artwork);
+        await _context.SaveChangesAsync();
+
+        // Thêm ArtworkTag vào cơ sở dữ liệu
+        foreach (var artworkTag in artwork.ArtworkTag)
+        {
+            // Không cần thiết lập ArtworkID vì nó sẽ tự động tăng
+            _context.ArtworkTag.Add(artworkTag);
+        }
+
+        await _context.SaveChangesAsync();
+        scope.Complete();
+        return Ok("Artwork created successfully");
     }
 
 
