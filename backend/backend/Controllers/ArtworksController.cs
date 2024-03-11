@@ -86,6 +86,7 @@ public class ArtworksController : ControllerBase
                 return BadRequest("CreatorID không tồn tại");
             }
 
+<<<<<<< HEAD
             // Chuyển đổi ImageFile thành mảng byte từ chuỗi Base64
             if (!string.IsNullOrEmpty(artwork.ImageFile))
             {
@@ -101,6 +102,8 @@ public class ArtworksController : ControllerBase
                 }
             }
 
+=======
+>>>>>>> Main
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
             {
@@ -119,10 +122,15 @@ public class ArtworksController : ControllerBase
             _context.Artworks.Add(artwork);
             await _context.SaveChangesAsync();
 
+            // Lưu trữ ArtworkID đã được tạo tự động
+            var artworkId = artwork.ArtworkID;
+
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
             {
-                // Không cần thiết lập ArtworkID vì nó sẽ tự động tăng
+                // Thiết lập ArtworkID với giá trị đã được tạo tự động
+                artworkTag.ArtworkID = artworkId;
+
                 _context.ArtworkTag.Add(artworkTag);
             }
 
