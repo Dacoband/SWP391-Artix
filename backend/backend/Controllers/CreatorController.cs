@@ -61,28 +61,29 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
-    
-    
+
+
     // POST: api/Creator
     [HttpPost]
-    public async Task<IActionResult> CreateArtwork([FromBody] Creator creatorModel)
+    public async Task<IActionResult> CreateCreator([FromBody] Creator creatorModel)
     {
         if (creatorModel == null)
         {
             return BadRequest("Invalid data. Creator object is null.");
         }
 
-        // Xử lý tệp hình ảnh và lưu vào đối tượng Creator
-        if (creatorModel.ProfilePicture != null && creatorModel.ProfilePicture.Length > 0)
+        // Kiểm tra xem tệp hình ảnh có giá trị không
+        if (!string.IsNullOrEmpty(creatorModel.ProfilePicture))
         {
-            using (MemoryStream ms = new MemoryStream())
+            try
             {
-                await creatorModel.ProfilePicture.CopyToAsync(ms);
-
-                // Create a new instance of FormFile with the updated content
-                creatorModel.ProfilePicture = new FormFile(ms, 0, ms.Length,
-                                                            creatorModel.ProfilePicture.Name,
-                                                            creatorModel.ProfilePicture.FileName);
+                // Thực hiện xử lý kiểm tra và chuyển đổi dữ liệu Base64 nếu cần
+                byte[] imageBytes = Convert.FromBase64String(creatorModel.ProfilePicture);
+                // Lưu imageBytes vào cơ sở dữ liệu hoặc thực hiện các bước xử lý khác tùy thuộc vào yêu cầu của bạn
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Định dạng hình ảnh không hợp lệ");
             }
         }
 
@@ -92,7 +93,6 @@ public class CreatorController : ControllerBase
         // Trả về đối tượng đã được tạo
         return Ok(creatorModel);
     }
-
 
 
     // PUT: api/Creator/5

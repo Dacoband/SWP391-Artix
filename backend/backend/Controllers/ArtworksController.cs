@@ -86,6 +86,21 @@ public class ArtworksController : ControllerBase
                 return BadRequest("CreatorID không tồn tại");
             }
 
+            // Chuyển đổi ImageFile thành mảng byte từ chuỗi Base64
+            if (!string.IsNullOrEmpty(artwork.ImageFile))
+            {
+                try
+                {
+                    byte[] imageBytes = Convert.FromBase64String(artwork.ImageFile);
+                    artwork.ImageFile = Convert.ToBase64String(imageBytes); // Chuyển đổi trở lại chuỗi Base64 nếu muốn giữ nguyên
+                    // Lưu imageBytes vào cơ sở dữ liệu hoặc thực hiện các bước xử lý khác tùy thuộc vào yêu cầu của bạn
+                }
+                catch (FormatException)
+                {
+                    return BadRequest("Định dạng hình ảnh không hợp lệ");
+                }
+            }
+
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
             {
@@ -116,6 +131,7 @@ public class ArtworksController : ControllerBase
             return Ok("Artwork created successfully");
         }
     }
+
 
 
     // PUT: api/artworks/{id}
