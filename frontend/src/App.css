@@ -369,8 +369,6 @@
 .form{
   padding-top: 2%;
   padding-bottom: 5%;
-  display: flex;
-  justify-content: space-between;
 }
 
 .userInfoForm{
@@ -383,14 +381,42 @@
   padding-right: 5%;
   padding-bottom: 2%;
   height: auto;
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.allFieldForm{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 2%;
+}
+
+.textFieldBox{
+  width: 70%;
 }
 
 .artTextField{
   width: 80%;
-  margin-bottom: 2%;
 }
 
+.priceBox{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: -2%;
+  border: solid 1px;
+  border-radius: 5px;
+
+}
+
+
+.priceField{
+  width: 100%;
+}
 
 a{
   text-decoration: none;
@@ -400,11 +426,11 @@ a{
 .tagAndpreviewBox{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
 }
 
 .tagField{
   width: 50%;
-  margin-left: 5%;
 }
 
 .tagHolder::-webkit-scrollbar {
@@ -426,8 +452,6 @@ a{
   object-fit: fill;
   border-radius: 5px;
 }
-
-
 
 /* End Artwork Form */
 

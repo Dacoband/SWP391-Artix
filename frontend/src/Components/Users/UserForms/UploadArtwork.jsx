@@ -11,7 +11,7 @@ import CustomizedTypography from '../../StyledMUI/CustomizedTypography.jsx'
 import CustomizedSelect from '../../StyledMUI/CustomizedSelect.jsx'
 import CustomizedImageButton from '../../StyledMUI/CustomizedImageButton.jsx'
 import * as Yup from 'yup';
-import { useFormik, FieldArray } from 'formik'; // useFormik instead of a custom handleChange event
+import { useFormik, FieldArray, FormikProvider } from 'formik'; // useFormik instead of a custom handleChange event
 import axios from 'axios';
 import {
     FormControlLabel,
@@ -108,12 +108,16 @@ function UploadArtwork() {
 
     const handlePriceVisibility = () => {
         return artForm.Purchasable && (
-            <CustomizedTextField
-                name="price"
-                label="Price"
-                value={artForm.Price}
-                onChange={formik.handleChange}
-            />
+            <div className='priceField'>
+                <CustomizedTextField
+                    sx={{ float: 'right' }}
+                    name="price"
+                    label="Price"
+                    value={artForm.Price}
+                    onChange={formik.handleChange}
+                    fullWidth
+                />
+            </div>
         );
     };
     useEffect(() => {
@@ -147,17 +151,16 @@ function UploadArtwork() {
                 .then(response => response.data)
                 .then(data => console.log(data))
                 .catch(err => console.error(err))
+            
         },
-        validationSchema: {
-            artworkName: Yup.string().required("NAME! I want a name! Please..."),
-            description: Yup.string().required("What? Tell me more about your work."),
-            imageFile: Yup.mixed().required("Where the image, mate?"),
-        }
+        
+        
     })
     return (
         <>
+
             <div className='form'>
-                <div className='userInfoForm' style={{ backgroundColor: `rgba(${theme.rgbBackgroundColor},0.9)` }}>
+                <div className='userInfoForm' style={{ backgroundColor: `rgba(${theme.rgbBackgroundColor},0.95)` }}>
                     <form onSubmit={formik.handleSubmit}>
                         <CustomizedTypography variant="h4" component="h2" gutterBottom>
                             Share Us Your Creation
@@ -171,85 +174,113 @@ function UploadArtwork() {
                         />
 
                         {formik.errors.imageFile && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
-
-                        {handlePriceVisibility()}
-                        <FormControlLabel
-                            sx={{ color: theme.color, marginLeft: '', float: 'right' }}
-                            control={
-                                <CustomizedSwitch
-                                    checked={artForm.Purchasable}
-                                    onChange={handleSwitchChange}
-                                    name="Purchasable"
+                        <div className='allFieldForm'>
+                            <Box className="textFieldBox">
+                                <div className='artTextField' style={{ marginBottom: '2%' }}>
+                                    <CustomizedTextField
+                                        name="artworkName"
+                                        label="Give Your Amazing Art A Name"
+                                        value={artForm.ArtworkName}
+                                        onChange={formik.handleChange}
+                                        fullWidth
+                                    />
+                                    {formik.errors.artworkName && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
+                                </div>
+                                <div className='artTextField'>
+                                    <CustomizedTextField
+                                        name="description"
+                                        label="Description Of Your Art"
+                                        value={artForm.Description}
+                                        onChange={formik.handleChange}
+                                        multiline
+                                        fullWidth
+                                        rows={4}
+                                    />
+                                    {formik.errors.description && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
+                                </div>
+                            </Box>
+                            <Box className="priceBox"
+                                sx={{
+                                    backgroundColor: theme.backgroundColor,
+                                    borderColor: theme.color
+                                }}
+                            >
+                                <FormControlLabel
+                                    sx={{ color: theme.color, marginBottom: '10%' }}
+                                    control={
+                                        <CustomizedSwitch
+                                            checked={artForm.Purchasable}
+                                            onChange={handleSwitchChange}
+                                            name="Purchasable"
+                                        />
+                                    }
+                                    label="Is Purchasable?"
                                 />
-                            }
-                            label="Is Purchasable?"
-                        />
-                        <br></br>
-                        <div className='artTextField'>
-                            <CustomizedTextField
-                                name="artworkName"
-                                label="Give Your Amazing Art A Name"
-                                value={artForm.ArtworkName}
-                                onChange={formik.handleChange}
-                                fullWidth
-                            />
-                            {formik.errors.artworkName && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
-                        </div>
-                        <div className='artTextField'>
-                            <CustomizedTextField
-                                name="description"
-                                label="Description Of Your Art"
-                                value={artForm.Description}
-                                onChange={formik.handleChange}
-                                multiline
-                                fullWidth
-                                rows={4}
-                            />
-                            {formik.errors.description && (<Typography variant="body2" color="red">{formik.errors.name}</Typography>)}
+                                {handlePriceVisibility()}
+                            </Box>
+
                         </div>
                         <Box className="tagAndpreviewBox">
-                            <img
-                                style={{ border: `solid 1px ${theme.color}` }}
-                                className='previewImage' src={preview} alt="Preview Here!" />
-                            <div className='tagField' >
-                                <FieldArray
-                                    validateOnChange={false}
-                                    name="artworkTag"
-                                    render={arrayHelpers => (
-                                        <>
-                                            {formik.values.artworkTag.map((tag, index) => (
-                                                <div key={index}>
-                                                    <Select
-                                                        name={`artworkTag.${index}.tagID`}
-                                                        value={tag.tagID}
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                    >
-                                                        {/* Assuming these are your tag options */}
-                                                        <MenuItem value="tag1">Tag1</MenuItem>
-                                                        <MenuItem value="tag2">Tag2</MenuItem>
-                                                        {/* ...other tags */}
-                                                    </Select>
-                                                    <CustomizedButton
-                                                        type="button"
-                                                        onClick={() => arrayHelpers.remove(index)}
-                                                    >
-                                                        Remove
-                                                    </CustomizedButton>
-                                                </div>
-                                            ))}
-                                            <CustomizedButton
-                                                type="button"
-                                                onClick={() => arrayHelpers.push({ tagID: '' })}
-                                            >
-                                                Add a Tag
-                                            </CustomizedButton>
-                                        </>
-                                    )}
-                                />
+                            <FormikProvider value={formik}
+                            //Formik Fields requires you to provide a context with FormikProvider with the difined 'formik' as value
+                            >
+                                <div className='tagField' >
+                                    <FieldArray
+                                        name="artworkTag"
+                                        render={arrayHelpers => (
+                                            <>
+                                                {formik.values.artworkTag.map((tag, index) => (
+                                                    <div key={index}>
+                                                        <Select
+                                                            name={`artworkTag.${index}.tagID`}
+                                                            value={tag.tagID}
+                                                            onChange={formik.handleChange}
+                                                            onBlur={formik.handleBlur}
+                                                        >
+                                                            {ListTag.map((tag) => {
+                                                                return(
+                                                                <MenuItem
+                                                                    key={tag.id} value={tag.id}>
+                                                                    {tag.nameTag}
+                                                                </MenuItem>
+                                                                )
+                                                            })}
+
+                                                        </Select>
+                                                        <CustomizedButton
+                                                            type="button"
+                                                            onClick={() => arrayHelpers.remove(index)}
+                                                        >
+                                                            Remove
+                                                        </CustomizedButton>
+                                                    </div>
+                                                ))}
+                                                <CustomizedButton
+                                                    type="button"
+                                                    onClick={() => arrayHelpers.push({ tagID: '' })}
+                                                >
+                                                    Add a Tag
+                                                </CustomizedButton>
+                                            </>
+                                        )}
+                                    />
+                                </div>
+                            </FormikProvider>
+                            <div className='imageBox'>
+                                <Typography variant="h6"
+                                    color={theme.color}
+                                    sx={{ textAlign: 'right' }}
+                                >
+                                    Preview Image</Typography>
+                                <img
+                                    style={{
+                                        border: `solid 1px ${theme.color}`,
+                                        backgroundColor: theme.backgroundColor
+                                    }}
+                                    className='previewImage' src={preview} alt="Preview Here!" />
                             </div>
                         </Box>
-                        <CustomizedButton sx={{ display: 'block', width: '50%', margin: 'auto', marginTop: '10vw' }} variant="contained" type="submit">
+                        <CustomizedButton sx={{ display: 'block', width: '50%', margin: 'auto', marginTop: '5vh' }} variant="contained" type="submit">
                             Welcome To The Wolrd!
                         </CustomizedButton>
                     </form>
