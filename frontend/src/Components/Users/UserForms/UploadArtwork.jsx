@@ -98,14 +98,6 @@ function UploadArtwork() {
         }
     };
 
-    const handleTagDelete = (chipToDelete) => () => {
-
-        SetArtTags(
-            artTags.filter((tag) => tag.tagID !== chipToDelete.tagID)
-        )
-
-    };
-
     const handlePriceVisibility = () => {
         return artForm.Purchasable && (
             <div className='priceField'>
@@ -138,7 +130,7 @@ function UploadArtwork() {
             likes: 0,
             purchasable: false,
             price: 0,
-            imageFile: null,
+            imageFile: preview,
             artworkTag: []
         },
         onSubmit: (values) => {
@@ -283,7 +275,8 @@ function UploadArtwork() {
                                     className='previewImage' src={preview} alt="Preview Here!" />
                             </div>
                         </Box>
-                        <CustomizedButton sx={{ display: 'block', width: '50%', margin: 'auto', marginTop: '5vh' }} variant="contained" type="submit">
+                        <CustomizedButton sx={{ 
+                            display: 'block', width: '50%', margin: 'auto', marginTop: '5vh' }} variant="contained" type="submit">
                             Welcome To The Wolrd!
                         </CustomizedButton>
                     </form>
