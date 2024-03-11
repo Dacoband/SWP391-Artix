@@ -48,7 +48,6 @@ public class AccountController : ControllerBase
 
         return account;
     }
-
     [HttpGet("email/{email}")]
     public async Task<ActionResult<Account>> GetAccountByEmail(string email)
     {

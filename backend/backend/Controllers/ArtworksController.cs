@@ -74,7 +74,7 @@ public class ArtworksController : ControllerBase
     }
 
     // POST: api/artworks
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateArtwork([FromBody] Artworks artwork)
     {
@@ -104,10 +104,15 @@ public class ArtworksController : ControllerBase
             _context.Artworks.Add(artwork);
             await _context.SaveChangesAsync();
 
+            // Lưu trữ ArtworkID đã được tạo tự động
+            var artworkId = artwork.ArtworkID;
+
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
             {
-                // Không cần thiết lập ArtworkID vì nó sẽ tự động tăng
+                // Thiết lập ArtworkID với giá trị đã được tạo tự động
+                artworkTag.ArtworkID = artworkId;
+
                 _context.ArtworkTag.Add(artworkTag);
             }
 
@@ -116,6 +121,7 @@ public class ArtworksController : ControllerBase
             return Ok("Artwork created successfully");
         }
     }
+
 
 
     // PUT: api/artworks/{id}
