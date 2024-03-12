@@ -272,6 +272,7 @@ D:/FPT_Learning/SWP391/SWP391-Artix/backend/backend/bin/Debug/net8.0/Microsoft.I
 D:/FPT_Learning/SWP391/SWP391-Artix/backend/backend/bin/Debug/net8.0/Microsoft.IdentityModel.Tokens.dll
 D:/FPT_Learning/SWP391/SWP391-Artix/backend/backend/bin/Debug/net8.0/System.IdentityModel.Tokens.Jwt.dll
 >>>>>>> Volka
+<<<<<<< HEAD
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/Humanizer.dll
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/Microsoft.AspNetCore.Cryptography.Internal.dll
@@ -360,3 +361,7 @@ D:/FPT_Learning/SWP391/SWP391-Artix/backend/backend/bin/Debug/net8.0/System.Iden
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.sourcelink.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.csproj.Up2Date
+=======
+D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\PayPal.dll
+>>>>>>> THUCVIP

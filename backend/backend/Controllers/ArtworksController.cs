@@ -117,10 +117,13 @@ public class ArtworksController : ControllerBase
             // Thêm artwork vào cơ sở dữ liệu
             _context.Artworks.Add(artwork);
             await _context.SaveChangesAsync();
+            
+           
 
             // Lưu trữ ArtworkID đã được tạo tự động
             var artworkId = artwork.ArtworkID;
 
+           
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
             {
