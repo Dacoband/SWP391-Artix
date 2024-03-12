@@ -9,6 +9,7 @@ export default function CommissionForm() {
     <div>
       <Box className='box'
         sx={{
+          
           color: theme.color,
           backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
           transition: theme.transition,

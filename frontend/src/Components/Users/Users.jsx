@@ -33,9 +33,10 @@ export default function Users() {
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreForYou/>}/>
-          <Route path={`commission`} element={<CommissionForm/>}/>
+         
          
           <Route path={`createaccount`} element={<CreateAccount/>}/>
+          <Route path={`commission`} element={<CommissionForm/>}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
