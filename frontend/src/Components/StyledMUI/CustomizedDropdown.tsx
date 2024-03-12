@@ -9,15 +9,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
-<<<<<<< HEAD
 import { Link } from 'react-router-dom';
-=======
->>>>>>> Volka
+import { useAuth } from '../AuthenContext.tsx';
+import { User } from '../../Interfaces/UserInterface';
 
-  
-  
-export default function CustomizedDropdown() {
+//Create an interface for your function to assign types to its props
+interface CustomizedDropdownProps{
+  user: User;
+}
+export default function CustomizedDropdown({user}:CustomizedDropdownProps) {
     const {theme,toggleTheme,dark} = useContext(ThemeContext)
+    const {logout} = useAuth();
     // Custom style for the Menu component
     const CustomizedMenu = styled(Menu)(() => ({
       '& .MuiPaper-root': {
@@ -41,6 +43,8 @@ const handleClick = (event) => {
   setAnchorEl(event.currentTarget)
   setOpen(!open)
 };
+
+
   return (
     <div>
       <IconButton
@@ -51,7 +55,7 @@ const handleClick = (event) => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : 'false'}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>A</Avatar>
+            <Avatar src={user? user.picture : ""} sx={{ width: 32, height: 32 }}>{user ? user.given_name.charAt[0] : null}</Avatar>
         </IconButton>
       <CustomizedMenu
         id="basic-menu"
@@ -71,11 +75,7 @@ const handleClick = (event) => {
         <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
         <Typography variant='caption'>Account</Typography>
         </Divider>
-<<<<<<< HEAD
         <MenuItem onClick={handleClick}><Link to={`creatorform`}>Profile</Link></MenuItem>
-=======
-        <MenuItem onClick={handleClick}>Profile</MenuItem>
->>>>>>> Volka
         <MenuItem onClick={handleClick}>My Dashboard</MenuItem>
         <MenuItem onClick={handleClick}>My Account</MenuItem>
         <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
@@ -86,7 +86,7 @@ const handleClick = (event) => {
           <Switch  checked={dark} />
           </MenuItem>
         <Divider sx={{"backgroundColor":{backgroundColor:theme.color}}} variant='middle'/>
-        <MenuItem onClick={handleClick}>Logout</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
         </Box>
       </CustomizedMenu>
     </div>

@@ -20,7 +20,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks
-    
+
     [HttpGet]
     public async Task<IActionResult> GetArtworks()
     {
@@ -87,17 +87,10 @@ public class ArtworksController : ControllerBase
             }
 
             // Kiểm tra xem có ImageFile không
-            if (!string.IsNullOrEmpty(artwork.ImageFile))
+            // Kiểm tra xem CreatorID có tồn tại không
+            if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
             {
-                try
-                {
-                    byte[] imageBytes = Convert.FromBase64String(artwork.ImageFile);
-                    // Lưu imageBytes vào cơ sở dữ liệu hoặc thực hiện các bước xử lý khác tùy thuộc vào yêu cầu của bạn
-                }
-                catch (FormatException)
-                {
-                    return BadRequest("Định dạng hình ảnh không hợp lệ");
-                }
+                return BadRequest("CreatorID không tồn tại");
             }
 
             // Kiểm tra xem TagID có tồn tại không
@@ -135,7 +128,6 @@ public class ArtworksController : ControllerBase
             return Ok("Artwork created successfully");
         }
     }
-
 
 
 

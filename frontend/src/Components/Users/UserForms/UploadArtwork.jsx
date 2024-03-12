@@ -7,6 +7,7 @@ import { ListTag } from '../../../share/ListofTag.js'
 import CustomizedTypography from '../../StyledMUI/CustomizedTypography.jsx'
 import CustomizedSelect from '../../StyledMUI/CustomizedSelect.jsx'
 import CustomizedImageButton from '../../StyledMUI/CustomizedImageButton.jsx'
+import axios from 'axios';
 import {
     FormControlLabel,
     Input,
@@ -15,17 +16,27 @@ import {
     Chip,
     MenuItem,
 } from '@mui/material';
+
 function UploadArtwork() {
     const { theme } = useContext(ThemeContext)
+    const [preview,setPreview] = useState();
     const initialArtForm = {
-        selectedFile: null,
-        description: '',
-        tags: [],
-        createdtime: '',
-        isPurchasable: false,
-        price: '',
+        ArtworkID:0,
+        CreatorID:1,
+        TagID:[], //TODO Fix TagID array Maybe another POST to TagID DB
+        ArtworkName:'',
+        Description: '',
+        DateCreated:'',
+        Likes:0,
+        Purchasable:false,
+        Price:0,
+        ImageFile: null,
     };
-
+    const axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json', // Make sure the content type matches what the server expects
+        },
+      };
     const [artForm, setArtForm] = useState(initialArtForm)
 
      //Covert Blob to Base64 string to easily view the image
@@ -40,14 +51,14 @@ function UploadArtwork() {
 
     const handleInputChange = (e) => {
         const { name, files } = e.target;
-        if (name === "selectedFile") { 
+        if (name === "ImageFile") { 
             // Files is a FileList object, you can grab the first file using indexing if you're accepting single files
             const file = files[0];
             // Now you can set the file to your state, make sure you have a state property to hold it
             setArtForm({ ...artForm, [name]: file });
-            
+            //console.log(artForm.imageFile)
             blobToBase64(file,function(base64Image){
-                setArtForm({...artForm, [name]: base64Image})
+                setPreview(base64Image)
                 //console.log(base64Image)
             })
 
@@ -57,7 +68,7 @@ function UploadArtwork() {
         }
     };
     const handleSwitchChange = (e) => {
-        setArtForm({ ...artForm, isPurchasable: e.target.checked });
+        setArtForm({ ...artForm, Purchasable: e.target.checked });
     };
     const handleTagChange = (event) => {
         const {
@@ -65,24 +76,24 @@ function UploadArtwork() {
         } = event;
         setArtForm({
             ...artForm,
-            tags: typeof value === 'string' ? value.split(',') : value,
+            TagID: typeof value === 'string' ? value.split(',') : value,
         });
     };
 
     const handleTagDelete = (chipToDelete) => () => {
         setArtForm({
             ...artForm,
-            tags: artForm.tags.filter((chip) => chip !== chipToDelete),
+            TagID: artForm.tags.filter((chip) => chip !== chipToDelete),
         });
     };
 
     const handlePriceVisibility = () => {
-        return artForm.isPurchasable && (
+        return artForm.Purchasable && (
             <CustomizedTextField
                 sx={{margin:'0 0 0 0'}}
-                name="price"
+                name="Price"
                 label="Price"
-                value={artForm.price}
+                value={artForm.Price}
                 onChange={handleInputChange}
             />
         );
@@ -90,12 +101,39 @@ function UploadArtwork() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const time = new Date()
-        setArtForm({ ...artForm, createdtime: time.toISOString() });
+        setArtForm({ ...artForm, DateCreated: time.toISOString() });
         //Call the convertion function
-       
         // TODO: Submit your form logic...
         console.log(artForm)
+        //Using FromData instead of normally fetching using Axios
+            event.preventDefault();
+            const formData = new FormData();
+            // Append the standard text fields
+            formData.append('ArtworkID', artForm.ArtworkID);
+            formData.append('CreatorID', artForm.CreatorID);
+            formData.append('TagID', artForm.TagID); // Make sure this is the format your backend expects. ARRAY OF TAG IS WRONG
+            formData.append('ArtworkName', artForm.ArtworkName);
+            formData.append('Description', artForm.Description);
+            formData.append('DateCreated', artForm.DateCreated); 
+            formData.append('Likes', artForm.Likes);
+            formData.append('Purchasable', artForm.Purchasable);
+            formData.append('Price', artForm.Purchasable ? artForm.Price : 0); // Conditional based on Purchasable
+            // Append the file if it exists
+            if (artForm.ImageFile) {
+                formData.append('ImageFile', artForm.ImageFile);
+            }
+            const url = "https://localhost:7233/api/Artworks";
+            // Send formData without axiosConfig for Content-Type
+            axios.post(url, formData)
+            .then(response => {
+                console.log("Upload successful!", response.data);
+            })
+            .catch(error => {
+                console.error("Upload failed.", error);
+            });
     };
+
+    
 
     return (
         <>
@@ -107,7 +145,7 @@ function UploadArtwork() {
                         </CustomizedTypography>
 
                         <CustomizedImageButton
-                            name="selectedFile" 
+                            name="ImageFile" 
                             type="file"
                             onChange={handleInputChange}
                             fullWidth
@@ -117,18 +155,28 @@ function UploadArtwork() {
                         sx={{color:theme.color,marginLeft:'',float:'right'}}
                             control={
                                 <CustomizedSwitch
-                                    checked={artForm.isPurchasable}
+                                    checked={artForm.Purchasable}
                                     onChange={handleSwitchChange}
-                                    name="isPurchasable"
+                                    name="Purchasable"
                                 />
                             }
                             label="Is Purchasable?"
                         />
                         <br></br>
                         <CustomizedTextField
-                            name="description"
+                            name="ArtworkName"
+                            label="Give Your Amazing Art A Name"
+                            value={artForm.ArtworkName}
+                            onChange={handleInputChange}
+                            fullWidth
+                            multiline
+                            rows={4}
+                            style={{width:'50%'}}
+                        />
+                        <CustomizedTextField
+                            name="Description"
                             label="Description..."
-                            value={artForm.description}
+                            value={artForm.Description}
                             onChange={handleInputChange}
                             fullWidth
                             multiline
@@ -137,15 +185,14 @@ function UploadArtwork() {
                         />
                         <img 
                         style={{border:`solid 1px ${theme.color}`}}
-                        className='previewImage' src={artForm.selectedFile} alt="Your New Upload" />
+                        className='previewImage' src={preview} alt="Your New Upload" />
                         <br></br>
                         <FormControl variant='standard' fullWidth style={{marginTop:'2%',width:'50%'}}>
                             <InputLabel><CustomizedTypography variant="body1">Tags</CustomizedTypography></InputLabel>
                             <CustomizedSelect
-                                
                                 multiple
-                                name="tags"
-                                value={artForm.tags}
+                                name="tagID"
+                                value={artForm.TagID}
                                 onChange={handleTagChange}
                                 input={<Input id="select-multiple-tags" />}
                                 renderValue={(selected) => (
@@ -158,7 +205,7 @@ function UploadArtwork() {
                             >
                                 {/* Here you can map over your tags to create MenuItem components */}
                                 {ListTag.map((tag) => (
-                                    <MenuItem key={tag.id} value={tag.nameTag}>
+                                    <MenuItem key={tag.id} value={tag.id}>
                                         {tag.nameTag}
                                     </MenuItem>
                                 ))}

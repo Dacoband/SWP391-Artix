@@ -2,16 +2,16 @@
     position: fixed;
     width: 100vw;
     height: 110vh;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     background-color: rgba(0,0,0,0.8);
 }
+.card{
+    padding-top: 5%;
+}
 .loginForm{
+    text-align: center;
     margin: auto;
-    width: 20%;
-    padding: 5%;
-    transform: translate(0, 15%);
+    width: 25%;
+    padding: 50px;
     background-color: whitesmoke;
     border-radius: 3%;
 }

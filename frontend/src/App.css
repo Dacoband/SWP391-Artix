@@ -5,470 +5,474 @@
 
 }
 
-main {
-  
-  /* display: flex;
-  justify-content: space-between;
-  flex: 1; */
-}
-.Navigation2 {
-  /* flex:1; */
-  /* float: left; Đặt container này ở phía trái */
-  width: 18%; /* Chiếm 30% dung lượng */
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  
-  border-right: 1px solid #dbdbdb ;
-  position: fixed; /* Đảm bảo navigation dọc luôn hiển thị ở một vị trí cố định trên trang */
-  top: 65px; /* Hiển thị navigation dọc ở phía trên cùng của trang */
-  bottom: 0; /* Hiển thị navigation dọc ở phía dưới cùng của trang */
-  left: 0; /* Hiển thị navigation dọc ở phía bên trái của trang */
- 
-  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao của navigation dọc */
- 
-}
-.Navigation2 > div {
-  flex: 1; /* Phân chia không gian cho hai hàng */
-  display: flex; /* Sử dụng Flexbox cho các hàng */
-  flex-direction: column; /* Chia các hàng thành một cột dọc */
-}
-.Navigation2 h3{
-  text-align: center;
-
-}
-/* .container {
-  margin-top: 60px;
-  padding: 20px; */
-  /* width: 85%;  */
-  /* Chiếm 82% dung lượng */
-  /* float: right;  */
-  /* Đặt .container bên phải */
-/* } */
-.Navigation2 ul {
-  list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
-  padding: 0; /* Xóa padding */
-  margin-left: 25px; /* Xóa margin */
-}
-
-.Navigation2 ul li {
-  width: 100%;
-  margin-bottom: 15px;
-   /* Khoảng cách giữa các mục */
-}
-
-
-.Navigation2 ul li a {
-  text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
-  color: black;
-  padding: 10px;
-  padding-right: 20px;
-  
-}
-.home{
-  
-  border-bottom:1px solid  #dbdbdb ;
-
-  
-  
-}
-.container{
-  margin-top: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
-}
-.item1{
-  height: 200px;
-}
-
-.hero{
-  width: 100%;
-  height: 100vh;
-  display: flex ;
-  align-items: center;
-  justify-content: center;
-}
-.btn{
- 
-  display: inline-block;
-  font-size: 18px;
-  padding: 10px 10px 3px 10px;
-  background:none;
-  /* color: #fff; */
-
-  border-radius: 100px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  
-  transition: box-shadow 0.25s;
-  z-index: 2;
-}
-.btn:active{
-  transform: scale(0.96);
-  background: #fff;
-  color: #ff1876;
-
-}
-.btn span{
-  background: #ff1876;
-  border: 1px solid #ff1876 ;
-  width: 5px;
-  height: 5px;
-  border-radius: 50px;
-  position: absolute;
-  /* z-index: -1; */
-  transform:scale(0);
- 
-}
-.btn span:nth-child(1){
-  top:-80%;
-  left: -200%;
-}
-.btn span:nth-child(2){
-  top:10%;
-  left: -10%;
-  background: transparent;
-}
-.btn span:nth-child(3){
-  top:80%;
-  left:0%;
-  
-}
-
-
-.btn span:nth-child(4){
-  top:30%;
-  left: -20%;}
-  
-.btn span:nth-child(5){
-  top:50%;
-  left: -10%;
-  background: transparent;
-}
-
-
-.btn span:nth-child(6){
-  top:-20%;
-  left: 20%;
-  background: transparent;
-}
-.btn span:nth-child(7){
-  top:-20%;
-  left: 50%;
-  
-}
-.btn span:nth-child(8){
-  top:-20%;
-  left: 75%;
-  background: transparent;
-}
-.btn span:nth-child(9){
-  top:0%;
-  left: 90%;
-}
-.btn span:nth-child(10){
-  top:20%;
-  left: 100%;
-  background: transparent;
-}
-
-.btn span:nth-child(11){
-  top:40%;
-  left: 100%;
-
-}.btn span:nth-child(12){
-  top:60%;
-  left: 90%;
- background: transparent;
-}
-
-
-.btn span:nth-child(13){
-  top:85%;
-  left: 80%;
-
-
-
-}.btn span:nth-child(14){
-  top:90%;
-  left: 60%;
-  background: transparent;
-
-}.btn span:nth-child(15){
-  top:100%;
-  left: 35%;
-
-}.btn span:nth-child(16){
-  top:100%;
-  left: 10%;
-  background: transparent;
-  
-}
- 
-.anim{
-  animation: moving 0.7s linear reverse forwards;
-}
-@keyframes moving {
-  0%{
-    transform: scale(0);
-  }
-  10%{
-    transform: scale(1 );
-
-  }
-  100%{
-    top:50%;
-    left: 50%;
-  }
-  
-}
-
-/* test icon2 */
-.test2{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-
-
-main {
-  
-  /* display: flex;
-  justify-content: space-between;
-  flex: 1; */
-}
-.Navigation2 {
-  /* flex:1; */
-  /* float: left; Đặt container này ở phía trái */
-  width: 18%; /* Chiếm 30% dung lượng */
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  
-  border-right: 1px solid #dbdbdb ;
-  position: fixed; /* Đảm bảo navigation dọc luôn hiển thị ở một vị trí cố định trên trang */
-  top: 65px; /* Hiển thị navigation dọc ở phía trên cùng của trang */
-  bottom: 0; /* Hiển thị navigation dọc ở phía dưới cùng của trang */
-  left: 0; /* Hiển thị navigation dọc ở phía bên trái của trang */
- 
-  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao của navigation dọc */
- 
-}
-.Navigation2 > div {
-  flex: 1; /* Phân chia không gian cho hai hàng */
-  display: flex; /* Sử dụng Flexbox cho các hàng */
-  flex-direction: column; /* Chia các hàng thành một cột dọc */
-}
-.Navigation2 h3{
-  text-align: center;
-}
-/* .container {
-  margin-top: 60px;
-  padding: 20px; */
-  /* width: 85%;  */
-  /* Chiếm 82% dung lượng */
-  /* float: right;  */
-  /* Đặt .container bên phải */
-/* } */
-.Navigation2 ul {
-  list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
-  padding: 0; /* Xóa padding */
-  margin-left: 25px; /* Xóa margin */
-}
-
-.Navigation2 ul li {
-  width: 100%;
-  margin-bottom: 15px;
-   /* Khoảng cách giữa các mục */
-}
-
-
-.Navigation2 ul li a {
-  text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
-  color: black;
-  padding: 10px;
-  padding-right: 20px;
-  
-}
-.home{
-  
-  border-bottom:1px solid  #dbdbdb ;
-
-  
-  
-}
-.container{
-  margin-top: 40px;
-  margin-left: 40px;
-  margin-right: 40px;
-}
-.item1{
-  height: 200px;
-}
-
-.hero{
-  width: 100%;
-  height: 100vh;
-  display: flex ;
-  align-items: center;
-  justify-content: center;
-}
-.btn{
- 
-  display: inline-block;
-  font-size: 18px;
-  padding: 10px 10px 3px 10px;
-  background:none;
-  /* color: #fff; */
-
-  border-radius: 100px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: relative;
-  
-  transition: box-shadow 0.25s;
-  z-index: 2;
-}
-.btn:active{
-  transform: scale(0.96);
-  background: #fff;
-  color: #ff1876;
-
-}
-.btn span{
-  background: #ff1876;
-  border: 1px solid #ff1876 ;
-  width: 5px;
-  height: 5px;
-  border-radius: 50px;
-  position: absolute;
-  /* z-index: -1; */
-  transform:scale(0);
- 
-}
-.btn span:nth-child(1){
-  top:-80%;
-  left: -200%;
-}
-.btn span:nth-child(2){
-  top:10%;
-  left: -10%;
-  background: transparent;
-}
-.btn span:nth-child(3){
-  top:80%;
-  left:0%;
-  
-}
-
-
-.btn span:nth-child(4){
-  top:30%;
-  left: -20%;}
-  
-.btn span:nth-child(5){
-  top:50%;
-  left: -10%;
-  background: transparent;
-}
-
-
-.btn span:nth-child(6){
-  top:-20%;
-  left: 20%;
-  background: transparent;
-}
-.btn span:nth-child(7){
-  top:-20%;
-  left: 50%;
-  
-}
-.btn span:nth-child(8){
-  top:-20%;
-  left: 75%;
-  background: transparent;
-}
-.btn span:nth-child(9){
-  top:0%;
-  left: 90%;
-}
-.btn span:nth-child(10){
-  top:20%;
-  left: 100%;
-  background: transparent;
-}
-
-.btn span:nth-child(11){
-  top:40%;
-  left: 100%;
-
-}.btn span:nth-child(12){
-  top:60%;
-  left: 90%;
- background: transparent;
-}
-
-
-.btn span:nth-child(13){
-  top:85%;
-  left: 80%;
-
-
-
-}.btn span:nth-child(14){
-  top:90%;
-  left: 60%;
-  background: transparent;
-
-}.btn span:nth-child(15){
-  top:100%;
-  left: 35%;
-
-}.btn span:nth-child(16){
-  top:100%;
-  left: 10%;
-  background: transparent;
-  
-}
- 
-.anim{
-  animation: moving 0.7s linear reverse forwards;
-}
-@keyframes moving {
-  0%{
-    transform: scale(0);
-  }
-  10%{
-    transform: scale(1 );
-
-  }
-  100%{
-    top:50%;
-    left: 50%;
-  }
-  
-}
-
-
-
-/* test icon2 */
-.test2{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #fff;
-
-}
 .background{
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-position: center; /* Ensure the image is centered on the screen */
+  width: 100vw; /* 100% of the viewport width */
+  height: auto; /* 100% of the viewport height */
+  min-height: 100vh;
+  top: 0;
+  left: 0;
+  display: fixed;
 }
+
+
+
+.guestBtn:hover{
+  color: #218EC2;
+}
+
+.Navigation2 {
+  /* flex:1; */
+  /* float: left; Đặt container này ở phía trái */
+  width: 18%; /* Chiếm 30% dung lượng */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  border-right: 1px solid #dbdbdb ;
+  position: fixed; /* Đảm bảo navigation dọc luôn hiển thị ở một vị trí cố định trên trang */
+  top: 65px; /* Hiển thị navigation dọc ở phía trên cùng của trang */
+  bottom: 0; /* Hiển thị navigation dọc ở phía dưới cùng của trang */
+  left: 0; /* Hiển thị navigation dọc ở phía bên trái của trang */
+ 
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao của navigation dọc */
+ 
+}
+.Navigation2 > div {
+  flex: 1; /* Phân chia không gian cho hai hàng */
+  display: flex; /* Sử dụng Flexbox cho các hàng */
+  flex-direction: column; /* Chia các hàng thành một cột dọc */
+}
+.Navigation2 h3{
+  text-align: center;
+
+}
+/* .container {
+  margin-top: 60px;
+  padding: 20px; */
+  /* width: 85%;  */
+  /* Chiếm 82% dung lượng */
+  /* float: right;  */
+  /* Đặt .container bên phải */
+/* } */
+.Navigation2 ul {
+  list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
+  padding: 0; /* Xóa padding */
+  margin-left: 25px; /* Xóa margin */
+}
+
+.Navigation2 ul li {
+  width: 100%;
+  margin-bottom: 15px;
+   /* Khoảng cách giữa các mục */
+}
+
+
+.Navigation2 ul li a {
+  text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
+  color: black;
+  padding: 10px;
+  padding-right: 20px;
+  
+}
+.home{
+  
+  border-bottom:1px solid  #dbdbdb ;
+
+  
+  
+}
+.container{
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.item1{
+  height: 200px;
+}
+
+.hero{
+  width: 100%;
+  height: 100vh;
+  display: flex ;
+  align-items: center;
+  justify-content: center;
+}
+.btn{
+ 
+  display: inline-block;
+  font-size: 18px;
+  padding: 10px 10px 3px 10px;
+  background:none;
+  /* color: #fff; */
+
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  
+  transition: box-shadow 0.25s;
+  z-index: 2;
+}
+.btn:active{
+  transform: scale(0.96);
+  background: #fff;
+  color: #ff1876;
+
+}
+.btn span{
+  background: #ff1876;
+  border: 1px solid #ff1876 ;
+  width: 5px;
+  height: 5px;
+  border-radius: 50px;
+  position: absolute;
+  /* z-index: -1; */
+  transform:scale(0);
+ 
+}
+.btn span:nth-child(1){
+  top:-80%;
+  left: -200%;
+}
+.btn span:nth-child(2){
+  top:10%;
+  left: -10%;
+  background: transparent;
+}
+.btn span:nth-child(3){
+  top:80%;
+  left:0%;
+  
+}
+
+
+.btn span:nth-child(4){
+  top:30%;
+  left: -20%;}
+  
+.btn span:nth-child(5){
+  top:50%;
+  left: -10%;
+  background: transparent;
+}
+
+
+.btn span:nth-child(6){
+  top:-20%;
+  left: 20%;
+  background: transparent;
+}
+.btn span:nth-child(7){
+  top:-20%;
+  left: 50%;
+  
+}
+.btn span:nth-child(8){
+  top:-20%;
+  left: 75%;
+  background: transparent;
+}
+.btn span:nth-child(9){
+  top:0%;
+  left: 90%;
+}
+.btn span:nth-child(10){
+  top:20%;
+  left: 100%;
+  background: transparent;
+}
+
+.btn span:nth-child(11){
+  top:40%;
+  left: 100%;
+
+}.btn span:nth-child(12){
+  top:60%;
+  left: 90%;
+ background: transparent;
+}
+
+
+.btn span:nth-child(13){
+  top:85%;
+  left: 80%;
+
+
+
+}.btn span:nth-child(14){
+  top:90%;
+  left: 60%;
+  background: transparent;
+
+}.btn span:nth-child(15){
+  top:100%;
+  left: 35%;
+
+}.btn span:nth-child(16){
+  top:100%;
+  left: 10%;
+  background: transparent;
+  
+}
+ 
+.anim{
+  animation: moving 0.7s linear reverse forwards;
+}
+@keyframes moving {
+  0%{
+    transform: scale(0);
+  }
+  10%{
+    transform: scale(1 );
+
+  }
+  100%{
+    top:50%;
+    left: 50%;
+  }
+  
+}
+
+/* test icon2 */
+.test2{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+
+
+
+.Navigation2 {
+  /* flex:1; */
+  /* float: left; Đặt container này ở phía trái */
+  width: 18%; /* Chiếm 30% dung lượng */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
+  border-right: 1px solid #dbdbdb ;
+  position: fixed; /* Đảm bảo navigation dọc luôn hiển thị ở một vị trí cố định trên trang */
+  top: 65px; /* Hiển thị navigation dọc ở phía trên cùng của trang */
+  bottom: 0; /* Hiển thị navigation dọc ở phía dưới cùng của trang */
+  left: 0; /* Hiển thị navigation dọc ở phía bên trái của trang */
+ 
+  overflow-y: auto; /* Cho phép cuộn nếu nội dung vượt quá chiều cao của navigation dọc */
+ 
+}
+.Navigation2 > div {
+  flex: 1; /* Phân chia không gian cho hai hàng */
+  display: flex; /* Sử dụng Flexbox cho các hàng */
+  flex-direction: column; /* Chia các hàng thành một cột dọc */
+}
+.Navigation2 h3{
+  text-align: center;
+}
+/* .container {
+  margin-top: 60px;
+  padding: 20px; */
+  /* width: 85%;  */
+  /* Chiếm 82% dung lượng */
+  /* float: right;  */
+  /* Đặt .container bên phải */
+/* } */
+.Navigation2 ul {
+  list-style-type: none; /* Loại bỏ kiểu danh sách mặc định */
+  padding: 0; /* Xóa padding */
+  margin-left: 25px; /* Xóa margin */
+}
+
+.Navigation2 ul li {
+  width: 100%;
+  margin-bottom: 15px;
+   /* Khoảng cách giữa các mục */
+}
+
+
+.Navigation2 ul li a {
+  text-decoration: none; /* Loại bỏ gạch chân dưới chữ */
+  color: black;
+  padding: 10px;
+  padding-right: 20px;
+  
+}
+.home{
+  
+  border-bottom:1px solid  #dbdbdb ;
+
+  
+  
+}
+.container{
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.item1{
+  height: 200px;
+}
+
+.hero{
+  width: 100%;
+  height: 100vh;
+  display: flex ;
+  align-items: center;
+  justify-content: center;
+}
+.btn{
+ 
+  display: inline-block;
+  font-size: 18px;
+  padding: 10px 10px 3px 10px;
+  background:none;
+  /* color: #fff; */
+
+  border-radius: 100px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  
+  transition: box-shadow 0.25s;
+  z-index: 2;
+}
+.btn:active{
+  transform: scale(0.96);
+  background: #fff;
+  color: #ff1876;
+
+}
+.btn span{
+  background: #ff1876;
+  border: 1px solid #ff1876 ;
+  width: 5px;
+  height: 5px;
+  border-radius: 50px;
+  position: absolute;
+  /* z-index: -1; */
+  transform:scale(0);
+ 
+}
+.btn span:nth-child(1){
+  top:-80%;
+  left: -200%;
+}
+.btn span:nth-child(2){
+  top:10%;
+  left: -10%;
+  background: transparent;
+}
+.btn span:nth-child(3){
+  top:80%;
+  left:0%;
+  
+}
+
+
+.btn span:nth-child(4){
+  top:30%;
+  left: -20%;}
+  
+.btn span:nth-child(5){
+  top:50%;
+  left: -10%;
+  background: transparent;
+}
+
+
+.btn span:nth-child(6){
+  top:-20%;
+  left: 20%;
+  background: transparent;
+}
+.btn span:nth-child(7){
+  top:-20%;
+  left: 50%;
+  
+}
+.btn span:nth-child(8){
+  top:-20%;
+  left: 75%;
+  background: transparent;
+}
+.btn span:nth-child(9){
+  top:0%;
+  left: 90%;
+}
+.btn span:nth-child(10){
+  top:20%;
+  left: 100%;
+  background: transparent;
+}
+
+.btn span:nth-child(11){
+  top:40%;
+  left: 100%;
+
+}.btn span:nth-child(12){
+  top:60%;
+  left: 90%;
+ background: transparent;
+}
+
+
+.btn span:nth-child(13){
+  top:85%;
+  left: 80%;
+
+
+
+}.btn span:nth-child(14){
+  top:90%;
+  left: 60%;
+  background: transparent;
+
+}.btn span:nth-child(15){
+  top:100%;
+  left: 35%;
+
+}.btn span:nth-child(16){
+  top:100%;
+  left: 10%;
+  background: transparent;
+  
+}
+ 
+.anim{
+  animation: moving 0.7s linear reverse forwards;
+}
+@keyframes moving {
+  0%{
+    transform: scale(0);
+  }
+  10%{
+    transform: scale(1 );
+
+  }
+  100%{
+    top:50%;
+    left: 50%;
+  }
+  
+}
+
+
+
+/* test icon2 */
+.test2{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+
+}
+
 
 .page{
   display: flex;
@@ -493,10 +497,7 @@ main {
   background-color: aliceblue;
 }
 
-a{
-  text-decoration: none;
-  color: inherit;
-}
+
 
 .loadingscreen{
   position: fixed;
@@ -612,8 +613,6 @@ a{
 }
 
 
-
-
 }
 
 
@@ -687,13 +686,6 @@ a{
 }
 
 
-.carouseluser{
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  border-radius: 5px;
-}
-
 .recommendedwork{
 
   margin-top: 20px;
@@ -716,40 +708,30 @@ a{
 }
 
 
-.recommendedImages{
-  display: flex;
-  justify-content: first baseline;
-  padding-bottom: 10px;
-  min-width: 450px;
-}
 
 .recommendedusers{
   margin-top: 30px;
   margin-right: 90px;
-
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
   margin-bottom: 40px;
-
 
 }
 
 .groupOfCarousel{
   display: flex;
   flex-direction: row;
-  justify-content: first baseline;
+  justify-content: center;
   overflow: auto;
   min-width: 400px;
-
 }
 
 .carouselCustom{
   display: block;
   width: 18vw;
   min-width: 250px;
-  margin: 2px 2px 2px 2px;
-
+  margin: 5px 5px 5px 5px;
 }
 
 .imguser{
@@ -776,13 +758,14 @@ a{
 .contentuser{
   margin-left: 10px;
   margin-right: 10px;
-
 }
 
 .card-follow-button {
   display: flex;
   justify-content: center; 
+
 }
+
 .Randomimg{
   margin-top: 30px;
   margin-left: 90px;
@@ -814,13 +797,16 @@ a{
 
 }
 
+a{
+  text-decoration: none;
+  color: inherit;
 }
 
 .tagHolder::-webkit-scrollbar {
   display: none;
 }
 .tagHolder{
-  height: 5vh;
+  height: 8vh;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
   overflow-x: auto;
