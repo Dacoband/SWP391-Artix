@@ -8,11 +8,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Avatar from '@mui/material/Avatar';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea ,CardActions,Button} from '@mui/material';
 export default function SeeMoreUser() {
     const { theme } = useContext(ThemeContext)
   return (
-    <div>
+    <div className='Box-content'>
        <Box className='box'
         sx={{
           color: theme.color,
@@ -22,10 +22,11 @@ export default function SeeMoreUser() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
+          paddingTop:'30px'
           
         }}>
        
-          <Typography variant='h5'>Top 30 Recommended User:</Typography>
+          <Typography variant='h5' style={{marginLeft:'110px'}}>Top 30 Recommended User:</Typography>
           <div className='grid-container'>
           {ListofUsers.map((user) => (
            <Card key={user.id} sx={{ width: '30%', marginBottom: '20px' }}>
@@ -37,22 +38,29 @@ export default function SeeMoreUser() {
           alt="green iguana"
         />
         <CardContent>
-        
+         <div className='infouser'>
           <Typography gutterBottom variant="h5" component="div">
-          <div className='infouser'>
+         
           <div className='avartar'> 
               <Avatar
                  alt="Remy Sharp"
                  src={`${user.avatar}`}
-                 sx={{ width: 70, height: 70 }}
+                 sx={{ width: 110, height: 110 }}
+                 style={{border: '3px solid white'}}
                 /></div> 
-            {user.User}</div>
+            {user.User}
           </Typography>
-          {/* <Typography variant="body2" color="text.secondary">
-            
-          </Typography> */}
+          <Typography variant="body2" color="text.secondary">
+           Fllower: {user.follower} | Like: {user.like}
+          </Typography></div>
         </CardContent>
+       
       </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary" style={{width:'100%',margin:'0',height:'40px'}}>
+          + Follow
+        </Button>
+      </CardActions>
     </Card>))}</div>
 
 
