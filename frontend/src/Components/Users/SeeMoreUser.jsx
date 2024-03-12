@@ -9,8 +9,23 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Avatar from '@mui/material/Avatar';
 import { CardActionArea ,CardActions,Button} from '@mui/material';
+
+import Pagination from '@mui/material/Pagination';
+
 export default function SeeMoreUser() {
+
     const { theme } = useContext(ThemeContext)
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 15;
+
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = ListofUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);
+    };
   return (
     <div className='Box-content'>
        <Box className='box'
@@ -26,9 +41,9 @@ export default function SeeMoreUser() {
           
         }}>
        
-          <Typography variant='h5' style={{marginLeft:'110px'}}>Top 30 Recommended User:</Typography>
+          <Typography variant='h5' style={{marginLeft:'100px'}}>Top 30 Recommended User:</Typography>
           <div className='grid-container'>
-          {ListofUsers.map((user) => (
+          {currentUsers.map((user) => (
            <Card key={user.id} sx={{ width: '30%', marginBottom: '20px' }}>
       <CardActionArea>
         <CardMedia
@@ -39,16 +54,16 @@ export default function SeeMoreUser() {
         />
         <CardContent>
          <div className='infouser'>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h5" component="div" style={{marginBottom:'0'}}>
          
           <div className='avartar'> 
               <Avatar
                  alt="Remy Sharp"
                  src={`${user.avatar}`}
-                 sx={{ width: 110, height: 110 }}
+                 sx={{ width: 100, height: 100 }}
                  style={{border: '3px solid white'}}
                 /></div> 
-            {user.User}
+                {user.User}
           </Typography>
           <Typography variant="body2" color="text.secondary">
            Fllower: {user.follower} | Like: {user.like}
@@ -57,16 +72,16 @@ export default function SeeMoreUser() {
        
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary" style={{width:'100%',margin:'0',height:'40px'}}>
+        <Button size="small" color="primary" style={{width:'100%',margin:'0',height:'30px'}}>
           + Follow
         </Button>
       </CardActions>
     </Card>))}</div>
 
 
-
-
-
+ 
+   <div className='pagination'>
+          <Pagination count={Math.ceil(ListofUsers.length / usersPerPage)} variant="outlined"  onChange={handleChangePage}  /></div>
 
 
 

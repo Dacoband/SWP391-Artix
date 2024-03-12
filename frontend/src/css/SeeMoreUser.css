@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 cột có kích thước bằng nhau */
     grid-gap: 20px; /* Khoảng cách giữa các card */
-    margin: 20px 110px;
+    margin: 15px 100px;
 }
 .grid-container .MuiCard-root {
     width: 100%;
@@ -10,8 +10,8 @@
 .infouser{
     /* display: flex; */
     text-align: center;
-    transform: translateY(-65%);
-    height: 100px;
+    transform: translateY(-80%);
+    height: 80px;
 }
 .avartar img{
     /* border-radius: 100%; */
@@ -26,4 +26,9 @@
     /* transform: translateY(-65%); */
     display: flex;
     justify-content: center;
+}
+.pagination{
+   display: flex;
+   justify-content: center;
+   padding-bottom: 50px;
 }

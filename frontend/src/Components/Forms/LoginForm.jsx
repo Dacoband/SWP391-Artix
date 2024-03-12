@@ -65,9 +65,10 @@ export default function LoginForm({ disableOutsideClick,handleClick, backdrop, a
               </Button>
             </Grid>
             <Grid item xs={12}>
+              <Link to={`createaccount`}>
               <Button variant="outlined" fullWidth>
                 Register Account
-              </Button>
+              </Button></Link>
             </Grid>
             <Grid item xs={12}>
               <LoginWithGoogle disableOutsideClick={disableOutsideClick} handleClick={handleClick} />

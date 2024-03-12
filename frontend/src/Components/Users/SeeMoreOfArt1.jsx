@@ -6,8 +6,19 @@ import { Work } from '../../share/ListofWork';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import '../../css/SeeMoreOfArt1.css';
+import Pagination from '@mui/material/Pagination';
 export default function SeeMoreOfArt1() {
     const { theme } = useContext(ThemeContext)
+    const [currentPage, setCurrentPage] = useState(1);
+    const imagesPerPage = 30;
+
+    const indexOfLastImage = currentPage * imagesPerPage;
+    const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+    const currentImages = Work.slice(indexOfFirstImage, indexOfLastImage);
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);}
+    
 
     
   return (
@@ -30,7 +41,7 @@ export default function SeeMoreOfArt1() {
             <Box className= 'boxlistimage'>
                 <ImageList variant="masonry" cols={4} gap={7}>
 
-                    {Work.map((work) => (
+                {currentImages.map((work) => (
                 <ImageListItem key={work.id}>
                     <img
                      srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -42,6 +53,10 @@ export default function SeeMoreOfArt1() {
                 ))}
                </ImageList></Box>
             </div></div>
+            <div className='pagination'>
+            <Pagination count={Math.ceil(Work.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
+
+            
         </Box>
       
     </div>

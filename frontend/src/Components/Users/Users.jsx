@@ -15,6 +15,7 @@ import ArtPost from '../ArtPost.jsx';
 import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
 import SeeMoreUser from './SeeMoreUser.jsx';
 import SeeMoreForYou from './SeeMoreForYou.jsx';
+import CreateAccount from '../Forms/CreateAccount.jsx';
 export default function Users() {
   return (
     <div>
@@ -31,7 +32,7 @@ export default function Users() {
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreForYou/>}/>
-          
+          <Route path={`createaccount`} element={<CreateAccount/>}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
