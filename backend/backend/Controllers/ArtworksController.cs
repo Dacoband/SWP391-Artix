@@ -123,9 +123,7 @@ public class ArtworksController : ControllerBase
             // Lưu trữ ArtworkID đã được tạo tự động
             var artworkId = artwork.ArtworkID;
 
-            // Lưu trữ ArtworkID đã được tạo tự động
-            var artworkId = artwork.ArtworkID;
-
+           
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
             {
@@ -143,10 +141,7 @@ public class ArtworksController : ControllerBase
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> Volka
     // PUT: api/artworks/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> PutArtwork(int id, [FromBody] Artworks artworkRequest)
