@@ -86,6 +86,20 @@ public class ArtworksController : ControllerBase
                 return BadRequest("CreatorID không tồn tại");
             }
 
+            // Kiểm tra xem có ImageFile không
+            if (!string.IsNullOrEmpty(artwork.ImageFile))
+            {
+                try
+                {
+                    byte[] imageBytes = Convert.FromBase64String(artwork.ImageFile);
+                    // Lưu imageBytes vào cơ sở dữ liệu hoặc thực hiện các bước xử lý khác tùy thuộc vào yêu cầu của bạn
+                }
+                catch (FormatException)
+                {
+                    return BadRequest("Định dạng hình ảnh không hợp lệ");
+                }
+            }
+
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
             {
@@ -109,6 +123,9 @@ public class ArtworksController : ControllerBase
             // Lưu trữ ArtworkID đã được tạo tự động
             var artworkId = artwork.ArtworkID;
 
+            // Lưu trữ ArtworkID đã được tạo tự động
+            var artworkId = artwork.ArtworkID;
+
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
             {
@@ -126,6 +143,10 @@ public class ArtworksController : ControllerBase
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> Volka
     // PUT: api/artworks/{id}
     [HttpPut("{id}")]
     public async Task<IActionResult> PutArtwork(int id, [FromBody] Artworks artworkRequest)
