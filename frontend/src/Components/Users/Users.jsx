@@ -16,6 +16,7 @@ import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
 import SeeMoreUser from './SeeMoreUser.jsx';
 import SeeMoreForYou from './SeeMoreForYou.jsx';
 import CreateAccount from '../Forms/CreateAccount.jsx';
+import CommissionForm from './CommissionForm.jsx';
 export default function Users() {
   return (
     <div>
@@ -32,6 +33,8 @@ export default function Users() {
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreForYou/>}/>
+          <Route path={`commission`} element={<CommissionForm/>}/>
+         
           <Route path={`createaccount`} element={<CreateAccount/>}/>
         </Routes>
         <Outlet />
