@@ -105,7 +105,7 @@ function UploadArtwork() {
                     sx={{ float: 'right' }}
                     name="price"
                     label="Price"
-                    value={artForm.Price}
+                    value={formik.values.price}
                     onChange={formik.handleChange}
                     fullWidth
                 />
@@ -140,10 +140,12 @@ function UploadArtwork() {
         onSubmit: (values) => {
             const time = new Date()
             values.dateCreated = time.toISOString()
-            values.imageFile = blobImage.split(',')[1]; 
+            
+            values.imageFile = preview.split(',')[1]; 
             // Split Data URL Base64 (data:image/jpeg,base64) => (base64)
             values.price = artForm.Price
             values.purchasable = artForm.Purchasable
+            console.log(values)
             axios.post(url, values)
                 .then(response => response.data)
                 .then(data => console.log(data))
@@ -180,7 +182,7 @@ function UploadArtwork() {
                                     <CustomizedTextField
                                         name="artworkName"
                                         label="Give Your Amazing Art A Name"
-                                        value={artForm.ArtworkName}
+                                        value={formik.values.artworkName}
                                         onChange={formik.handleChange}
                                         fullWidth
                                     />
@@ -190,7 +192,7 @@ function UploadArtwork() {
                                     <CustomizedTextField
                                         name="description"
                                         label="Description Of Your Art"
-                                        value={artForm.Description}
+                                        value={formik.values.description}
                                         onChange={formik.handleChange}
                                         multiline
                                         fullWidth
@@ -209,7 +211,7 @@ function UploadArtwork() {
                                     sx={{ color: theme.color, marginBottom: '10%' }}
                                     control={
                                         <CustomizedSwitch
-                                            checked={artForm.Purchasable}
+                                            checked={formik.values.purchasable}
                                             onChange={handleSwitchChange}
                                             name="Purchasable"
                                         />
