@@ -211,10 +211,17 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
+        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
+        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
+        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
+
+        // Sau đó mới xóa bản ghi từ bảng Artworks
         _context.Artworks.Remove(artwork);
+
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
+
 
 }
