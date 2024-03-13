@@ -104,6 +104,7 @@ function UploadArtwork() {
             const time = new Date()
             values.dateCreated = time.toISOString()
             values.imageFile = preview.split(',')[1]; 
+            values.purchasable = priceSwitch
             // Split Data URL Base64 (data:image/jpeg,base64) => (base64)
             console.log(values)
             axios.post(url, values)
