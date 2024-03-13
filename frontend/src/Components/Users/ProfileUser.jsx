@@ -4,7 +4,7 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useState } from 'react';
 import { ListofUsers } from '../../share/ListofUsers';
-import { NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
@@ -26,7 +26,6 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
-import { Link } from 'react-router-dom';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -137,7 +136,9 @@ export default function ProfileUser() {
                 </Tabs>
               </div>
               <div className='buttonSubcribe'>
-                <Button variant="contained" href="#contained-buttons"> <ShoppingBagIcon style={{ marginRight: '5px' }} />  Subcribe</Button>
+                <Link to={`commission`}>
+                   <Button variant="contained" href="#contained-buttons"> <ShoppingBagIcon style={{ marginRight: '5px' }} />Commission</Button>
+                </Link>
                 <Button variant="contained" href="#contained-buttons" style={{ marginLeft: '20px' }}>Report</Button>
               </div>
             </Box>

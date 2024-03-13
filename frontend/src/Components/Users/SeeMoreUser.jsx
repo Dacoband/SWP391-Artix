@@ -82,9 +82,6 @@ export default function SeeMoreUser() {
  
    <div className='pagination'>
           <Pagination count={Math.ceil(ListofUsers.length / usersPerPage)} variant="outlined"  onChange={handleChangePage}  /></div>
-
-
-
         </Box>
 
     </div>
