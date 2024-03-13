@@ -26,22 +26,11 @@ function UploadArtwork() {
     const { theme } = useContext(ThemeContext)
     const [preview, setPreview] = useState();
     const [blobImage, setBlobImage] = useState();
+    const [priceSwitch,setPriceSwitch] = useState(false)
+    const [listOfTags, setListOfTags] = useState(ListTag);
     const url = "https://localhost:7233/api/Artworks";
 
-    const initialArtForm = {
-        ArtworkID: 0,
-        CreatorID: 1,
-        TagID: [], //TODO Fix TagID array Maybe another POST to TagID DB
-        ArtworkName: '',
-        Description: '',
-        DateCreated: '',
-        Likes: 0,
-        Purchasable: false,
-        Price: 0,
-        ImageFile: null,
-    };
-
-    const [artForm, setArtForm] = useState(initialArtForm)
+  
     //Covert Blob to Base64 string to easily view the image
     function blobToBase64(blob, callback) {
         const reader = new FileReader();
@@ -67,39 +56,15 @@ function UploadArtwork() {
 
         }
     };
+    
+ 
     const handleSwitchChange = (e) => {
-        setArtForm({ ...artForm, Purchasable: e.target.checked });
-    };
-
-
-    const artworkTags = [];
-    const [artTags, SetArtTags] = useState(artworkTags)
-
-    const handleTagChange = (event) => {
-        // Flat array of selected options (tag IDs).
-        const { value } = event.target;
-        // Ensure we're working with a flat array.
-        // If value is incorrectly nested, you can flatten it like this:
-        const flatValues = value.flat(); // Use Array.prototype.flat() to flatten the array.
-        // Update your state to set the selected tags.
-        // This will depend on how you're storing these IDs in your state.
-
-        const selectedTagID = flatValues; // The ID of the selected tag
-        console.log(event.target.value)
-        // Check if the tag is already selected
-        if (!artTags.some(tag => tag.tagID === selectedTagID)) {
-            const newArtworkTag = {
-                artworkTagID: 0, // Replace with a function/way to generate a new ID
-                artworkID: 0, // Replace with the current artwork's ID
-                tagID: selectedTagID
-            };
-            // Add the new tag to the existing tags
-            SetArtTags([...artTags, newArtworkTag]);
-        }
+        setPriceSwitch(e.target.checked)
+        formik.values.purchasable = priceSwitch
     };
 
     const handlePriceVisibility = () => {
-        return artForm.Purchasable && (
+        return priceSwitch && (
             <div className='priceField'>
                 <CustomizedTextField
                     sx={{ float: 'right' }}
@@ -112,14 +77,12 @@ function UploadArtwork() {
             </div>
         );
     };
-    useEffect(() => {
-        console.log('Updated artTags:', artTags);
-    }, [artTags]); // Only re-run the effect if artTags changes
 
+  
 
     const formik = useFormik({
         validateOnChange: false,
-        validateOnBlur: true,
+        validateOnBlur: false,
         enableReinitialize: true,
         initialValues: {
             artworkID: 0,
@@ -132,19 +95,16 @@ function UploadArtwork() {
             price: 0,
             imageFile: preview,
             artworkTag: [ {
-                "artworkTagID": 0,
-                "artworkID": 0,
-                "tagID": 0
+                artworkTagID: 0,
+                artworkID: 0,
+                tagID: 1
               },]
         },
         onSubmit: (values) => {
             const time = new Date()
             values.dateCreated = time.toISOString()
-            
             values.imageFile = preview.split(',')[1]; 
             // Split Data URL Base64 (data:image/jpeg,base64) => (base64)
-            values.price = artForm.Price
-            values.purchasable = artForm.Purchasable
             console.log(values)
             axios.post(url, values)
                 .then(response => response.data)
@@ -211,9 +171,9 @@ function UploadArtwork() {
                                     sx={{ color: theme.color, marginBottom: '10%' }}
                                     control={
                                         <CustomizedSwitch
-                                            checked={formik.values.purchasable}
-                                            onChange={handleSwitchChange}
-                                            name="Purchasable"
+                                            checked={priceSwitch}
+                                            onChange={(event)=>handleSwitchChange(event)}
+                                            name="purchasable"
                                         />
                                     }
                                     label="Is Purchasable?"
@@ -237,11 +197,10 @@ function UploadArtwork() {
                                                             name={`artworkTag.${index}.tagID`}
                                                             value={tag.tagID}
                                                             onChange={formik.handleChange}
-                                                            onBlur={formik.handleBlur}
                                                         >
-                                                            {ListTag.map((tag) => {
+                                                            {listOfTags.map((tag) => {
                                                                 return (
-                                                                    <MenuItem
+                                                                    <MenuItem 
                                                                         key={tag.id} value={tag.id}>
                                                                         {tag.nameTag}
                                                                     </MenuItem>
@@ -250,7 +209,7 @@ function UploadArtwork() {
 
                                                         </Select>
                                                         <CustomizedButton
-                                                            type="button"
+                                                          
                                                             onClick={() => arrayHelpers.remove(index)}
                                                         >
                                                             Remove
@@ -258,9 +217,13 @@ function UploadArtwork() {
                                                     </div>
                                                 ))}
                                                 <CustomizedButton
-                                                    type="button"
-                                                    onClick={() => arrayHelpers.push({ tagID: '' })}
-                                                >
+                                                   
+                                                    onClick={() => {
+                                                        arrayHelpers.push({  artworkTagID: 0,
+                                                        artworkID: '',
+                                                        tagID: 0 });
+                                                        }
+                                                    }>
                                                     Add a Tag
                                                 </CustomizedButton>
                                             </>
