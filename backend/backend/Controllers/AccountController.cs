@@ -26,7 +26,6 @@ public class AccountController : ControllerBase
          // Assuming Id is the problematic Int32 property, handle NULL with null-conditional operator
          AccountID = ac.AccountID,
          RoleID = ac.RoleID,
-         Username = ac.Username,
          Password = ac.Password,
          Email = ac.Email,
      })
@@ -57,7 +56,6 @@ public class AccountController : ControllerBase
             {
                 AccountID = ac.AccountID,
                 RoleID = ac.RoleID,
-                Username = ac.Username,
                 Password = ac.Password,
                 Email = ac.Email
                 // Other properties...
@@ -98,7 +96,6 @@ public class AccountController : ControllerBase
 
         // Cập nhật thông tin của tài khoản hiện có từ yêu cầu
         existingAccount.RoleID = account.RoleID;
-        existingAccount.Username = account.Username;
         existingAccount.Password = account.Password;
         existingAccount.Email = account.Email;
 

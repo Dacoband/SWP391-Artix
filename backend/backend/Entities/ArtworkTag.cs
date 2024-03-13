@@ -11,9 +11,5 @@ namespace backend.Entities
 
         public int ArtworkID { get; set; } // Khóa ngoại
         public int TagID { get; set; } // Khóa ngoại
-
-        
-
-
     }
 }

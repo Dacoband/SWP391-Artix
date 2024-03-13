@@ -20,7 +20,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks
-    
+
     [HttpGet]
     public async Task<IActionResult> GetArtworks()
     {
@@ -85,9 +85,6 @@ public class ArtworksController : ControllerBase
             {
                 return BadRequest("CreatorID không tồn tại");
             }
-
-            // Kiểm tra xem có ImageFile không
-           
 
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
@@ -214,10 +211,17 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
+        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
+        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
+        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
+
+        // Sau đó mới xóa bản ghi từ bảng Artworks
         _context.Artworks.Remove(artwork);
+
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
+
 
 }

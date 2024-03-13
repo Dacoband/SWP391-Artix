@@ -5,7 +5,9 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import './FormCSS/LoginForm.css'
 import LoginWithGoogle from '../../Login/Google/LoginWithGoogle';
-export default function LoginForm({ handleClick }) {
+import Divider from '@mui/material/Divider';
+import { Link } from 'react-router-dom';
+export default function LoginForm({ handleClick, backdrop }) {
   const onClick = (event) => {
     // Check if the target of the click is the element that the event was bound to
     if (event.target === event.currentTarget) {
@@ -15,7 +17,9 @@ export default function LoginForm({ handleClick }) {
     }
   };
   return (
-    <div onClick={onClick} className='backdrop'>
+    // backdrop name as defined "backdrop" to generate the black background cover the screen
+    <div onClick={onClick} className={backdrop}>
+      <div className='card'>
       <div className='loginForm'>
         <Grid container spacing={2} component="form" noValidate>
           <Grid item xs={12}>
@@ -54,9 +58,16 @@ export default function LoginForm({ handleClick }) {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            <LoginWithGoogle handleClick = {handleClick}/>
+            <LoginWithGoogle />
+          </Grid>
+          <Grid item xs={12}>
+            <Divider sx={{ "&::before, &::after": { backgroundColor: "lightgray" } }} variant='middle'>
+              <Typography variant='h6'>Alternative</Typography>
+            </Divider>
+            <Link className='guestBtn' style={{fontStyle:"italic",color:"grey"}} to={`/characters`}>Continue As Guest</Link>
           </Grid>
         </Grid>
+      </div>
       </div>
     </div>
   );

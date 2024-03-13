@@ -13,9 +13,6 @@ import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.jsx';
 
-
-
-
 export default function Users() {
   return (
     <div>
