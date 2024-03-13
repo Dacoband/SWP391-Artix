@@ -86,7 +86,7 @@ function UploadArtwork() {
         enableReinitialize: true,
         initialValues: {
             artworkID: 0,
-            creatorID: 0,
+            creatorID: 0, //CHANGE THE CREATOR ID 
             artworkName: "",
             description: "",
             dateCreated: "",
@@ -108,7 +108,7 @@ function UploadArtwork() {
             console.log(values)
             axios.post(url, values)
                 .then(response => response.data)
-                .then(data => console.log(data))
+                .then(data => console.log("Post Artwork Complete!"+data))
                 .catch(err => console.error(err))
 
         },
@@ -220,8 +220,8 @@ function UploadArtwork() {
                                                    
                                                     onClick={() => {
                                                         arrayHelpers.push({  artworkTagID: 0,
-                                                        artworkID: '',
-                                                        tagID: 0 });
+                                                        artworkID: 1, //CHANGE THE CREATOR ID 
+                                                        tagID: 1 });
                                                         }
                                                     }>
                                                     Add a Tag
