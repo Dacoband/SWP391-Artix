@@ -18,6 +18,9 @@ namespace backend.Entities
         public string Phone { get; set; }
         public DateTime LastLogDate { get; set; }
         public bool AllowCommission { get; set; }
+        public string Biography { get; set; }
+
+
 
     }
 }

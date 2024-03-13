@@ -29,15 +29,16 @@ public class CreatorController : ControllerBase
                 AccountID = c.AccountID,
                 PaypalAccountID = c.PaypalAccountID,
                 UserName = c.UserName,
-                FollowerID = c.FollowerID, // Kiểm tra giá trị NULL trước khi gán
-                ProfilePicture = c.ProfilePicture, // Kiểm tra giá trị null trước khi gán
+                FollowerID = c.FollowerID, 
+                ProfilePicture = c.ProfilePicture, 
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Address = c.Address,
                 Phone = c.Phone,
                 LastLogDate = c.LastLogDate,
-                AllowCommission = c.AllowCommission
-                // Các thuộc tính khác...
+                AllowCommission = c.AllowCommission,
+                Biography =c.Biography,
+                
             })
             .ToListAsync();
 

@@ -273,3 +273,5 @@ D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.I
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 >>>>>>> Volka
+D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\PayPal.dll

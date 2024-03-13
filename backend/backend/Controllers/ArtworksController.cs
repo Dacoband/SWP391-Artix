@@ -87,11 +87,15 @@ public class ArtworksController : ControllerBase
             }
 
             // Kiểm tra xem có ImageFile không
+<<<<<<< HEAD
             // Kiểm tra xem CreatorID có tồn tại không
             if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
             {
                 return BadRequest("CreatorID không tồn tại");
             }
+=======
+           
+>>>>>>> THUCVIP
 
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
@@ -111,8 +115,11 @@ public class ArtworksController : ControllerBase
             _context.Artworks.Add(artwork);
             await _context.SaveChangesAsync();
 
+
+
             // Lưu trữ ArtworkID đã được tạo tự động
             var artworkId = artwork.ArtworkID;
+
 
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
