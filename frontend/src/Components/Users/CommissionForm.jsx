@@ -75,25 +75,38 @@ style={{ background:' whitesmoke',margin:'auto', paddingLeft:'35px',paddingRight
       </Grid>
      
       <Grid item xs={12}>
-        <TextField
+        <TextField className='text'
           disabled
           id="userName"
           label="User Name"
           
           defaultValue="TAT610"
           fullWidth
+          
+          InputLabelProps={{ style: { color: 'gray' } }} 
+        // InputLabelProps={{
+        //     sx: {
+        //         color: 'gray', // Thay đổi màu chữ của nhãn (label) khi TextField bị vô hiệu hóa
+        //     },
+        // }}
+        sx={{
+            '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'gray !important', // Thay đổi màu của viền ngoài khi TextField bị vô hiệu hóa
+            },
+        }}
+          // InputLabelProps={{ style: { color: 'black' } }} // Thay đổi màu chữ của nhãn thành màu xanh
+          // style={{ borderColor: 'red' }} // Thay đổi màu khung thành màu đỏ
           value={formik.values.userName} onChange={formik.handleChange}
         />
          {formik.errors.userName && (<Typography variant="body2" color="red">{formik.errors.userName}
         </Typography>)} 
       </Grid>
-      <Grid item xs={12}>
-        <TextField
+      <Grid item xs={12}> 
+        <TextField className='text'
           disabled
           id="phone"
           label="Phone Contact"
-          name="phone"
-          autoComplete="email"
+          defaultValue="TAT610"
           fullWidth
           value={formik.values.phone} onChange={formik.handleChange}
         />
@@ -101,12 +114,11 @@ style={{ background:' whitesmoke',margin:'auto', paddingLeft:'35px',paddingRight
         </Typography>)} 
       </Grid>
       <Grid item xs={12}>
-        <TextField
+        <TextField className='text'
           disabled
           id="email"
           label="Email"
-          name="email"
-          autoComplete="email"
+          defaultValue="TAT610"
           fullWidth
           value={formik.values.email} onChange={formik.handleChange}
         />
