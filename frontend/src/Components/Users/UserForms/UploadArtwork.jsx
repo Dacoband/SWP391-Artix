@@ -86,7 +86,7 @@ function UploadArtwork() {
         enableReinitialize: true,
         initialValues: {
             artworkID: 0,
-            creatorID: 0, //CHANGE THE CREATOR ID 
+            creatorID: 1, //CHANGE THE CREATOR ID 
             artworkName: "",
             description: "",
             dateCreated: "",
@@ -220,7 +220,7 @@ function UploadArtwork() {
                                                    
                                                     onClick={() => {
                                                         arrayHelpers.push({  artworkTagID: 0,
-                                                        artworkID: 1, //CHANGE THE CREATOR ID 
+                                                        artworkID: 0,
                                                         tagID: 1 });
                                                         }
                                                     }>
