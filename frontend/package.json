@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.15.3",
     "@mui/material": "^5.15.5",
     "@mui/styles": "^5.15.5",
+    "@mui/x-charts": "^6.19.5",
     "@react-oauth/google": "^0.12.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

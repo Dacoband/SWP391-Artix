@@ -71,7 +71,7 @@ transformOrigin={{
 <Typography variant='caption'>Account</Typography>
 </Divider>
 <MenuItem onClick={handleClickDropdown}><Link to={`creatorform`}>Profile</Link></MenuItem>
-<MenuItem onClick={handleClickDropdown}>My Dashboard</MenuItem>
+<MenuItem onClick={handleClickDropdown}><Link to={`dashboarduser`}>My Dashboard</Link></MenuItem>
 <MenuItem onClick={handleClickDropdown}>My Account</MenuItem>
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
 <Typography variant='caption'>Theme</Typography>
