@@ -1,0 +1,34 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cột có kích thước bằng nhau */
+    grid-gap: 20px; /* Khoảng cách giữa các card */
+    margin: 15px 100px;
+}
+.grid-container .MuiCard-root {
+    width: 100%;
+}
+.infouser{
+    /* display: flex; */
+    text-align: center;
+    transform: translateY(-80%);
+    height: 80px;
+}
+.avartar img{
+    /* border-radius: 100%; */
+    /* transform: translateY(-40%); */
+    /* margin-left: 100px; */
+    outline: 4px solid #fff;
+    position: relative;
+    z-index: 2;
+    object-fit: cover;
+}
+.avartar{
+    /* transform: translateY(-65%); */
+    display: flex;
+    justify-content: center;
+}
+.pagination{
+   display: flex;
+   justify-content: center;
+   padding-bottom: 50px;
+}
