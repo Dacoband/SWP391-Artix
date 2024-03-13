@@ -1,0 +1,22 @@
+.listimage{
+    
+    /* display: flex;
+    justify-content: center; */
+    padding-bottom: 40px;
+}
+
+.content-recomment{
+    /* margin-top: 20px; */
+    padding-top: 20px;
+    margin-left: 90px;
+    margin-right: 90px;
+   
+    position: relative;
+    margin-bottom: 40px;
+}
+.boxlistimage{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}

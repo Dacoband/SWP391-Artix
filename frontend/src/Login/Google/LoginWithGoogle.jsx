@@ -5,11 +5,14 @@ import Button from '@mui/material/Button';
 import  axios  from 'axios';
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from '../../Components/AuthenContext.tsx';
-export default function LoginWithGoogle() {
+export default function LoginWithGoogle({disableOutsideClick,handleClick}) {
     const {storeUserData}= useAuth();
     //Call the custom hook to store user login information
     const navigate = useNavigate();
     const redirect =()=>{
+      if(disableOutsideClick!==true){
+        handleClick()
+      }
       const url = "/characters"
       navigate(url)
     }
