@@ -5,10 +5,20 @@ import { Typography } from '@mui/material';
 import { Work } from '../../share/ListofWork';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import Pagination from '@mui/material/Pagination';
 import '../../css/SeeMoreForYou.css';
 export default function SeeMoreForYou() {
     const { theme } = useContext(ThemeContext)
+    const [currentPage, setCurrentPage] = useState(1);
+    const imagesPerPage = 30;
 
+    const indexOfLastImage = currentPage * imagesPerPage;
+    const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+    const currentImages = Work.slice(indexOfFirstImage, indexOfLastImage);
+
+    const handleChangePage = (event, value) => {
+        setCurrentPage(value);}
+    
     
   return (
     <div className='seemorecommentwork'>
@@ -30,7 +40,7 @@ export default function SeeMoreForYou() {
             <Box className= 'boxlistimage'>
                 <ImageList variant="masonry" cols={4} gap={7}>
 
-                    {Work.map((work) => (
+                {currentImages.map((work) => (
                 <ImageListItem key={work.id}>
                     <img
                      srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
@@ -42,6 +52,9 @@ export default function SeeMoreForYou() {
                 ))}
                </ImageList></Box>
             </div></div>
+            <div className='pagination'>
+            <Pagination count={Math.ceil(Work.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
+
         </Box>
       
     </div>

@@ -66,7 +66,7 @@ export default function SeeMoreUser() {
                 {user.User}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-           Fllower: {user.follower} | Like: {user.like}
+           Followers: {user.follower} | Likes: {user.like}
           </Typography></div>
         </CardContent>
        
