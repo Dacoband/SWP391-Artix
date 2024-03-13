@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
 import Background from '../Themes/Background';
+import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 
 function LoginAsGuest() {
   return (
@@ -26,7 +27,7 @@ function LoginAsGuest() {
 }
 
 export default function CreateAccount() {
-
+  const {theme} = useContext(ThemeContext)
 
   const formik = useFormik({
     validateOnChange: false,
@@ -76,18 +77,16 @@ export default function CreateAccount() {
   return (
     <Background>
       <div className='createaccount'>
-        <div className='signUpForm'>
+        <div className='signupForm' style={{marginTop:'2%'}}>
           <Box
-            //   height=auto
-            width={700}
+            height={'auto'}
+            width={'80%'}
             my={4}
             display="flex"
             alignItems="center"
-            //   justifyContent="center"
             gap={4}
             p={2}
-            sx={{ border: '2px solid grey' }}
-            className=''
+            sx={{backgroundColor:theme.backgroundColor, margin:'auto'}}
           >
             <form onSubmit={formik.handleSubmit}>
               <Grid className='formregister' container spacing={2} component="form" noValidate>

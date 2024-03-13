@@ -742,20 +742,3 @@ a {
 
 /* End Art Post */
 
-
-/* Sign Up Form */
-.createaccount {
-  display: flex;
-  justify-content: space-between;
-}
-
-.signUpForm{
-  background: ' whitesmoke';
-  margin: 'auto';
-  padding-left: '35px';
-  padding-right: '35px';
-  margin-bottom: '40px';
-  margin-top: '2%'
-}
-
-/* End Sign Up Form */
