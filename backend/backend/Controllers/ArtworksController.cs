@@ -145,21 +145,21 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
-        existingArtwork.CreatorID = artworkRequest.CreatorID;
+        _context.Entry(existingArtwork).State = EntityState.Detached;
+
         existingArtwork.ArtworkName = artworkRequest.ArtworkName;
         existingArtwork.Description = artworkRequest.Description;
-        existingArtwork.DateCreated = artworkRequest.DateCreated;
         existingArtwork.Likes = artworkRequest.Likes;
         existingArtwork.Purchasable = artworkRequest.Purchasable;
         existingArtwork.Price = artworkRequest.Price;
-        existingArtwork.ImageFile = artworkRequest.ImageFile;
 
         // Update tags
-        existingArtwork.ArtworkTag.Clear();
         existingArtwork.ArtworkTag = artworkRequest.ArtworkTag.Select(tag => new ArtworkTag
         {
             TagID = tag.TagID
         }).ToList();
+
+        _context.Entry(existingArtwork).State = EntityState.Modified;
 
         try
         {
