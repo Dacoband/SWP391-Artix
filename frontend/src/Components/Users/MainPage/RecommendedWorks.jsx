@@ -6,18 +6,9 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
 import { Work} from '../../../share/ListofWork.js'
+import { Link } from 'react-router-dom';
 export default function RecommendedWords() {
-  const recommendedwork = {
-    ArtworkID:0, // PK
-    CreatorID:0,  // FK
-    TagID:0,  // FK
-    CategoryID:0,  // FK
-    Description:'Description',
-    DateCreated: new Date().toISOString(),
-    Likes:0, 
-    Purchasable:false, 
-    Price:0,
-  }
+  
   const [recommendedworkList,setrecommendedworkList] = useState([])
   const url = "https://localhost:7233/api/Artworks"
   const [isLoading,setIsLoading] = useState(false)
@@ -27,16 +18,18 @@ export default function RecommendedWords() {
     .then(list => {setrecommendedworkList(list)})
     .then(console.log(recommendedworkList))
     .then(
-          setIsLoading(!isLoading)
+          setIsLoading(!isLoading),
+          Sort()
     )
+
     .catch(error => {console.log(error)})
   },[])
 function Sort(){
    // Sắp xếp danh sách công việc theo số lượng like giảm dần
    // REAL DATABASE
-   //const sortedWork = [...recommendedworkList].sort((a, b) => b.Likes - a.Likes);
+   const sortedWork = [...recommendedworkList].sort((a, b) => b.Likes - a.Likes);
    // FAKE DATABASE
-    const sortedWork = [...Work].sort((a, b) => b.like - a.like);
+    //const sortedWork = [...Work].sort((a, b) => b.like - a.like);
    // Lấy ra 9 phần tử đầu tiên
    setrecommendedworkList(sortedWork.slice(0, 10));
 }
@@ -45,6 +38,7 @@ function Sort(){
   return (
     <ImageList className='recommendedImages' cols={5} >
       {recommendedworkList.map((work) => (
+        <Link to={`artwork/${work.id}`}>
         <CardActionArea key={work.ArtworkID}>
         <ImageListItem key={work.ArtworkID}>
           <CardMedia
@@ -56,7 +50,7 @@ function Sort(){
             />
         </ImageListItem>
         </CardActionArea>
-
+        </Link>
       ))}
     </ImageList>
 
