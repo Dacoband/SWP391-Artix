@@ -44,8 +44,8 @@ export default function SeeMoreOfArt1() {
                 {currentImages.map((work) => (
                 <ImageListItem key={work.id}>
                     <img
-                     srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                     src={`${work.img}?w=248&fit=crop&auto=format`}
+                     srcSet={`${work.img}`}
+                     src={`${work.img}`}
                      alt={work.title}
                      loading="lazy"
                     />
