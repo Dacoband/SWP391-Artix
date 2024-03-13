@@ -3282,11 +3282,16 @@
     ]
   },
   "packageFolders": {
+<<<<<<< HEAD
     "/Users/hendrix/.nuget/packages/": {}
+=======
+    "C:\\Users\\bolic\\.nuget\\packages\\": {}
+>>>>>>> Main
   },
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/backend.csproj",
       "projectName": "backend",
       "projectPath": "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/backend.csproj",
@@ -3295,6 +3300,17 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/hendrix/.nuget/NuGet/NuGet.Config"
+=======
+      "projectUniqueName": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
+      "projectName": "backend",
+      "projectPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\bolic\\.nuget\\packages\\",
+      "outputPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+>>>>>>> Main
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3313,11 +3329,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3388,12 +3399,25 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+>>>>>>> Main
       }
     }
   },
   "logs": [
     {
+<<<<<<< HEAD
+=======
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'expectedPackageFiles', line 70, position 0."
+    },
+    {
+>>>>>>> Main
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,

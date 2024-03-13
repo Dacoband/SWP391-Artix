@@ -26,7 +26,8 @@ public class CreatorController : ControllerBase
             .Select(c => new Creator
             {
                 CreatorID = c.CreatorID,
-                PaypalAccount = c.PaypalAccount,
+                AccountID = c.AccountID,
+                PaypalAccountID = c.PaypalAccountID,
                 UserName = c.UserName,
                 FollowerID = c.FollowerID, 
                 ProfilePicture = c.ProfilePicture, 
@@ -86,6 +87,17 @@ public class CreatorController : ControllerBase
             {
                 return BadRequest("Định dạng hình ảnh không hợp lệ");
             }
+        }
+
+        if (creatorModel.AccountID == null)
+        {
+            return BadRequest("AccountID is required.");
+        }
+
+        // Kiểm tra xem AccountID có tồn tại trong bảng Accounts hay không
+        if (!_context.Account.Any(a => a.AccountID == creatorModel.AccountID))
+        {
+            return BadRequest("Invalid AccountID.");
         }
 
         _context.Creators.Add(creatorModel);
