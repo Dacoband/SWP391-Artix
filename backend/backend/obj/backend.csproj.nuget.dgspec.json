@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[8.0.2, )"
             },
+            "PayPal": {
+              "target": "Package",
+              "version": "[1.9.1, )"
+            },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
               "version": "[8.0.0, )"

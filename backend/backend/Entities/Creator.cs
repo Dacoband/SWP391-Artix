@@ -7,7 +7,8 @@ namespace backend.Entities
     {
         [Key]
         public int? CreatorID { get; set; } // PK
-        public int? PaypalAccount { get; set; } // FK
+        public int AccountID { get; set; }
+        public int? PaypalAccountID { get; set; } // FK
         public string UserName { get; set; }
         public int? FollowerID { get; set; } // FK
         public string  ProfilePicture { get; set; } // Có thể 
@@ -17,6 +18,9 @@ namespace backend.Entities
         public string Phone { get; set; }
         public DateTime LastLogDate { get; set; }
         public bool AllowCommission { get; set; }
+        public string Biography { get; set; }
+
+
 
     }
 }
