@@ -6,8 +6,8 @@ namespace backend.Entities
     public class Creator
     {
         [Key]
-        public int? CreatorID { get; set; } // PK
-        public int AccountID { get; set; }
+        public int CreatorID { get; set; } // PK
+        public int? AccountID { get; set; }
         public int? PaypalAccountID { get; set; } // FK
         public string UserName { get; set; }
         public int? FollowerID { get; set; } // FK
