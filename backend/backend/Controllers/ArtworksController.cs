@@ -86,17 +86,6 @@ public class ArtworksController : ControllerBase
                 return BadRequest("CreatorID không tồn tại");
             }
 
-            // Kiểm tra xem có ImageFile không
-<<<<<<< HEAD
-            // Kiểm tra xem CreatorID có tồn tại không
-            if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
-            {
-                return BadRequest("CreatorID không tồn tại");
-            }
-=======
-           
->>>>>>> THUCVIP
-
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
             {
