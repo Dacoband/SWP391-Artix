@@ -86,13 +86,6 @@ public class ArtworksController : ControllerBase
                 return BadRequest("CreatorID không tồn tại");
             }
 
-            // Kiểm tra xem có ImageFile không
-            // Kiểm tra xem CreatorID có tồn tại không
-            if (!_context.Creators.Any(c => c.CreatorID == artwork.CreatorID))
-            {
-                return BadRequest("CreatorID không tồn tại");
-            }
-
             // Kiểm tra xem TagID có tồn tại không
             if (artwork.ArtworkTag != null && artwork.ArtworkTag.Any())
             {
@@ -111,8 +104,11 @@ public class ArtworksController : ControllerBase
             _context.Artworks.Add(artwork);
             await _context.SaveChangesAsync();
 
+
+
             // Lưu trữ ArtworkID đã được tạo tự động
             var artworkId = artwork.ArtworkID;
+
 
             // Thêm ArtworkTag vào cơ sở dữ liệu
             foreach (var artworkTag in artwork.ArtworkTag)
@@ -149,21 +145,21 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
-        existingArtwork.CreatorID = artworkRequest.CreatorID;
+        _context.Entry(existingArtwork).State = EntityState.Detached;
+
         existingArtwork.ArtworkName = artworkRequest.ArtworkName;
         existingArtwork.Description = artworkRequest.Description;
-        existingArtwork.DateCreated = artworkRequest.DateCreated;
         existingArtwork.Likes = artworkRequest.Likes;
         existingArtwork.Purchasable = artworkRequest.Purchasable;
         existingArtwork.Price = artworkRequest.Price;
-        existingArtwork.ImageFile = artworkRequest.ImageFile;
 
         // Update tags
-        existingArtwork.ArtworkTag.Clear();
         existingArtwork.ArtworkTag = artworkRequest.ArtworkTag.Select(tag => new ArtworkTag
         {
             TagID = tag.TagID
         }).ToList();
+
+        _context.Entry(existingArtwork).State = EntityState.Modified;
 
         try
         {
@@ -215,10 +211,17 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
+        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
+        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
+        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
+
+        // Sau đó mới xóa bản ghi từ bảng Artworks
         _context.Artworks.Remove(artwork);
+
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
+
 
 }

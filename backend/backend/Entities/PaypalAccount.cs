@@ -6,7 +6,6 @@ namespace backend.Entities
     {
         [Key]
         public int PayPalAccountID { get; set; }
-        public int CreatorID { get; set; }
         public string QR { get; set; }
     }
 }
