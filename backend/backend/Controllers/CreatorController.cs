@@ -50,10 +50,24 @@ public class CreatorController : ControllerBase
 
 
 
+    [HttpGet("{accountId}")]
+    public async Task<ActionResult<Creator>> GetCreatorByAccountId(int accountId)
+    {
+        var creator = await _context.Creators.FirstOrDefaultAsync(c => c.AccountID == accountId);
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
+
 
 
     // GET: api/Creator/5
-    [HttpGet("{id}")]
+    [HttpGet("ById/{id}")]
     public async Task<ActionResult<Creator>> GetCreator(int id)
     {
         var creator = await _context.Creators.FindAsync(id);
