@@ -1,9 +1,9 @@
 import React, { createContext, useState, useContext } from 'react';
-import { User } from '../Interfaces/UserInterface';
+import { GoogleUser, Creator } from '../Interfaces/UserInterface';
 import { useNavigate } from 'react-router-dom';
 interface AuthContextType {
-  auth: User | null; //User is the predefine interface for user login account
-  storeUserData: (userData: any) => void; // Replace 'any' with the actual type of your user data
+  auth: Creator | null; //User is the predefine interface for user login account
+  storeUserData: (userData: Creator) => void; // Replace 'any' with the actual type of your user data
   logout:()=>void; //
 }
 // Define the context with the AuthContextType
