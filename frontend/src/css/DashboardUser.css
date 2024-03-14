@@ -1,0 +1,36 @@
+.boxdashboard{
+    transform: translateY(3%);
+    margin-bottom: 70px;
+    
+}
+.boxdashboard h1{
+    margin-left: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.headertab{
+    display: flex;
+    justify-content: center;
+}
+.contentdashboard{
+    display: flex;
+    margin: 10px 100px 40px;
+    
+}
+.contentdashboard h2{
+    margin-bottom: 10px;
+}
+.explication{
+    padding-left: 80px;
+    margin: auto;
+    padding-bottom: 50px;
+}
+.chart{
+    padding-right: 80px;
+    border-right: 1px solid gray;
+
+}
+.namework{
+    font-weight: 400;
+    font-size: 18px;
+}

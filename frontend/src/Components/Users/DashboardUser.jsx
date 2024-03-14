@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
-
+import '../../css/DashboardUser.css';
 
   
 function CustomTabPanel(props) {
@@ -52,15 +52,9 @@ export default function DashboardUser() {
     // Lấy 10 tác phẩm mới nhất
     const latestWorks = sortedWork.slice(0, 10);
 
-    // const sortedWork = Work.sort((a, b) => {
-    //     const dateComparison = new Date(b.date) - new Date(a.date);
-    //     if (dateComparison !== 0) {
-    //       return dateComparison;
-    //     }
-    //     return new Date(`${b.date}T${b.time}`) - new Date(`${a.date}T${a.time}`);
-    //   });
-    
-    //   const latestWorks = sortedWork.slice(0, 10);
+     const sortedWork2 = Work.sort((a, b) => b.like - a.like);
+     const likeWorks = sortedWork2.slice(0, 10);
+        
     
    
         const [value, setValue] = React.useState(0);
@@ -70,7 +64,7 @@ export default function DashboardUser() {
         };
 
   return (
-    <div>
+    <div className='boxdashboard'>
         <Box className='box'
         sx={{
           color: theme.color,
@@ -82,35 +76,72 @@ export default function DashboardUser() {
           marginBottom: '15px',
           
         }}>
+
+
+          <h1>Your Dashboard :</h1>
+          
              <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <div className='headertab'>  
+      <Box sx={{ borderBottom: 1, borderColor: 'gray',width:'80%' }}>
         <Tabs value={value} onChange={handleChange} centered>
-          <Tab label="TOP 10 NEW" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
+          <Tab label=" Top 10 newest works" {...a11yProps(0)} />
+          <Tab label="Top 10 works with the most likes" {...a11yProps(1)} />
         
         </Tabs>
-      </Box>
+      </Box></div>
       <CustomTabPanel value={value} index={0}>
+        <div className='contentdashboard'>
       <div className='chart'>
                  <LineChart
                           xAxis={[{ data: latestWorks.map((work, index) => index + 1) }]}
                           series={[{ data: latestWorks.map(work => work.like) }]}
                       
-                        width={700}
+                        width={720}
                         height={450}
+                        
                     />
             </div>
 
 
-            <div>
-                Name: {latestWorks.map(work => 
-                    
-                    
-                    <div>{work.namework} and {work.date} and {work.like}</div>)} 
+            <div className='explication'>
+   <h2>Explication: </h2>
+  {latestWorks.map((work, index) => (
+    <div className='namework' key={index}>
+      {index + 1}: {work.namework} 
+      {/* {work.date} */}
+    </div>
+  ))}
+</div>
+                
+            
             </div>
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-        Item Two
+      <div className='contentdashboard'>
+      <div className='chart'>
+                 <LineChart
+                          xAxis={[{ data: likeWorks.map((work, index) => index + 1) }]}
+                          series={[{ data: likeWorks.map(work => work.like) }]}
+                      
+                        width={720}
+                        height={450}
+                        
+                    />
+            </div>
+
+
+            <div className='explication'>
+   <h2>Explication: </h2>
+  {likeWorks.map((work, index) => (
+    <div className='namework' key={index}>
+      {index + 1}: {work.namework} 
+      {/* {work.like} */}
+    </div>
+  ))}
+</div>
+                
+            
+            </div>
       </CustomTabPanel>
       
     </Box>
