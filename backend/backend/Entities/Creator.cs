@@ -22,6 +22,8 @@ namespace backend.Entities
 
         public Boolean?  VIP { get; set; }
 
+        public int? FollowCounts { get; set; }
+
         public Creator()
         {
             VIP = false; // Đặt giá trị mặc định của VIP là true

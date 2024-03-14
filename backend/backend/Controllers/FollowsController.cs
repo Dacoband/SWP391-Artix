@@ -46,7 +46,9 @@ public class FollowsController : ControllerBase
         _context.Follows.Add(follow);
         await _context.SaveChangesAsync();
 
-     
+        var creator = await _context.Creators.FindAsync(creatorId);
+        creator.FollowCounts++;
+
 
         await _context.SaveChangesAsync();
 
@@ -66,7 +68,9 @@ public class FollowsController : ControllerBase
         _context.Follows.Remove(follow);
         await _context.SaveChangesAsync();
 
-       
+        var creator = await _context.Creators.FindAsync(creatorId);
+        creator.FollowCounts--;
+
 
         await _context.SaveChangesAsync();
 

@@ -39,6 +39,7 @@ public class CreatorController : ControllerBase
                 AllowCommission = c.AllowCommission,
                 Biography =c.Biography,
                 VIP = c.VIP,
+                FollowCounts = c.FollowCounts,  
                 
             })
             .ToListAsync();
