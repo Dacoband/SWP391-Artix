@@ -42,7 +42,7 @@ useEffect(() => {
         }}>
         < div className='recommendedwork'>
           <div className='headrecommended'>
-            <Typography variant='h5'>Recommended Works {user?.userName===""? `For You, ${user.userName}`:"From The Community"}</Typography>
+            <Typography variant='h5'>Recommended Works {user?.userName!==""? `For You, ${user?.userName}`:"From The Community"}</Typography>
             <Link to={`artwordrecomment`}>
             <div className='seemore'>See More</div>
             </Link>
