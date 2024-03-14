@@ -1,5 +1,5 @@
 .boxdashboard{
-    transform: translateY(3%);
+    transform: translateY(4%);
     margin-bottom: 70px;
     
 }
@@ -33,4 +33,30 @@
 .namework{
     font-weight: 400;
     font-size: 18px;
+}
+.overview h2{
+    text-align: center;
+    margin-bottom: 25px;
+    margin-top: 25px;
+}
+
+.overview{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 50px;
+    width: 80%;
+    border-top:1px solid gray ;
+}
+.contentoverview{
+    font-size: 20px;
+}
+.line{
+    margin-left: 70px;
+    display: flex;
+    margin-bottom: 10px;
+    
+}
+.line1{
+    width: 370px;
 }

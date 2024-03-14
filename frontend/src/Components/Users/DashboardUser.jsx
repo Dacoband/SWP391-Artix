@@ -70,7 +70,7 @@ export default function DashboardUser() {
           color: theme.color,
           backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
           transition: theme.transition,
-          width: '95%',
+          width: '90%',
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
@@ -147,6 +147,23 @@ export default function DashboardUser() {
     </Box>
 
 
+        <div className='overview'>
+          
+          <div className='contentoverview'>
+           <h2>Information overview</h2>
+
+           <div className='line'>
+           <div className='line1'> Total commission received: 100   </div>
+            <div className='line1'>Total commission sented :  100    </div>
+            <div className='line1'>Your post number:  5  </div></div>
+            <div className='line'>
+            <div className='line1'>Your post number:  5  </div>
+            <div className='line1'>Your number of likes: 20 </div>      </div>
+
+            {/* <div>Number of works sold:</div> */}
+          
+          </div>
+        </div>
         
 
 
