@@ -38,6 +38,7 @@ public class CreatorController : ControllerBase
                 LastLogDate = c.LastLogDate,
                 AllowCommission = c.AllowCommission,
                 Biography =c.Biography,
+                VIP = c.VIP,
                 
             })
             .ToListAsync();
