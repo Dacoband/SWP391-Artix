@@ -157,10 +157,12 @@ export default function DashboardUser() {
             <div className='line1'>Total commission sented :  100    </div>
             <div className='line1'>Your post number:  5  </div></div>
             <div className='line'>
-            <div className='line1'>Your post number:  5  </div>
-            <div className='line1'>Your number of likes: 20 </div>      </div>
+            <div className='line1'>Number of works sold: </div>
+            <div className='line1'>Number of works bought: </div>
+            <div className='line1'>Your number of likes: 20 </div>   
+               </div>
 
-            {/* <div>Number of works sold:</div> */}
+            <div></div>
           
           </div>
         </div>
