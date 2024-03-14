@@ -138,6 +138,30 @@ public class AccountController : ControllerBase
         return _context.Account.Any(a => a.AccountID == id);
     }
 
+    [HttpPost("login")]
+    public async Task<ActionResult<Account>> Login(string email, string password)
+    {
+        // Tìm tài khoản trong cơ sở dữ liệu dựa trên email
+        var account = await _context.Account
+            .FirstOrDefaultAsync(ac => ac.Email == email);
+
+        // Nếu không tìm thấy tài khoản với email cung cấp, trả về Unauthorized
+        if (account == null)
+        {
+            return Unauthorized(); // 401 Unauthorized
+        }
+
+        // Kiểm tra mật khẩu
+        if (password != account.Password)
+        {
+            return Unauthorized(); // 401 Unauthorized
+        }
+
+        // Nếu email và mật khẩu đều khớp, trả về tài khoản
+        return account;
+    }
+
+
 
 
 }
