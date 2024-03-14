@@ -27,8 +27,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const logout = () => {
         // Clear the user data in the state
         setAuth(null);
-        // Also clear the sessionStorage
-        sessionStorage.removeItem('auth');
+        // Also clear the sessionStorage and user role
+        sessionStorage.removeItem('userRole')
+        sessionStorage.removeItem('auth')
         redirect("/")
     };
     return (
