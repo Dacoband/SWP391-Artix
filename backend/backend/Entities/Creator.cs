@@ -14,7 +14,7 @@ namespace backend.Entities
         public int? AccountID { get; set; }
         public int? PaypalAccountID { get; set; } // FK
         public string UserName { get; set; }
-        public int? FollowerID { get; set; } // FK
+        public int? FollowID { get; set; } // FK
         public string?  ProfilePicture { get; set; } // Có thể 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -25,6 +25,8 @@ namespace backend.Entities
         public string? Biography { get; set; }
 
         public Boolean?  VIP { get; set; }
+
+        public int? FollowCounts { get; set; }
 
         public Creator()
         {
