@@ -20,7 +20,12 @@ namespace backend.Entities
         public bool AllowCommission { get; set; }
         public string Biography { get; set; }
 
+        public Boolean  VIP { get; set; }
 
+        public Creator()
+        {
+            VIP = false; // Đặt giá trị mặc định của VIP là true
+        }
 
     }
 }
