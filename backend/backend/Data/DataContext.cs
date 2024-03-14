@@ -27,7 +27,7 @@ namespace backend.Entities
         public DbSet<Comments> Comments { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Follow> Follows { get; set; }
-        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Notification> Notification { get; set; }
         public DbSet<ViewReport> ViewReport { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetail { get; set; }

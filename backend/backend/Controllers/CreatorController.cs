@@ -38,6 +38,7 @@ public class CreatorController : ControllerBase
                 LastLogDate = c.LastLogDate,
                 AllowCommission = c.AllowCommission,
                 Biography =c.Biography,
+                VIP = c.VIP,
                 
             })
             .ToListAsync();
@@ -138,7 +139,6 @@ public class CreatorController : ControllerBase
         return NoContent();
     }
 
-    // DELETE: api/Creator/5
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCreator(int id)
     {
@@ -148,11 +148,46 @@ public class CreatorController : ControllerBase
             return NotFound();
         }
 
+        // Xóa tất cả các bản ghi trong bảng CommissionForm có ReceiverID là creator.Id
+        var commissionForms = await _context.CommissionForm.Where(cf => cf.ReceiverID == id).ToListAsync();
+        _context.CommissionForm.RemoveRange(commissionForms);
+
+        // Xóa tất cả các bản ghi trong bảng Notification có CreatorID là creator.Id
+        var notifications = await _context.Notification.Where(n => n.CreatorID == id).ToListAsync();
+        _context.Notification.RemoveRange(notifications);
+
+        // Xóa tất cả các bản ghi trong bảng Orders có CreatorID là creator.Id
+        var orders = await _context.Orders.Where(o => o.CreatorID == id).ToListAsync();
+        foreach (var order in orders)
+        {
+            // Tìm và xóa tất cả các bản ghi trong bảng OrderDetail có OrderID là ID của đơn đặt hàng hiện tại
+            var orderDetails = await _context.OrderDetail.Where(od => od.OrderID == order.OrderID).ToListAsync();
+            _context.OrderDetail.RemoveRange(orderDetails);
+        }
+        _context.Orders.RemoveRange(orders);
+        await _context.SaveChangesAsync();
+        // Xóa tất cả các bản ghi trong bảng Reports có CreatorID là creator.Id
+        var reports = await _context.Reports.Where(r => r.CreatorID == id).ToListAsync();
+        foreach (var report in reports)
+        {
+            var moderators = await _context.Moderators.Where(m => m.ReportID == report.ReportID).ToListAsync();
+            _context.Moderators.RemoveRange(moderators);
+        }
+        _context.Reports.RemoveRange(reports);
+
+        // Xóa tất cả các bản ghi trong bảng OrderDetail có CreatorID là creator.Id
+        
+
+        // Lưu các thay đổi vào cơ sở dữ liệu
+        await _context.SaveChangesAsync();
+
+        // Xóa creator
         _context.Creators.Remove(creator);
         await _context.SaveChangesAsync();
 
         return NoContent();
     }
+
 
     private bool CreatorExists(int id)
     {
