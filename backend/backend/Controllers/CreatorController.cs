@@ -30,7 +30,8 @@ public class CreatorController : ControllerBase
                 PaypalAccountID = c.PaypalAccountID,
                 UserName = c.UserName,
                 FollowID = c.FollowID, 
-                ProfilePicture = c.ProfilePicture, 
+                ProfilePicture = c.ProfilePicture,
+                BackgroundPicture = c.BackgroundPicture,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
                 Address = c.Address,
@@ -102,6 +103,21 @@ public class CreatorController : ControllerBase
             catch (FormatException)
             {
                 return BadRequest("Định dạng hình ảnh không hợp lệ");
+            }
+        }
+
+        // Kiểm tra xem tệp hình ảnh BackgroundPicture có giá trị không
+        if (!string.IsNullOrEmpty(creatorModel.BackgroundPicture))
+        {
+            try
+            {
+                // Thực hiện xử lý kiểm tra và chuyển đổi dữ liệu Base64 nếu cần
+                byte[] backgroundBytes = Convert.FromBase64String(creatorModel.BackgroundPicture);
+                // Lưu backgroundBytes vào cơ sở dữ liệu hoặc thực hiện các bước xử lý khác tùy thuộc vào yêu cầu của bạn
+            }
+            catch (FormatException)
+            {
+                return BadRequest("Định dạng hình ảnh BackgroundPicture không hợp lệ");
             }
         }
 
