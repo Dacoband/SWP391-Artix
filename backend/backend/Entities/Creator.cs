@@ -6,11 +6,11 @@ namespace backend.Entities
     public class Creator
     {
         [Key]
-        public int CreatorID { get; set; } // PK
+        public int? CreatorID { get; set; } // PK
         public int? AccountID { get; set; }
         public int? PaypalAccountID { get; set; } // FK
         public string UserName { get; set; }
-        public int? FollowerID { get; set; } // FK
+        public int? FollowID { get; set; } // FK
         public string?  ProfilePicture { get; set; } // Có thể 
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -20,7 +20,14 @@ namespace backend.Entities
         public bool AllowCommission { get; set; }
         public string? Biography { get; set; }
 
+        public Boolean?  VIP { get; set; }
 
+        public int? FollowCounts { get; set; }
+
+        public Creator()
+        {
+            VIP = false; // Đặt giá trị mặc định của VIP là false
+        }
 
     }
 }

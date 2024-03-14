@@ -1,9 +1,9 @@
 import React, { createContext, useState, useContext } from 'react';
-import { User } from '../Interfaces/UserInterface';
+import { GoogleUser, Creator } from '../Interfaces/UserInterface';
 import { useNavigate } from 'react-router-dom';
 interface AuthContextType {
-  auth: User | null; //User is the predefine interface for user login account
-  storeUserData: (userData: any) => void; // Replace 'any' with the actual type of your user data
+  auth: Creator | null; //User is the predefine interface for user login account
+  storeUserData: (userData: Creator) => void; // Replace 'any' with the actual type of your user data
   logout:()=>void; //
 }
 // Define the context with the AuthContextType
@@ -27,8 +27,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const logout = () => {
         // Clear the user data in the state
         setAuth(null);
-        // Also clear the sessionStorage
-        sessionStorage.removeItem('auth');
+        // Also clear the sessionStorage and user role
+        sessionStorage.removeItem('userRole')
+        sessionStorage.removeItem('auth')
         redirect("/")
     };
     return (

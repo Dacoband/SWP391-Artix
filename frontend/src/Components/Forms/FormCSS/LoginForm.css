@@ -8,10 +8,18 @@
     padding-top: 5%;
 }
 .loginForm{
+    min-width: 300px;
     text-align: center;
     margin: auto;
     width: 25%;
     padding: 50px;
     background-color: whitesmoke;
-    border-radius: 3%;
+    border-radius: 5%;
+}
+
+.normalLogin{
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    margin-left: 5%;
 }
