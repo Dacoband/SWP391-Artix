@@ -38,7 +38,7 @@ public class CreatorController : ControllerBase
                 LastLogDate = c.LastLogDate,
                 AllowCommission = c.AllowCommission,
                 Biography =c.Biography,
-                VIP = c.VIP,
+                VIP = c.VIP ,
                 FollowCounts = c.FollowCounts,  
                 
             })
@@ -130,6 +130,13 @@ public class CreatorController : ControllerBase
         {
             return BadRequest("Invalid AccountID.");
         }
+
+        if (creatorModel.VIP == null)
+        {
+            creatorModel.VIP = false;
+        }
+
+       
 
         _context.Creators.Add(creatorModel);
         await _context.SaveChangesAsync();
