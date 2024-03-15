@@ -27,8 +27,14 @@ namespace backend.Entities
         {
             VIP = false; // Đặt giá trị mặc định của VIP là false
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             AllowCommission = false;
+>>>>>>> THUCVIP
+=======
+
+            AllowCommission = false;
+
 >>>>>>> THUCVIP
         }
 
