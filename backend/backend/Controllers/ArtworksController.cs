@@ -188,72 +188,7 @@ public class ArtworksController : ControllerBase
 
 
 
-    [HttpPut("{id}/updateProfilePicture")]
-    public async Task<IActionResult> UpdateProfilePicture(int id, [FromBody] string profilePicture)
-    {
-        var existingArtwork = await _context.Artworks.FindAsync(id);
-
-        if (existingArtwork == null)
-        {
-            return NotFound();
-        }
-
-        existingArtwork.ProfilePicture = profilePicture;
-
-        _context.Entry(existingArtwork).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ArtworkExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
-        return Ok("Profile Picture updated successfully");
-    }
-
-    [HttpPut("{id}/updateBackground")]
-    public async Task<IActionResult> UpdateBackground(int id, [FromBody] string background)
-    {
-        var existingArtwork = await _context.Artworks.FindAsync(id);
-
-        if (existingArtwork == null)
-        {
-            return NotFound();
-        }
-
-        existingArtwork.Background = background;
-
-        _context.Entry(existingArtwork).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!ArtworkExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
-        return Ok("Background updated successfully");
-    }
-
+   
     
 
 
