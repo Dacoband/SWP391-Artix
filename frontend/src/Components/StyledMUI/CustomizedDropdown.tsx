@@ -37,7 +37,6 @@ export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedD
     const [anchorEl, setAnchorEl] = useState(null)
     const [open,setOpen] = useState(false)
   useEffect(()=>{
-   
 }
 )
 const handleClickDropdown = (event) => {
@@ -86,7 +85,6 @@ transformOrigin={{
 </CustomizedMenu>
   )
 }
-
   return (
     <div>
        <IconButton
@@ -97,7 +95,7 @@ transformOrigin={{
         aria-haspopup="true"
         aria-expanded={open ? 'true' : 'false'}
       >
-        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.firstName.charAt[0] : null}</Avatar>
+        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
       </IconButton>
       {
         user===null?

@@ -29,7 +29,6 @@ export async function CheckLogin(checkAccount:initialUser, storeUserData:any) {
   try {
     const response = await axios.get(accounturl);
     const listOfAccounts = response.data;
-    console.log(listOfAccounts);
     const foundAccount:initialUser = listOfAccounts.find((account: { email: string; password: string }) => account.email === checkAccount.email && account.password === checkAccount.password);
     if (foundAccount) {
       //Get the user roles
@@ -40,7 +39,6 @@ export async function CheckLogin(checkAccount:initialUser, storeUserData:any) {
        // Once the user is verified, get additional user data.
       const creatorResponse = await axios.get(creatorurl + foundAccount.accountID);
       const creatorData = creatorResponse.data;
-      console.log(creatorData);
       storeUserData(creatorData);
     } else {
       alert("No account found");

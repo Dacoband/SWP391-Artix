@@ -44,7 +44,7 @@ export default function LoginWithGoogle({ disableOutsideClick, handleClick }) {
           //Store the user role in sesison
           sessionStorage.setItem('userRole', userrole.roleName);
           storeUserData(creator); //Store user data from Google to session storage
-          console.log(user);
+          window.dispatchEvent(new Event('userLoggedIn'));
         })
         .then(redirect)
         .catch(error => console.log(error))

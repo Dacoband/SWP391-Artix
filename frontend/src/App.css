@@ -33,13 +33,13 @@
 }
 
 .loadingscreen {
-  position: fixed;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 1000vh;
+  height: 100vh;
   z-index: 9999;
+
 }
 
 .loading {
@@ -255,7 +255,7 @@
 }
 
 .carouseltag {
-
+  margin-top: 2%;
   margin-left: 90px;
   margin-right: 90px;
   position: relative;
@@ -388,6 +388,7 @@
   margin-top: 30px;
   margin-left: 90px;
   margin-right: 90px;
+  margin-bottom: 5%;
   border: 2px;
   border-bottom: #218EC2;
 }

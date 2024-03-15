@@ -4,8 +4,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CardMedia from '@mui/material/CardMedia';
 import { Work } from '../../../share/ListofWork';
 import {Link} from 'react-router-dom'
-export default function StandardImageList() {
-  const randomWork = Work.sort(() => 0.5 - Math.random()).slice(0, 10);
+export default function StandardImageList({artworkList}) {
+  const randomWork = artworkList.sort(() => 0.5 - Math.random()).slice(0, 10);
   return (
     <ImageList className='recommendedImages' cols={5}>
     {randomWork.map((work) => (

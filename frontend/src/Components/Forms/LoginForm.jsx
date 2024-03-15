@@ -30,7 +30,6 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
         password: Yup.string().required("What's the password?"),
       }),
       onSubmit: async (values) => {
-        console.log(values);
         try{
         await CheckLogin(values,storeUserData)
         const sessionRole = sessionStorage.getItem('userRole');
@@ -38,8 +37,11 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
         if(sessionRole ===  "AD"){
           navigate('/admin');
         }
-        else
+        else{
         navigate('/characters');
+        }
+        window.dispatchEvent(new Event('userLoggedIn'));
+        handleClick()
       }
       catch(err){
         console.log(err);
