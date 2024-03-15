@@ -29,7 +29,6 @@ public class CreatorController : ControllerBase
                 AccountID = c.AccountID,
                 PaypalAccountID = c.PaypalAccountID,
                 UserName = c.UserName,
-                FollowID = c.FollowID, 
                 ProfilePicture = c.ProfilePicture,
                 BackgroundPicture = c.BackgroundPicture,
                 FirstName = c.FirstName,
