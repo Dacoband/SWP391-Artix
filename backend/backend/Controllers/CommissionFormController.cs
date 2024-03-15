@@ -53,7 +53,8 @@ public class CommissionFormController : ControllerBase
     [HttpPut("{commissionId}")]
     public async Task<IActionResult> PutCommissionForm(int commissionId, CommissionForm commissionForm)
     {
-        if (commissionId != commissionForm.CommissionID)
+        if (commissionId != commissionForm.CommissionFormID
+            )
         {
             return BadRequest();
         }
