@@ -1,3 +1,11 @@
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.csproj.AssemblyReference.cache
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cs
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cache
+/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.sourcelink.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.Development.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/backend
@@ -97,14 +105,6 @@
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/tr/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/zh-Hans/Microsoft.CodeAnalysis.Workspaces.resources.dll
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/zh-Hant/Microsoft.CodeAnalysis.Workspaces.resources.dll
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.csproj.AssemblyReference.cache
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.GeneratedMSBuildEditorConfig.editorconfig
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.AssemblyInfoInputs.cache
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.AssemblyInfo.cs
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.csproj.CoreCompileInputs.cache
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cs
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cache
-/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.sourcelink.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/staticwebassets.build.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/staticwebassets.development.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props

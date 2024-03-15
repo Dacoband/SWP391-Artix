@@ -54,9 +54,9 @@ export default function Menu() {
               <ExpandingSearchBar />
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              {user === null ? <LoginButton /> : ""}
-              <Button onClick={user === null ? () => handleClick() : () => disabledButtons()}
-                color="inherit"><Link to={user ? "artworkform" : ""}>Publish Your Works</Link></Button>
+              {user===null? <LoginButton /> : ""}
+              <Button onClick={user===null? () => handleClick() : () => disabledButtons()}
+                color="inherit"><Link to={user!==null? "artworkform" : ""}>Publish Your Works</Link></Button>
               <CustomizedDropdown
                 handleClickAsGuest={handleClick}
                 user={user} />

@@ -10,7 +10,6 @@ namespace backend.Entities
         public int? AccountID { get; set; }
         public int? PaypalAccountID { get; set; } // FK
         public string UserName { get; set; }
-        public int? FollowID { get; set; } // FK
         public string?  ProfilePicture { get; set; } // Có thể 
         public string? BackgroundPicture { get; set; }
         public string FirstName { get; set; }
@@ -27,7 +26,7 @@ namespace backend.Entities
 
         public Creator()
         {
-            VIP = false; // Đặt giá trị mặc định của VIP là true
+            VIP = false; // Đặt giá trị mặc định của VIP là false
         }
 
     }
