@@ -10,9 +10,6 @@ import { Creator } from '../../../Interfaces/UserInterface.ts';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 export default function HomePage() {
-  const role = sessionStorage.getItem('userRole')
-  console.log(role)
-
 // Attempt to retrieve the auth state from sessionStorage
 const savedAuth = sessionStorage.getItem('auth');
 // Check if there's any auth data saved and parse it
@@ -42,7 +39,7 @@ useEffect(() => {
         }}>
         < div className='recommendedwork'>
           <div className='headrecommended'>
-            <Typography variant='h5'>Recommended Works {user?.userName!==""? `For You, ${user?.userName}`:"From The Community"}</Typography>
+            <Typography variant='h5'>Recommended Works {user?.userName!==""?`For You, ${user?.userName}`:"From The Community"}</Typography>
             <Link to={`artwordrecomment`}>
             <div className='seemore'>See More</div>
             </Link>

@@ -25,7 +25,7 @@ export function NormalLogin() {
   )
 }
 
-export async function CheckLogin(checkAccount:initialUser, setRole:any, storeUserData:any) {
+export async function CheckLogin(checkAccount:initialUser, storeUserData:any) {
   try {
     const response = await axios.get(accounturl);
     const listOfAccounts = response.data;
@@ -35,7 +35,6 @@ export async function CheckLogin(checkAccount:initialUser, setRole:any, storeUse
       //Get the user roles
       const userroleResponse = await axios.get(roleurl+foundAccount.roleID);
       const userrole:roles = userroleResponse.data;
-      setRole(userrole)
       //Store the user role in sesison
       sessionStorage.setItem('userRole', userrole.roleName);
        // Once the user is verified, get additional user data.
