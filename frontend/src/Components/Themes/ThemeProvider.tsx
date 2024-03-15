@@ -1,4 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState,useEffect} from 'react'
+
+
 //type Theme =  string
 const lightimages = [
   "/sliderImages/day1.png",
@@ -47,7 +49,15 @@ const initialState = {
 const ThemeContext = React.createContext(initialState);
 
 function ThemeProvider({children}) {
-  const [dark,SetDark] = useState(false)
+  const getInitialTheme = () => {
+    const savedTheme = localStorage.getItem('isDarkMode');
+    return savedTheme !== null ? JSON.parse(savedTheme) : false;
+  };
+  const [dark, SetDark] = useState(getInitialTheme); // Now we get state from function
+  useEffect(() => {
+    // Update local storage when the theme changes
+    localStorage.setItem('isDarkMode', JSON.stringify(dark));
+  }, [dark]);
   const toggleTheme = () => {
     SetDark(prevDark => !prevDark); // Toggles dark mode without a separate state change
   }

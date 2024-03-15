@@ -7,26 +7,34 @@ import CustomizedButton from './CustomizedButton.tsx'
 const CustomizedImageButton = ({ name, onChange, fullWidth }) => {
   return (
     <>
-      <input
-        accept='.png,.jpeg,.jpg,.tif,.gif'
-        style={{ display: 'none', }}
-        id={name}
-        name={name}
-        type="file"
-        onChange={onChange}
-        
-      />
-      <label htmlFor={name}>
-        <CustomizedButton
-          variant="contained"
-          component="span"
-          fullWidth={fullWidth}
-          style={{marginBottom:'2%',width:"30%",borderRadius:"50px"}}
-          startIcon={<BackupIcon />}
-        >
-        Upload Artwork
-        </CustomizedButton>
-      </label>
+      <div className='uploadButton'
+        style={{
+          width: "100%", margin: "auto",
+          marginBottom: '2%',
+        }}
+
+      >
+        <input
+          accept='.png,.jpeg,.jpg,.tif,.gif'
+          style={{ display: 'none' }}
+          id={name}
+          name={name}
+          type="file"
+          onChange={onChange}
+
+        />
+        <label htmlFor={name}>
+          <CustomizedButton
+            variant="contained"
+            component="span"
+            fullWidth={fullWidth}
+            style={{ width: "30%", borderRadius: "50px" }}
+            startIcon={<BackupIcon />}
+          >
+            Upload Artwork
+          </CustomizedButton>
+        </label>
+      </div>
     </>
   );
 };

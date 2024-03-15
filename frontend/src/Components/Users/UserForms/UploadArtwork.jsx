@@ -1,4 +1,7 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import { Select } from '@mui/material';
 import CustomizedButton from '../../StyledMUI/CustomizedButton.tsx';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
 import CustomizedTextField from '../../StyledMUI/CustomizedTextField.tsx'
@@ -7,6 +10,8 @@ import { ListTag } from '../../../share/ListofTag.js'
 import CustomizedTypography from '../../StyledMUI/CustomizedTypography.jsx'
 import CustomizedSelect from '../../StyledMUI/CustomizedSelect.jsx'
 import CustomizedImageButton from '../../StyledMUI/CustomizedImageButton.jsx'
+import * as Yup from 'yup';
+import { useFormik, FieldArray, FormikProvider } from 'formik'; // useFormik instead of a custom handleChange event
 import axios from 'axios';
 import {
     FormControlLabel,
@@ -19,199 +24,230 @@ import {
 
 function UploadArtwork() {
     const { theme } = useContext(ThemeContext)
-    const [preview,setPreview] = useState();
-    const initialArtForm = {
-        ArtworkID:0,
-        CreatorID:1,
-        TagID:[], //TODO Fix TagID array Maybe another POST to TagID DB
-        ArtworkName:'',
-        Description: '',
-        DateCreated:'',
-        Likes:0,
-        Purchasable:false,
-        Price:0,
-        ImageFile: null,
-    };
-    const axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json', // Make sure the content type matches what the server expects
-        },
-      };
-    const [artForm, setArtForm] = useState(initialArtForm)
+    const [preview, setPreview] = useState();
+    const [blobImage, setBlobImage] = useState();
+    const [priceSwitch,setPriceSwitch] = useState(false)
+    const [listOfTags, setListOfTags] = useState(ListTag);
+    const url = "https://localhost:7233/api/Artworks";
 
-     //Covert Blob to Base64 string to easily view the image
-     function blobToBase64(blob, callback) {
+  
+    //Covert Blob to Base64 string to easily view the image
+    function blobToBase64(blob, callback) {
         const reader = new FileReader();
         reader.readAsDataURL(blob);
-        reader.onloadend = function() {
-          const base64data = reader.result;   
-          callback(base64data);
+        reader.onloadend = function () {
+            const base64data = reader.result;
+            callback(base64data);
         };
-      }
+    }
 
-    const handleInputChange = (e) => {
+    const handleImageChange = (e) => {
         const { name, files } = e.target;
-        if (name === "ImageFile") { 
+        if (name === "imageFile") {
             // Files is a FileList object, you can grab the first file using indexing if you're accepting single files
             const file = files[0];
             // Now you can set the file to your state, make sure you have a state property to hold it
-            setArtForm({ ...artForm, [name]: file });
+            setBlobImage(file)
             //console.log(artForm.imageFile)
-            blobToBase64(file,function(base64Image){
+            blobToBase64(file, function (base64Image) {
                 setPreview(base64Image)
                 //console.log(base64Image)
             })
 
-        } else {
-            const { value } = e.target;
-            setArtForm({ ...artForm, [name]: value });
         }
     };
+    
+ 
     const handleSwitchChange = (e) => {
-        setArtForm({ ...artForm, Purchasable: e.target.checked });
-    };
-    const handleTagChange = (event) => {
-        const {
-            target: { value },
-        } = event;
-        setArtForm({
-            ...artForm,
-            TagID: typeof value === 'string' ? value.split(',') : value,
-        });
-    };
-
-    const handleTagDelete = (chipToDelete) => () => {
-        setArtForm({
-            ...artForm,
-            TagID: artForm.tags.filter((chip) => chip !== chipToDelete),
-        });
+        setPriceSwitch(e.target.checked)
+        formik.values.purchasable = priceSwitch
     };
 
     const handlePriceVisibility = () => {
-        return artForm.Purchasable && (
-            <CustomizedTextField
-                sx={{margin:'0 0 0 0'}}
-                name="Price"
-                label="Price"
-                value={artForm.Price}
-                onChange={handleInputChange}
-            />
+        return priceSwitch && (
+            <div className='priceField'>
+                <CustomizedTextField
+                    sx={{ float: 'right' }}
+                    name="price"
+                    label="Price"
+                    value={formik.values.price}
+                    onChange={formik.handleChange}
+                    fullWidth
+                />
+            </div>
         );
     };
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const time = new Date()
-        setArtForm({ ...artForm, DateCreated: time.toISOString() });
-        //Call the convertion function
-        // TODO: Submit your form logic...
-        console.log(artForm)
-        //Using FromData instead of normally fetching using Axios
-            event.preventDefault();
-            const formData = new FormData();
-            // Append the standard text fields
-            formData.append('ArtworkID', artForm.ArtworkID);
-            formData.append('CreatorID', artForm.CreatorID);
-            formData.append('TagID', artForm.TagID); // Make sure this is the format your backend expects. ARRAY OF TAG IS WRONG
-            formData.append('ArtworkName', artForm.ArtworkName);
-            formData.append('Description', artForm.Description);
-            formData.append('DateCreated', artForm.DateCreated); 
-            formData.append('Likes', artForm.Likes);
-            formData.append('Purchasable', artForm.Purchasable);
-            formData.append('Price', artForm.Purchasable ? artForm.Price : 0); // Conditional based on Purchasable
-            // Append the file if it exists
-            if (artForm.ImageFile) {
-                formData.append('ImageFile', artForm.ImageFile);
-            }
-            const url = "https://localhost:7233/api/Artworks";
-            // Send formData without axiosConfig for Content-Type
-            axios.post(url, formData)
-            .then(response => {
-                console.log("Upload successful!", response.data);
-            })
-            .catch(error => {
-                console.error("Upload failed.", error);
-            });
-    };
 
-    
+  
 
+    const formik = useFormik({
+        validateOnChange: false,
+        validateOnBlur: false,
+        enableReinitialize: true,
+        initialValues: {
+            artworkID: 0,
+            creatorID: 1, //CHANGE THE CREATOR ID 
+            artworkName: "",
+            description: "",
+            dateCreated: "",
+            likes: 0,
+            purchasable: false,
+            price: 0,
+            imageFile: preview,
+            artworkTag: [ {
+                artworkTagID: 0,
+                artworkID: 0,
+                tagID: 1
+              },]
+        },
+        onSubmit: (values) => {
+            const time = new Date()
+            values.dateCreated = time.toISOString()
+            values.imageFile = preview.split(',')[1]; 
+            values.purchasable = priceSwitch
+            // Split Data URL Base64 (data:image/jpeg,base64) => (base64)
+            console.log(values)
+            axios.post(url, values)
+                .then(response => response.data)
+                .then(data => console.log("Post Artwork Complete!"+data))
+                .catch(err => console.error(err))
+
+        },
+        validationSchema: Yup.object({
+            artworkName: Yup.string().required("NAME! I want a name! Please..."),
+            description: Yup.string().required("What? Tell me more about your work."),
+            imageFile: Yup.mixed().required("Where the image, mate?"),
+        }),
+    })
     return (
         <>
+
             <div className='form'>
-                <div className='userInfoForm' style={{ backgroundColor: `rgba(${theme.rgbBackgroundColor},0.9)` }}>
-                    <form onSubmit={handleSubmit}>
+                <div className='userInfoForm' style={{ backgroundColor: `rgba(${theme.rgbBackgroundColor},0.95)` }}>
+                    <form onSubmit={formik.handleSubmit}>
                         <CustomizedTypography variant="h4" component="h2" gutterBottom>
                             Share Us Your Creation
                         </CustomizedTypography>
 
                         <CustomizedImageButton
-                            name="ImageFile" 
+                            name="imageFile"
                             type="file"
-                            onChange={handleInputChange}
+                            onChange={handleImageChange}
                             fullWidth
                         />
-                         {handlePriceVisibility()}
-                        <FormControlLabel
-                        sx={{color:theme.color,marginLeft:'',float:'right'}}
-                            control={
-                                <CustomizedSwitch
-                                    checked={artForm.Purchasable}
-                                    onChange={handleSwitchChange}
-                                    name="Purchasable"
-                                />
-                            }
-                            label="Is Purchasable?"
-                        />
-                        <br></br>
-                        <CustomizedTextField
-                            name="ArtworkName"
-                            label="Give Your Amazing Art A Name"
-                            value={artForm.ArtworkName}
-                            onChange={handleInputChange}
-                            fullWidth
-                            multiline
-                            rows={4}
-                            style={{width:'50%'}}
-                        />
-                        <CustomizedTextField
-                            name="Description"
-                            label="Description..."
-                            value={artForm.Description}
-                            onChange={handleInputChange}
-                            fullWidth
-                            multiline
-                            rows={4}
-                            style={{width:'50%'}}
-                        />
-                        <img 
-                        style={{border:`solid 1px ${theme.color}`}}
-                        className='previewImage' src={preview} alt="Your New Upload" />
-                        <br></br>
-                        <FormControl variant='standard' fullWidth style={{marginTop:'2%',width:'50%'}}>
-                            <InputLabel><CustomizedTypography variant="body1">Tags</CustomizedTypography></InputLabel>
-                            <CustomizedSelect
-                                multiple
-                                name="tagID"
-                                value={artForm.TagID}
-                                onChange={handleTagChange}
-                                input={<Input id="select-multiple-tags" />}
-                                renderValue={(selected) => (
-                                    <div className="tagHolder">
-                                        {selected.map((value) => (
-                                            <Chip key={value} label={value} onDelete={handleTagDelete(value)} />
-                                        ))}
-                                    </div>
-                                )}
+
+                        {formik.errors.imageFile && (<Typography variant="body2" color="red">{formik.errors.imageFile}</Typography>)}
+                        <div className='allFieldForm'>
+                            <Box className="textFieldBox">
+                                <div className='artTextField' style={{ marginBottom: '2%' }}>
+                                    <CustomizedTextField
+                                        name="artworkName"
+                                        label="Give Your Amazing Art A Name"
+                                        value={formik.values.artworkName}
+                                        onChange={formik.handleChange}
+                                        fullWidth
+                                    />
+                                    {formik.errors.artworkName && (<Typography variant="body2" color="red">{formik.errors.artworkName}</Typography>)}
+                                </div>
+                                <div className='artTextField'>
+                                    <CustomizedTextField
+                                        name="description"
+                                        label="Description Of Your Art"
+                                        value={formik.values.description}
+                                        onChange={formik.handleChange}
+                                        multiline
+                                        fullWidth
+                                        rows={4}
+                                    />
+                                    {formik.errors.description && (<Typography variant="body2" color="red">{formik.errors.description}</Typography>)}
+                                </div>
+                            </Box>
+                            <Box className="priceBox"
+                                sx={{
+                                    backgroundColor: theme.backgroundColor,
+                                    borderColor: theme.color
+                                }}
                             >
-                                {/* Here you can map over your tags to create MenuItem components */}
-                                {ListTag.map((tag) => (
-                                    <MenuItem key={tag.id} value={tag.id}>
-                                        {tag.nameTag}
-                                    </MenuItem>
-                                ))}
-                            </CustomizedSelect>
-                        </FormControl>
-                        <CustomizedButton sx={{display:'block',width:'50%',margin:'auto',marginTop:'10vw'}} variant="contained" type="submit">
+                                <FormControlLabel
+                                    sx={{ color: theme.color, marginBottom: '10%' }}
+                                    control={
+                                        <CustomizedSwitch
+                                            checked={priceSwitch}
+                                            onChange={(event)=>handleSwitchChange(event)}
+                                            name="purchasable"
+                                        />
+                                    }
+                                    label="Is Purchasable?"
+                                />
+                                {handlePriceVisibility()}
+                            </Box>
+
+                        </div>
+                        <Box className="tagAndpreviewBox">
+                            <FormikProvider value={formik}
+                            //Formik Fields requires you to provide a context with FormikProvider with the difined 'formik' as value
+                            >
+                                <div className='tagField' >
+                                    <FieldArray
+                                        name="artworkTag"
+                                        render={arrayHelpers => (
+                                            <>
+                                                {formik.values.artworkTag.map((tag, index) => (
+                                                    <div key={index}>
+                                                        <Select
+                                                            name={`artworkTag.${index}.tagID`}
+                                                            value={tag.tagID}
+                                                            onChange={formik.handleChange}
+                                                        >
+                                                            {listOfTags.map((tag) => {
+                                                                return (
+                                                                    <MenuItem 
+                                                                        key={tag.id} value={tag.id}>
+                                                                        {tag.nameTag}
+                                                                    </MenuItem>
+                                                                )
+                                                            })}
+
+                                                        </Select>
+                                                        <CustomizedButton
+                                                          
+                                                            onClick={() => arrayHelpers.remove(index)}
+                                                        >
+                                                            Remove
+                                                        </CustomizedButton>
+                                                    </div>
+                                                ))}
+                                                <CustomizedButton
+                                                   
+                                                    onClick={() => {
+                                                        arrayHelpers.push({  artworkTagID: 0,
+                                                        artworkID: 0,
+                                                        tagID: 1 });
+                                                        }
+                                                    }>
+                                                    Add a Tag
+                                                </CustomizedButton>
+                                            </>
+                                        )}
+                                    />
+                                </div>
+                            </FormikProvider>
+                            <div className='imageBox'>
+                                <Typography variant="h6"
+                                    color={theme.color}
+                                    sx={{ textAlign: 'right' }}
+                                >
+                                    Preview Image</Typography>
+                                <img
+                                    style={{
+                                        border: `solid 1px ${theme.color}`,
+                                        backgroundColor: theme.backgroundColor
+                                    }}
+                                    className='previewImage' src={preview} alt="Preview Here!" />
+                            </div>
+                        </Box>
+                        <CustomizedButton sx={{ 
+                            display: 'block', width: '50%', margin: 'auto', marginTop: '5vh' }} variant="contained" type="submit">
                             Welcome To The Wolrd!
                         </CustomizedButton>
                     </form>
