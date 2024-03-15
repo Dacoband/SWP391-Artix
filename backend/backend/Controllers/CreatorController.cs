@@ -146,16 +146,17 @@ public class CreatorController : ControllerBase
     }
 
 
-    // PUT: api/Creator/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutCreator(int id, Creator creator)
+    [HttpPut("updateProfilePicture/{id}")]
+    public async Task<IActionResult> UpdateProfilePicture(int id, [FromBody] string profilePicture)
     {
-        if (id != creator.CreatorID)
+        var existingCreator = await _context.Creators.FindAsync(id);
+
+        if (existingCreator == null)
         {
-            return BadRequest();
+            return NotFound();
         }
 
-        _context.Entry(creator).State = EntityState.Modified;
+        existingCreator.ProfilePicture = profilePicture;
 
         try
         {
@@ -175,6 +176,40 @@ public class CreatorController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPut("updateBackground/{id}")]
+    public async Task<IActionResult> UpdateBackground(int id, [FromBody] string background)
+    {
+        var existingCreator = await _context.Creators.FindAsync(id);
+
+        if (existingCreator == null)
+        {
+            return NotFound();
+        }
+
+        existingCreator.BackgroundPicture = background;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!CreatorExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        return NoContent();
+    }
+
+   
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteCreator(int id)
