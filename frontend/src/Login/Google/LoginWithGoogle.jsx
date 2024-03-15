@@ -44,6 +44,7 @@ export default function LoginWithGoogle({ disableOutsideClick, handleClick }) {
       const creatorResponse = await axios.get(creatorurl + foundAccount.accountID);
       const creatorData = creatorResponse.data;
       storeUserData(creatorData);
+      handleClick()
         window.dispatchEvent(new Event('userLoggedIn'));
         if (userrole.roleName === "AD") {
           navigate('/admin');

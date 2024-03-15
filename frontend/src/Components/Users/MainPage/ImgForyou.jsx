@@ -14,8 +14,8 @@ export default function StandardImageList({artworkList}) {
         <CardMedia
             component="img"
             style={{ objectFit:"fill",  width:'15vw' ,height: '15vw' ,borderRadius:'5px',minWidth:'182px',minHeight:'182px' }}
-            image={`${work.img}`}
-            alt={work.img}
+            image={`data:image/jpeg;base64,${work.imageFile}`}
+            alt={work.artworkName}
             loading="lazy"
             />
             </Link>
