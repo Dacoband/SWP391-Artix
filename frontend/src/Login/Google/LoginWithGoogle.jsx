@@ -13,14 +13,6 @@ export default function LoginWithGoogle({ disableOutsideClick, handleClick }) {
   const { storeUserData } = useAuth();
   //Call the custom hook to store user login information
   const navigate = useNavigate();
-  const redirect = () => {
-    if (disableOutsideClick !== true) {
-      handleClick()
-    }
-    const url = "/characters"
-    navigate(url)
-    handleClick()
-  }
 
   //This Method will able you to fetch Google Authentication Token and use Google API to fetch user gmail account info without needing a Backend
   const googleAPI = 'https://www.googleapis.com/oauth2/v3/userinfo' // URL to googleapis to authenticate user token
@@ -44,7 +36,6 @@ export default function LoginWithGoogle({ disableOutsideClick, handleClick }) {
       const creatorResponse = await axios.get(creatorurl + foundAccount.accountID);
       const creatorData = creatorResponse.data;
       storeUserData(creatorData);
-      handleClick()
         window.dispatchEvent(new Event('userLoggedIn'));
         if (userrole.roleName === "AD") {
           navigate('/admin');
