@@ -8,7 +8,7 @@ export default function FrontPage() {
   return (
 
     <Background>
-    <LoginForm disableOutsideClick={true} alternative={true} backdrop={""}/>
+    <LoginForm handleClick={handleClick} disableOutsideClick={true} alternative={true} backdrop={""}/>
     </Background>
   )
 }

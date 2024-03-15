@@ -16,7 +16,6 @@ import {useNavigate} from 'react-router-dom'
 export default function LoginForm({ disableOutsideClick, handleClick, backdrop, alternative }) {
 
   const { storeUserData } = useAuth();
-  const [role,setRole] = useState();
   const navigate = useNavigate()
   const formik = useFormik(
     {
@@ -31,15 +30,18 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
         password: Yup.string().required("What's the password?"),
       }),
       onSubmit: async (values) => {
-        console.log(values);
         try{
-        await CheckLogin(values,setRole,storeUserData)
+        await CheckLogin(values,storeUserData)
+        const sessionRole = sessionStorage.getItem('userRole');
         // await to ensure the CheckLogin finish its task before running the navigate action
-        if(role ===  "AD"){
+        if(sessionRole ===  "AD"){
           navigate('/admin');
         }
-        else
+        else{
         navigate('/characters');
+        }
+        window.dispatchEvent(new Event('userLoggedIn'));
+        handleClick()
       }
       catch(err){
         console.log(err);

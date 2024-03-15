@@ -29,10 +29,11 @@ export default function Users() {
           <Route path={`creatorform`} element={<UserInfoForm/>}/>
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
           <Route path={`profile/:id`} element={<ProfileUser />}/>
-
-              <Route path={`profile/:id/commission`} element={<CommissionForm/>}/>
-
+          
+          <Route path={`profile/:id/commission`} element={<CommissionForm/>}/>
+          
           <Route path={`artwork/:id`} element={<ArtPost />}/>
+
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreForYou/>}/>

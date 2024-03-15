@@ -26,7 +26,9 @@ namespace backend.Entities
         public Creator()
         {
             VIP = false; // Đặt giá trị mặc định của VIP là false
+
             AllowCommission = false;
+
         }
 
 
