@@ -30,6 +30,10 @@ function UploadArtwork() {
     const [listOfTags, setListOfTags] = useState(ListTag);
     const url = "https://localhost:7233/api/Artworks";
 
+    // Attempt to retrieve the auth state from sessionStorage
+  // Check if there's any auth data saved and parse it
+  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('auth')))
+  //nullish coalescing operator (??) 
   
     //Covert Blob to Base64 string to easily view the image
     function blobToBase64(blob, callback) {
@@ -86,7 +90,7 @@ function UploadArtwork() {
         enableReinitialize: true,
         initialValues: {
             artworkID: 0,
-            creatorID: 1, //CHANGE THE CREATOR ID 
+            creatorID: user.creatorID, //CHANGE THE CREATOR ID 
             artworkName: "",
             description: "",
             dateCreated: "",
