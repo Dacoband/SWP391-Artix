@@ -11,11 +11,11 @@ import { styled } from '@mui/material/styles';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthenContext.tsx';
-import { User } from '../../Interfaces/UserInterface';
+import { Creator } from '../../Interfaces/UserInterface';
 
 //Create an interface for your function to assign types to its props
 interface CustomizedDropdownProps{
-  user: User;
+  user: Creator;
   handleClickAsGuest:any;
 }
 export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedDropdownProps) {
@@ -37,7 +37,6 @@ export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedD
     const [anchorEl, setAnchorEl] = useState(null)
     const [open,setOpen] = useState(false)
   useEffect(()=>{
-   
 }
 )
 const handleClickDropdown = (event) => {
@@ -86,7 +85,6 @@ transformOrigin={{
 </CustomizedMenu>
   )
 }
-
   return (
     <div>
        <IconButton
@@ -97,7 +95,7 @@ transformOrigin={{
         aria-haspopup="true"
         aria-expanded={open ? 'true' : 'false'}
       >
-        <Avatar src={user? user.picture : ""} sx={{ width: 32, height: 32 }}>{user ? user.given_name.charAt[0] : null}</Avatar>
+        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
       </IconButton>
       {
         user===null?
