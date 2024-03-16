@@ -28,9 +28,9 @@
   - ### Design Figma - Draw GUIs
     - ### **Login & Sign Up :**
       - Login Page :
-        ![LoginPage](Figma/Login.png)
+        ![LoginPage](Figma/LoginPage.png)
       - Sign Up Page :
-        ![SignUpPage](Figma/SignUp.png)
+        ![SignUpPage](Figma/SignUpPage.png)
     - ### **Admin Page :**
       - *Manage* :
         - Statistics :
