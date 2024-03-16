@@ -19,6 +19,8 @@ interface CustomizedDropdownProps{
   handleClickAsGuest:any;
 }
 export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedDropdownProps) {
+
+
     const {theme,toggleTheme,dark} = useContext(ThemeContext)
     const {logout} = useAuth();
     // Custom style for the Menu component
@@ -69,7 +71,7 @@ transformOrigin={{
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
 <Typography variant='caption'>Account</Typography>
 </Divider>
-<MenuItem onClick={handleClickDropdown}><Link to={`creatorform`}>Profile</Link></MenuItem>
+<MenuItem onClick={handleClickDropdown}><Link to={`profile/${user.accountID}`}>Profile</Link></MenuItem>
 <MenuItem onClick={handleClickDropdown}><Link to={`dashboarduser`}>My Dashboard</Link></MenuItem>
 <MenuItem onClick={handleClickDropdown}>My Account</MenuItem>
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
