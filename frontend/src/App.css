@@ -66,7 +66,7 @@
 .btn {
   display: inline-block;
   font-size: 18px;
-  padding: 10px 3px 10px;
+  padding: 10px 10px ;
   background: none;
   /* color: #fff; */
 
@@ -706,6 +706,14 @@ a {
 .contentpost {
   flex: 1;
   margin-left: 30px;
+  max-height: 500px;
+  overflow-y: auto ;
+}
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* max-height: 200px; /* Điều chỉnh chiều cao tối đa của khung chứa */
+  /* overflow-y: auto; Cho phép thanh cuộn dọc khi cần */ 
 }
 
 .infor-user-post {

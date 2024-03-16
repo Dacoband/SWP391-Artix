@@ -3,6 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import { ThemeContext } from './Themes/ThemeProvider.tsx';
+import Chip from '@mui/material/Chip';
 export default function TestIcon() {
   const { theme } = useContext(ThemeContext);
   const [isClicked, setIsClicked] = useState(false);
@@ -35,7 +36,9 @@ export default function TestIcon() {
   }, [isClicked]);
 
   return (
+ 
     <div className='hero'>
+      
       <div className='button-favourite'>
       <button className={`btn ${isClicked ? 'active' : ''}`} id="btn">
       {isClicked ? (
@@ -53,6 +56,12 @@ export default function TestIcon() {
         <h4 className='addfavourite'>Comment</h4>
       </div>
     </div>
+    
+    
+    
+    
+    
+    
     
   );
 }
