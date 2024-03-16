@@ -60,53 +60,47 @@ export default function HomePage() {
 
   const { theme } = useContext(ThemeContext)
   
-  function PageSections(){
-    return(
-      <Box className='homepage'>
-      <div className='carouseltag'>
-        <CarouselTag />
-      </div>
-      <Box
-        sx={{
-          color: theme.color,
-          backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
-          transition: theme.transition,
-          width: '95%',
-          margin: 'auto',
-          borderRadius: '5px',
-          marginBottom: '15px',
-        }}>
-        < div className='recommendedwork'>
-            <RecommendedWorks artworkList={reccomendedArtworklist} user={user} />
-        </div>
-
-        <div className='recommendedusers'>
-          <div className='headrecommended'>
-            <Typography variant='h5'>Recommended Users</Typography>
-            <Link to={`userrecomment`}>
-            <div className='seemore'>See More</div></Link>
-            </div>
-          <div>
-            <RecommendedUsers />
-          </div>
-        </div>
-        <div className='Randomimg'>
-          <div className='headrecommended'>
-          <Typography variant='h5'>Random Artworks, GO!!!</Typography>
-          <Link to={`randomword`}>
-            <div className='seemore'>See More</div></Link></div>
-          <div className='foryouimg'>
-            <ImgForyou artworkList={randomArtwork} />
-          </div>
-        </div>
-      </Box>
-    </Box>
-    )
-  }
-
 
   return (
-   <PageSections/> 
+    <Box className='homepage'>
+    <div className='carouseltag'>
+      <CarouselTag />
+    </div>
+    <Box
+      sx={{
+        color: theme.color,
+        backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
+        transition: theme.transition,
+        width: '95%',
+        margin: 'auto',
+        borderRadius: '5px',
+        marginBottom: '15px',
+      }}>
+      < div className='recommendedwork'>
+          <RecommendedWorks artworkList={reccomendedArtworklist} user={user} />
+      </div>
+
+      <div className='recommendedusers'>
+        <div className='headrecommended'>
+          <Typography variant='h5'>Recommended Users</Typography>
+          <Link to={`userrecomment`}>
+          <div className='seemore'>See More</div></Link>
+          </div>
+        <div>
+          <RecommendedUsers />
+        </div>
+      </div>
+      <div className='Randomimg'>
+        <div className='headrecommended'>
+        <Typography variant='h5'>Random Artworks, GO!!!</Typography>
+        <Link to={`randomword`}>
+          <div className='seemore'>See More</div></Link></div>
+        <div className='foryouimg'>
+          <ImgForyou artworkList={randomArtwork} />
+        </div>
+      </div>
+    </Box>
+  </Box>
 
   )
 }

@@ -11,20 +11,13 @@ import { Work } from '../../../share/ListofWork.js'
 import { Creator } from '../../../Interfaces/UserInterface.ts';
 import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
 import { AuthContext } from '../../AuthenContext';
-
+import { PlaceHoldersImageCard } from '../PlaceHolders.jsx';
 
 export default function RecommendedWords({artworkList,user}) {
 
-  return (
-    <>
-      <div className='headrecommended'>
-        <Typography key={user?.accountID} variant='h5'>
-          Recommended Works {user? `For You, ${user?.userName}` : "From The Community"}</Typography>
-        <Link to={`artwordrecomment`}>
-          <div className='seemore'>See More</div>
-        </Link>
-      </div>
-      <div className='recommendedimg'>
+  function ReccomendedArts(){
+    return(
+      <>
         <ImageList className='recommendedImages' cols={5} >
           {artworkList.map((work:Artwork) => (
              
@@ -43,6 +36,22 @@ export default function RecommendedWords({artworkList,user}) {
             </Link>
           ))}
         </ImageList>
+       
+      </>
+    )
+  }
+
+  return (
+    <>
+      <div className='headrecommended'>
+        <Typography key={user?.accountID} variant='h5'>
+          Recommended Works {user? `For You, ${user?.userName}` : "From The Community"}</Typography>
+          <Link to={`artwordrecomment`}>
+          <div className='seemore'>See More</div>
+        </Link>
+      </div>
+      <div className='recommendedimg'>
+        {artworkList.length !== 0? <ReccomendedArts/> : <PlaceHoldersImageCard/>}
       </div>
     </>
   )

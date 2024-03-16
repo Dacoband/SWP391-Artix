@@ -4,10 +4,14 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CardMedia from '@mui/material/CardMedia';
 import { Work } from '../../../share/ListofWork';
 import {Link} from 'react-router-dom'
+import { PlaceHoldersImageCard } from '../PlaceHolders';
 export default function StandardImageList({artworkList}) {
-  return (
-    <ImageList className='recommendedImages' cols={5}>
-    {artworkList.map((work) => (
+
+  function RandomArts(){
+    return(
+    <>
+     <ImageList className='recommendedImages' cols={5}>
+     {artworkList.map((work) => (
       <ImageListItem key={work.id}>
          <Link to={`artwork/${work.id}`}>
         <CardMedia
@@ -20,6 +24,12 @@ export default function StandardImageList({artworkList}) {
             </Link>
       </ImageListItem>
     ))}
-  </ImageList>
+    </ImageList>
+    </>
+    )
+  }
+
+  return (
+    artworkList.length !== 0 ? <RandomArts/>:<PlaceHoldersImageCard/>
   );
       };
