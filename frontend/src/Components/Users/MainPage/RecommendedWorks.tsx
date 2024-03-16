@@ -27,13 +27,14 @@ export default function RecommendedWords({artworkList,user}) {
       <div className='recommendedimg'>
         <ImageList className='recommendedImages' cols={5} >
           {artworkList.map((work:Artwork) => (
+             
             <Link to={`artwork/${work.artworkID}`}>
               <CardActionArea key={work.artworkID}>
-                <ImageListItem key={work.artworkID}>
+                <ImageListItem>
                   <CardMedia
                     component="img"
                     style={{ objectFit: "fill", width: '15vw', height: '15vw', borderRadius: '5px', minWidth: '182px', minHeight: '182px' }}
-                    image={`data:image/jpeg;base64,${work.imageFile}`}
+                    image={work.imageFile && work.imageFile.length > 0 ? `data:image/jpeg;base64,${work.imageFile}` : "/images/loadingImages.gif"}
                     alt={work.artworkName}
                     loading="lazy"
                   />

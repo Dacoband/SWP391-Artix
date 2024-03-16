@@ -5,16 +5,15 @@ import CardMedia from '@mui/material/CardMedia';
 import { Work } from '../../../share/ListofWork';
 import {Link} from 'react-router-dom'
 export default function StandardImageList({artworkList}) {
-  const randomWork = artworkList.sort(() => 0.5 - Math.random()).slice(0, 10);
   return (
     <ImageList className='recommendedImages' cols={5}>
-    {randomWork.map((work) => (
+    {artworkList.map((work) => (
       <ImageListItem key={work.id}>
          <Link to={`artwork/${work.id}`}>
         <CardMedia
             component="img"
             style={{ objectFit:"fill",  width:'15vw' ,height: '15vw' ,borderRadius:'5px',minWidth:'182px',minHeight:'182px' }}
-            image={`data:image/jpeg;base64,${work.imageFile}`}
+            image={work.imageFile && work.imageFile.length > 0 ? `data:image/jpeg;base64,${work.imageFile}` : "/images/loadingImages.gif"}
             alt={work.artworkName}
             loading="lazy"
             />

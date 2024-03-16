@@ -13,7 +13,7 @@ import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   // Attempt to retrieve the auth state from sessionStorage
   // Check if there's any auth data saved and parse it
   const [user, setUser] = useState<Creator | null>
@@ -41,9 +41,8 @@ export default function HomePage() {
   const [randomArtwork, setrandomArtwork] = useState([])
   const url = "https://localhost:7233/api/Artworks"
   
-  useEffect(() => {
-    console.log("User is: "+user?.userName)
-    setIsLoading(true); // Start loading
+  useEffect( () => {
+    
     axios.get(url)
       .then(response => response.data)
       .then(data=>{
@@ -60,11 +59,11 @@ export default function HomePage() {
   }, [user]);
 
   const { theme } = useContext(ThemeContext)
+  
   function PageSections(){
     return(
       <Box className='homepage'>
       <div className='carouseltag'>
-        {/* <div className='seemore'>See More</div> */}
         <CarouselTag />
       </div>
       <Box
@@ -107,7 +106,7 @@ export default function HomePage() {
 
 
   return (
-   isLoading ? <LoadingScreen/> : <PageSections/> 
+   <PageSections/> 
 
   )
 }
