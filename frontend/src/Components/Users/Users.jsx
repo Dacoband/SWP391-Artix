@@ -11,7 +11,7 @@ import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.jsx';
 import ProfileUser from './ProfileUser.jsx';
-import ArtPost from '../ArtPost.jsx';
+import ArtPost from '../ArtPost.tsx';
 import SeeMoreOfArt1 from './SeeMoreOfArt1.tsx';
 import SeeMoreUser from './SeeMoreUser.tsx';
 import SeeMoreForYou from './SeeMoreForYou.tsx';
