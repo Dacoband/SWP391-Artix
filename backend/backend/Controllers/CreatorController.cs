@@ -130,9 +130,10 @@ public class CreatorController : ControllerBase
         var artworksByArtworkName = await _context.Artworks
             .Where(a => a.ArtworkName.Contains(searchTerm))
             .ToListAsync();
+        searchResult.ArtworksByArtworkName = artworksByArtworkName;
 
-        // Tìm kiếm artworks dựa trên TagName nếu có
-        var tagsContainingSearchTerm = await _context.Tags
+         // Tìm kiếm artworks dựa trên TagName nếu có
+         var tagsContainingSearchTerm = await _context.Tags
        .Where(t => t.TagName.Contains(searchTerm))
        .ToListAsync();
 
