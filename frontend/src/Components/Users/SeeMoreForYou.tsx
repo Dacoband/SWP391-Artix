@@ -9,6 +9,7 @@ import Pagination from '@mui/material/Pagination';
 import '../../css/SeeMoreForYou.css';
 import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces';
+import { PlaceHoldersImageCard } from './PlaceHolders.jsx';
 
 export default function SeeMoreForYou() {
     const { theme } = useContext(ThemeContext)
@@ -30,6 +31,21 @@ export default function SeeMoreForYou() {
     const handleChangePage = (event, value) => {
         setCurrentPage(value);}
     
+    function ArtworkList(){
+      return (
+        <>
+          {artworkList.map((work:Artwork) => (
+            <ImageListItem key={work.artworkID}>
+              <img
+                src={`data:image/jpeg;base64,${work.imageFile}`}
+                alt={work.artworkName}
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </>
+      )
+    }
     
   return (
     <div className='seemorecommentwork'>
@@ -50,16 +66,7 @@ export default function SeeMoreForYou() {
             <div  className='listimage'>       
             <Box className= 'boxlistimage'>
                 <ImageList variant="masonry" cols={4} gap={7}>
-
-                {artworkList.map((work:Artwork) => (
-                <ImageListItem key={work.artworkID}>
-                    <img
-                     src={`data:image/jpeg;base64,${work.imageFile}`}
-                     alt={work.artworkName}
-                     loading="lazy"
-                    />
-                </ImageListItem>
-                ))}
+                {artworkList.length!==0? <ArtworkList/>:<PlaceHoldersImageCard/>}
                </ImageList></Box>
             </div></div>
             <div className='pagination'>

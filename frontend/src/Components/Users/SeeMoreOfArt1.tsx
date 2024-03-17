@@ -9,6 +9,7 @@ import '../../css/SeeMoreOfArt1.css';
 import Pagination from '@mui/material/Pagination';
 import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces';
+import { PlaceHoldersImageCard } from './PlaceHolders.jsx';
 export default function SeeMoreOfArt1() {
   const { theme } = useContext(ThemeContext)
   const [currentPage, setCurrentPage] = useState(1);
@@ -25,13 +26,29 @@ export default function SeeMoreOfArt1() {
       const indexOfLastImage = currentPage * imagesPerPage;
       const indexOfFirstImage = indexOfLastImage - imagesPerPage;
       const currentImages = artworkList?.slice(indexOfFirstImage, indexOfLastImage);
-      SetArtworkList(currentImages? currentImages : [])
+      SetArtworkList(currentImages ? currentImages : [])
     }
     getArtworks()
   }, [])
 
+  function ArtWorkList() {
+    return (
+      <>
+        {artworkList.map((work: Artwork) => (
+          <ImageListItem key={work.artworkID}>
+            <img
+              src={`data:image/jpeg;base64,${work.imageFile}`}
+              alt={work.artworkName}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </>
+    )
+  }
+
   return (
-    <div className='seemorecommentwork'>
+    <div className='seemorecommentwork' style={{marginBottom:'10%'}}>
       <Box className='box'
         sx={{
           color: theme.color,
@@ -41,7 +58,6 @@ export default function SeeMoreOfArt1() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
-
         }}>
         <div className='content-recomment'>
           <Typography variant='h5'>Recommended Works:</Typography>
@@ -49,24 +65,13 @@ export default function SeeMoreOfArt1() {
           <div className='listimage'>
             <Box className='boxlistimage'>
               <ImageList variant="masonry" cols={4} gap={7}>
-
-                {artworkList.map((work:Artwork) => (
-                  <ImageListItem key={work.artworkID}>
-                    <img
-                      src={`data:image/jpeg;base64,${work.imageFile}`}
-                      alt={work.artworkName}
-                      loading="lazy"
-                    />
-                  </ImageListItem>
-                ))}
+              {artworkList.length !== 0 ? <ArtWorkList /> : <PlaceHoldersImageCard />}
               </ImageList></Box>
           </div></div>
         <div className='pagination'>
           <Pagination count={Math.ceil(artworkList.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
-
-
-      </Box>
-
-    </div>
-  )
+      
+            </Box>
+          </div>
+          )
 }
