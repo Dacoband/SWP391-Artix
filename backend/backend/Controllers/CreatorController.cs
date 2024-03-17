@@ -79,6 +79,19 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
+    [HttpGet("ByUserName/{username}")]
+    public async Task<ActionResult<Creator>> GetCreatorByUsername(string username)
+    {
+        var creator = await _context.Creators.FirstOrDefaultAsync(c => c.UserName == username);
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
 
 
     // POST: api/Creator

@@ -69,7 +69,7 @@ public class AccountController : ControllerBase
 
         return account;
     }
-    [HttpPost]
+     [HttpPost]
     public async Task<ActionResult<Account>> PostAccount(Account account)
     {
         _context.Account.Add(account);
