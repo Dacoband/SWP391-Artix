@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles';
 import { ThemeContext } from "../Themes/ThemeProvider.tsx"
 import { SearchResultsList } from '../Users/SearchResultsList.jsx';
 import axios from 'axios';
-
+import { Box } from '@mui/material';
 
 const SearchDarkMode = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -69,7 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function ExpandingSearchBar() {
     const { dark } = useContext(ThemeContext);
-        //TAT
+        
     // const[input,setInput] = useState("")
     // const [results, setResults] = useState([]);
     // const fetchData =(value)=>{
@@ -112,10 +112,10 @@ export default function ExpandingSearchBar() {
     //             console.error('Error fetching data:', error);
     //         });
     // }
-
+    // dung de search user
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
-    const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
+    // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
 
     const fetchData = (value) => {
         console.log(1);
@@ -131,7 +131,7 @@ export default function ExpandingSearchBar() {
                     );
                 });
                 setResults(filteredResults);
-                setShowResults(true);
+                // setShowResults(true);
     
             })
             .catch(error => {
@@ -139,36 +139,38 @@ export default function ExpandingSearchBar() {
             });
       
     }
-    // const handleChange = (value) => {
-    //     setInput(value);
-    //     fetchData(value);
-
-
-
-    //   };
     const handleChange = (value) => {
         setInput(value);
-        if (value.trim() === "") {
-            setShowResults(false);
-        } else {
-            fetchData(value);
-        }
-    };
-    const handleBlur = () => {
-        // Ẩn kết quả tìm kiếm khi người dùng nhấp ra khỏi ô tìm kiếm, trừ khi đã bắt đầu nhập lại vào ô
-        // if (input.trim() === "") {
-            setShowResults(false);
+        fetchData(value);
+
+      };
+
+
+
+    // const handleChange = (value) => {
+    //     setInput(value);
+    //     if (value.trim() === "") {
+    //         setShowResults(false);
+    //     } else {
+    //         fetchData(value);
+    //     }
+    // };
+    // const handleBlur = () => {
+    //     // Ẩn kết quả tìm kiếm khi người dùng nhấp ra khỏi ô tìm kiếm, trừ khi đã bắt đầu nhập lại vào ô
+    //     // if (input.trim() === "") {
+    //         setShowResults(false);
         
-    };
-    const handleFocus = () => {
-        // Hiển thị kết quả tìm kiếm khi người dùng nhấp vào ô tìm kiếm
-        if (input.trim() !== "") {
-            setShowResults(true);
-        }
-    };
+    // };
+    // const handleFocus = () => {
+    //     // Hiển thị kết quả tìm kiếm khi người dùng nhấp vào ô tìm kiếm
+    //     if (input.trim() !== "") {
+    //         setShowResults(true);
+    //     }
+    // };
     const searchBarComponent = (
+        // <Box onBlur={handleBlur}
+        // onFocus={handleFocus}>
         <>
-        
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
@@ -178,12 +180,12 @@ export default function ExpandingSearchBar() {
              }}
                  value={input} 
                  onChange={(e) =>handleChange(e.target.value) }
-                 onBlur={handleBlur}
-                 onFocus={handleFocus}
+                 
             />
             {/* bo cho nay */}
-            {showResults && results && results.length > 0 && <SearchResultsList results={results} />}
-        
+            
+            {/* // {showResults && results && results.length > 0 && <SearchResultsList results={results} />} */}
+        {/* // </Box> */}
         </>
     )
     const lightMode = (
@@ -200,31 +202,35 @@ export default function ExpandingSearchBar() {
 
     return (
         // dark? darkMode : lightMode
-    //     <div>
-    //     {dark ? (
-    //         <SearchDarkMode>
-    //             {searchBarComponent}
-    //             {results && results.length > 0 && <SearchResultsList results={results} />}
-    //         </SearchDarkMode>
-    //     ) : (
-    //         <SearchLightMode>
-    //             {searchBarComponent}
-    //             {results && results.length > 0 && <SearchResultsList results={results} />}
-    //         </SearchLightMode>
-    //     )}
+        <div>
+        {dark ? (
+            <SearchDarkMode>
+                {searchBarComponent}
+                {results && results.length > 0 && <SearchResultsList results={results} />}
+            </SearchDarkMode>
+        ) : (
+            <SearchLightMode>
+                {searchBarComponent}
+                {results && results.length > 0 && <SearchResultsList results={results} />}
+            </SearchLightMode>
+        )}
        
-    // </div>
-    <div>
-    {dark ? (
-        <SearchDarkMode>
-            {searchBarComponent}
-        </SearchDarkMode>
-    ) : (
-        <SearchLightMode>
-            {searchBarComponent}
-        </SearchLightMode>
-    )}
-</div>
+    </div>
+
+
+//     <div>
+//     {dark ? (
+//         <SearchDarkMode>
+//             {searchBarComponent}
+//             {/* {showResults && results && results.length > 0 && <SearchResultsList results={results} />} */}
+//         </SearchDarkMode>
+//     ) : (
+//         <SearchLightMode>
+//             {searchBarComponent}
+//             {/* {showResults && results && results.length > 0 && <SearchResultsList results={results} />} */}
+//         </SearchLightMode>
+//     )}
+// </div>
            
 )
 }
