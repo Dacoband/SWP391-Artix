@@ -1,9 +1,9 @@
 .results-list {
     width: 35%;
-    background-color: white;
+    background-color: whitesmoke;
     display: flex;
     flex-direction: column;
-    box-shadow: 0px 0px 8px #ddd;
+    box-shadow: 0px 0px 3px #ddd;
     border-radius: 10px;
     margin-top: 1rem;
     max-height: 300px;

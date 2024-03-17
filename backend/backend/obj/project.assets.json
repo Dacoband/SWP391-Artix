@@ -3282,40 +3282,24 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\hanvu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
-=======
-    "C:\\Users\\bolic\\.nuget\\packages\\": {}
->>>>>>> Main
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "projectName": "backend",
       "projectPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\hanvu\\.nuget\\packages\\",
       "outputPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\obj\\",
-=======
-      "projectUniqueName": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "projectName": "backend",
-      "projectPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\bolic\\.nuget\\packages\\",
-      "outputPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\obj\\",
->>>>>>> Main
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\hanvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-=======
-        "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Main
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3323,10 +3307,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-<<<<<<< HEAD
         "C:\\Program Files\\dotnet\\library-packs": {},
-=======
->>>>>>> Main
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3414,11 +3395,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
->>>>>>> Main
       }
     }
   },
@@ -3427,7 +3404,7 @@
       "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Problem reading the cache file D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+      "message": "Problem reading the cache file D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     },
     {
       "code": "NU1701",

@@ -116,25 +116,32 @@ export default function ExpandingSearchBar() {
     const [results, setResults] = useState([]);
 
     const fetchData = (value) => {
-        axios.get("https://jsonplaceholder.typicode.com/users")
+        console.log(1);
+        axios.get(`https://localhost:7233/api/Creator`)
             .then(response => {
+                // console.log(response);
                 const filteredResults = response.data.filter(user => {
                     return (
                         value &&
                         user &&
-                        user.name &&
-                        user.name.toLowerCase().includes(value.toLowerCase())
+                        user.userName &&
+                        user.userName.toLowerCase().includes(value.toLowerCase())
                     );
                 });
                 setResults(filteredResults);
+    
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
             });
+      
     }
     const handleChange = (value) => {
         setInput(value);
         fetchData(value);
+
+
+
       };
     const searchBarComponent = (
         <>
