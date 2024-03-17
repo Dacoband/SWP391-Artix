@@ -80,14 +80,29 @@ public class CreatorController : ControllerBase
         return creator;
     }
     [HttpGet("ByUserName/{username}")]
-    public async Task<ActionResult<Creator>> GetCreatorByUsername(string username)
+    public async Task<List<Creator>> GetCreatorByUsername(string username)
     {
-        var creator = await _context.Creators.FirstOrDefaultAsync(c => c.UserName == username);
+        var creator = await _context.Creators.Select(c => new Creator
+             
+             {
+                 CreatorID = c.CreatorID,
+                 AccountID = c.AccountID,
+                 PaypalAccountID = c.PaypalAccountID,
+                 UserName = c.UserName,
+                 ProfilePicture = c.ProfilePicture,
+                 BackgroundPicture = c.BackgroundPicture,
+                 FirstName = c.FirstName,
+                 LastName = c.LastName,
+                 Address = c.Address,
+                 Phone = c.Phone,
+                 LastLogDate = c.LastLogDate,
+                 AllowCommission = c.AllowCommission,
+                 Biography = c.Biography,
+                 VIP = c.VIP,
+                 FollowCounts = c.FollowCounts,
 
-        if (creator == null)
-        {
-            return NotFound();
-        }
+             }).Where( c=> c.UserName.ToLower().Contains(username.ToLower())).ToListAsync();
+             
 
         return creator;
     }
