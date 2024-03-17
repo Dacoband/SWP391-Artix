@@ -1,8 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/material/styles';
 import { ThemeContext } from "../Themes/ThemeProvider.tsx"
+import { SearchResultsList } from '../Users/SearchResultsList.jsx';
+import axios from 'axios';
+
 
 const SearchDarkMode = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -56,7 +59,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
         [theme.breakpoints.up('md')]: {
             width: '20ch',
             '&:focus': {
-                width: '35ch', // Expanded width on focus
+                width: '50ch', // Expanded width on focus
             },
         },
     },
@@ -65,15 +68,88 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function ExpandingSearchBar() {
     const { dark } = useContext(ThemeContext);
+        //TAT
+    // const[input,setInput] = useState("")
+    // const [results, setResults] = useState([]);
+    // const fetchData =(value)=>{
+    //     fetch("https://jsonplaceholder.typicode.com/users")
+    //     .then((response) => response.json())
+    //     .then((json) => {
+    //       const results = json.filter((user) => {
+    //         return (
+    //           value &&
+    //           user &&
+    //           user.name &&
+    //           user.name.toLowerCase().includes(value)
+    //         );
+    //       });
+    //       setResults(results);
+    //       {results && results.length > 0 && <SearchResultsList results={results} />}
+    //     });   
+    // }
+
+    // const [input, setInput] = useState("");
+    // const [results, setResults] = useState([]);
+
+    // const fetchData = (value) => {
+    //     // Sử dụng Axios để thực hiện request GET đến API
+    //     axios.get("https://jsonplaceholder.typicode.com/users")
+    //         .then(response => {
+    //             // Lọc kết quả trả về dựa trên giá trị tìm kiếm
+    //             const filteredResults = response.data.filter(user => {
+    //                 return (
+    //                     value &&
+    //                     user &&
+    //                     user.name &&
+    //                     user.name.toLowerCase().includes(value.toLowerCase())
+    //                 );
+    //             });
+    //             // Cập nhật state với kết quả đã lọc
+    //             setResults(filteredResults);
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching data:', error);
+    //         });
+    // }
+
+    const [input, setInput] = useState("");
+    const [results, setResults] = useState([]);
+
+    const fetchData = (value) => {
+        axios.get("https://jsonplaceholder.typicode.com/users")
+            .then(response => {
+                const filteredResults = response.data.filter(user => {
+                    return (
+                        value &&
+                        user &&
+                        user.name &&
+                        user.name.toLowerCase().includes(value.toLowerCase())
+                    );
+                });
+                setResults(filteredResults);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+    const handleChange = (value) => {
+        setInput(value);
+        fetchData(value);
+      };
     const searchBarComponent = (
         <>
+        
             <SearchIconWrapper>
                 <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
                 placeholder="Search..."
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ 'aria-label': 'search'
+             }}
+                 value={input} 
+                 onChange={(e) =>handleChange(e.target.value) }
             />
+            {/* bo cho nay */}
         </>
     )
     const lightMode = (
@@ -86,9 +162,22 @@ export default function ExpandingSearchBar() {
         {searchBarComponent}
         </SearchDarkMode>
     )
+   
 
     return (
-        dark? darkMode : lightMode
+        // dark? darkMode : lightMode
+        <div>
+        {dark ? (
+            <SearchDarkMode>
+                {searchBarComponent}
+            </SearchDarkMode>
+        ) : (
+            <SearchLightMode>
+                {searchBarComponent}
+            </SearchLightMode>
+        )}
+        {results && results.length > 0 && <SearchResultsList results={results} />}
+    </div>
            
 )
 }
