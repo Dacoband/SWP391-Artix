@@ -12,9 +12,9 @@ import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.jsx';
 import ProfileUser from './ProfileUser.jsx';
 import ArtPost from '../ArtPost.jsx';
-import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
+import SeeMoreOfArt1 from './SeeMoreOfArt1.tsx';
 import SeeMoreUser from './SeeMoreUser.tsx';
-import SeeMoreForYou from './SeeMoreForYou.jsx';
+import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
 export default function Users() {
