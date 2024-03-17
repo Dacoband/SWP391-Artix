@@ -14,9 +14,19 @@ export async function GetCreatorList() {
   }
 }
 
-export async function GetCreator(id:number) {
+export async function GetCreatorByAccountID(accountId:number) {
   try{
-      let creator:Creator = await axios.get(creatorurl+id).then(response => response.data)
+      let creator:Creator = await axios.get(creatorurl+accountId).then(response => response.data)
+      return creator
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
+export async function GetCreatorByID(creatorId:number) {
+  try{
+      let creator:Creator = await axios.get(creatorurl+`ById/${creatorId}`).then(response => response.data)
       return creator
       
   }catch(err){

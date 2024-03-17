@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CarouselTag from './CarouselTag.jsx';
 import RecommendedWorks from './RecommendedWorks.tsx';
-import RecommendedUsers from './RecommendedUsers.jsx';
+import RecommendedUsers from './RecommendedUsers.tsx';
 import ImgForyou from './ImgForyou.tsx';
 import Box from '@mui/material/Box';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
-import { Work } from '../../../share/ListofWork.js'
 import { Creator } from '../../../Interfaces/UserInterface.ts';
 import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
 import { GetArtList } from '../../../API/ArtworkAPI/GET.tsx';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import axios from 'axios'
+import { GetCreatorList } from '../../../API/UserAPI/GET.tsx';
 
 export default function HomePage() {
-  const [isLoading, setIsLoading] = useState(false)
   // Attempt to retrieve the auth state from sessionStorage
   // Check if there's any auth data saved and parse it
   const [user, setUser] = useState<Creator | null>
@@ -40,6 +38,7 @@ export default function HomePage() {
   
   const [reccomendedArtworklist, setReccomendedArtworklist] = useState<Artwork[]>([])
   const [randomArtwork, setrandomArtwork] = useState<Artwork[]>([])
+  const [creatorList, setCreatorList] = useState<Creator[]>([])
 
    useEffect(() => {
     const getArtList = async () => {
@@ -48,8 +47,13 @@ export default function HomePage() {
       setrandomArtwork(artworklist? artworklist.sort(() => 0.5 - Math.random()).slice(0, 10):[])
       // add a nullish coalescing operator (??)
       // Set the sorted and sliced list
-      setIsLoading(false); // Finish loading
+    
     }
+    const getCreatorList = async () =>{
+      let creatorList: Creator[] | undefined = await GetCreatorList()
+      setCreatorList(creatorList? creatorList : [])
+    }
+    getCreatorList()
     getArtList()
   }, [user]);
 
@@ -82,7 +86,7 @@ export default function HomePage() {
               <div className='seemore'>See More</div></Link>
           </div>
           <div>
-            <RecommendedUsers />
+            <RecommendedUsers creatorList={creatorList} />
           </div>
         </div>
         <div className='Randomimg'>
