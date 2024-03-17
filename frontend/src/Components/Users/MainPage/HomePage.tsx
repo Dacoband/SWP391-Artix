@@ -44,8 +44,8 @@ export default function HomePage() {
    useEffect(() => {
     const getArtList = async () => {
       let artworklist:Artwork[]|undefined = await GetArtList()
-      setReccomendedArtworklist(artworklist??[].sort((a: Artwork, b: Artwork) => b.likes - a.likes).slice(0, 10))
-      setrandomArtwork(artworklist??[].sort(() => 0.5 - Math.random()).slice(0, 10))
+      setReccomendedArtworklist(artworklist? artworklist.sort((a: Artwork, b: Artwork) => b.likes - a.likes).slice(0, 10):[])
+      setrandomArtwork(artworklist? artworklist.sort(() => 0.5 - Math.random()).slice(0, 10):[])
       // add a nullish coalescing operator (??)
       // Set the sorted and sliced list
       setIsLoading(false); // Finish loading
