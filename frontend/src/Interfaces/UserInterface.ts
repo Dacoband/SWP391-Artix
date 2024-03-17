@@ -22,6 +22,7 @@ export interface GoogleUser {
   phone: number | 0,
   lastLogDate: Date,
   allowCommission: boolean | false,
-  biography: string |  ""
+  biography: string |  "",
+    followCount: number | 0,
   } // This is the Object Creator, having all the infomation.
   

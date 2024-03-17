@@ -5,15 +5,16 @@ import CardMedia from '@mui/material/CardMedia';
 import { Work } from '../../../share/ListofWork';
 import {Link} from 'react-router-dom'
 import { PlaceHoldersImageCard } from '../PlaceHolders';
+import { Artwork } from '../../../Interfaces/ArtworkInterfaces';
 export default function StandardImageList({artworkList}) {
 
   function RandomArts(){
     return(
     <>
      <ImageList className='recommendedImages' cols={5}>
-     {artworkList.map((work) => (
-      <ImageListItem key={work.id}>
-         <Link to={`artwork/${work.id}`}>
+     {artworkList.map((work:Artwork) => (
+      <ImageListItem key={work.artworkID}>
+         <Link to={`artwork/${work.artworkID}`}>
         <CardMedia
             component="img"
             style={{ objectFit:"fill",  width:'15vw' ,height: '15vw' ,borderRadius:'5px',minWidth:'182px',minHeight:'182px' }}

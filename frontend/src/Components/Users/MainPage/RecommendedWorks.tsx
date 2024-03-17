@@ -20,9 +20,8 @@ export default function RecommendedWords({artworkList,user}) {
       <>
         <ImageList className='recommendedImages' cols={5} >
           {artworkList.map((work:Artwork) => (
-             
-            <Link to={`artwork/${work.artworkID}`}>
-              <CardActionArea key={work.artworkID}>
+            <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
+              <CardActionArea >
                 <ImageListItem>
                   <CardMedia
                     component="img"

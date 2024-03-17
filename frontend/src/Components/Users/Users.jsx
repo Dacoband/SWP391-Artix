@@ -13,7 +13,7 @@ import UploadArtwork from './UserForms/UploadArtwork.jsx';
 import ProfileUser from './ProfileUser.jsx';
 import ArtPost from '../ArtPost.jsx';
 import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
-import SeeMoreUser from './SeeMoreUser.jsx';
+import SeeMoreUser from './SeeMoreUser.tsx';
 import SeeMoreForYou from './SeeMoreForYou.jsx';
 import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
