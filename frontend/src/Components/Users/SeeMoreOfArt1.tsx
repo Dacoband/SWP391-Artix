@@ -2,28 +2,37 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import { Work } from '../../share/ListofWork';
+import { Work } from '../../share/ListofWork.js';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import '../../css/SeeMoreOfArt1.css';
 import Pagination from '@mui/material/Pagination';
+import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
+import { Artwork } from '../../Interfaces/ArtworkInterfaces';
 export default function SeeMoreOfArt1() {
-    const { theme } = useContext(ThemeContext)
-    const [currentPage, setCurrentPage] = useState(1);
-    const imagesPerPage = 30;
+  const { theme } = useContext(ThemeContext)
+  const [currentPage, setCurrentPage] = useState(1);
+  const imagesPerPage = 30;
+  const [artworkList, SetArtworkList] = useState<Artwork[]>([])
 
-    const indexOfLastImage = currentPage * imagesPerPage;
-    const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-    const currentImages = Work.slice(indexOfFirstImage, indexOfLastImage);
+  const handleChangePage = (event, value) => {
+    setCurrentPage(value);
+  }
 
-    const handleChangePage = (event, value) => {
-        setCurrentPage(value);}
-    
+  useEffect(() => {
+    const getArtworks = async () => {
+      let artworkList: Artwork[] | undefined = await GetArtList()
+      const indexOfLastImage = currentPage * imagesPerPage;
+      const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+      const currentImages = artworkList?.slice(indexOfFirstImage, indexOfLastImage);
+      SetArtworkList(currentImages? currentImages : [])
+    }
+    getArtworks()
+  }, [])
 
-    
   return (
     <div className='seemorecommentwork'>
-         <Box className='box'
+      <Box className='box'
         sx={{
           color: theme.color,
           backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
@@ -32,33 +41,32 @@ export default function SeeMoreOfArt1() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
-          
+
         }}>
-            <div className='content-recomment'>
-            <Typography variant='h5'>Recommended Works:</Typography>
-            
-            <div  className='listimage'>       
-            <Box className= 'boxlistimage'>
-                <ImageList variant="masonry" cols={4} gap={7}>
+        <div className='content-recomment'>
+          <Typography variant='h5'>Recommended Works:</Typography>
 
-                {currentImages.map((work) => (
-                <ImageListItem key={work.id}>
+          <div className='listimage'>
+            <Box className='boxlistimage'>
+              <ImageList variant="masonry" cols={4} gap={7}>
+
+                {artworkList.map((work:Artwork) => (
+                  <ImageListItem key={work.artworkID}>
                     <img
-                     srcSet={`${work.img}`}
-                     src={`${work.img}`}
-                     alt={work.title}
-                     loading="lazy"
+                      src={`data:image/jpeg;base64,${work.imageFile}`}
+                      alt={work.artworkName}
+                      loading="lazy"
                     />
-                </ImageListItem>
+                  </ImageListItem>
                 ))}
-               </ImageList></Box>
-            </div></div>
-            <div className='pagination'>
-            <Pagination count={Math.ceil(Work.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
+              </ImageList></Box>
+          </div></div>
+        <div className='pagination'>
+          <Pagination count={Math.ceil(artworkList.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
 
-            
-        </Box>
-      
+
+      </Box>
+
     </div>
   )
 }

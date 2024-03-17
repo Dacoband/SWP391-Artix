@@ -14,16 +14,18 @@ export default function SeeMoreForYou() {
     const { theme } = useContext(ThemeContext)
     const [currentPage, setCurrentPage] = useState(1);
     const imagesPerPage = 30;
-    const indexOfLastImage = currentPage * imagesPerPage;
-    const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-    const currentImages = Work.slice(indexOfFirstImage, indexOfLastImage);
+    const [artworkList, SetArtworkList] = useState<Artwork[]>([])
 
-    useEffect(()=>{
-      const getArtworks = async () => { 
-        let artworkList:Artwork[]|undefined = await GetArtList()
-        
+    useEffect(() => {
+      const getArtworks = async () => {
+        let artworkList: Artwork[] | undefined = await GetArtList()
+        const indexOfLastImage = currentPage * imagesPerPage;
+        const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+        const currentImages = artworkList?.slice(indexOfFirstImage, indexOfLastImage);
+        SetArtworkList(currentImages? currentImages : [])
       }
-    },[])
+      getArtworks()
+    }, [])
 
     const handleChangePage = (event, value) => {
         setCurrentPage(value);}
@@ -49,12 +51,11 @@ export default function SeeMoreForYou() {
             <Box className= 'boxlistimage'>
                 <ImageList variant="masonry" cols={4} gap={7}>
 
-                {currentImages.map((work) => (
-                <ImageListItem key={work.id}>
+                {artworkList.map((work:Artwork) => (
+                <ImageListItem key={work.artworkID}>
                     <img
-                     srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                     src={`${work.img}?w=248&fit=crop&auto=format`}
-                     alt={work.title}
+                     src={`data:image/jpeg;base64,${work.imageFile}`}
+                     alt={work.artworkName}
                      loading="lazy"
                     />
                 </ImageListItem>
@@ -62,7 +63,7 @@ export default function SeeMoreForYou() {
                </ImageList></Box>
             </div></div>
             <div className='pagination'>
-            <Pagination count={Math.ceil(Work.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
+            <Pagination count={Math.ceil(artworkList.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
 
         </Box>
       

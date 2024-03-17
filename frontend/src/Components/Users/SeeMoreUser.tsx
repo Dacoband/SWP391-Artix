@@ -44,7 +44,7 @@ export default function SeeMoreUser() {
               <CardMedia
                 component="img"
                 height="140"
-                image={`${user.backgroundPicture}`}
+                image={`data:image/jpeg;base64,${user.backgroundPicture}`}
                 alt="backgroundImage"
               />
               <CardContent>
@@ -54,7 +54,7 @@ export default function SeeMoreUser() {
                     <div className='avartar'>
                       <Avatar
                         alt="Remy Sharp"
-                        src={`${user.profilePicture}`}
+                        src={`data:image/jpeg;base64,${user.profilePicture}`}
                         sx={{ width: 100, height: 100 }}
                         style={{ border: '3px solid white' }}
                       />
