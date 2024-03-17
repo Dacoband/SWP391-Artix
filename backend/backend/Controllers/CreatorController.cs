@@ -108,47 +108,50 @@ public class CreatorController : ControllerBase
     }
 
 
+    public class SearchResult
+    {
+        public List<Creator> Creators { get; set; }
+        public List<Artworks> ArtworksByArtworkName { get; set; }
+        public List<Artworks> ArtworksByTagName { get; set; }
+    }
+
     [HttpGet("Search")]
     public async Task<ActionResult<SearchResult>> Search(string searchTerm)
     {
         var searchResult = new SearchResult();
 
+        // Tìm kiếm creators có UserName chứa searchTerm
         var creators = await _context.Creators
             .Where(c => c.UserName.Contains(searchTerm))
             .ToListAsync();
         searchResult.Creators = creators;
 
-        var tag = await _context.Tags
-            .FirstOrDefaultAsync(t => t.TagName == searchTerm);
+        // Tìm kiếm artworks có ArtworkName chứa ít nhất một từ khóa từ searchTerm
+        var artworksByArtworkName = await _context.Artworks
+            .Where(a => a.ArtworkName.Contains(searchTerm))
+            .ToListAsync();
 
-        if (tag != null)
-        {
-            var artworkIds = await _context.ArtworkTag
-                .Where(at => at.TagID == tag.TagID)
-                .Select(at => at.ArtworkID)
-                .ToListAsync();
+        // Tìm kiếm artworks dựa trên TagName nếu có
+        var tagsContainingSearchTerm = await _context.Tags
+       .Where(t => t.TagName.Contains(searchTerm))
+       .ToListAsync();
 
-            var artworks = await _context.Artworks
-                .Where(a => artworkIds.Contains(a.ArtworkID))
-                .ToListAsync();
+        // Lấy danh sách TagID từ các tag đã lọc
+        var tagIds = tagsContainingSearchTerm.Select(t => t.TagID).ToList();
 
-            searchResult.Artworks = artworks;
-        }
-        else
-        {
-            // Nếu không tìm thấy tag có TagName tương ứng, không có artworks phù hợp
-            searchResult.Artworks = new List<Artworks>();
-        }
+        var artworkIds = await _context.ArtworkTag
+       .Where(at => tagIds.Contains(at.TagID))
+       .Select(at => at.ArtworkID)
+       .ToListAsync();
+
+        // Lấy danh sách artworks dựa trên danh sách ArtworkID
+        searchResult.ArtworksByTagName = await _context.Artworks
+            .Where(a => artworkIds.Contains(a.ArtworkID))
+            .ToListAsync();
+
 
         return searchResult;
     }
-
-    public enum SearchType
-    {
-        CreatorByUsername,
-        ArtworkByNameOrTag
-    }
-
 
 
     // POST: api/Creator
