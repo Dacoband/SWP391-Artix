@@ -93,6 +93,48 @@ public class CreatorController : ControllerBase
     }
 
 
+    [HttpGet("Search")]
+    public async Task<ActionResult<SearchResult>> Search(string searchTerm)
+    {
+        var searchResult = new SearchResult();
+
+        var creators = await _context.Creators
+            .Where(c => c.UserName.Contains(searchTerm))
+            .ToListAsync();
+        searchResult.Creators = creators;
+
+        var tag = await _context.Tags
+            .FirstOrDefaultAsync(t => t.TagName == searchTerm);
+
+        if (tag != null)
+        {
+            var artworkIds = await _context.ArtworkTag
+                .Where(at => at.TagID == tag.TagID)
+                .Select(at => at.ArtworkID)
+                .ToListAsync();
+
+            var artworks = await _context.Artworks
+                .Where(a => artworkIds.Contains(a.ArtworkID))
+                .ToListAsync();
+
+            searchResult.Artworks = artworks;
+        }
+        else
+        {
+            // Nếu không tìm thấy tag có TagName tương ứng, không có artworks phù hợp
+            searchResult.Artworks = new List<Artworks>();
+        }
+
+        return searchResult;
+    }
+
+    public enum SearchType
+    {
+        CreatorByUsername,
+        ArtworkByNameOrTag
+    }
+
+
 
     // POST: api/Creator
     [HttpPost]
