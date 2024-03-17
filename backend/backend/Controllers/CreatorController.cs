@@ -146,8 +146,21 @@ public class CreatorController : ControllerBase
 
         // Lấy danh sách artworks dựa trên danh sách ArtworkID
         searchResult.ArtworksByTagName = await _context.Artworks
-            .Where(a => artworkIds.Contains(a.ArtworkID))
-            .ToListAsync();
+    .Where(a => artworkIds.Contains(a.ArtworkID))
+    .Select(a => new Artworks
+    {
+        ArtworkID = a.ArtworkID,
+        CreatorID = a.CreatorID,
+        ArtworkName = a.ArtworkName,
+        Description = a.Description,
+        DateCreated = a.DateCreated,
+        Likes = a.Likes,
+        Purchasable = a.Purchasable,
+        Price = a.Price,
+        ImageFile = a.ImageFile,
+        ArtworkTag = a.ArtworkTag
+    })
+    .ToListAsync();
 
 
         return searchResult;
