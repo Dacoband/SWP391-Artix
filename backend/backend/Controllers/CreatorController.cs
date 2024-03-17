@@ -83,31 +83,70 @@ public class CreatorController : ControllerBase
     public async Task<List<Creator>> GetCreatorByUsername(string username)
     {
         var creator = await _context.Creators.Select(c => new Creator
-        {
-            CreatorID = c.CreatorID,
-            AccountID = c.AccountID,
-            PaypalAccountID = c.PaypalAccountID,
-            UserName = c.UserName,
-            ProfilePicture = c.ProfilePicture,
-            BackgroundPicture = c.BackgroundPicture,
-            FirstName = c.FirstName,
-            LastName = c.LastName,
-            Address = c.Address,
-            Phone = c.Phone,
-            LastLogDate = c.LastLogDate,
-            AllowCommission = c.AllowCommission,
-            Biography = c.Biography,
-            VIP = c.VIP,
-            FollowCounts = c.FollowCounts,
+             
+             {
+                 CreatorID = c.CreatorID,
+                 AccountID = c.AccountID,
+                 PaypalAccountID = c.PaypalAccountID,
+                 UserName = c.UserName,
+                 ProfilePicture = c.ProfilePicture,
+                 BackgroundPicture = c.BackgroundPicture,
+                 FirstName = c.FirstName,
+                 LastName = c.LastName,
+                 Address = c.Address,
+                 Phone = c.Phone,
+                 LastLogDate = c.LastLogDate,
+                 AllowCommission = c.AllowCommission,
+                 Biography = c.Biography,
+                 VIP = c.VIP,
+                 FollowCounts = c.FollowCounts,
 
-        }).Where(c => c.UserName.ToLower().Contains(username.ToLower())).ToListAsync();
-
-        //if (creator == null)
-        //{
-        //    return NotFound();
-        //}
+             }).Where( c=> c.UserName.ToLower().Contains(username.ToLower())).ToListAsync();
+             
 
         return creator;
+    }
+
+
+    [HttpGet("Search")]
+    public async Task<ActionResult<SearchResult>> Search(string searchTerm)
+    {
+        var searchResult = new SearchResult();
+
+        var creators = await _context.Creators
+            .Where(c => c.UserName.Contains(searchTerm))
+            .ToListAsync();
+        searchResult.Creators = creators;
+
+        var tag = await _context.Tags
+            .FirstOrDefaultAsync(t => t.TagName == searchTerm);
+
+        if (tag != null)
+        {
+            var artworkIds = await _context.ArtworkTag
+                .Where(at => at.TagID == tag.TagID)
+                .Select(at => at.ArtworkID)
+                .ToListAsync();
+
+            var artworks = await _context.Artworks
+                .Where(a => artworkIds.Contains(a.ArtworkID))
+                .ToListAsync();
+
+            searchResult.Artworks = artworks;
+        }
+        else
+        {
+            // Nếu không tìm thấy tag có TagName tương ứng, không có artworks phù hợp
+            searchResult.Artworks = new List<Artworks>();
+        }
+
+        return searchResult;
+    }
+
+    public enum SearchType
+    {
+        CreatorByUsername,
+        ArtworkByNameOrTag
     }
 
 
