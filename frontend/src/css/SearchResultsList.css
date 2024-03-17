@@ -1,5 +1,5 @@
 .results-list {
-    width: 35%;
+    width: 100%;
     background-color: whitesmoke;
     display: flex;
     flex-direction: column;

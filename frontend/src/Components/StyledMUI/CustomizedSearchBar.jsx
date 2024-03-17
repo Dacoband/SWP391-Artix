@@ -60,6 +60,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             width: '20ch',
             '&:focus': {
                 width: '50ch', // Expanded width on focus
+                
             },
         },
     },
@@ -177,13 +178,15 @@ export default function ExpandingSearchBar() {
         {dark ? (
             <SearchDarkMode>
                 {searchBarComponent}
+                {results && results.length > 0 && <SearchResultsList results={results} />}
             </SearchDarkMode>
         ) : (
             <SearchLightMode>
                 {searchBarComponent}
+                {results && results.length > 0 && <SearchResultsList results={results} />}
             </SearchLightMode>
         )}
-        {results && results.length > 0 && <SearchResultsList results={results} />}
+       
     </div>
            
 )
