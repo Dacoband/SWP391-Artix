@@ -30,8 +30,7 @@ export default function SeeMoreUser() {
     getArtList()
   }, [])
   const currentUsers = creatorList ?? [].slice(indexOfFirstUser, indexOfLastUser);
-
-
+  let paging = creatorList?.length? Math.ceil(creatorList.length / usersPerPage) : 0;
   const handleChangePage = (event, value) => {
     setCurrentPage(value);
   };
@@ -97,7 +96,7 @@ export default function SeeMoreUser() {
         </div>
         <div className='pagination'>
           {creatorList?.length!==0?<Pagination 
-          count={Math.ceil(creatorList.length / usersPerPage)} 
+          count={paging} 
           variant="outlined" 
           onChange={handleChangePage}/> : ""}
           </div>
