@@ -70,49 +70,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 export default function ExpandingSearchBar() {
     const { dark } = useContext(ThemeContext);
         
-    // const[input,setInput] = useState("")
-    // const [results, setResults] = useState([]);
-    // const fetchData =(value)=>{
-    //     fetch("https://jsonplaceholder.typicode.com/users")
-    //     .then((response) => response.json())
-    //     .then((json) => {
-    //       const results = json.filter((user) => {
-    //         return (
-    //           value &&
-    //           user &&
-    //           user.name &&
-    //           user.name.toLowerCase().includes(value)
-    //         );
-    //       });
-    //       setResults(results);
-    //       {results && results.length > 0 && <SearchResultsList results={results} />}
-    //     });   
-    // }
-
-    // const [input, setInput] = useState("");
-    // const [results, setResults] = useState([]);
-
-    // const fetchData = (value) => {
-    //     // Sử dụng Axios để thực hiện request GET đến API
-    //     axios.get("https://jsonplaceholder.typicode.com/users")
-    //         .then(response => {
-    //             // Lọc kết quả trả về dựa trên giá trị tìm kiếm
-    //             const filteredResults = response.data.filter(user => {
-    //                 return (
-    //                     value &&
-    //                     user &&
-    //                     user.name &&
-    //                     user.name.toLowerCase().includes(value.toLowerCase())
-    //                 );
-    //             });
-    //             // Cập nhật state với kết quả đã lọc
-    //             setResults(filteredResults);
-    //         })
-    //         .catch(error => {
-    //             console.error('Error fetching data:', error);
-    //         });
-    // }
-    // dung de search user
+    
+    // // dung de search user
+    
     const [input, setInput] = useState("");
     const [results, setResults] = useState([]);
     // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
@@ -144,6 +104,95 @@ export default function ExpandingSearchBar() {
         fetchData(value);
 
       };
+
+
+      
+    // const [input2, setInput2] = useState("");
+    // const [results2, setResults2] = useState([]);
+    // // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
+
+    // const fetchData2 = (value) => {
+    //     console.log(1);
+    //     axios.get(`https://localhost:7233/api/artworks`)
+    //         .then(response => {
+    //             // console.log(response);
+    //             const filteredResults = response.data.filter(artwork => {
+    //                 return (
+    //                     value &&
+    //                     artwork &&
+    //                     artwork.userName &&
+    //                     artwork.userName.toLowerCase().includes(value.toLowerCase())
+    //                 );
+    //             });
+    //             setResults(filteredResults);
+    //             // setShowResults(true);
+    
+    //         })
+    //         .catch(error => {
+    //             console.error('Error fetching data:', error);
+    //         });
+      
+    // }
+    // const handleChange = (value) => {
+    //     setInput(value);
+    //     fetchData(value);
+
+    //   };
+
+
+
+
+
+
+
+//    // SEARCH HOME
+//     const [input, setInput] = useState("");
+//     const [results, setResults] = useState([]);
+//     // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
+
+//     const fetchData = (value) => {
+//         console.log(1);
+//         axios.get(`https://localhost:7233/api/Creator/Search/`)
+            
+//                 .then(response => {
+//                     const creators = response.data.creators.filter(creators => {
+//                         return (
+//                             value &&
+//                             creators &&
+//                             creators.userName &&
+//                             creators.userName.toLowerCase().includes(value.toLowerCase())
+//                         );
+//                     });
+    
+//                     const artworksByArtworkName = response.data.artworksByArtworkName.filter(artworksByArtworkName => {
+//                         return (
+//                             value &&
+//                             artworksByArtworkName &&
+//                             artworksByArtworkName.artworkName &&
+//                             artworksByArtworkName.artworkName.toLowerCase().includes(value.toLowerCase())
+//                         );
+//                     });
+    
+//                     const combinedResults = [...creators, ...artworksByArtworkName];
+//                     setResults(combinedResults);
+//                 })
+             
+//             .catch(error => {
+//                 console.error('Error fetching data:', error);
+//             });
+      
+//     }
+//     const handleChange = (value) => {
+//         setInput(value);
+//         fetchData(value);
+
+//       };
+
+
+
+
+
+
 
 
 
@@ -180,7 +229,8 @@ export default function ExpandingSearchBar() {
              }}
                  value={input} 
                  onChange={(e) =>handleChange(e.target.value) }
-                 
+                //  onBlur={handleBlur}
+                // onFocus={handleFocus}>
             />
             {/* bo cho nay */}
             
