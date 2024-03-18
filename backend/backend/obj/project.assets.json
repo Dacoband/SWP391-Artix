@@ -3282,40 +3282,24 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\hanvu\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
-=======
-    "C:\\Users\\THY\\.nuget\\packages\\": {}
->>>>>>> Main
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "projectName": "backend",
       "projectPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "packagesPath": "C:\\Users\\hanvu\\.nuget\\packages\\",
       "outputPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\obj\\",
-=======
-      "projectUniqueName": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "projectName": "backend",
-      "projectPath": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\THY\\.nuget\\packages\\",
-      "outputPath": "D:\\SWP391-Artix\\backend\\backend\\obj\\",
->>>>>>> Main
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\hanvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-=======
-        "C:\\Users\\THY\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> Main
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3323,10 +3307,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-<<<<<<< HEAD
         "C:\\Program Files\\dotnet\\library-packs": {},
-=======
->>>>>>> Main
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3414,11 +3395,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
->>>>>>> Main
       }
     }
   },

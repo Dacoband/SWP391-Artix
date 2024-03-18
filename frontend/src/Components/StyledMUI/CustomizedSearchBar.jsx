@@ -74,11 +74,11 @@ export default function ExpandingSearchBar() {
     // // dung de search user
     
     const [input, setInput] = useState("");
-    const [results, setResults] = useState([]);
+    const [dataCreator, setDataCreator] = useState("");
+    const [dataTag, setDataTag] = useState("")
     // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
 
-    const fetchData = (value) => {
-        console.log(1);
+    const fetchCreator = (value) => {
         axios.get(`https://localhost:7233/api/Creator`)
             .then(response => {
                 // console.log(response);
@@ -90,7 +90,7 @@ export default function ExpandingSearchBar() {
                         user.userName.toLowerCase().includes(value.toLowerCase())
                     );
                 });
-                setResults(filteredResults);
+                setDataCreator(filteredResults);
                 // setShowResults(true);
     
             })
@@ -99,10 +99,35 @@ export default function ExpandingSearchBar() {
             });
       
     }
+
+
+    const fetchTag = (value) => {
+        console.log(1);
+        axios.get(`https://localhost:7233/api/Tag`)
+            .then(response => {
+                // console.log(response);
+                const filteredResults = response.data.filter(tag => {
+                    return (
+                        value &&
+                        tag &&
+                        tag.tagName &&
+                        tag.tagName.toLowerCase().includes(value.toLowerCase())
+                    );
+                });
+                setDataTag(filteredResults);
+                // setShowResults(true);
+    
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+      
+    }
+
     const handleChange = (value) => {
         setInput(value);
-        fetchData(value);
-
+        fetchCreator(value);
+        fetchTag(value)
       };
 
 
@@ -256,12 +281,12 @@ export default function ExpandingSearchBar() {
         {dark ? (
             <SearchDarkMode>
                 {searchBarComponent}
-                {results && results.length > 0 && <SearchResultsList results={results} />}
+                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataTag={dataTag}/>}
             </SearchDarkMode>
         ) : (
             <SearchLightMode>
                 {searchBarComponent}
-                {results && results.length > 0 && <SearchResultsList results={results} />}
+                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataTag={dataTag} />}
             </SearchLightMode>
         )}
        

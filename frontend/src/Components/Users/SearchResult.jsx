@@ -27,6 +27,8 @@ import '../../css/SearchResult.css';
 export const SearchResult = ({ result }) => {
   const navigate = useNavigate();
 
+  // console.log(result);
+
   const handleSelect = () => {
     console.log("Xử lý chọn được kích hoạt");
     if (result.type === "user") {
@@ -40,7 +42,7 @@ export const SearchResult = ({ result }) => {
 
   return (
     <div className="search-result" onClick={handleSelect}>
-      {result.name}
+      {result}
     </div>
   );
 };

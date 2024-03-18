@@ -18,12 +18,16 @@ import '../../css/SearchResultsList.css';
 import { SearchResult } from "./SearchResult";
 import { Link } from 'react-router-dom';
 
-export const SearchResultsList = ({ results }) => {
-  console.log(results);
+export const SearchResultsList = (props) => {
+  const {dataCreator, dataTag} = props
+  console.log(dataTag);
   return (
     <div className="results-list">
-      {results.map((result, id) => {
-        return <SearchResult result={result} key={id} />;
+      {dataCreator.map((dataCreator, id) => {
+        return  <SearchResult result={dataCreator.userName} key={id} />;
+      })}
+      {dataCreator.map((dataTag, id) => {
+         return <SearchResult result={dataTag.tagName} key={id} />;
       })}
     </div>
   );
