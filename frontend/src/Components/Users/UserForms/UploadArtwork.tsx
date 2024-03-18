@@ -13,7 +13,7 @@ import CustomizedImageButton from '../../StyledMUI/CustomizedImageButton.jsx'
 import * as Yup from 'yup';
 import { useFormik, FieldArray, FormikProvider } from 'formik'; // useFormik instead of a custom handleChange event
 import axios from 'axios';
-import { Tag } from '../../../Interfaces/TagInterface';
+import { Tag } from '../../../Interfaces/TagInterface.ts';
 import {
     FormControlLabel,
     Input,
@@ -103,7 +103,7 @@ function UploadArtwork() {
     const formik = useFormik({
         validateOnChange: false,
         validateOnBlur: false,
-        enableReinitialize: true,
+        
         initialValues: {
             artworkID: 0,
             creatorID: user.creatorID, //CHANGE THE CREATOR ID 
@@ -113,7 +113,7 @@ function UploadArtwork() {
             likes: 0,
             purchasable: false,
             price: 0,
-            imageFile: preview,
+            imageFile: "",
             artworkTag: [{
                 artworkTagID: 0,
                 artworkID: 0,
@@ -131,16 +131,16 @@ function UploadArtwork() {
             console.log(values)
             const postArtwork = async () =>{
                 const response = await  axios.post(url, values)
-                console.log("Post Artwork Complete!" + response.data)
-                const newArtwork:Artwork = response.data
-                redirectUrl(`artwork/${newArtwork.artworkID}`)// TO DO, WE ARE NOT FINISHED WITH THIS LINE
+                console.log("Post Artwork Complete!" + response.data) 
+                const newArtwork:Artwork = response.data //The response data will contain the newly post artwork infomations. Including its id
+                redirectUrl(`../artwork/${newArtwork.artworkID}`) //Redirect the user to the post with the new artwork
             }
             postArtwork()
         },
         validationSchema: Yup.object({
             artworkName: Yup.string().required("NAME! I want a name! Please..."),
             description: Yup.string().required("What? Tell me more about your work."),
-            imageFile: Yup.mixed().required("Where the image, mate?"),
+            //imageFile: Yup.mixed().required("Where the image, mate?"),
         }),
     })
     return (
