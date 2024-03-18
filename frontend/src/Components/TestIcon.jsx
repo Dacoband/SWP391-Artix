@@ -52,7 +52,7 @@ export default function TestIcon() {
         ))} 
       </button><h4 className='addfavourite'>Add to Favourites</h4></div>
       <div className='button-comment'>
-        <button className='iconcomment' ><CommentIcon sx={{color:theme.color, fontSize: 35,paddingTop:'5px',marginRight:'5px'}}/></button>
+        <button className='iconcomment' href="#comment"><CommentIcon sx={{color:theme.color, fontSize: 35,paddingTop:'5px',marginRight:'5px'}}/></button>
         <h4 className='addfavourite'>Comment</h4>
       </div>
     </div>

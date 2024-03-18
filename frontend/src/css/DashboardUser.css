@@ -13,7 +13,7 @@
     justify-content: center;
 }
 .contentdashboard{
-    display: flex;
+    /* display: flex; */
     margin: 10px 100px 40px;
     
 }
@@ -42,21 +42,34 @@
 
 .overview{
     margin: auto;
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
     padding-bottom: 50px;
-    width: 80%;
-    border-top:1px solid gray ;
+   
 }
 .contentoverview{
     font-size: 20px;
 }
 .line{
-    margin-left: 70px;
-    display: flex;
-    margin-bottom: 10px;
+ 
     
 }
 .line1{
-    width: 370px;
+   
 }
+
+.tong{
+display: flex;
+
+}
+.nameworks-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Chia thành hai cột bằng độ rộng tự động */
+    grid-gap: 10px; /* Khoảng cách giữa các công việc */
+  }
+  
+  .namework {
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  

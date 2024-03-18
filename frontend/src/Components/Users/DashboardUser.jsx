@@ -8,7 +8,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import '../../css/DashboardUser.css';
-
+import { createTheme } from '@mui/material/styles';
   
 function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -45,6 +45,7 @@ function CustomTabPanel(props) {
 
 export default function DashboardUser() {
     const { theme } = useContext(ThemeContext)
+ 
 
 
     // Sắp xếp danh sách tác phẩm theo thời gian từ mới nhất đến cũ nhất
@@ -79,7 +80,8 @@ export default function DashboardUser() {
 
 
           <h1>Your Dashboard :</h1>
-          
+     <div className='tong'>    
+     <div className='1'>    
              <Box sx={{ width: '100%' }}>
             <div className='headertab'>  
       <Box sx={{ borderBottom: 1, borderColor: 'gray',width:'80%' }}>
@@ -98,6 +100,7 @@ export default function DashboardUser() {
                       
                         width={720}
                         height={450}
+                        
                         
                     />
             </div>
@@ -118,26 +121,32 @@ export default function DashboardUser() {
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
       <div className='contentdashboard'>
-      <div className='chart'>
+      <div className='chart' style={{color:theme.color2}}>
                  <LineChart
                           xAxis={[{ data: likeWorks.map((work, index) => index + 1) }]}
                           series={[{ data: likeWorks.map(work => work.like) }]}
                       
                         width={720}
                         height={450}
+                       
+
+                        
+
                         
                     />
             </div>
 
 
             <div className='explication'>
-   <h2>Explication: </h2>
+   <h2>Name of arts: </h2>
+   <div className='nameworks-container'>
   {likeWorks.map((work, index) => (
     <div className='namework' key={index}>
-      {index + 1}: {work.namework} 
+      {index + 1}: {work.namework}
       {/* {work.like} */}
     </div>
   ))}
+</div>
 </div>
                 
             
@@ -145,6 +154,7 @@ export default function DashboardUser() {
       </CustomTabPanel>
       
     </Box>
+    </div> 
 
 
         <div className='overview'>
@@ -154,7 +164,7 @@ export default function DashboardUser() {
 
            <div className='line'>
            <div className='line1'> Total commission received: 100   </div>
-            <div className='line1'>Total commission sented :  100    </div>
+            <div className='line1'>Total commission sent :  100    </div>
             <div className='line1'>Your post number:  5  </div></div>
             <div className='line'>
             <div className='line1'>Number of works sold: </div>
@@ -162,10 +172,11 @@ export default function DashboardUser() {
             <div className='line1'>Your number of likes: 20 </div>   
                </div>
 
-            <div></div>
+            
           
           </div>
         </div>
+        </div> 
         
 
 
@@ -180,6 +191,7 @@ export default function DashboardUser() {
 
 
     </div>
+    
   )
 }
 // import React, { useContext, useState } from 'react';

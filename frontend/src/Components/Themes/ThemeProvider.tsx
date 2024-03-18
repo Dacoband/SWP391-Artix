@@ -19,6 +19,7 @@ const darkimages = [
 // ex: /<imagefolder>/image.png
 const Theme = {
   light:{
+    color2:'#0096FA',
     color:'#0096FA',
     backgroundColor:'#FFF',
     rgbBackgroundColor:"255, 255, 255",
@@ -29,6 +30,7 @@ const Theme = {
     hoverBackgroundColor:"#F5F5F5",
   },
   dark:{
+    color2:'#EBEBEB',
     color:'#61dafb',
     backgroundColor:'#1a1a2e',
     rgbBackgroundColor:"26, 26, 46",

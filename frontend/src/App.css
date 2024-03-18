@@ -601,6 +601,7 @@ a {
 
 .navuser {
   margin-left: 110px;
+  z-index: 5;
 }
 
 .buttonSubcribe {
