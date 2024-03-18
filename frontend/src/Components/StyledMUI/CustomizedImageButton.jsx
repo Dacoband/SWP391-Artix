@@ -15,7 +15,7 @@ const CustomizedImageButton = ({ name, onChange, fullWidth }) => {
 
       >
         <input
-          accept='.png,.jpeg,.jpg,.tif,.gif'
+          accept='.png,.jpeg,.jpg,.gif'
           style={{ display: 'none' }}
           id={name}
           name={name}
