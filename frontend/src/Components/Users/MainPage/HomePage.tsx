@@ -1,33 +1,64 @@
 import React, { useContext, useEffect, useState } from 'react'
 import CarouselTag from './CarouselTag.jsx';
-import RecommendedWorks from './RecommendedWorks.jsx';
+import RecommendedWorks from './RecommendedWorks.tsx';
 import RecommendedUsers from './RecommendedUsers.jsx';
-import ImgForyou from './ImgForyou.jsx';
+import ImgForyou from './ImgForyou.tsx';
 import Box from '@mui/material/Box';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
-import { Work} from '../../../share/ListofWork.js'
+import { Work } from '../../../share/ListofWork.js'
 import { Creator } from '../../../Interfaces/UserInterface.ts';
+import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
+import { GetArtList } from '../../../API/ArtworkAPI/GET.tsx';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-export default function HomePage() {
-  const role = sessionStorage.getItem('userRole')
-  console.log(role)
+import axios from 'axios'
 
-// Attempt to retrieve the auth state from sessionStorage
-const savedAuth = sessionStorage.getItem('auth');
-// Check if there's any auth data saved and parse it
-const [user,SetUser] = useState<Creator>()
-useEffect(() => {
-  const savedUser = savedAuth ? JSON.parse(savedAuth) : null;
-  // Now 'auth' contains your authentication state or null if there's nothing saved
-  SetUser(savedUser)
-},[savedAuth])
+export default function HomePage() {
+  const [isLoading, setIsLoading] = useState(false)
+  // Attempt to retrieve the auth state from sessionStorage
+  // Check if there's any auth data saved and parse it
+  const [user, setUser] = useState<Creator | null>
+    (JSON.parse(sessionStorage.getItem('auth') ?? 'null'))
+  //nullish coalescing operator (??) 
+
+  useEffect(() => {
+    const handleUserLogin = async () => {
+      const savedAuth = sessionStorage.getItem('auth');
+      const savedUser = savedAuth ? JSON.parse(savedAuth) : null;
+      // Now 'auth' contains your authentication state or null if there's nothing saved
+      setUser(savedUser)
+
+    };
+    window.addEventListener('userLoggedIn', handleUserLogin);
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('userLoggedIn', handleUserLogin);
+    };
+  }, []);// useEffect with [] can use to update the state only 1
   // user is the user login info store in the session
+
+  
+  const [reccomendedArtworklist, setReccomendedArtworklist] = useState<Artwork[]>([])
+  const [randomArtwork, setrandomArtwork] = useState<Artwork[]>([])
+
+   useEffect(() => {
+    const getArtList = async () => {
+      let artworklist:Artwork[]|undefined = await GetArtList()
+      setReccomendedArtworklist(artworklist??[].sort((a: Artwork, b: Artwork) => b.likes - a.likes).slice(0, 10))
+      setrandomArtwork(artworklist??[].sort(() => 0.5 - Math.random()).slice(0, 10))
+      // add a nullish coalescing operator (??)
+      // Set the sorted and sliced list
+      setIsLoading(false); // Finish loading
+    }
+    getArtList()
+  }, [user]);
+
   const { theme } = useContext(ThemeContext)
+
+
   return (
     <Box className='homepage'>
       <div className='carouseltag'>
-        {/* <div className='seemore'>See More</div> */}
         <CarouselTag />
       </div>
       <Box
@@ -41,34 +72,26 @@ useEffect(() => {
           marginBottom: '15px',
         }}>
         < div className='recommendedwork'>
-          <div className='headrecommended'>
-            <Typography variant='h5'>Recommended Works {user?.userName!==""? `For You, ${user?.userName}`:"From The Community"}</Typography>
-            <Link to={`artwordrecomment`}>
-            <div className='seemore'>See More</div>
-            </Link>
-            </div>
-
-          <div className='recommendedimg'>
-            <RecommendedWorks /></div>
+          <RecommendedWorks artworkList={reccomendedArtworklist} user={user} />
         </div>
 
         <div className='recommendedusers'>
           <div className='headrecommended'>
             <Typography variant='h5'>Recommended Users</Typography>
             <Link to={`userrecomment`}>
-            <div className='seemore'>See More</div></Link>
-            </div>
+              <div className='seemore'>See More</div></Link>
+          </div>
           <div>
             <RecommendedUsers />
           </div>
         </div>
         <div className='Randomimg'>
           <div className='headrecommended'>
-          <Typography variant='h5'>Random Artworks, GO!!!</Typography>
-          <Link to={`randomword`}>
-            <div className='seemore'>See More</div></Link></div>
+            <Typography variant='h5'>Random Artworks, GO!!!</Typography>
+            <Link to={`randomword`}>
+              <div className='seemore'>See More</div></Link></div>
           <div className='foryouimg'>
-            <ImgForyou />
+            <ImgForyou artworkList={randomArtwork} />
           </div>
         </div>
       </Box>

@@ -19,6 +19,8 @@ interface CustomizedDropdownProps{
   handleClickAsGuest:any;
 }
 export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedDropdownProps) {
+
+
     const {theme,toggleTheme,dark} = useContext(ThemeContext)
     const {logout} = useAuth();
     // Custom style for the Menu component
@@ -37,7 +39,6 @@ export default function CustomizedDropdown({user,handleClickAsGuest}:CustomizedD
     const [anchorEl, setAnchorEl] = useState(null)
     const [open,setOpen] = useState(false)
   useEffect(()=>{
-   
 }
 )
 const handleClickDropdown = (event) => {
@@ -70,8 +71,8 @@ transformOrigin={{
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
 <Typography variant='caption'>Account</Typography>
 </Divider>
-<MenuItem onClick={handleClickDropdown}><Link to={`creatorform`}>Profile</Link></MenuItem>
-<MenuItem onClick={handleClickDropdown}>My Dashboard</MenuItem>
+<MenuItem onClick={handleClickDropdown}><Link to={`profile/${user.accountID}`}>Profile</Link></MenuItem>
+<MenuItem onClick={handleClickDropdown}><Link to={`dashboarduser`}>My Dashboard</Link></MenuItem>
 <MenuItem onClick={handleClickDropdown}>My Account</MenuItem>
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
 <Typography variant='caption'>Theme</Typography>
@@ -86,7 +87,6 @@ transformOrigin={{
 </CustomizedMenu>
   )
 }
-
   return (
     <div>
        <IconButton
@@ -97,7 +97,7 @@ transformOrigin={{
         aria-haspopup="true"
         aria-expanded={open ? 'true' : 'false'}
       >
-        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.firstName.charAt[0] : null}</Avatar>
+        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
       </IconButton>
       {
         user===null?

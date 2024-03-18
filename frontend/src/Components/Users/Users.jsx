@@ -13,9 +13,9 @@ import UploadArtwork from './UserForms/UploadArtwork.jsx';
 import ProfileUser from './ProfileUser.jsx';
 import ArtPost from '../ArtPost.jsx';
 import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
-import SeeMoreUser from './SeeMoreUser.jsx';
+import SeeMoreUser from './SeeMoreUser.tsx';
 import SeeMoreForYou from './SeeMoreForYou.jsx';
-
+import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
 export default function Users() {
   return (
@@ -29,13 +29,15 @@ export default function Users() {
           <Route path={`creatorform`} element={<UserInfoForm/>}/>
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
           <Route path={`profile/:id`} element={<ProfileUser />}/>
-
-              <Route path={`profile/:id/commission`} element={<CommissionForm/>}/>
-
+          
+          <Route path={`profile/:id/commission`} element={<CommissionForm/>}/>
+          
           <Route path={`artwork/:id`} element={<ArtPost />}/>
+
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreForYou/>}/>
+          <Route path={`dashboarduser`} element={<DashboardUser/>}/>
 
          
         </Routes>
