@@ -121,7 +121,7 @@ public class ArtworksController : ControllerBase
 
             await _context.SaveChangesAsync();
             scope.Complete();
-            return Ok("Artwork created successfully");
+            return Ok(artwork);
         }
     }
 
