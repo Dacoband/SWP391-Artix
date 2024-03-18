@@ -79,6 +79,93 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
+    [HttpGet("ByUserName/{username}")]
+    public async Task<List<Creator>> GetCreatorByUsername(string username)
+    {
+        var creator = await _context.Creators.Select(c => new Creator
+             
+             {
+                 CreatorID = c.CreatorID,
+                 AccountID = c.AccountID,
+                 PaypalAccountID = c.PaypalAccountID,
+                 UserName = c.UserName,
+                 ProfilePicture = c.ProfilePicture,
+                 BackgroundPicture = c.BackgroundPicture,
+                 FirstName = c.FirstName,
+                 LastName = c.LastName,
+                 Address = c.Address,
+                 Phone = c.Phone,
+                 LastLogDate = c.LastLogDate,
+                 AllowCommission = c.AllowCommission,
+                 Biography = c.Biography,
+                 VIP = c.VIP,
+                 FollowCounts = c.FollowCounts,
+
+             }).Where( c=> c.UserName.ToLower().Contains(username.ToLower())).ToListAsync();
+             
+
+        return creator;
+    }
+
+
+    public class SearchResult
+    {
+        public List<Creator> Creators { get; set; }
+        public List<Artworks> ArtworksByArtworkName { get; set; }
+        public List<Artworks> ArtworksByTagName { get; set; }
+    }
+
+    [HttpGet("Search")]
+    public async Task<ActionResult<SearchResult>> Search(string searchTerm)
+    {
+        var searchResult = new SearchResult();
+
+        // Tìm kiếm creators có UserName chứa searchTerm
+        var creators = await _context.Creators
+            .Where(c => c.UserName.Contains(searchTerm))
+            .ToListAsync();
+        searchResult.Creators = creators;
+
+        // Tìm kiếm artworks có ArtworkName chứa ít nhất một từ khóa từ searchTerm
+        var artworksByArtworkName = await _context.Artworks
+            .Where(a => a.ArtworkName.Contains(searchTerm))
+            .ToListAsync();
+        searchResult.ArtworksByArtworkName = artworksByArtworkName;
+
+         // Tìm kiếm artworks dựa trên TagName nếu có
+         var tagsContainingSearchTerm = await _context.Tags
+       .Where(t => t.TagName.Contains(searchTerm))
+       .ToListAsync();
+
+        // Lấy danh sách TagID từ các tag đã lọc
+        var tagIds = tagsContainingSearchTerm.Select(t => t.TagID).ToList();
+
+        var artworkIds = await _context.ArtworkTag
+       .Where(at => tagIds.Contains(at.TagID))
+       .Select(at => at.ArtworkID)
+       .ToListAsync();
+
+        // Lấy danh sách artworks dựa trên danh sách ArtworkID
+        searchResult.ArtworksByTagName = await _context.Artworks
+    .Where(a => artworkIds.Contains(a.ArtworkID))
+    .Select(a => new Artworks
+    {
+        ArtworkID = a.ArtworkID,
+        CreatorID = a.CreatorID,
+        ArtworkName = a.ArtworkName,
+        Description = a.Description,
+        DateCreated = a.DateCreated,
+        Likes = a.Likes,
+        Purchasable = a.Purchasable,
+        Price = a.Price,
+        ImageFile = a.ImageFile,
+        ArtworkTag = a.ArtworkTag
+    })
+    .ToListAsync();
+
+
+        return searchResult;
+    }
 
 
     // POST: api/Creator
