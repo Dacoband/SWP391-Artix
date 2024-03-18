@@ -9,7 +9,7 @@ import Menu from './Menu.jsx';
 import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
-import UploadArtwork from './UserForms/UploadArtwork.jsx';
+import UploadArtwork from './UserForms/UploadArtwork.tsx';
 import ProfileUser from './ProfileUser.jsx';
 import ArtPost from '../ArtPost.tsx';
 import SeeMoreOfArt1 from './SeeMoreOfArt1.tsx';
