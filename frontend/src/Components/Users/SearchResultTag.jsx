@@ -23,8 +23,8 @@
 //   };
 import { useNavigate } from 'react-router-dom';
 import '../../css/SearchResult.css';
-import PersonIcon from '@mui/icons-material/Person';
-export const SearchResult = ({ result, resultId }) => {
+import ColorLensIcon from '@mui/icons-material/ColorLens';
+export const SearchResultTag = ({ result, resultId}) => {
   const navigate = useNavigate();
 
   // console.log(result);
@@ -32,17 +32,17 @@ export const SearchResult = ({ result, resultId }) => {
   const handleSelect = () => {
     console.log("Xử lý chọn được kích hoạt");
     // if (result.type === "user") {
-      // Nếu là userName, điều hướng đến trang profile
-      navigate(`profile/${resultId}`);
+    //   // Nếu là userName, điều hướng đến trang profile
+    //   navigate(`profile/${result.accountID}`);
     // } else if (result.type === "artwork") {
-    //   // Nếu là tên artwork, điều hướng đến trang bài post
-    //   navigate(`artwork/${result.artworkID}`);
+      // Nếu là tên artwork, điều hướng đến trang bài post
+      navigate(`artwork/${resultId}`);
     // }
   };
 
   return (
     <div className="search-result" onClick={handleSelect}>
-     <PersonIcon/> {result}
+        <ColorLensIcon/> {result}
     </div>
   );
 };

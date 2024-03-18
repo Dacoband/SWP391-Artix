@@ -13,10 +13,11 @@
 //     </div>
 //   );
 // };
-
+import ColorLensIcon from '@mui/icons-material/ColorLens';
 import '../../css/SearchResultsList.css';
 import { SearchResult } from "./SearchResult";
 import { Link } from 'react-router-dom';
+import { SearchResultTag } from './SearchResultTag';
 
 export const SearchResultsList = (props) => {
   const {dataCreator, dataTag} = props
@@ -24,10 +25,10 @@ export const SearchResultsList = (props) => {
   return (
     <div className="results-list">
       {dataCreator.map((dataCreator, id) => {
-        return  <SearchResult result={dataCreator.userName} key={id} />;
+        return  <SearchResult result={dataCreator.userName} resultId={dataCreator.creatorID} resultIdkey={id} />;
       })}
-      {dataCreator.map((dataTag, id) => {
-         return <SearchResult result={dataTag.tagName} key={id} />;
+      {dataTag.map((dataTag, id) => {
+         return  <SearchResultTag result={dataTag.tagName} resultId={dataTag.tagID} key={id} />;
       })}
     </div>
   );
