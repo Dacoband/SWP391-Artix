@@ -127,7 +127,7 @@ export default function ProfileUser() {
       <div className='tabsBackground' style={{ backgroundColor: theme.backgroundColor }} >
         <div className='inforuser2'>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: theme.color2 }} className='navofuser'>
+            <Box sx={{ borderBottom: 1}} className='navofuser'>
               <div className='navuser'>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"style={{color:theme.color2,zIndex:'7'}}>
                   <Tab label="Home" {...a11yProps(0)} style={{color:theme.color2,}}/>
