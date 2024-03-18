@@ -13,6 +13,7 @@ import CustomizedImageButton from '../../StyledMUI/CustomizedImageButton.jsx'
 import * as Yup from 'yup';
 import { useFormik, FieldArray, FormikProvider } from 'formik'; // useFormik instead of a custom handleChange event
 import axios from 'axios';
+import { Tag } from '../../../Interfaces/TagInterface';
 import {
     FormControlLabel,
     Input,
@@ -21,20 +22,35 @@ import {
     Chip,
     MenuItem,
 } from '@mui/material';
+import { GetTagList } from '../../../API/TagAPI/GET.tsx';
+import { Creator } from '../../../Interfaces/UserInterface.ts';
+import { useNavigate } from 'react-router-dom';
+import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
 
 function UploadArtwork() {
     const { theme } = useContext(ThemeContext)
-    const [preview, setPreview] = useState();
+    const [preview, setPreview] = useState<string>();
     const [blobImage, setBlobImage] = useState();
-    const [priceSwitch,setPriceSwitch] = useState(false)
-    const [listOfTags, setListOfTags] = useState(ListTag);
-    const url = "https://localhost:7233/api/Artworks";
+    const [priceSwitch, setPriceSwitch] = useState(false)
+    const [listOfTags, setListOfTags] = useState<Tag[]|undefined>([]);
+    const url = "https://localhost:7233/api/Artworks/";
+    const redirectUrl = useNavigate();
 
     // Attempt to retrieve the auth state from sessionStorage
-  // Check if there's any auth data saved and parse it
-  const [user, setUser] = useState(JSON.parse(sessionStorage.getItem('auth')))
-  //nullish coalescing operator (??) 
-  
+    // Check if there's any auth data saved and parse it
+    const authData = sessionStorage.getItem('auth');
+    const user:Creator = authData ? JSON.parse(authData) : null;
+    //nullish coalescing operator (??) 
+
+    //Get tagList
+    useEffect(() => {
+        const tagList = async ()=>{
+            let tagList:Tag[]|undefined = await GetTagList()
+            setListOfTags(tagList)
+        } 
+        tagList()
+    },[])
+
     //Covert Blob to Base64 string to easily view the image
     function blobToBase64(blob, callback) {
         const reader = new FileReader();
@@ -60,8 +76,8 @@ function UploadArtwork() {
 
         }
     };
-    
- 
+
+
     const handleSwitchChange = (e) => {
         setPriceSwitch(e.target.checked)
         formik.values.purchasable = priceSwitch
@@ -82,7 +98,7 @@ function UploadArtwork() {
         );
     };
 
-  
+
 
     const formik = useFormik({
         validateOnChange: false,
@@ -98,24 +114,28 @@ function UploadArtwork() {
             purchasable: false,
             price: 0,
             imageFile: preview,
-            artworkTag: [ {
+            artworkTag: [{
                 artworkTagID: 0,
                 artworkID: 0,
                 tagID: 1
-              },]
+            },]
         },
         onSubmit: (values) => {
             const time = new Date()
             values.dateCreated = time.toISOString()
-            values.imageFile = preview.split(',')[1]; 
+            if (preview) {
+                values.imageFile = preview.split(',')[1];
+            }
             values.purchasable = priceSwitch
             // Split Data URL Base64 (data:image/jpeg,base64) => (base64)
             console.log(values)
-            axios.post(url, values)
-                .then(response => response.data)
-                .then(data => console.log("Post Artwork Complete!"+data))
-                .catch(err => console.error(err))
-
+            const postArtwork = async () =>{
+                const response = await  axios.post(url, values)
+                console.log("Post Artwork Complete!" + response.data)
+                const newArtwork:Artwork = response.data
+                redirectUrl(`artwork/${newArtwork.artworkID}`)// TO DO, WE ARE NOT FINISHED WITH THIS LINE
+            }
+            postArtwork()
         },
         validationSchema: Yup.object({
             artworkName: Yup.string().required("NAME! I want a name! Please..."),
@@ -135,7 +155,6 @@ function UploadArtwork() {
 
                         <CustomizedImageButton
                             name="imageFile"
-                            type="file"
                             onChange={handleImageChange}
                             fullWidth
                         />
@@ -177,7 +196,7 @@ function UploadArtwork() {
                                     control={
                                         <CustomizedSwitch
                                             checked={priceSwitch}
-                                            onChange={(event)=>handleSwitchChange(event)}
+                                            onChange={(event) => handleSwitchChange(event)}
                                             name="purchasable"
                                         />
                                     }
@@ -188,6 +207,7 @@ function UploadArtwork() {
 
                         </div>
                         <Box className="tagAndpreviewBox">
+                            {listOfTags?.length!==0? 
                             <FormikProvider value={formik}
                             //Formik Fields requires you to provide a context with FormikProvider with the difined 'formik' as value
                             >
@@ -203,18 +223,18 @@ function UploadArtwork() {
                                                             value={tag.tagID}
                                                             onChange={formik.handleChange}
                                                         >
-                                                            {listOfTags.map((tag) => {
+                                                            {listOfTags?.map((tag:Tag) => {
                                                                 return (
-                                                                    <MenuItem 
-                                                                        key={tag.id} value={tag.id}>
-                                                                        {tag.nameTag}
+                                                                    <MenuItem
+                                                                        key={tag.tagID} value={tag.tagID}>
+                                                                        {tag.tagName}
                                                                     </MenuItem>
                                                                 )
                                                             })}
 
                                                         </Select>
                                                         <CustomizedButton
-                                                          
+
                                                             onClick={() => arrayHelpers.remove(index)}
                                                         >
                                                             Remove
@@ -222,12 +242,14 @@ function UploadArtwork() {
                                                     </div>
                                                 ))}
                                                 <CustomizedButton
-                                                   
+
                                                     onClick={() => {
-                                                        arrayHelpers.push({  artworkTagID: 0,
-                                                        artworkID: 0,
-                                                        tagID: 1 });
-                                                        }
+                                                        arrayHelpers.push({
+                                                            artworkTagID: 0,
+                                                            artworkID: 0,
+                                                            tagID: 1
+                                                        });
+                                                    }
                                                     }>
                                                     Add a Tag
                                                 </CustomizedButton>
@@ -236,6 +258,7 @@ function UploadArtwork() {
                                     />
                                 </div>
                             </FormikProvider>
+                            :""}
                             <div className='imageBox'>
                                 <Typography variant="h6"
                                     color={theme.color}
@@ -250,8 +273,9 @@ function UploadArtwork() {
                                     className='previewImage' src={preview} alt="Preview Here!" />
                             </div>
                         </Box>
-                        <CustomizedButton sx={{ 
-                            display: 'block', width: '50%', margin: 'auto', marginTop: '5vh' }} variant="contained" type="submit">
+                        <CustomizedButton sx={{
+                            display: 'block', width: '50%', margin: 'auto', marginTop: '5vh'
+                        }} variant="contained" type="submit">
                             Welcome To The Wolrd!
                         </CustomizedButton>
                     </form>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/backend.csproj": {}
+    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/backend.csproj": {
+    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/backend.csproj",
+        "projectUniqueName": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/backend.csproj",
+        "projectPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
         "packagesPath": "/Users/hendrix/.nuget/packages/",
-        "outputPath": "/Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/obj/",
+        "outputPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/hendrix/.nuget/NuGet/NuGet.Config"
