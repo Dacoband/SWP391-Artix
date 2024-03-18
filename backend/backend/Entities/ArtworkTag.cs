@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PayPal.Api;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace backend.Entities
 {
@@ -11,5 +12,6 @@ namespace backend.Entities
 
         public int ArtworkID { get; set; } // Khóa ngoại
         public int TagID { get; set; } // Khóa ngoại
+       
     }
 }
