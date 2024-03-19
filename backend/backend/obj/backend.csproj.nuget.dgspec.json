@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj": {}
   },
   "projects": {
@@ -16,22 +15,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-    "D:\\SWP391-Artix\\backend\\backend\\backend.csproj": {}
-  },
-  "projects": {
-    "D:\\SWP391-Artix\\backend\\backend\\backend.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
-        "projectName": "backend",
-        "projectPath": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\THY\\.nuget\\packages\\",
-        "outputPath": "D:\\SWP391-Artix\\backend\\backend\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\THY\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> c3a06c9b2038fb2a9709fb9b78d7add8e1d1f232
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -133,11 +116,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
->>>>>>> c3a06c9b2038fb2a9709fb9b78d7add8e1d1f232
         }
       }
     }
