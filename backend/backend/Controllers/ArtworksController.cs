@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -264,25 +265,26 @@ public class ArtworksController : ControllerBase
 
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteArtwork(int id)
+    public async Task<IActionResult> DeleteReport(int id)
     {
-        var artwork = await _context.Artworks.FindAsync(id);
-        if (artwork == null)
+        try
         {
-            return NotFound();
+            var report = await _context.Reports.FindAsync(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            _context.Reports.Remove(report);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
-
-     
-        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
-        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
-        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
-
-        // Sau đó mới xóa bản ghi từ bảng Artworks
-        _context.Artworks.Remove(artwork);
-
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while deleting the report.");
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
     }
 
 
