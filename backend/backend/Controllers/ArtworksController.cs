@@ -188,8 +188,8 @@ public class ArtworksController : ControllerBase
 
 
 
-   
-    
+
+
 
 
 
@@ -211,6 +211,49 @@ public class ArtworksController : ControllerBase
 
         return topLikedArtworks;
     }
+
+    // GET: api/artworks/random11
+    [HttpGet("random11")]
+    public async Task<IActionResult> GetRandom11Artworks()
+    {
+        // Lấy danh sách tất cả các artworks từ cơ sở dữ liệu
+        var allArtworks = await _context.Artworks.ToListAsync();
+
+        // Kiểm tra xem có artworks nào không
+        if (allArtworks.Count == 0)
+        {
+            return NotFound("Không có artworks nào trong cơ sở dữ liệu.");
+        }
+
+        // Lấy 11 artworks ngẫu nhiên từ danh sách tất cả các artworks
+        var randomArtworks = GetRandomElements(allArtworks, 11);
+
+        return Ok(randomArtworks);
+    }
+
+    // Hàm chọn ngẫu nhiên các phần tử từ danh sách
+    private List<Artworks> GetRandomElements(List<Artworks> list, int count)
+    {
+        var random = new Random();
+        var randomArtworks = new List<Artworks>();
+
+        while (randomArtworks.Count < count)
+        {
+            var index = random.Next(0, list.Count);
+            var artwork = list[index];
+
+            // Kiểm tra xem artwork đã được chọn trước đó chưa
+            if (!randomArtworks.Contains(artwork))
+            {
+                randomArtworks.Add(artwork);
+            }
+        }
+
+        return randomArtworks;
+    }
+
+
+
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArtwork(int id)
