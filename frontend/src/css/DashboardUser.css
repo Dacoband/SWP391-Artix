@@ -38,6 +38,7 @@
 
 .contentoverview{
     margin-top: 50px;
+
 }
 .contentoverview h1{
    
@@ -47,7 +48,7 @@ text-align: center;
 .overview{
     display: flex;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
     margin: auto;
     font-size: 20px;
     padding-bottom: 80px;

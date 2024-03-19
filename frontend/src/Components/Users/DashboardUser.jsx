@@ -383,10 +383,13 @@ export default function DashboardUser() {
                    </div>
               </CustomTabPanel>
               <CustomTabPanel value={value} index={1}>
-              <div style={{width:'900px'}}>
+            <div className='contentdashboard' >   
+              <div className='chart' style={{width:'900px'}}>
                      <Bar options={options} data={data2} />
-                     <div className='explication'>
-                        <h2>Featured Artworks: </h2>
+                     </div>
+                     <div className='explication'style={{border:'1px solid', borderColor:theme.color3}}>
+                     <h3> <EditNoteIcon style={{transform: 'translateY(22%)'}}/>Featured Artworks: </h3>
+                     <div className='nameworks-container'>
                         {likeWorks.map((work, index) => (
                            <div className='namework' key={index}>
                               {index + 1}: {work.namework} 
@@ -395,14 +398,15 @@ export default function DashboardUser() {
                          ))}
                       </div>
                    </div>
-        
+        </div>
               </CustomTabPanel>
    
     </Box>
           </div>
 
 
-         < div className='contentoverview'>
+         < div className='contentoverview' style={{width: '80%',borderTop:'1px solid', borderColor:theme.color3,margin:'90px auto'}}>
+           <div>
            <h1>Information overview</h1>
            <div className='overview'>
 
@@ -416,7 +420,7 @@ export default function DashboardUser() {
              <div className='line1'>Number of works bought: </div>
              <div className='line1'>Your number of likes: 20 </div> </div>  
                
-         </div>
+         </div></div>
           
            </div>
 
