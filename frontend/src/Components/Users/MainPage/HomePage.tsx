@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
 import { Creator } from '../../../Interfaces/UserInterface.ts';
 import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
-import { GetArtList } from '../../../API/ArtworkAPI/GET.tsx';
+import { GetArtList, GetRandom10Arts, GetTop10Arts } from '../../../API/ArtworkAPI/GET.tsx';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { GetCreatorList } from '../../../API/UserAPI/GET.tsx';
@@ -42,12 +42,12 @@ export default function HomePage() {
 
    useEffect(() => {
     const getArtList = async () => {
-      let artworklist:Artwork[]|undefined = await GetArtList()
-      setReccomendedArtworklist(artworklist? artworklist.sort((a: Artwork, b: Artwork) => b.likes - a.likes).slice(0, 10):[])
-      setrandomArtwork(artworklist? artworklist.sort(() => 0.5 - Math.random()).slice(0, 10):[])
-      // add a nullish coalescing operator (??)
-      // Set the sorted and sliced list
-    
+        let top10Artworklist: Artwork[] | undefined = await GetTop10Arts();
+        setReccomendedArtworklist(top10Artworklist?top10Artworklist:[]);
+        //Get top liked artwork
+        let randomArtworklist: Artwork[] | undefined = await GetRandom10Arts();
+        setrandomArtwork(randomArtworklist?randomArtworklist:[]);
+        //Get random artwork
     }
     const getCreatorList = async () =>{
       let creatorList: Creator[] | undefined = await GetCreatorList()

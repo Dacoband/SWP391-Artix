@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import { Work } from '../../share/ListofWork';
+import React, { useContext, useEffect } from 'react'
+import { Work } from '../../share/ListofWork.js';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import { useState } from 'react';
-import { ListofUsers } from '../../share/ListofUsers';
+import { ListofUsers } from '../../share/ListofUsers.js';
 import { Link, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -26,6 +26,8 @@ import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
+import { GetCreatorByID } from '../../API/UserAPI/GET.tsx';
+import { Creator } from '../../Interfaces/UserInterface.ts';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -58,11 +60,10 @@ function a11yProps(index) {
   };
 }
 
-
 export default function ProfileUser() {
   const [isFollowing, setIsFollowing] = useState(false)
+  const [user,setUser] = useState<Creator>()
   let { id } = useParams()
-  const selectedUser = ListofUsers.find(user => user.id === parseInt(id));
   const { theme } = useContext(ThemeContext)
   const handleClick = () => {
     setIsFollowing(!isFollowing)
@@ -70,10 +71,18 @@ export default function ProfileUser() {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setValue(newValue)
   };
-  return (
 
+  useEffect(() => {
+    const getUserProfile = async () =>{
+      const userProfile = await GetCreatorByID(id? id : "0")
+      setUser(userProfile)
+    }
+    getUserProfile()
+  },[])
+
+  return (
     <div className=''>
       <div className='headeruser'>
         {/* <div className='backgrounduser'>
@@ -81,13 +90,13 @@ export default function ProfileUser() {
         </div> */}
         <Card sx={{ width: '100%' }}>
 
-          <div className='backgrounduser' style={{ backgroundImage: `url('${selectedUser.background}')` }}>
+          <div className='backgrounduser' style={{ backgroundImage: `url('${user?.backgroundPicture}')` }}>
             <Button className='button-edit-background' style={{ color: '#04a1fd', backgroundColor: '#1A1A2E', borderRadius: '10px', fontSize: '14px', top: '80%', left: '85%' }}><CameraAltIcon /> Edit Cover Image</Button>
           </div>
           <CardContent className='infouser1'>
             <div className='infousername'>
               <div className='avataruser' >
-                <img src={selectedUser.avatar} />
+                <img src={user?.profilePicture} />
                 <div className='buttonavatar'>
                   <Button style={{ color: 'white', borderRadius: '50%' }}>
                     <Avatar style={{ outline: '2px solid #fff' }}>
@@ -98,10 +107,10 @@ export default function ProfileUser() {
               </div>
               <div className='headerusername'>
                 <Typography gutterBottom variant="h3" component="div" style={{ fontWeight: 700, marginBottom: '5px' }} >
-                  {selectedUser.User}
+                  {user?.userName}
                 </Typography>
                 <Typography variant="body2" style={{ fontWeight: 500, fontSize: '18px' }} >
-                  Followers: {selectedUser.follower} | Following: {selectedUser.following}
+                  Followers: {user?.followCount}
                 </Typography>
               </div> </div>
 
@@ -157,12 +166,12 @@ export default function ProfileUser() {
                       zIndex: 10 // you may want to add a zIndex to ensure it stacks on top of other contents
                     }} className='boxintroduct'
                   >
-                    <h2 className='headintroduct'>About {selectedUser.User}:</h2>
-                    <div className='contentintroduct'><CakeIcon className='iconintroduct' />Birday: {selectedUser.birday} </div>
-                    <div className='contentintroduct'><RoomIcon className='iconintroduct' />Location: {selectedUser.location}</div>
-                    <div className='contentintroduct'><EmailIcon className='iconintroduct' />Email: {selectedUser.email} </div>
-                    <div className='contentintroduct'><PhoneIcon className='iconintroduct' />Phone: {selectedUser.Phone}</div>
-                    <div className='contentintroduct'> <AutoAwesomeIcon className='iconintroduct' />My Bio: {selectedUser.bio}  </div>
+                    <h2 className='headintroduct'>About {user?.userName}:</h2>
+                    <div className='contentintroduct'><CakeIcon className='iconintroduct' />Birday: TOBEADDED </div>
+                    <div className='contentintroduct'><RoomIcon className='iconintroduct' />Location: {user?.address}</div>
+                    <div className='contentintroduct'><EmailIcon className='iconintroduct' />Email: TOBEADDED </div>
+                    <div className='contentintroduct'><PhoneIcon className='iconintroduct' />Phone: {user?.phone}</div>
+                    <div className='contentintroduct'> <AutoAwesomeIcon className='iconintroduct' />My Bio: {user?.biography}  </div>
                   </Box></div>
                 <div className='workofuser'>
                   <div className='head-workofuser'>
@@ -188,7 +197,7 @@ export default function ProfileUser() {
 
             </CustomTabPanel>
 
-            <CustomTabPanel value={value} index={1} className='tabshop'>
+            <CustomTabPanel value={value} index={1}>
               {/* <ImageList sx={{ width:1200 , height: 450 ,overflow: 'hidden'}} cols={5} rowHeight={210}> */}
               <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible' }} cols={4}>
                 {/* <ImageListItem key="Subheader" cols={2}>
@@ -221,7 +230,7 @@ export default function ProfileUser() {
             </CustomTabPanel>
 
 
-            <CustomTabPanel value={value} index={2} className='tabfavourites'>
+            <CustomTabPanel value={value} index={2}>
 
               <Box sx={{ width: 1200, height: 450, overflow: 'visible' }}>
                 <ImageList variant="masonry" cols={4} gap={8}>

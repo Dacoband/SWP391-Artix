@@ -10,16 +10,16 @@ export interface GoogleUser {
   } // This is the Object google return for us, having all user infomation in their Gmail account
   
   export interface Creator { 
-  creatorID: string | 0,
-  accountID: string | 0,
-  paypalAccountID: number | 0,
+  creatorID: string | "0",
+  accountID: string | "0",
+  paypalAccountID: number | "0",
   userName: string | "",
   profilePicture: string | "",
   backgroundPicture:string | "",
   firstName: string | "",
   lastName: string | "",
   address: string | "",
-  phone: number | 0,
+  phone: number | "0",
   lastLogDate: Date,
   allowCommission: boolean | false,
   biography: string |  "",

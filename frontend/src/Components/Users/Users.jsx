@@ -10,10 +10,11 @@ import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.tsx';
-import ProfileUser from './ProfileUser.jsx';
+import ProfileUser from './ProfileUser.tsx';
 import ArtPost from '../ArtPost.tsx';
 import SeeMoreOfArt1 from './SeeMoreOfArt1.tsx';
 import SeeMoreUser from './SeeMoreUser.tsx';
+// eslint-disable-next-line 
 import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
@@ -36,7 +37,7 @@ export default function Users() {
 
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
-          <Route path={`randomword`} element={<SeeMoreForYou/>}/>
+          <Route path={`randomword`} element={<SeeMoreOfArt1/>}/>
           <Route path={`dashboarduser`} element={<DashboardUser/>}/>
 
          
