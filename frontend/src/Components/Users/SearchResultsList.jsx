@@ -28,13 +28,9 @@ export const SearchResultsList = (props) => {
         return  <SearchResult result={dataCreator.userName} resultId={dataCreator.creatorID} resultIdkey={id} />;
       })}
       {/* Kiểm tra dataArt có phải là mảng không */}
-      {Array.isArray(dataArt) ? (
-        dataArt.map((dataArtItem, id) => (
-          <SearchResultTag result={dataArtItem.artworkName} resultId={dataArtItem.artworkID} key={id} />
-        ))
-      ) : (
-        <p>No artworks found</p>
-      )}
+      {/* {dataArt.map((dataArt, id) => {
+        return  <SearchResultTag result={dataArt.artworkName} resultId={dataArt.artworkID} resultIdkey={id} />;
+      })} */}
     </div>
   );
 };

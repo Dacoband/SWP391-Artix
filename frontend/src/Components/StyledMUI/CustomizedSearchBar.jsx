@@ -114,6 +114,7 @@ export default function ExpandingSearchBar() {
                         art.artworkName.toLowerCase().includes(value.toLowerCase())
                     );
                 });
+                console.log(filteredResults);
                 setDataArt(filteredResults);
                 // setShowResults(true);
     
@@ -281,7 +282,7 @@ export default function ExpandingSearchBar() {
         {dark ? (
             <SearchDarkMode>
                 {searchBarComponent}
-                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataArt={dataArt}/>}
+                {dataCreator && dataCreator.length > 0  && <SearchResultsList dataCreator={dataCreator} dataArt={dataArt} />}
             </SearchDarkMode>
         ) : (
             <SearchLightMode>
