@@ -25,8 +25,10 @@ public class ArtworksController : ControllerBase
     public async Task<IActionResult> GetArtworks()
     {
         var artworks = await _context.Artworks
-            .Include(a => a.ArtworkTag)
-            .Select(a => new Artworks
+            .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
+            .Take(5) // Lấy 5 artwork đầu tiên
+            .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
+            .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
@@ -41,8 +43,14 @@ public class ArtworksController : ControllerBase
             })
             .ToListAsync();
 
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
         return Ok(artworks);
     }
+
 
     // GET: api/artworks/{id}
     [HttpGet("{id}")]
