@@ -17,72 +17,49 @@ public class FollowsController : ControllerBase
         _context = context;
     }
 
-    // GET: api/Follows
+
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Follow>>> GetFollows()
+    [Route("api/Followers/{creatorId}")]
+    public async Task<ActionResult<List<Creator>>> GetFollowers(int creatorId)
     {
-        return await _context.Follows.ToListAsync();
+        var followers = await _context.Follows
+            .Where(f => f.CreatorID== creatorId)
+            .Select(f => f.FollowerID)
+            .ToListAsync();
+
+        return Ok(followers);
     }
 
-    // GET: api/Follows/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Follow>> GetFollow(int id)
-    {
-        var follow = await _context.Follows.FindAsync(id);
 
-        if (follow == null)
-        {
-            return NotFound();
-        }
-
-        return follow;
-    }
 
     // POST: api/Follows
     [HttpPost]
-    public async Task<ActionResult<Follow>> PostFollow(Follow follow)
+    public async Task<ActionResult> FollowCreator(int followerId, int creatorId)
     {
+        var follow = new Follow
+        {
+            FollowerID = followerId,
+            CreatorID = creatorId,
+            
+        };
+
         _context.Follows.Add(follow);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetFollow), new { id = follow.FollowId}, follow);
+        var creator = await _context.Creators.FindAsync(creatorId);
+        creator.FollowCounts++;
+
+
+        await _context.SaveChangesAsync();
+
+        return Ok();
     }
 
-    // PUT: api/Follows/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> PutFollow(int id, Follow follow)
+    [HttpDelete]
+    public async Task<ActionResult> UnfollowCreator(int followerId, int creatorId)
     {
-        if (id != follow.FollowId)
-        {
-            return BadRequest();
-        }
+        var follow = await _context.Follows.FirstOrDefaultAsync(f => f.FollowerID == followerId && f.CreatorID == creatorId);
 
-        _context.Entry(follow).State = EntityState.Modified;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!FollowExists(id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
-        }
-
-        return NoContent();
-    }
-
-    // DELETE: api/Follows/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteFollow(int id)
-    {
-        var follow = await _context.Follows.FindAsync(id);
         if (follow == null)
         {
             return NotFound();
@@ -91,11 +68,17 @@ public class FollowsController : ControllerBase
         _context.Follows.Remove(follow);
         await _context.SaveChangesAsync();
 
-        return NoContent();
-    }
+        var creator = await _context.Creators.FindAsync(creatorId);
+        creator.FollowCounts--;
 
+
+        await _context.SaveChangesAsync();
+
+        return Ok();
+    }
+    
     private bool FollowExists(int id)
     {
-        return _context.Follows.Any(e => e.FollowId == id);
+        return _context.Follows.Any(e => e.FollowerID == id);
     }
 }

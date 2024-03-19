@@ -6,18 +6,31 @@ namespace backend.Entities
     public class Creator
     {
         [Key]
-        public int CreatorID { get; set; } // PK
-        public int FollowID { get; set; } // FK
-        public int PaypalAccount { get; set; } // FK
+        public int? CreatorID { get; set; } // PK
+        public int? AccountID { get; set; }
+        public int? PaypalAccountID { get; set; } // FK
         public string UserName { get; set; }
-        public double Follower { get; set; }
-        public byte[] ProfilePicture { get; set; } // Có thể 
+        public string?  ProfilePicture { get; set; } // Có thể 
+        public string? BackgroundPicture { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public DateTime LastLogDate { get; set; }
-        public bool AllowCommission { get; set; }
+        public bool AllowCommission { get; set; } = false;
+        public string? Biography { get; set; }
+
+        public bool? VIP { get; set; } = false;
+
+        public int? FollowCounts { get; set; }
+        public Creator()
+        {
+            VIP = false; // Đặt giá trị mặc định của VIP là false
+
+            AllowCommission = false;
+
+        }
+
 
     }
 }

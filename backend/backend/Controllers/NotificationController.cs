@@ -21,14 +21,14 @@ public class NotificationController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Notification>>> GetNotifications()
     {
-        return await _context.Notifications.ToListAsync();
+        return await _context.Notification.ToListAsync();
     }
 
     // GET: api/Notification/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Notification>> GetNotification(int id)
     {
-        var notification = await _context.Notifications.FindAsync(id);
+        var notification = await _context.Notification.FindAsync(id);
 
         if (notification == null)
         {
@@ -42,7 +42,7 @@ public class NotificationController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Notification>> PostNotification(Notification notification)
     {
-        _context.Notifications.Add(notification);
+        _context.Notification.Add(notification);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetNotification), new { id = notification.ArtWorkID }, notification);
@@ -82,13 +82,13 @@ public class NotificationController : ControllerBase
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteNotification(int id)
     {
-        var notification = await _context.Notifications.FindAsync(id);
+        var notification = await _context.Notification.FindAsync(id);
         if (notification == null)
         {
             return NotFound();
         }
 
-        _context.Notifications.Remove(notification);
+        _context.Notification.Remove(notification);
         await _context.SaveChangesAsync();
 
         return NoContent();
@@ -96,6 +96,6 @@ public class NotificationController : ControllerBase
 
     private bool NotificationExists(int id)
     {
-        return _context.Notifications.Any(e => e.ArtWorkID == id);
+        return _context.Notification.Any(e => e.ArtWorkID == id);
     }
 }

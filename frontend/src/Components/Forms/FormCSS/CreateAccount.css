@@ -1,0 +1,16 @@
+.header{
+    text-align: center;
+}
+
+
+/* Sign Up Form */
+.createaccount {
+    display: flex;
+   
+  }
+  .signupForm{
+    margin-top: '2%';
+  }
+  
+  
+  /* End Sign Up Form */

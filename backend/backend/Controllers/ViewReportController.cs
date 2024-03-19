@@ -21,14 +21,14 @@ public class ViewReportController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<IEnumerable<ViewReport>>> GetViewReports()
     {
-        return await _context.ViewReports.ToListAsync();
+        return await _context.ViewReport.ToListAsync();
     }
 
     // GET: api/ViewReport/5
     [HttpGet("{moderatorId}/{reportId}")]
     public async Task<ActionResult<ViewReport>> GetViewReport(int moderatorId, int reportId)
     {
-        var viewReport = await _context.ViewReports.FindAsync(moderatorId, reportId);
+        var viewReport = await _context.ViewReport.FindAsync(moderatorId, reportId);
 
         if (viewReport == null)
         {
@@ -42,7 +42,7 @@ public class ViewReportController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<ViewReport>> PostViewReport(ViewReport viewReport)
     {
-        _context.ViewReports.Add(viewReport);
+        _context.ViewReport.Add(viewReport);
         await _context.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetViewReport), new { moderatorId = viewReport.ModeratorID, reportId = viewReport.ReportID }, viewReport);
@@ -52,13 +52,13 @@ public class ViewReportController : ControllerBase
     [HttpDelete("{moderatorId}/{reportId}")]
     public async Task<IActionResult> DeleteViewReport(int moderatorId, int reportId)
     {
-        var viewReport = await _context.ViewReports.FindAsync(moderatorId, reportId);
+        var viewReport = await _context.ViewReport.FindAsync(moderatorId, reportId);
         if (viewReport == null)
         {
             return NotFound();
         }
 
-        _context.ViewReports.Remove(viewReport);
+        _context.ViewReport.Remove(viewReport);
         await _context.SaveChangesAsync();
 
         return NoContent();
