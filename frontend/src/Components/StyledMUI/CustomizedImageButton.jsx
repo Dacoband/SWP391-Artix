@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Children } from 'react';
 import BackupIcon from '@mui/icons-material/Backup';
 import CustomizedButton from './CustomizedButton.tsx'
 // This StyledButton will be used to override the default label styling
 
 
-const CustomizedImageButton = ({ name, onChange, fullWidth }) => {
+const CustomizedImageButton = ({ name, onChange, fullWidth,}) => {
   return (
     <>
       <div className='uploadButton'
@@ -21,7 +21,6 @@ const CustomizedImageButton = ({ name, onChange, fullWidth }) => {
           name={name}
           type="file"
           onChange={onChange}
-
         />
         <label htmlFor={name}>
           <CustomizedButton

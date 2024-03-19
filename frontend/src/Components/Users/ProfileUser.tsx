@@ -25,9 +25,11 @@ import Avatar from '@mui/material/Avatar';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
+import CustomizedImageButton from '../StyledMUI/CustomizedImageButton.jsx'
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import { GetCreatorByID } from '../../API/UserAPI/GET.tsx';
 import { Creator } from '../../Interfaces/UserInterface.ts';
+import { PutCreatorBackgroundPicture, PutCreatorProfilePicture } from '../../API/UserAPI/PUT.tsx';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -62,7 +64,11 @@ function a11yProps(index) {
 
 export default function ProfileUser() {
   const [isFollowing, setIsFollowing] = useState(false)
-  const [user,setUser] = useState<Creator>()
+  const [user, setUser] = useState<Creator>()
+  const [blobImage, setBlobImage] = useState();
+  
+  const [previewProfile, setPreviewProfile] = useState<string>();
+  const [previewBackground, setPreviewBackground] = useState<string>();
   let { id } = useParams()
   const { theme } = useContext(ThemeContext)
   const handleClick = () => {
@@ -75,12 +81,66 @@ export default function ProfileUser() {
   };
 
   useEffect(() => {
-    const getUserProfile = async () =>{
-      const userProfile = await GetCreatorByID(id? id : "0")
+    const getUserProfile = async () => {
+      const userProfile = await GetCreatorByID(id ? id : "0")
       setUser(userProfile)
     }
     getUserProfile()
-  },[])
+  }, [])
+
+
+  //Covert Blob to Base64 string to easily view the image
+  function blobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const base64data = reader.result as string;
+        resolve(base64data);
+      };
+      reader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  }
+  
+
+  async function postImageToDatabase(imageData:string, imageType:string) {
+    if(imageType==="profilePicture"){
+      let plainBase64Data = imageData.split(',')[1];
+      PutCreatorProfilePicture(user? user.creatorID:"1", plainBase64Data)
+    }
+    else if(imageType==="backgroundPicture"){
+      let plainBase64Data = imageData.split(',')[1];
+      PutCreatorBackgroundPicture(user? user.creatorID:"1", plainBase64Data)
+    }else{
+      console.log("error: POSTING FAILED! Check below for further details:")
+    }
+
+  }
+
+  const handleImageChange = async (e) => {
+    const { name, files } = e.target;
+  if (name === "profilePicture" || name === "backgroundPicture") {
+    const file = files?.[0];
+    if (file) {
+      try {
+        const base64Image = await blobToBase64(file);
+        // Match the arguments to the function definition
+        await postImageToDatabase(base64Image, name); // Here `name` should be of type 'profilePicture' | 'backgroundPicture'
+        if (name === "profilePicture") {
+          setPreviewProfile(base64Image);
+        } else {
+          setPreviewBackground(base64Image);
+        }
+        console.log('Posting images...');
+      } catch (error) {
+        console.error('Error posting image to database', error);
+      }
+    }
+  }
+  };
+
 
   return (
     <div className=''>
@@ -90,19 +150,75 @@ export default function ProfileUser() {
         </div> */}
         <Card sx={{ width: '100%' }}>
 
-          <div className='backgrounduser' style={{ backgroundImage: `url('${user?.backgroundPicture}')` }}>
-            <Button className='button-edit-background' style={{ color: '#04a1fd', backgroundColor: '#1A1A2E', borderRadius: '10px', fontSize: '14px', top: '80%', left: '85%' }}><CameraAltIcon /> Edit Cover Image</Button>
+          <div className='backgrounduser' style={{ backgroundImage: `url('${user?.backgroundPicture? "data:image/jpeg;base64,"+user?.backgroundPicture : previewBackground}')` }}>
+            <div
+              className='backgroundPicture'
+              style={{
+                position: 'relative',
+                display: 'flex',
+                justifyContent: 'center',
+                color: '#04a1fd',
+                backgroundColor: '#1A1A2E',
+                borderRadius: '10px', fontSize: '14px',
+                top: '80%',
+                left: '83%',
+                width: '15vw',
+              }}
+            >
+              <input
+                accept='.png,.jpeg,.jpg,.tif,.gif'
+                style={{ display: 'none' }}
+                id={"backgroundPicture"}
+                name={"backgroundPicture"}
+                type="file"
+                onChange={handleImageChange}
+              />
+              <label htmlFor={"backgroundPicture"}>
+                <Button
+                  className='button-edit-background'
+                  component="span"
+                  startIcon={<CameraAltIcon />}
+                >
+                  Edit Cover Image
+                </Button>
+              </label>
+            </div>
           </div>
           <CardContent className='infouser1'>
             <div className='infousername'>
               <div className='avataruser' >
-                <img src={user?.profilePicture} />
+                <img src={user?.profilePicture? "data:image/jpeg;base64,"+user?.profilePicture : previewProfile} />
                 <div className='buttonavatar'>
-                  <Button style={{ color: 'white', borderRadius: '50%' }}>
-                    <Avatar style={{ outline: '2px solid #fff' }}>
-                      <CameraAltIcon />
-                    </Avatar>
-                  </Button>
+                  <div className='profilePicture'
+                    style={{  
+                      backgroundColor: "none",
+                      position: "absolute",
+                      top: 10,
+                      right: 0,
+                      transform: "translate(10%, 100%)",
+                      zIndex: 2,
+                    }}
+                  >
+                    <input
+                      style={{display:'none'}}
+                      accept='.png,.jpeg,.jpg,.tif,.gif'
+                      id={"profilePicture"}
+                      name={"profilePicture"}
+                      type="file"
+                      onChange={handleImageChange}
+                    />
+                    
+                    <label htmlFor={"profilePicture"}>
+                      <Button style={{ color: 'white', borderRadius: '150px' }}
+                        component="span" //Component = 'span' allow you to span the lable across the input
+                      >
+                        <Avatar style={{ outline: '2px solid #fff' }}>
+                          <CameraAltIcon />
+                        </Avatar>
+                      </Button>
+                    </label>
+                  </div>
+                  
                 </div>
               </div>
               <div className='headerusername'>
@@ -146,7 +262,7 @@ export default function ProfileUser() {
               </div>
               <div className='buttonSubcribe'>
                 <Link to={`commission`}>
-                   <Button variant="contained" href="#contained-buttons"> <ShoppingBagIcon style={{ marginRight: '5px' }} />Commission</Button>
+                  <Button variant="contained" href="#contained-buttons"> <ShoppingBagIcon style={{ marginRight: '5px' }} />Commission</Button>
                 </Link>
                 <Button variant="contained" href="#contained-buttons" style={{ marginLeft: '20px' }}>Report</Button>
               </div>
