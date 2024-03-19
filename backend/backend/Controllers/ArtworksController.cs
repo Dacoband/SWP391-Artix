@@ -255,28 +255,28 @@ public class ArtworksController : ControllerBase
 
 
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteReport(int id)
-    {
-        try
-        {
-            var report = await _context.Reports.FindAsync(id);
-            if (report == null)
-            {
-                return NotFound();
-            }
+    //[HttpDelete("{id}")]
+    //public async Task<IActionResult> DeleteReport(int id)
+    //{
+    //    try
+    //    {
+    //        var report = await _context.Reports.FindAsync(id);
+    //        if (report == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            _context.Reports.Remove(report);
-            await _context.SaveChangesAsync();
+    //        _context.Reports.Remove(report);
+    //        await _context.SaveChangesAsync();
 
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "An error occurred while deleting the report.");
-            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
-        }
-    }
+    //        return NoContent();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "An error occurred while deleting the report.");
+    //        return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+    //    }
+    //}
 
    
   

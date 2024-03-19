@@ -114,7 +114,7 @@ export default function ExpandingSearchBar() {
                         art.artworkName.toLowerCase().includes(value.toLowerCase())
                     );
                 });
-                console.log(filteredResults);
+                // console.log(filteredResults);
                 setDataArt(filteredResults);
                 // setShowResults(true);
     
