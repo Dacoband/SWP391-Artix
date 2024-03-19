@@ -3,34 +3,71 @@
     margin-bottom: 70px;
     
 }
+ 
 .boxdashboard h1{
     margin-left: 50px;
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
 }
 .headertab{
     display: flex;
     justify-content: center;
 }
-.contentdashboard{
-    display: flex;
-    margin: 10px 100px 40px;
+
+.contentdashboard{ 
+   
+   display: flex;
     
 }
+.chart{
+    margin: auto;
+}
+.explication{
+    padding: 10px;
+    /* border: 2px solid #ECECEC; */
+    width: 230px ;
+    height: 300px;
+    margin-right: 40px;
+    margin-left: 10px;
+    margin-top: 70px;
+    padding: 15px 15px;
+}
+.explication h3{
+    padding-bottom: 10px;
+}
+
+.contentoverview{
+    margin-top: 50px;
+}
+.contentoverview h1{
+   
+text-align: center;
+
+}
+.overview{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: auto;
+    font-size: 20px;
+    padding-bottom: 80px;
+}
+/*
 .contentdashboard h2{
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 .explication{
-    padding-left: 80px;
+    
     margin: auto;
     padding-bottom: 50px;
-}
-.chart{
-    padding-right: 80px;
+} */
+/* .chart{
+   margin-right: 0px;
     border-right: 1px solid gray;
 
-}
-.namework{
+} */
+/* .namework{
     font-weight: 400;
     font-size: 18px;
 }
@@ -41,22 +78,40 @@
 }
 
 .overview{
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    padding-bottom: 50px;
-    width: 80%;
-    border-top:1px solid gray ;
+    
+    margin-top: 0px;
+    margin-right: 160px; */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* margin-bottom: ;
+    padding-left: 30px;
+    border-left: 1px solid gray;
 }
 .contentoverview{
     font-size: 20px;
 }
 .line{
-    margin-left: 70px;
-    display: flex;
-    margin-bottom: 10px;
+ 
     
 }
 .line1{
-    width: 370px;
+   
 }
+
+.tong{
+display: flex;
+justify-content: space-between;
+
+} */
+
+ /* .nameworks-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 10px; 
+  } 
+
+  .namework {
+    padding: 5px;
+    box-sizing: border-box;
+  }
+    */

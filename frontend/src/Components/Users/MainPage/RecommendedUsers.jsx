@@ -59,8 +59,9 @@ function RecommendedUsers() {
           >
           {set.map((user) => (
             <div key={user.id} >
-              <Link to={`profile/${user.id}`}>
+         
             <Card >
+            <Link to={`profile/${user.id}`}>
               <CardActionArea>
                 <CardMedia >
                      <div className="inforuser" style={{background:theme.backgroundColor,color:theme.color}}>
@@ -78,14 +79,14 @@ function RecommendedUsers() {
                   </div>
                   </div>
                 </CardMedia>
-              </CardActionArea>
+              </CardActionArea> </Link>
               <CardActions className="card-follow-button">
                 <Button size="small" color="primary">
                   + Follow
                 </Button>
               </CardActions>
             </Card>
-            </Link>
+           
           </div>
           ))}
           </Carousel>
