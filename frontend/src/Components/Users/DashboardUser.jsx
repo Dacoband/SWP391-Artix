@@ -256,7 +256,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Biểu đồ cột của Chart.js',
+      text: 'Statistical chart of likes of works',
     },
   },
   scales: {
@@ -301,7 +301,7 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Số lượt like',
+      label: 'Number of likes',
       data: latestWorks.map(work => work.like) ,
       backgroundColor: '#01b8ef', 
       boderColor:'black',// Màu của cột chính
@@ -404,17 +404,19 @@ export default function DashboardUser() {
 
          < div className='contentoverview'>
            <h1>Information overview</h1>
+           <div className='overview'>
 
             <div className='line'>
             <div className='line1'> Total commission received: 100   </div>
-             <div className='line1'>Total commission sent :  100    </div>
-             <div className='line1'>Your post number:  5  </div></div>
+             <div className='line1'>Total commission sent :  100    </div></div>
              <div className='line'>
-             <div className='line1'>Number of works sold: </div>
+             <div className='line1'>Your post number:  5  </div>
+              <div className='line1'>Number of works sold: </div></div>
+              <div className='line'>
              <div className='line1'>Number of works bought: </div>
-             <div className='line1'>Your number of likes: 20 </div>   
-               </div>
-         
+             <div className='line1'>Your number of likes: 20 </div> </div>  
+               
+         </div>
           
            </div>
 
