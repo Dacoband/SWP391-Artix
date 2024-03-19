@@ -121,7 +121,7 @@ public class ArtworksController : ControllerBase
 
             await _context.SaveChangesAsync();
             scope.Complete();
-            return Ok("Artwork created successfully");
+            return Ok(artwork);
         }
     }
 
@@ -185,6 +185,16 @@ public class ArtworksController : ControllerBase
         return _context.Artworks.Any(e => e.ArtworkID == id);
     }
 
+
+
+
+   
+    
+
+
+
+
+
     //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -211,6 +221,7 @@ public class ArtworksController : ControllerBase
             return NotFound();
         }
 
+     
         // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
         var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
         _context.ArtworkTag.RemoveRange(relatedArtworkTags);
