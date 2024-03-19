@@ -75,7 +75,7 @@ export default function ExpandingSearchBar() {
     
     const [input, setInput] = useState("");
     const [dataCreator, setDataCreator] = useState("");
-    const [dataTag, setDataTag] = useState("")
+    const [dataArt, setDataArt] = useState("")
     // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
 
     const fetchCreator = (value) => {
@@ -101,20 +101,20 @@ export default function ExpandingSearchBar() {
     }
 
 
-    const fetchTag = (value) => {
+    const fetchArt = (value) => {
         console.log(1);
-        axios.get(`https://localhost:7233/api/Tag`)
+        axios.get(`https://localhost:7233/api/artworks`)
             .then(response => {
                 // console.log(response);
-                const filteredResults = response.data.filter(tag => {
+                const filteredResults = response.data.filter(art => {
                     return (
                         value &&
-                        tag &&
-                        tag.tagName &&
-                        tag.tagName.toLowerCase().includes(value.toLowerCase())
+                        art &&
+                        art.artworkName &&
+                        art.artworkName.toLowerCase().includes(value.toLowerCase())
                     );
                 });
-                setDataTag(filteredResults);
+                setDataArt(filteredResults);
                 // setShowResults(true);
     
             })
@@ -127,7 +127,7 @@ export default function ExpandingSearchBar() {
     const handleChange = (value) => {
         setInput(value);
         fetchCreator(value);
-        fetchTag(value)
+        fetchArt(value)
       };
 
 
@@ -281,12 +281,12 @@ export default function ExpandingSearchBar() {
         {dark ? (
             <SearchDarkMode>
                 {searchBarComponent}
-                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataTag={dataTag}/>}
+                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataArt={dataArt}/>}
             </SearchDarkMode>
         ) : (
             <SearchLightMode>
                 {searchBarComponent}
-                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataTag={dataTag} />}
+                {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataArt={dataArt} />}
             </SearchLightMode>
         )}
        

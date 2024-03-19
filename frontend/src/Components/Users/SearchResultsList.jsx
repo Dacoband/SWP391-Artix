@@ -20,16 +20,21 @@ import { Link } from 'react-router-dom';
 import { SearchResultTag } from './SearchResultTag';
 
 export const SearchResultsList = (props) => {
-  const {dataCreator, dataTag} = props
-  console.log(dataTag);
+  const {dataCreator, dataArt} = props
+  console.log(dataArt);
   return (
     <div className="results-list">
       {dataCreator.map((dataCreator, id) => {
         return  <SearchResult result={dataCreator.userName} resultId={dataCreator.creatorID} resultIdkey={id} />;
       })}
-      {dataTag.map((dataTag, id) => {
-         return  <SearchResultTag result={dataTag.tagName} resultId={dataTag.tagID} key={id} />;
-      })}
+      {/* Kiểm tra dataArt có phải là mảng không */}
+      {Array.isArray(dataArt) ? (
+        dataArt.map((dataArtItem, id) => (
+          <SearchResultTag result={dataArtItem.artworkName} resultId={dataArtItem.artworkID} key={id} />
+        ))
+      ) : (
+        <p>No artworks found</p>
+      )}
     </div>
   );
 };

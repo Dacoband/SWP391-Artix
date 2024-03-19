@@ -196,14 +196,6 @@ public class ArtworksController : ControllerBase
 
 
 
-
-
-
-
-
-
-
-
     //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -287,5 +279,7 @@ public class ArtworksController : ControllerBase
         }
     }
 
+   
+  
 
 }
