@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import { Work } from '../../share/ListofWork.js';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import '../../css/SeeMoreOfArt1.css';
@@ -10,11 +9,14 @@ import Pagination from '@mui/material/Pagination';
 import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces';
 import { PlaceHoldersImageCard } from './PlaceHolders.jsx';
+import { useNavigate } from 'react-router-dom';
 export default function SeeMoreOfArt1() {
   const { theme } = useContext(ThemeContext)
   const [currentPage, setCurrentPage] = useState(1);
   const imagesPerPage = 30;
   const [artworkList, SetArtworkList] = useState<Artwork[]>([])
+
+  const redirect = useNavigate()
 
   const handleChangePage = (event, value) => {
     setCurrentPage(value);
@@ -29,7 +31,11 @@ export default function SeeMoreOfArt1() {
       SetArtworkList(currentImages ? currentImages : [])
     }
     getArtworks()
-  }, [])
+  },)
+
+  const handleClick = (artworkID) =>{
+    redirect(`../artwork/${artworkID}`)
+  }
 
   function ArtWorkList() {
     return (
@@ -37,6 +43,8 @@ export default function SeeMoreOfArt1() {
         {artworkList.map((work: Artwork) => (
           <ImageListItem key={work.artworkID}>
             <img
+              style={{cursor: 'pointer'}}
+              onClick={() => handleClick(work.artworkID) }
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
