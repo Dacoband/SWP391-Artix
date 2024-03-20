@@ -39,7 +39,6 @@ export default function HomePage() {
   const [reccomendedArtworklist, setReccomendedArtworklist] = useState<Artwork[]>([])
   const [randomArtwork, setrandomArtwork] = useState<Artwork[]>([])
   const [creatorList, setCreatorList] = useState<Creator[]>([])
-
    useEffect(() => {
     const getArtList = async () => {
         let top10Artworklist: Artwork[] | undefined = await GetTop10Arts();
