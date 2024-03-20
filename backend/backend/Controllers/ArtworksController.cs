@@ -213,7 +213,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks/random11
-    [HttpGet("random11")]
+    [HttpGet("random10")]
     public async Task<IActionResult> GetRandom11Artworks()
     {
         // Lấy danh sách tất cả các artworks từ cơ sở dữ liệu
@@ -226,7 +226,7 @@ public class ArtworksController : ControllerBase
         }
 
         // Lấy 11 artworks ngẫu nhiên từ danh sách tất cả các artworks
-        var randomArtworks = GetRandomElements(allArtworks, 11);
+        var randomArtworks = GetRandomElements(allArtworks, 10);
 
         return Ok(randomArtworks);
     }
@@ -255,30 +255,30 @@ public class ArtworksController : ControllerBase
 
 
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteReport(int id)
-    //{
-    //    try
-    //    {
-    //        var report = await _context.Reports.FindAsync(id);
-    //        if (report == null)
-    //        {
-    //            return NotFound();
-    //        }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteReport(int id)
+    {
+        try
+        {
+            var report = await _context.Reports.FindAsync(id);
+            if (report == null)
+            {
+                return NotFound();
+            }
 
-    //        _context.Reports.Remove(report);
-    //        await _context.SaveChangesAsync();
+            _context.Reports.Remove(report);
+            await _context.SaveChangesAsync();
 
-    //        return NoContent();
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        _logger.LogError(ex, "An error occurred while deleting the report.");
-    //        return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
-    //    }
-    //}
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+            //_logger.LogError(ex, "An error occurred while deleting the report.");
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
 
-   
-  
+
+
 
 }
