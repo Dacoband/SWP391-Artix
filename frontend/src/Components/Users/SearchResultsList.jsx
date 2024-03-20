@@ -17,8 +17,8 @@ import ColorLensIcon from '@mui/icons-material/ColorLens';
 import '../../css/SearchResultsList.css';
 import { SearchResult } from "./SearchResult";
 import { Link } from 'react-router-dom';
-import { SearchResultTag } from './SearchResultTag';
-
+// import { SearchResultTag } from './SearchResultTag';
+import{SearchResultsArtWork} from'./SearchResultArtWork'
 export const SearchResultsList = (props) => {
   const {dataCreator, dataArt} = props
   console.log(dataArt);
@@ -28,9 +28,9 @@ export const SearchResultsList = (props) => {
         return  <SearchResult result={dataCreator.userName} resultId={dataCreator.creatorID} resultIdkey={id} />;
       })}
       {/* Kiểm tra dataArt có phải là mảng không */}
-      {/* {dataArt.map((dataArt, id) => {
-        return  <SearchResultTag result={dataArt.artworkName} resultId={dataArt.artworkID} resultIdkey={id} />;
-      })} */}
+      {dataArt.map((dataArt, id) => {
+        return  <SearchResultsArtWork result={dataArt.artworkName} resultId={dataArt.artworkID} resultIdkey={id} />;
+      })}
     </div>
   );
 };
