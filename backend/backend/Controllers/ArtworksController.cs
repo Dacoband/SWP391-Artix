@@ -78,6 +78,34 @@ public class ArtworksController : ControllerBase
         return recentArtworks;
     }
 
+    [HttpGet("ByCreatorID/{CreatorID}")]
+    public async Task<IActionResult> GetArtworkByCreatorID(int CreatorID)
+    {
+        var artworks = await _context.Artworks
+            .Include(a => a.ArtworkTag)
+            .Where(a => a.CreatorID == CreatorID)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile,
+                ArtworkTag = a.ArtworkTag
+            })
+            .ToListAsync();
+
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworks);
+    }
 
 
 
@@ -284,28 +312,24 @@ public class ArtworksController : ControllerBase
 
 
 
+    //[HttpDelete("{id}")]
+    //public async Task<IActionResult> DeleteArtwork(int id)
+    //{
+        
+    //        var artwork = await _context.Artworks.FindAsync(id);
+    //        if (artwork == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteReport(int id)
-    {
-        try
-        {
-            var report = await _context.Reports.FindAsync(id);
-            if (report == null)
-            {
-                return NotFound();
-            }
+    //        _context.Artworks.Remove(artwork);
+    //        await _context.SaveChangesAsync();
+    //        return NoContent();
+        
+        
+    //}
 
-            _context.Reports.Remove(report);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            //_logger.LogError(ex, "An error occurred while deleting the report.");
-            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
-        }
-    }
+
 
 
 
