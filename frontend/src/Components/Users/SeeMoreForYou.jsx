@@ -7,7 +7,6 @@ import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Pagination from '@mui/material/Pagination';
 import '../../css/SeeMoreForYou.css';
-
 export default function SeeMoreForYou() {
     const { theme } = useContext(ThemeContext)
     const [currentPage, setCurrentPage] = useState(1);

@@ -27,7 +27,6 @@ public class ArtworksController : ControllerBase
     {
         var artworks = await _context.Artworks
             .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
-            .Take(5) // Lấy 5 artwork đầu tiên
             .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
             .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
             {
@@ -196,14 +195,6 @@ public class ArtworksController : ControllerBase
 
 
 
-
-
-
-
-
-
-
-
     //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -264,20 +255,21 @@ public class ArtworksController : ControllerBase
 
 
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteReport(int id)
-    {
-        try
-        {
-            var report = await _context.Reports.FindAsync(id);
-            if (report == null)
-            {
-                return NotFound();
-            }
+    //[HttpDelete("{id}")]
+    //public async Task<IActionResult> DeleteReport(int id)
+    //{
+    //    try
+    //    {
+    //        var report = await _context.Reports.FindAsync(id);
+    //        if (report == null)
+    //        {
+    //            return NotFound();
+    //        }
 
-            _context.Reports.Remove(report);
-            await _context.SaveChangesAsync();
+    //        _context.Reports.Remove(report);
+    //        await _context.SaveChangesAsync();
 
+<<<<<<< HEAD
             return NoContent();
         }
         catch (Exception ex)
@@ -286,6 +278,18 @@ public class ArtworksController : ControllerBase
             return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
         }
     }
+=======
+    //        return NoContent();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "An error occurred while deleting the report.");
+    //        return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+    //    }
+    //}
+>>>>>>> Volka
 
+   
+  
 
 }

@@ -14,7 +14,9 @@
     - Phạm Minh Triều - SE172937 - FE | Documentation
   - **Project:** Artworks Sharing and Selling Platform - Social Media, E-Commerce hybrid - Consumer to Consumer
   - **Techs:** RestfulAPI - mySQL - ReactJS - MaterializeCSS - Bootstrap - JavaScript - Paypal - MUI - .NET 8 with C# - Vercel - Azure - Avien 
-  - **Structure:** Using MVC1 Structure 
+  - **Structure:** 
+    - Back-End:  Using MVC Structure, Database-First
+    - Front-End:  
 - # **Table Of Contents**
   - ### [Specifications](#specifications)
     - [Process 1](#process-1-Register-An-Account)
@@ -47,8 +49,13 @@
         - Banned Listed :
           ![BannedListPage](Figma/BannedList.png)
     - ### **Users Page :**
-      - *Home Page* :
-        ![HomePagePage](Figma/Screenshot%202024-01-31%20130937.png)
+      - *Home Page LightMode* :
+        ![HomePage](UI/LightHomePage.png)
+      - *Home Page DarkMode* :
+        ![HomePage](UI/DarkHomePage.png)
+        - *Home Page Nav-Bar * :
+        ![HomePage](UI/NavBar2.png)
+        ![HomePage](UI/navBar3.png)
       <!-- Sẽ cập nhật sau -->
   - ### Future Advancement
   - ### Limitation

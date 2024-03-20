@@ -15,7 +15,7 @@ export default function Admin() {
 
         <Paper style={{ padding: '2rem', marginBottom: '2rem' }}>
           <Typography variant="h6" gutterBottom>
-            Monthly Visitors
+               Monthly Visitors
           </Typography>
           <MyLineChart /> {/* This is where the chart gets rendered */}
         </Paper>
