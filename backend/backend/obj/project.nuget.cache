@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uzDW9A0y4upViKFaGS6B1y52idP78s9Yr1KYL87FqxjmAyMnNAmgGaPP8j7+PxGIIVFmRvr6lguPfXty1LZ21Q==",
+  "dgSpecHash": "k3NA0qflBcju1RyFjdNuKpP1un1AGtpKilkHPnl3WEE1yB0HH6Pv9LWY3vXMnxWEI6D93ztQAyPR6S2PNq330w==",
   "success": true,
   "projectFilePath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
   "expectedPackageFiles": [
@@ -51,6 +51,7 @@
     "C:\\Users\\bolic\\.nuget\\packages\\mysqlconnector\\2.3.5\\mysqlconnector.2.3.5.nupkg.sha512",
     "C:\\Users\\bolic\\.nuget\\packages\\newtonsoft.json\\11.0.2\\newtonsoft.json.11.0.2.nupkg.sha512",
     "C:\\Users\\bolic\\.nuget\\packages\\paypal\\1.9.1\\paypal.1.9.1.nupkg.sha512",
+    "C:\\Users\\bolic\\.nuget\\packages\\paypalcoresdk\\1.7.1\\paypalcoresdk.1.7.1.nupkg.sha512",
     "C:\\Users\\bolic\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "C:\\Users\\bolic\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\8.0.0\\pomelo.entityframeworkcore.mysql.8.0.0.nupkg.sha512",
     "C:\\Users\\bolic\\.nuget\\packages\\stackexchange.redis\\2.7.33\\stackexchange.redis.2.7.33.nupkg.sha512",
@@ -84,6 +85,16 @@
       "warningLevel": 1,
       "message": "Package 'PayPal 1.9.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
       "libraryId": "PayPal",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PayPalCoreSDK 1.7.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PayPalCoreSDK",
       "targetGraphs": [
         "net8.0"
       ]
