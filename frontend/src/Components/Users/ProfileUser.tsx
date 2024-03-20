@@ -32,6 +32,7 @@ import { Creator } from '../../Interfaces/UserInterface.ts';
 import { PutCreatorBackgroundPicture, PutCreatorProfilePicture } from '../../API/UserAPI/PUT.tsx';
 import { GetArtListById } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
+import {PlaceHoldersImageCard} from './PlaceHolders.jsx'
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -68,7 +69,6 @@ export default function ProfileUser() {
   const [isFollowing, setIsFollowing] = useState(false)
   const [user, setUser] = useState<Creator>()
   const [artworks, setArtworks] = useState<Artwork[]>([])
-  const [blobImage, setBlobImage] = useState();
 
   const [previewProfile, setPreviewProfile] = useState<string>();
   const [previewBackground, setPreviewBackground] = useState<string>();
@@ -90,7 +90,7 @@ export default function ProfileUser() {
     }
     const getUserArtworks = async () => {
       const userArtworks = await GetArtListById(id ? id : "0")
-      setArtworks(userArtworks as unknown as Artwork[])
+      setArtworks(userArtworks?userArtworks:[])
     }
     getUserProfile()
     getUserArtworks()
@@ -148,6 +148,65 @@ export default function ProfileUser() {
       }
     }
   };
+
+  function FreeImage() {
+    return (
+      <ImageList variant="masonry" cols={3} gap={8}>
+        {artworks.map((work) => (
+          <ImageListItem key={work.artworkID}>
+            <img
+              src={`data:image/jpeg;base64,${work.imageFile}`}
+              alt={work.artworkName}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    )
+  }
+  function CostImage() {
+    return (
+      <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible' }} cols={4}>
+        {artworks.map((work) => (
+          <ImageListItem key={work.artworkID}>
+            <img
+              src={`data:image/jpeg;base64,${work.imageFile}`}
+              alt={work.artworkName}
+              loading="lazy"
+              style={{ height: '200px' }}
+            />
+            <ImageListItemBar
+              title={work.price}
+              subtitle={work.artworkName}
+              actionIcon={
+                <IconButton
+                  sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                  aria-label={`info about ${user?.userName}`}
+                >
+                  <InfoIcon />
+                </IconButton>
+              }
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    )
+  }
+  function AllImage() {
+    return (
+      <ImageList variant="masonry" cols={4} gap={8}>
+        {artworks.map((work) => (
+          <ImageListItem key={work.artworkID}>
+            <img
+              src={`data:image/jpeg;base64,${work.imageFile}`}
+              alt={work.artworkName}
+              loading="lazy"
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    )
+  }
 
 
   return (
@@ -302,18 +361,7 @@ export default function ProfileUser() {
                   <div className='head-workofuser'>
                     <h2 style={{ color: theme.color2, }}> My Works:</h2>
                     <Box>
-                      <ImageList variant="masonry" cols={3} gap={8}>
-                        {Work.map((work) => (
-                          <ImageListItem key={work.id}>
-                            <img
-                              srcSet={`${work.img}`}
-                              src={`${work.img}`}
-                              alt={work.title}
-                              loading="lazy"
-                            />
-                          </ImageListItem>
-                        ))}
-                      </ImageList>
+                      {artworks.length!==0 ? <FreeImage/>: <PlaceHoldersImageCard/>}
                     </Box>
                   </div>
                 </div>
@@ -323,53 +371,14 @@ export default function ProfileUser() {
             </CustomTabPanel>
 
             <CustomTabPanel value={value} index={1}>
-              {/* <ImageList sx={{ width:1200 , height: 450 ,overflow: 'hidden'}} cols={5} rowHeight={210}> */}
-              <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible' }} cols={4}>
-                {/* <ImageListItem key="Subheader" cols={2}>
-        <ListSubheader component="div">December</ListSubheader>
-        </ImageListItem> */}
-                {Work.map((work) => (
-                  <ImageListItem key={work.id}>
-                    <img
-                      srcSet={`${work.img}?w=240&fit=crop&auto=format&dpr=2 2x`}
-                      src={`${work.img}?w=240&fit=crop&auto=format`}
-                      alt={work.title}
-                      loading="lazy"
-                      style={{ height: '200px' }}
-                    />
-                    <ImageListItemBar
-                      title={work.price}
-                      subtitle={work.author}
-                      actionIcon={
-                        <IconButton
-                          sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-                          aria-label={`info about ${work.author}`}
-                        >
-                          <InfoIcon />
-                        </IconButton>
-                      }
-                    />
-                  </ImageListItem>
-                ))}
-              </ImageList>
+            {artworks.length!==0 ? <CostImage/>: <PlaceHoldersImageCard/>}
             </CustomTabPanel>
 
 
             <CustomTabPanel value={value} index={2}>
 
               <Box sx={{ width: 1200, height: 450, overflow: 'visible' }}>
-                <ImageList variant="masonry" cols={4} gap={8}>
-                  {Work.map((work) => (
-                    <ImageListItem key={work.id}>
-                      <img
-                        srcSet={`${work.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                        src={`${work.img}?w=248&fit=crop&auto=format`}
-                        alt={work.title}
-                        loading="lazy"
-                      />
-                    </ImageListItem>
-                  ))}
-                </ImageList>
+              {artworks.length!==0 ? <AllImage/>: <PlaceHoldersImageCard/>}
               </Box>
             </CustomTabPanel>
 

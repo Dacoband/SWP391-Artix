@@ -4,6 +4,8 @@ import axios from 'axios'
 
 
 const creatorurl = 'https://localhost:7233/api/Creator/'
+
+
 export async function GetCreatorList() {
   try{
       let creatorList:Creator[] = await axios.get(creatorurl).then(response => response.data)

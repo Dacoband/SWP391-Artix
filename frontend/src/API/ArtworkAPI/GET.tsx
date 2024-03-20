@@ -40,7 +40,7 @@ export async function GetRandom10Arts() {
 
 export async function GetArtListById(id:string) {
   try{
-      let artwork:Artwork = await axios.get(arturl+id).then(response => response.data)
+      let artwork:Artwork[] = await axios.get(arturl+id).then(response => response.data)
       return artwork
   }catch(err){
     console.log(err)
