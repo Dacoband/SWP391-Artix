@@ -30,7 +30,7 @@ function App() {
           <Route path='/' element={<FrontPage/>}/>
           <Route path='/unauthorized' element={<Unauthorized/>}/>
           <Route element={<ProtectedRoute allowedRoles={['AD']}/>}>
-            <Route path="/admin" element={<RouterAdmin/>}></Route>
+            <Route path="/admin/*" element={<RouterAdmin/>}></Route>
           </Route>
           <Route path="/mod" element={<Mod/>}></Route>
           <Route path="/createaccount" element={<CreateAccount/>}/>

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "gAvV+m0uk0ec+x+KhAkk03HUkeW4Hiw/noT5rHPBnolSrXPm0ewTPt6aIEkK7RCWW4qoJwDHW1f8S6f6i45ZHA==",
+  "dgSpecHash": "yuAg9Wo8x+rgLlbQzWGYVv/bq2gLR8/O5fSJ2qQiQy9tDEAWSTQhg5wA9U7xrdhv4xzp7yYclb7qB8dUa0NR/A==",
   "success": true,
   "projectFilePath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
   "expectedPackageFiles": [
@@ -45,7 +45,9 @@
     "/Users/hendrix/.nuget/packages/mysqlconnector/2.3.5/mysqlconnector.2.3.5.nupkg.sha512",
     "/Users/hendrix/.nuget/packages/newtonsoft.json/7.0.1/newtonsoft.json.7.0.1.nupkg.sha512",
     "/Users/hendrix/.nuget/packages/paypal/1.9.1/paypal.1.9.1.nupkg.sha512",
+    "/Users/hendrix/.nuget/packages/pipelines.sockets.unofficial/2.2.8/pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "/Users/hendrix/.nuget/packages/pomelo.entityframeworkcore.mysql/8.0.0/pomelo.entityframeworkcore.mysql.8.0.0.nupkg.sha512",
+    "/Users/hendrix/.nuget/packages/stackexchange.redis/2.7.33/stackexchange.redis.2.7.33.nupkg.sha512",
     "/Users/hendrix/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/Users/hendrix/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/Users/hendrix/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
