@@ -33,13 +33,11 @@
 }
 
 .loadingscreen {
-  position: fixed;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  min-height: 100vh;
-  height: auto;
+  height: 100vh;
   z-index: 9999;
 
 }
@@ -68,7 +66,7 @@
 .btn {
   display: inline-block;
   font-size: 18px;
-  padding: 10px 3px 10px;
+  padding: 10px 10px ;
   background: none;
   /* color: #fff; */
 
@@ -586,6 +584,7 @@ a {
 
 .navuser {
   margin-left: 110px;
+  z-index: 5;
 }
 
 .buttonSubcribe {
@@ -692,6 +691,14 @@ a {
 .contentpost {
   flex: 1;
   margin-left: 30px;
+  max-height: 500px;
+  overflow-y: auto ;
+}
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  /* max-height: 200px; /* Điều chỉnh chiều cao tối đa của khung chứa */
+  /* overflow-y: auto; Cho phép thanh cuộn dọc khi cần */ 
 }
 
 .infor-user-post {

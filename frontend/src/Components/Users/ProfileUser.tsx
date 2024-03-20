@@ -252,12 +252,12 @@ export default function ProfileUser() {
       <div className='tabsBackground' style={{ backgroundColor: theme.backgroundColor }} >
         <div className='inforuser2'>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className='navofuser'>
+            <Box sx={{ borderBottom: 1}} className='navofuser'>
               <div className='navuser'>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                  <Tab label="Home" {...a11yProps(0)} />
-                  <Tab label="Shop" {...a11yProps(1)} />
-                  <Tab label="Favourites" {...a11yProps(2)} />
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"style={{color:theme.color2,zIndex:'7'}}>
+                  <Tab label="Home" {...a11yProps(0)} style={{color:theme.color2,}}/>
+                  <Tab label="Shop" {...a11yProps(1)} style={{color:theme.color2,}}/>
+                  <Tab label="Favourites" {...a11yProps(2)} style={{color:theme.color2,}}/>
                 </Tabs>
               </div>
               <div className='buttonSubcribe'>
@@ -277,6 +277,7 @@ export default function ProfileUser() {
                     gap={4}
                     p={2}
                     style={{
+                      color:theme.color2,
                       border: '2px solid grey',
                       top: 0, // this defines the top position when it's sticky
                       zIndex: 10 // you may want to add a zIndex to ensure it stacks on top of other contents
@@ -291,7 +292,7 @@ export default function ProfileUser() {
                   </Box></div>
                 <div className='workofuser'>
                   <div className='head-workofuser'>
-                    <h2> My Works:</h2>
+                    <h2 style={{color:theme.color2,}}> My Works:</h2>
                     <Box>
                       <ImageList variant="masonry" cols={3} gap={8}>
                         {Work.map((work) => (
