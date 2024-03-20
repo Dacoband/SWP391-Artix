@@ -3600,16 +3600,11 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\THY\\.nuget\\packages\\": {}
-=======
-    "/Users/hendrix/.nuget/packages/": {}
->>>>>>> f1b620ac51443566c8a7c51aa30215c9c6a22821
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "projectName": "backend",
       "projectPath": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
@@ -3619,22 +3614,12 @@
       "configFilePaths": [
         "C:\\Users\\THY\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-      "projectUniqueName": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-      "projectName": "backend",
-      "projectPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-      "packagesPath": "/Users/hendrix/.nuget/packages/",
-      "outputPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "/Users/hendrix/.nuget/NuGet/NuGet.Config"
->>>>>>> f1b620ac51443566c8a7c51aa30215c9c6a22821
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "/usr/local/share/dotnet/library-packs": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3734,11 +3719,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
->>>>>>> f1b620ac51443566c8a7c51aa30215c9c6a22821
       }
     }
   },
