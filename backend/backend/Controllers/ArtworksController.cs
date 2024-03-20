@@ -320,29 +320,6 @@ public class ArtworksController : ControllerBase
 
 
 
-<<<<<<< HEAD
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteArtwork(int id)
-    //{
-        
-    //        var artwork = await _context.Artworks.FindAsync(id);
-    //        if (artwork == null)
-    //        {
-    //            return NotFound();
-    //        }
-
-    //        _context.Artworks.Remove(artwork);
-    //        await _context.SaveChangesAsync();
-    //        return NoContent();
-        
-        
-    //}
-
-
-
-
-
-=======
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArtwork(int id)
@@ -365,7 +342,6 @@ public class ArtworksController : ControllerBase
 
         return NoContent();
     }
->>>>>>> Tuyet
 
 
 }
