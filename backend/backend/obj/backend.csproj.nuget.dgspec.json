@@ -1,44 +1,32 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {}
+    "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj": {}
   },
   "projects": {
-    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {
+    "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
+        "projectUniqueName": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-        "packagesPath": "/Users/hendrix/.nuget/packages/",
-        "outputPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/",
+        "projectPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\hanvu\\.nuget\\packages\\",
+        "outputPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/Users/hendrix/.nuget/NuGet/NuGet.Config"
-=======
-    "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj": {}
-  },
-  "projects": {
-    "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
-        "projectName": "backend",
-        "projectPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\bolic\\.nuget\\packages\\",
-        "outputPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\obj\\",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hanvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
->>>>>>> origin/Volka
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -51,6 +39,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -97,8 +90,6 @@
               "target": "Package",
               "version": "[2.7.33, )"
             },
-<<<<<<< HEAD
-=======
             "StackExchange.Redis.Extensions": {
               "target": "Package",
               "version": "[1.0.1, )"
@@ -107,7 +98,6 @@
               "target": "Package",
               "version": "[10.2.0, )"
             },
->>>>>>> origin/Volka
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -136,11 +126,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
->>>>>>> origin/Volka
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

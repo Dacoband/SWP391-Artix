@@ -19,7 +19,6 @@ namespace backend.Entities
         public DateTime LastLogDate { get; set; }
         public bool AllowCommission { get; set; } = false;
         public string? Biography { get; set; }
-        public string Email { get; set; }
 
         public bool? VIP { get; set; } = false;
 

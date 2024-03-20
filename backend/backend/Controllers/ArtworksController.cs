@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
-using System.Net;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -27,6 +26,7 @@ public class ArtworksController : ControllerBase
     {
         var artworks = await _context.Artworks
             .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
+            .Take(5) // Lấy 5 artwork đầu tiên
             .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
             .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
             {
@@ -195,6 +195,14 @@ public class ArtworksController : ControllerBase
 
 
 
+
+
+
+
+
+
+
+
     //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -255,41 +263,27 @@ public class ArtworksController : ControllerBase
 
 
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> DeleteReport(int id)
-    //{
-    //    try
-    //    {
-    //        var report = await _context.Reports.FindAsync(id);
-    //        if (report == null)
-    //        {
-    //            return NotFound();
-    //        }
-
-    //        _context.Reports.Remove(report);
-    //        await _context.SaveChangesAsync();
-
-<<<<<<< HEAD
-            return NoContent();
-        }
-        catch (Exception ex)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteArtwork(int id)
+    {
+        var artwork = await _context.Artworks.FindAsync(id);
+        if (artwork == null)
         {
-           
-            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+            return NotFound();
         }
-    }
-=======
-    //        return NoContent();
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        _logger.LogError(ex, "An error occurred while deleting the report.");
-    //        return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
-    //    }
-    //}
->>>>>>> origin/Volka
 
-   
-  
+     
+        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
+        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
+        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
+
+        // Sau đó mới xóa bản ghi từ bảng Artworks
+        _context.Artworks.Remove(artwork);
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
+    }
+
 
 }

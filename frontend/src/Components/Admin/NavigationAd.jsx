@@ -4,10 +4,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import ListItemButton from '@mui/material/ListItemButton';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 function AdminNavbar() {
   // The side drawer width
-  const drawerWidth = 240;
+  const drawerWidth = 220;
   // Sidebar navigation list
   // const adminNavItems = [
   //   { text: 'Dashboard', icon: <HomeIcon /> , link: '/' },
@@ -16,42 +17,53 @@ function AdminNavbar() {
     // Add more navigation items here
   // ];
   return (
-    <div style={{ display: 'flex' }}>
+    <div style={{ display: 'flex',}}>
       <Drawer
         variant="permanent"
         anchor="left"
         style={{
           width: drawerWidth,
+          
         }}
         open
       >
-        <List>
+        <List style={{backgroundColor:'#121621', height:'100%', color:'#fdfdff'}}>
           {/* Dashboard */}
-          
-          <ListItemButton button>
-            <ListItemIcon>
-              <HomeIcon />
+          <Link to={`/`}>
+          <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
+            <ListItemIcon >
+              <HomeIcon style={{color:'#fdfdff'}}/>
             </ListItemIcon>
             <ListItemText primary="Dashboard" />
-          </ListItemButton>
+          </ListItemButton></Link>
 
           {/* Users */}
           <Link to={`listuser`}>
-          <ListItemButton button>
+          <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
             <ListItemIcon>
-              <PeopleIcon />
+              <PeopleIcon style={{color:'#fdfdff'}}/>
             </ListItemIcon>
             <ListItemText primary="Users" />
           </ListItemButton></Link>
 
           {/* Reports */}
           <Link to={'report'}>
-          <ListItemButton button>
+          <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
             <ListItemIcon>
-              <BarChartIcon />
+              <BarChartIcon style={{color:'#fdfdff'}} />
             </ListItemIcon>
             <ListItemText primary="Reports" />
           </ListItemButton></Link>
+          {/* Log out */}
+          <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
+            <ListItemIcon>
+              <LogoutIcon style={{color:'#fdfdff'}} />
+            </ListItemIcon>
+            <ListItemText primary="Log out" />
+          </ListItemButton>
+
+
+          
         </List>
       </Drawer>
       <div style={{ flexGrow: 1, padding: 3 }}>
