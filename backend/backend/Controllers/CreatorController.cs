@@ -47,6 +47,37 @@ public class CreatorController : ControllerBase
         return creators;
     }
 
+    [HttpGet("ProfilePicture")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetCreatorsForProfilePicture()
+    {
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID= c.CreatorID,
+                ProfilePicture = c.ProfilePicture,
+
+            })
+            .ToListAsync();
+
+        return creators;
+    }
+
+    [HttpGet("BackgroundPicture")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetCreatorsForBackgroundPicture()
+    {
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                BackgroundPicture= c.BackgroundPicture,
+
+            })
+            .ToListAsync();
+
+        return creators;
+    }
+
+
 
 
 
