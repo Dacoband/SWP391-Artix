@@ -9,19 +9,27 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = backend
 build_property.RootNamespace = backend
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 build_property.ProjectDir = /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/
 =======
 build_property.ProjectDir = D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\
 >>>>>>> origin/Volka
+=======
+build_property.ProjectDir = /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/
+>>>>>>> Stashed changes
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 build_property.MSBuildProjectDirectory = /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend
 =======
 build_property.MSBuildProjectDirectory = D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend
 >>>>>>> origin/Volka
+=======
+build_property.MSBuildProjectDirectory = /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend
+>>>>>>> Stashed changes
 build_property._RazorSourceGeneratorDebug = 
