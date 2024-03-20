@@ -12,6 +12,7 @@ import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthenContext.tsx';
 import { Creator } from '../../Interfaces/UserInterface';
+import { LightDarkSwitch } from './CustomizedLightDarkSwitch.tsx';
 
 //Create an interface for your function to assign types to its props
 interface CustomizedDropdownProps{
@@ -78,8 +79,7 @@ transformOrigin={{
 <Typography variant='caption'>Theme</Typography>
 </Divider>
 <MenuItem onClick={toggleTheme}>
-  {dark ? "Dark" : "Light"}
-  <Switch  checked={dark} />
+  <LightDarkSwitch  checked={dark} />
   </MenuItem>
 <Divider sx={{"backgroundColor":{backgroundColor:theme.color}}} variant='middle'/>
 <MenuItem onClick={logout}>Logout</MenuItem>

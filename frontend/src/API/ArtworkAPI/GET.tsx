@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const arturl = "https://localhost:7233/api/artworks/"
 const top10arturl = `https://localhost:7233/api/artworks/Top10Liked`
-const random10arturl = `https://localhost:7233/api/artworks/random11`
+const random10arturl = `https://localhost:7233/api/artworks/random10`
 
 export async function GetArtList() {
         try{
