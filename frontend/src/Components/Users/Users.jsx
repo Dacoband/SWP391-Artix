@@ -39,8 +39,6 @@ export default function Users() {
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreOfArt1/>}/>
           <Route path={`dashboarduser`} element={<DashboardUser/>}/>
-
-         
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}

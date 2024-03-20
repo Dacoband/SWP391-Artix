@@ -12,16 +12,8 @@ export default function RouterAdmin() {
           <Route path={`/`} element={<Admin/>} />
           <Route path={`listuser`} element={<ListUser />} />
           <Route path={`report`} element={<Report/>}/>
-         
-
-
           </Routes>
           <Outlet />
-
-
-
-
-
     </div>
   )
 }

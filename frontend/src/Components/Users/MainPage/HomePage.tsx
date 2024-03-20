@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import { ThemeContext } from '../../Themes/ThemeProvider.tsx';
 import { Creator } from '../../../Interfaces/UserInterface.ts';
 import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
-import { GetArtList, GetRandom10Arts, GetTop10Arts } from '../../../API/ArtworkAPI/GET.tsx';
+import {GetRandom10Arts, GetTop10Arts } from '../../../API/ArtworkAPI/GET.tsx';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { GetCreatorList } from '../../../API/UserAPI/GET.tsx';
