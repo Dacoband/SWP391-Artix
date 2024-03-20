@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -25,8 +26,9 @@ public class ArtworksController : ControllerBase
     public async Task<IActionResult> GetArtworks()
     {
         var artworks = await _context.Artworks
-            .Include(a => a.ArtworkTag)
-            .Select(a => new Artworks
+            .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
+            .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
+            .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
             {
                 ArtworkID = a.ArtworkID,
                 CreatorID = a.CreatorID,
@@ -41,8 +43,14 @@ public class ArtworksController : ControllerBase
             })
             .ToListAsync();
 
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
         return Ok(artworks);
     }
+
 
     // GET: api/artworks/{id}
     [HttpGet("{id}")]
@@ -121,7 +129,7 @@ public class ArtworksController : ControllerBase
 
             await _context.SaveChangesAsync();
             scope.Complete();
-            return Ok("Artwork created successfully");
+            return Ok(artwork);
         }
     }
 
@@ -187,14 +195,6 @@ public class ArtworksController : ControllerBase
 
 
 
-
-   
-    
-
-
-
-
-
     //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -212,27 +212,84 @@ public class ArtworksController : ControllerBase
         return topLikedArtworks;
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteArtwork(int id)
+    // GET: api/artworks/random11
+    [HttpGet("random11")]
+    public async Task<IActionResult> GetRandom11Artworks()
     {
-        var artwork = await _context.Artworks.FindAsync(id);
-        if (artwork == null)
+        // Lấy danh sách tất cả các artworks từ cơ sở dữ liệu
+        var allArtworks = await _context.Artworks.ToListAsync();
+
+        // Kiểm tra xem có artworks nào không
+        if (allArtworks.Count == 0)
         {
-            return NotFound();
+            return NotFound("Không có artworks nào trong cơ sở dữ liệu.");
         }
 
-     
-        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
-        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
-        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
+        // Lấy 11 artworks ngẫu nhiên từ danh sách tất cả các artworks
+        var randomArtworks = GetRandomElements(allArtworks, 11);
 
-        // Sau đó mới xóa bản ghi từ bảng Artworks
-        _context.Artworks.Remove(artwork);
-
-        await _context.SaveChangesAsync();
-
-        return NoContent();
+        return Ok(randomArtworks);
     }
 
+    // Hàm chọn ngẫu nhiên các phần tử từ danh sách
+    private List<Artworks> GetRandomElements(List<Artworks> list, int count)
+    {
+        var random = new Random();
+        var randomArtworks = new List<Artworks>();
+
+        while (randomArtworks.Count < count)
+        {
+            var index = random.Next(0, list.Count);
+            var artwork = list[index];
+
+            // Kiểm tra xem artwork đã được chọn trước đó chưa
+            if (!randomArtworks.Contains(artwork))
+            {
+                randomArtworks.Add(artwork);
+            }
+        }
+
+        return randomArtworks;
+    }
+
+
+
+
+    //[HttpDelete("{id}")]
+    //public async Task<IActionResult> DeleteReport(int id)
+    //{
+    //    try
+    //    {
+    //        var report = await _context.Reports.FindAsync(id);
+    //        if (report == null)
+    //        {
+    //            return NotFound();
+    //        }
+
+    //        _context.Reports.Remove(report);
+    //        await _context.SaveChangesAsync();
+
+<<<<<<< HEAD
+            return NoContent();
+        }
+        catch (Exception ex)
+        {
+           // _logger.LogError(ex, "An error occurred while deleting the report.");
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+=======
+    //        return NoContent();
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "An error occurred while deleting the report.");
+    //        return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+    //    }
+    //}
+>>>>>>> Volka
+
+   
+  
 
 }
