@@ -25,13 +25,14 @@ export default function SeeMoreOfArt1() {
   useEffect(() => {
     const getArtworks = async () => {
       let artworkList: Artwork[] | undefined = await GetArtList()
+      //SetArtworkList(artworkList? artworkList:[])
       const indexOfLastImage = currentPage * imagesPerPage;
       const indexOfFirstImage = indexOfLastImage - imagesPerPage;
       const currentImages = artworkList?.slice(indexOfFirstImage, indexOfLastImage);
       SetArtworkList(currentImages ? currentImages : [])
     }
     getArtworks()
-  },)
+  },[])
 
   const handleClick = (artworkID) =>{
     redirect(`../artwork/${artworkID}`)
@@ -77,7 +78,8 @@ export default function SeeMoreOfArt1() {
               </ImageList></Box>
           </div></div>
         <div className='pagination'>
-          <Pagination count={Math.ceil(artworkList.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
+          
+          </div>
       
             </Box>
           </div>

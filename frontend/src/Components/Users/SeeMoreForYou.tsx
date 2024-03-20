@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import { Work } from '../../share/ListofWork.js';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import Pagination from '@mui/material/Pagination';
@@ -20,13 +19,11 @@ export default function SeeMoreForYou() {
     useEffect(() => {
       const getArtworks = async () => {
         let artworkList: Artwork[] | undefined = await GetArtList()
-        const indexOfLastImage = currentPage * imagesPerPage;
-        const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-        const currentImages = artworkList?.slice(indexOfFirstImage, indexOfLastImage);
-        SetArtworkList(currentImages? currentImages : [])
+        SetArtworkList(artworkList? artworkList:[])
+
       }
       getArtworks()
-    }, [])
+    })
 
     const handleChangePage = (event, value) => {
         setCurrentPage(value);}
@@ -70,7 +67,8 @@ export default function SeeMoreForYou() {
                </ImageList></Box>
             </div></div>
             <div className='pagination'>
-            <Pagination count={Math.ceil(artworkList.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
+            
+            </div>
 
         </Box>
       
