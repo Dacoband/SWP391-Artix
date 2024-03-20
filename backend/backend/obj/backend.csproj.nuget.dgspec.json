@@ -1,22 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
-    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {}
-  },
-  "projects": {
-    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-        "projectName": "backend",
-        "projectPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-        "packagesPath": "/Users/hendrix/.nuget/packages/",
-        "outputPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/hendrix/.nuget/NuGet/NuGet.Config"
-=======
     "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj": {}
   },
   "projects": {
@@ -32,13 +16,12 @@
         "configFilePaths": [
           "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
->>>>>>> origin/Volka
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -97,8 +80,6 @@
               "target": "Package",
               "version": "[2.7.33, )"
             },
-<<<<<<< HEAD
-=======
             "StackExchange.Redis.Extensions": {
               "target": "Package",
               "version": "[1.0.1, )"
@@ -107,7 +88,6 @@
               "target": "Package",
               "version": "[10.2.0, )"
             },
->>>>>>> origin/Volka
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
@@ -136,11 +116,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
-=======
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
->>>>>>> origin/Volka
         }
       }
     }
