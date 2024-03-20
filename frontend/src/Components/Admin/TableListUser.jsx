@@ -14,6 +14,13 @@ import { green } from '@mui/material/colors';
 import Button from '@mui/material/Button';
 import WarningIcon from '@mui/icons-material/Warning';
 import TablePagination from '@mui/material/TablePagination';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import DialogActions from '@mui/material/DialogActions';
 export default function TableListUser() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -31,6 +38,11 @@ export default function TableListUser() {
 
   // Calculate the portion of users to display based on pagination
   const paginatedUsers = ListofUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {setOpen(false);};
+
+
   return (
     <div style={{ height: 'auto', width: '100%', marginTop: '40px'}}>
    
@@ -63,13 +75,38 @@ export default function TableListUser() {
                   {user.vip ? <VerifiedIcon color="success"/> : null}
                 </TableCell>
               <TableCell align="left">
-                 <Button variant="contained" color="error">
+                 <Button variant="contained" color="error" onClick={ ()=>{setOpen(true)}}>
                  <WarningIcon/>
                </Button></TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+      <Dialog
+    open={open}
+    onClose={handleClose}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+    >
+    <DialogTitle id="alert-dialog-title">
+      {"Congraturation"}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+      <Alert severity="success">
+    <AlertTitle>You want to ban this account ?</AlertTitle>
+    </Alert>
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      {/* chỗ này gắn hàm vô : onClick={()=>handleDelete()}*/}
+      <Button  >yes</Button>
+      <Button autoFocus onClick={handleClose}>
+       No
+      </Button>
+    </DialogActions>
+  </Dialog>
+    
       <TablePagination
           rowsPerPageOptions={10}
           component="div"

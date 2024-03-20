@@ -394,16 +394,17 @@ export default function ProfileUser() {
 
 
             </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}
+            <CustomTabPanel value={value} index={1} >
+              <div style={{marginLeft:'50px'}}>
+              {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}</div>
             </CustomTabPanel>
 
 
             <CustomTabPanel value={value} index={2}>
 
-              <Box sx={{ width: 1200, height: 450, overflow: 'visible' }}>
+              
                 {artworks.length !== 0 ? <AllImage /> : <PlaceHoldersImageCard />}
-              </Box>
+              
             </CustomTabPanel>
 
           </Box>

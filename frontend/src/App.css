@@ -725,6 +725,12 @@ a {
   display: flex;
   flex-direction: column;
 }
+.tag-container {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các phần tử tự động xuống hàng khi không đủ width */
+}
+
+
 
 /* End Art Post */
 
