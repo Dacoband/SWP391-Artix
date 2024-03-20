@@ -29,7 +29,7 @@ function AdminNavbar() {
       >
         <List style={{backgroundColor:'#121621', height:'100%', color:'#fdfdff'}}>
           {/* Dashboard */}
-          <Link to={`/`}>
+          <Link to={`/admin`}>
           <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
             <ListItemIcon >
               <HomeIcon style={{color:'#fdfdff'}}/>
