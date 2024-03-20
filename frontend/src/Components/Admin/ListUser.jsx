@@ -1,11 +1,15 @@
 import React from 'react';
-import AdminNavbar from './NavigationAd';
-
+import { Container, Box, Typography, Paper } from '@mui/material';
+import ExpandingSearchBarAdmin from './SearchBar';
 export default function ListUser() {
   return (
-    <div>
-      <AdminNavbar />
-      <div>List User</div>
-    </div>
+    
+     <Container style={{marginLeft:'260px'}}>
+       <Typography variant="h4" gutterBottom style={{fontWeight:'bold', marginTop:'40px'}}>
+          List Of Users:
+        </Typography>
+
+        <ExpandingSearchBarAdmin/>
+   </Container>
   );
 }
