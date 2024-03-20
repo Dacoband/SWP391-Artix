@@ -8,6 +8,7 @@ import Users from './Components/Users/Users.jsx';
 import CreateAccount from './Components/Forms/CreateAccount.jsx';
 import Unauthorized from './ProtectedRoutes/Unauthorized.jsx';
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute.tsx';
+import RouterAdmin from './Components/Admin/RouterAdmin.jsx';
 function App() {
   const role = sessionStorage.getItem('userRole')
   console.log(role)
@@ -29,7 +30,7 @@ function App() {
           <Route path='/' element={<FrontPage/>}/>
           <Route path='/unauthorized' element={<Unauthorized/>}/>
           <Route element={<ProtectedRoute allowedRoles={['AD']}/>}>
-            <Route path="/admin" element={<Admin/>}></Route>
+            <Route path="/admin" element={<RouterAdmin/>}></Route>
           </Route>
           <Route path="/mod" element={<Mod/>}></Route>
           <Route path="/createaccount" element={<CreateAccount/>}/>
