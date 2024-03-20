@@ -4,14 +4,16 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import './FormCSS/CreateAccount.css'
-import LoginWithGoogle from '../../Login/Google/LoginWithGoogle';
+import LoginWithGoogle from '../../Login/Google/LoginWithGoogle.jsx';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import Background from '../Themes/Background';
+import axios from "axios"
+import Background from '../Themes/Background.jsx';
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
+
 
 function LoginAsGuest() {
   return (
@@ -43,32 +45,13 @@ export default function CreateAccount() {
     },
 
     onSubmit: (values) => {
-      fetch(URL, {
-        method: 'POST',
-        body: JSON.stringify(values), headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'same-origin'
-      }).then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP Status: ${response.status}`)
-        }
-        return response.json()
-      })
-        //  .then(setOpen(true))
-        .catch(error => console.log(error.message));
+      
     },
 
     validationSchema: Yup.object({
-      lastName: Yup.string().required("Please do not leave it blank.").min(1, "Please do not leave it blank"),
-      //  year: Yup.number().integer().typeError("Please type a number."),
-      fistName: Yup.string().required("Please do not leave it blank.").min(1, "Please do not leave it blank."),
       userName: Yup.string().required("Must be 6 characters or more.").min(6, "Must be 6 characters or more"),
-      phone: Yup.string().required("Must be 10 characters or more.").min(10, "Must be 10 characters or more"),
-      address: Yup.string().required("Must be 3 characters or more.").min(3, "Must be 3 characters or more"),
-      email: Yup.string().required("Must be 10 characters or more.").min(10, "Must be 10 characters or more"),
-      password: Yup.string().required("Must be 6 characters or more.").min(6, "Must be 6 characters or more"),
-
+      email: Yup.string().required("We need something to authorize you").min(10, "Must be 10 characters or more"),
+      password: Yup.string().required("Password! Or we gonna steal your account.").min(5, "Must be 5 characters or more"),
     }),
 
 

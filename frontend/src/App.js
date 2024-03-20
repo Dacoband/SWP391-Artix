@@ -5,7 +5,7 @@ import FrontPage from './Components/FrontPage.jsx';
 import Admin from './Components/Admin/Admin.jsx'
 import Mod from './Components/Mods/Mod.jsx';
 import Users from './Components/Users/Users.jsx';
-import CreateAccount from './Components/Forms/CreateAccount.jsx';
+import CreateAccount from './Components/Forms/CreateAccount.tsx';
 import Unauthorized from './ProtectedRoutes/Unauthorized.jsx';
 import ProtectedRoute from './ProtectedRoutes/ProtectedRoute.tsx';
 import RouterAdmin from './Components/Admin/RouterAdmin.jsx';

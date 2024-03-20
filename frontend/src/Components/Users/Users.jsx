@@ -6,7 +6,6 @@ import HomePage from './MainPage/HomePage.tsx';
 import Page from './Page.jsx';
 import Footer from './Footer.jsx';
 import Menu from './Menu.jsx';
-import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.tsx';
@@ -26,7 +25,6 @@ export default function Users() {
       {/* <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}> */}
         <Routes>
           <Route path={`/`} element={<HomePage/>} />
-          <Route path={`create`} element={<CreatePeople />} />
           <Route path={`creatorform`} element={<UserInfoForm/>}/>
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
           <Route path={`profile/:id`} element={<ProfileUser />}/>
