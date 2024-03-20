@@ -52,6 +52,36 @@ public class ArtworksController : ControllerBase
     }
 
 
+
+    [HttpGet("recent-artworks")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetRecentArtworks()
+    {
+        var recentArtworks = await _context.Artworks
+            .OrderByDescending(a => a.ArtworkID) // Sử dụng ID nếu cần
+            .Take(2)
+            .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
+        .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
+        {
+            ArtworkID = a.ArtworkID,
+            CreatorID = a.CreatorID,
+            ArtworkName = a.ArtworkName,
+            Description = a.Description,
+            DateCreated = a.DateCreated,
+            Likes = a.Likes,
+            Purchasable = a.Purchasable,
+            Price = a.Price,
+            ImageFile = a.ImageFile,
+            ArtworkTag = a.ArtworkTag
+        })
+        .ToListAsync();
+
+        return recentArtworks;
+    }
+
+
+
+
+
     // GET: api/artworks/{id}
     [HttpGet("{id}")]
     public async Task<IActionResult> GetArtwork(int id)
@@ -268,7 +298,6 @@ public class ArtworksController : ControllerBase
 
             _context.Reports.Remove(report);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
         catch (Exception ex)
@@ -277,6 +306,7 @@ public class ArtworksController : ControllerBase
             return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
         }
     }
+
 
 
 
