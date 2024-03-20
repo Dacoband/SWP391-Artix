@@ -19,16 +19,17 @@ export interface Account {
 export interface Creator {
   creatorID: string | "0",
   accountID: string | "0",
-  paypalAccountID: number | "0",
+  paypalAccountID: string | number,
   userName: string | "",
   profilePicture: string | "",
   backgroundPicture: string | "",
   firstName: string | "",
   lastName: string | "",
   address: string | "",
-  phone: number | "0",
-  lastLogDate: Date,
+  phone: string | "0",
+  lastLogDate: string | undefined,
   allowCommission: boolean | false,
   biography: string | "",
   followCount: number | 0,
+  email:string
 } // This is the Object Creator, having all the infomation.

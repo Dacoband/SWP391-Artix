@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Creator } from '../../Interfaces/UserInterface.tsx'
+import { Account, Creator } from '../../Interfaces/UserInterface.tsx'
 import axios from 'axios'
 
 
 const creatorurl = 'https://localhost:7233/api/Creator/'
-
+const accountemailurl = 'https://localhost:7233/api/Account/email/'
 
 export async function GetCreatorList() {
   try{
@@ -30,6 +30,16 @@ export async function GetCreatorByID(creatorId:string) {
   try{
       let creator:Creator = await axios.get(creatorurl+`ById/${creatorId}`).then(response => response.data)
       return creator
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
+export async function GetAccountByEmail(email:string) {
+  try{
+      let account:Account = await axios.get(accountemailurl+`${email}`).then(response => response.data)
+      return account
       
   }catch(err){
     console.log(err)
