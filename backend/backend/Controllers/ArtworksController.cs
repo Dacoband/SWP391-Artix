@@ -243,7 +243,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks/random11
-    [HttpGet("random11")]
+    [HttpGet("random10")]
     public async Task<IActionResult> GetRandom11Artworks()
     {
         // Lấy danh sách tất cả các artworks từ cơ sở dữ liệu
@@ -256,7 +256,7 @@ public class ArtworksController : ControllerBase
         }
 
         // Lấy 11 artworks ngẫu nhiên từ danh sách tất cả các artworks
-        var randomArtworks = GetRandomElements(allArtworks, 11);
+        var randomArtworks = GetRandomElements(allArtworks, 10);
 
         return Ok(randomArtworks);
     }
