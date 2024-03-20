@@ -30,6 +30,8 @@ import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import { GetCreatorByID } from '../../API/UserAPI/GET.tsx';
 import { Creator } from '../../Interfaces/UserInterface.ts';
 import { PutCreatorBackgroundPicture, PutCreatorProfilePicture } from '../../API/UserAPI/PUT.tsx';
+import { GetArtListById } from '../../API/ArtworkAPI/GET.tsx';
+import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -65,8 +67,9 @@ function a11yProps(index) {
 export default function ProfileUser() {
   const [isFollowing, setIsFollowing] = useState(false)
   const [user, setUser] = useState<Creator>()
+  const [artworks, setArtworks] = useState<Artwork[]>([])
   const [blobImage, setBlobImage] = useState();
-  
+
   const [previewProfile, setPreviewProfile] = useState<string>();
   const [previewBackground, setPreviewBackground] = useState<string>();
   let { id } = useParams()
@@ -85,7 +88,12 @@ export default function ProfileUser() {
       const userProfile = await GetCreatorByID(id ? id : "0")
       setUser(userProfile)
     }
+    const getUserArtworks = async () => {
+      const userArtworks = await GetArtListById(id ? id : "0")
+      setArtworks(userArtworks as unknown as Artwork[])
+    }
     getUserProfile()
+    getUserArtworks()
   }, [])
 
 
@@ -103,17 +111,17 @@ export default function ProfileUser() {
       };
     });
   }
-  
 
-  async function postImageToDatabase(imageData:string, imageType:string) {
-    if(imageType==="profilePicture"){
+
+  async function postImageToDatabase(imageData: string, imageType: string) {
+    if (imageType === "profilePicture") {
       let plainBase64Data = imageData.split(',')[1];
-      PutCreatorProfilePicture(user? user.creatorID:"1", plainBase64Data)
+      PutCreatorProfilePicture(user ? user.creatorID : "1", plainBase64Data)
     }
-    else if(imageType==="backgroundPicture"){
+    else if (imageType === "backgroundPicture") {
       let plainBase64Data = imageData.split(',')[1];
-      PutCreatorBackgroundPicture(user? user.creatorID:"1", plainBase64Data)
-    }else{
+      PutCreatorBackgroundPicture(user ? user.creatorID : "1", plainBase64Data)
+    } else {
       console.log("error: POSTING FAILED! Check below for further details:")
     }
 
@@ -121,24 +129,24 @@ export default function ProfileUser() {
 
   const handleImageChange = async (e) => {
     const { name, files } = e.target;
-  if (name === "profilePicture" || name === "backgroundPicture") {
-    const file = files?.[0];
-    if (file) {
-      try {
-        const base64Image = await blobToBase64(file);
-        // Match the arguments to the function definition
-        await postImageToDatabase(base64Image, name); // Here `name` should be of type 'profilePicture' | 'backgroundPicture'
-        if (name === "profilePicture") {
-          setPreviewProfile(base64Image);
-        } else {
-          setPreviewBackground(base64Image);
+    if (name === "profilePicture" || name === "backgroundPicture") {
+      const file = files?.[0];
+      if (file) {
+        try {
+          const base64Image = await blobToBase64(file);
+          // Match the arguments to the function definition
+          await postImageToDatabase(base64Image, name); // Here `name` should be of type 'profilePicture' | 'backgroundPicture'
+          if (name === "profilePicture") {
+            setPreviewProfile(base64Image);
+          } else {
+            setPreviewBackground(base64Image);
+          }
+          console.log('Posting images...');
+        } catch (error) {
+          console.error('Error posting image to database', error);
         }
-        console.log('Posting images...');
-      } catch (error) {
-        console.error('Error posting image to database', error);
       }
     }
-  }
   };
 
 
@@ -150,7 +158,7 @@ export default function ProfileUser() {
         </div> */}
         <Card sx={{ width: '100%' }}>
 
-          <div className='backgrounduser' style={{ backgroundImage: `url('${user?.backgroundPicture? "data:image/jpeg;base64,"+user?.backgroundPicture : previewBackground}')` }}>
+          <div className='backgrounduser' style={{ backgroundImage: `url('${user?.backgroundPicture ? "data:image/jpeg;base64," + user?.backgroundPicture : previewBackground}')` }}>
             <div
               className='backgroundPicture'
               style={{
@@ -187,10 +195,10 @@ export default function ProfileUser() {
           <CardContent className='infouser1'>
             <div className='infousername'>
               <div className='avataruser' >
-                <img src={user?.profilePicture? "data:image/jpeg;base64,"+user?.profilePicture : previewProfile} />
+                <img src={user?.profilePicture ? "data:image/jpeg;base64," + user?.profilePicture : previewProfile} />
                 <div className='buttonavatar'>
                   <div className='profilePicture'
-                    style={{  
+                    style={{
                       backgroundColor: "none",
                       position: "absolute",
                       top: 10,
@@ -200,14 +208,14 @@ export default function ProfileUser() {
                     }}
                   >
                     <input
-                      style={{display:'none'}}
+                      style={{ display: 'none' }}
                       accept='.png,.jpeg,.jpg,.tif,.gif'
                       id={"profilePicture"}
                       name={"profilePicture"}
                       type="file"
                       onChange={handleImageChange}
                     />
-                    
+
                     <label htmlFor={"profilePicture"}>
                       <Button style={{ color: 'white', borderRadius: '150px' }}
                         component="span" //Component = 'span' allow you to span the lable across the input
@@ -218,7 +226,7 @@ export default function ProfileUser() {
                       </Button>
                     </label>
                   </div>
-                  
+
                 </div>
               </div>
               <div className='headerusername'>
@@ -252,12 +260,12 @@ export default function ProfileUser() {
       <div className='tabsBackground' style={{ backgroundColor: theme.backgroundColor }} >
         <div className='inforuser2'>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1}} className='navofuser'>
+            <Box sx={{ borderBottom: 1 }} className='navofuser'>
               <div className='navuser'>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"style={{color:theme.color2,zIndex:'7'}}>
-                  <Tab label="Home" {...a11yProps(0)} style={{color:theme.color2,}}/>
-                  <Tab label="Shop" {...a11yProps(1)} style={{color:theme.color2,}}/>
-                  <Tab label="Favourites" {...a11yProps(2)} style={{color:theme.color2,}}/>
+                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ color: theme.color2, zIndex: '7' }}>
+                  <Tab label="Home" {...a11yProps(0)} style={{ color: theme.color2, }} />
+                  <Tab label="Shop" {...a11yProps(1)} style={{ color: theme.color2, }} />
+                  <Tab label="Favourites" {...a11yProps(2)} style={{ color: theme.color2, }} />
                 </Tabs>
               </div>
               <div className='buttonSubcribe'>
@@ -277,7 +285,7 @@ export default function ProfileUser() {
                     gap={4}
                     p={2}
                     style={{
-                      color:theme.color2,
+                      color: theme.color2,
                       border: '2px solid grey',
                       top: 0, // this defines the top position when it's sticky
                       zIndex: 10 // you may want to add a zIndex to ensure it stacks on top of other contents
@@ -292,7 +300,7 @@ export default function ProfileUser() {
                   </Box></div>
                 <div className='workofuser'>
                   <div className='head-workofuser'>
-                    <h2 style={{color:theme.color2,}}> My Works:</h2>
+                    <h2 style={{ color: theme.color2, }}> My Works:</h2>
                     <Box>
                       <ImageList variant="masonry" cols={3} gap={8}>
                         {Work.map((work) => (
