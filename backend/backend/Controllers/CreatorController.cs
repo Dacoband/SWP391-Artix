@@ -51,6 +51,9 @@ public class CreatorController : ControllerBase
 
 
 
+
+
+
     [HttpGet("{accountId}")]
     public async Task<ActionResult<Creator>> GetCreatorByAccountId(int accountId)
     {
