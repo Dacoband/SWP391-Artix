@@ -75,12 +75,7 @@ export default function ExpandingSearchBar() {
     
     const [input, setInput] = useState("");
     const [dataCreator, setDataCreator] = useState("");
-<<<<<<< HEAD
-    // const [dataArt,setDataArt] = useState("")
-    const [dataTag, setDataTag] = useState("")
-=======
     const [dataArt, setDataArt] = useState("")
->>>>>>> origin/Volka
     // const [showResults, setShowResults] = useState(false); // Trạng thái để kiểm soát việc hiển thị kết quả tìm kiếm
 
     const fetchCreator = (value) => {
@@ -292,11 +287,7 @@ export default function ExpandingSearchBar() {
         ) : (
             <SearchLightMode>
                 {searchBarComponent}
-<<<<<<< HEAD
-                {dataCreator && dataCreator.length > 0  && <SearchResultsList dataCreator={dataCreator} dataTag={dataTag} />}
-=======
                 {dataCreator && dataCreator.length > 0 && <SearchResultsList dataCreator={dataCreator} dataArt={dataArt} />}
->>>>>>> origin/Volka
             </SearchLightMode>
         )}
        
