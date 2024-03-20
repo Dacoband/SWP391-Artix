@@ -8,7 +8,7 @@ import Comments from './Comments.jsx';
 import Box from '@mui/material/Box';
 import { ListTag } from '../share/ListofTag.js';
 import { ThemeContext } from './Themes/ThemeProvider.tsx';
-import { GetArtListById } from '../API/ArtworkAPI/GET.tsx';
+import { GetArtById } from '../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../Interfaces/ArtworkInterfaces.ts';
 import { GetCreatorByID } from '../API/UserAPI/GET.tsx';
 import { Creator } from '../Interfaces/UserInterface.ts';
@@ -24,7 +24,7 @@ export default function PostWork() {
   const [creator, setCreator] = useState<Creator>()
   useEffect(() => {
     const getArtWork = async () => {
-      const artwork = await GetArtListById(id ? id : "1");
+      const artwork = await GetArtById(id ? id : "1");
       setArtwork(artwork)
       const creator = await GetCreatorByID(artwork ? artwork.creatorID : "1")
       setCreator(creator)

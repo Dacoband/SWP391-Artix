@@ -30,9 +30,9 @@ import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import { GetCreatorByID } from '../../API/UserAPI/GET.tsx';
 import { Creator } from '../../Interfaces/UserInterface.ts';
 import { PutCreatorBackgroundPicture, PutCreatorProfilePicture } from '../../API/UserAPI/PUT.tsx';
-import { GetArtListById } from '../../API/ArtworkAPI/GET.tsx';
+import { GetArtsByCreatorId } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
-import {PlaceHoldersImageCard} from './PlaceHolders.jsx'
+import { PlaceHoldersImageCard } from './PlaceHolders.jsx'
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -69,11 +69,18 @@ export default function ProfileUser() {
   const [isFollowing, setIsFollowing] = useState(false)
   const [user, setUser] = useState<Creator>()
   const [artworks, setArtworks] = useState<Artwork[]>([])
-
   const [previewProfile, setPreviewProfile] = useState<string>();
   const [previewBackground, setPreviewBackground] = useState<string>();
   let { id } = useParams()
   const { theme } = useContext(ThemeContext)
+
+  // Attempt to retrieve the auth state from sessionStorage
+  const savedAuth = sessionStorage.getItem('auth');
+  // Check if there's any auth data saved and parse it
+  const userInSession: Creator = savedAuth ? JSON.parse(savedAuth) : "";
+  // Now 'auth' contains your authentication state or null if there's nothing saved
+
+
   const handleClick = () => {
     setIsFollowing(!isFollowing)
   }
@@ -89,8 +96,8 @@ export default function ProfileUser() {
       setUser(userProfile)
     }
     const getUserArtworks = async () => {
-      const userArtworks = await GetArtListById(id ? id : "0")
-      setArtworks(userArtworks?userArtworks:[])
+      const userArtworks = await GetArtsByCreatorId(id ? id : "0")
+      setArtworks(userArtworks ? userArtworks : [])
     }
     getUserProfile()
     getUserArtworks()
@@ -232,23 +239,30 @@ export default function ProfileUser() {
                 width: '15vw',
               }}
             >
-              <input
-                accept='.png,.jpeg,.jpg,.tif,.gif'
-                style={{ display: 'none' }}
-                id={"backgroundPicture"}
-                name={"backgroundPicture"}
-                type="file"
-                onChange={handleImageChange}
-              />
-              <label htmlFor={"backgroundPicture"}>
-                <Button
-                  className='button-edit-background'
-                  component="span"
-                  startIcon={<CameraAltIcon />}
-                >
-                  Edit Cover Image
-                </Button>
-              </label>
+              {/* Check to see if User in sesion is the same as the user in view, if yes, they can edit image */}
+              {userInSession.creatorID === user?.creatorID ?
+                <>
+                  <input
+                    accept='.png,.jpeg,.jpg,.tif,.gif'
+                    style={{ display: 'none' }}
+                    id={"backgroundPicture"}
+                    name={"backgroundPicture"}
+                    type="file"
+                    onChange={handleImageChange}
+                  />
+                  <label htmlFor={"backgroundPicture"}>
+                    <Button
+                      className='button-edit-background'
+                      component="span"
+                      startIcon={<CameraAltIcon />}
+                    >
+                      Edit Cover Image
+                    </Button>
+                  </label>
+                </>
+                :
+                ""
+              }
             </div>
           </div>
           <CardContent className='infouser1'>
@@ -266,24 +280,31 @@ export default function ProfileUser() {
                       zIndex: 2,
                     }}
                   >
-                    <input
-                      style={{ display: 'none' }}
-                      accept='.png,.jpeg,.jpg,.tif,.gif'
-                      id={"profilePicture"}
-                      name={"profilePicture"}
-                      type="file"
-                      onChange={handleImageChange}
-                    />
+                    {/* Check to see if User in sesion is the same as the user in view, if yes, they can edit image */}
+                    {userInSession.creatorID === user?.creatorID ?
+                      <>
+                        <input
+                          style={{ display: 'none' }}
+                          accept='.png,.jpeg,.jpg,.tif,.gif'
+                          id={"profilePicture"}
+                          name={"profilePicture"}
+                          type="file"
+                          onChange={handleImageChange}
+                        />
 
-                    <label htmlFor={"profilePicture"}>
-                      <Button style={{ color: 'white', borderRadius: '150px' }}
-                        component="span" //Component = 'span' allow you to span the lable across the input
-                      >
-                        <Avatar style={{ outline: '2px solid #fff' }}>
-                          <CameraAltIcon />
-                        </Avatar>
-                      </Button>
-                    </label>
+                        <label htmlFor={"profilePicture"}>
+                          <Button style={{ color: 'white', borderRadius: '150px' }}
+                            component="span" //Component = 'span' allow you to span the lable across the input
+                          >
+                            <Avatar style={{ outline: '2px solid #fff' }}>
+                              <CameraAltIcon />
+                            </Avatar>
+                          </Button>
+                        </label>
+                      </>
+                      :
+                      ""
+                    }
                   </div>
 
                 </div>
@@ -328,10 +349,14 @@ export default function ProfileUser() {
                 </Tabs>
               </div>
               <div className='buttonSubcribe'>
-                <Link to={`commission`}>
-                  <Button variant="contained" href="#contained-buttons"> <ShoppingBagIcon style={{ marginRight: '5px' }} />Commission</Button>
-                </Link>
-                <Button variant="contained" href="#contained-buttons" style={{ marginLeft: '20px' }}>Report</Button>
+                {user?.allowCommission===true?
+                  <Link to={`commission`}>
+                    <Button variant="contained" href=""> <ShoppingBagIcon style={{ marginRight: '5px' }} />Open For Commission</Button>
+                  </Link>   
+                  :
+                  <Button disabled={true} variant="contained" href=""> <ShoppingBagIcon style={{ marginRight: '5px' }} />Commission Closed</Button>
+                }
+                <Button variant="contained" color='error' href="" style={{ marginLeft: '20px' }}>Report</Button>
               </div>
             </Box>
             <CustomTabPanel value={value} index={0} >
@@ -361,7 +386,7 @@ export default function ProfileUser() {
                   <div className='head-workofuser'>
                     <h2 style={{ color: theme.color2, }}> My Works:</h2>
                     <Box>
-                      {artworks.length!==0 ? <FreeImage/>: <PlaceHoldersImageCard/>}
+                      {artworks.length !== 0 ? <FreeImage /> : <PlaceHoldersImageCard />}
                     </Box>
                   </div>
                 </div>
@@ -369,16 +394,15 @@ export default function ProfileUser() {
 
 
             </CustomTabPanel>
-
             <CustomTabPanel value={value} index={1}>
-            {artworks.length!==0 ? <CostImage/>: <PlaceHoldersImageCard/>}
+              {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}
             </CustomTabPanel>
 
 
             <CustomTabPanel value={value} index={2}>
 
               <Box sx={{ width: 1200, height: 450, overflow: 'visible' }}>
-              {artworks.length!==0 ? <AllImage/>: <PlaceHoldersImageCard/>}
+                {artworks.length !== 0 ? <AllImage /> : <PlaceHoldersImageCard />}
               </Box>
             </CustomTabPanel>
 
