@@ -7,7 +7,7 @@ import Report from'./Report'
 export default function RouterAdmin() {
   return (
     <div>
-        <AdminNavbar/>
+        {/* <AdminNavbar/> */}
         <Routes>
           <Route path={`/`} element={<Admin/>} />
           <Route path={`listuser`} element={<ListUser />} />

@@ -3,12 +3,8 @@ import { Container, Box, Typography, Paper } from '@mui/material';
 import AdminNavbar from './NavigationAd';
 import MyLineChart from './Charts/LineChart';
 import '../../css/Admin.css';
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-import Avatar from '@mui/material/Avatar';
+
 import { Doughnut } from 'react-chartjs-2';
-import PeopleIcon from '@mui/icons-material/People';
-import { Work } from '../../share/ListofWork';
-import { ListofUsers } from '../../share/ListofUsers'; 
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -42,11 +38,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: 'Statistics on number of artworks',
-      font: {
-        size: 20,
-      },
-      
+      text: 'Statistical chart of likes of works',
     },
   },
   scales: {
@@ -77,23 +69,20 @@ export const options = {
 
 
 // sơ đồ 2
-// số lượng user vip ( vip =true)
-const uservip = ListofUsers.filter(user => user.vip === true).length;
-const usernonvip = ListofUsers.length - uservip;
 export const data2 = {
   labels: ['Non-VIP Users', 'VIP Users'],
   datasets: [
     {
       label: '# of Votes',
-      data: [usernonvip,uservip],
+      data: [15,5],
       backgroundColor: [
         'rgb(46, 144, 250)',
-        'rgb(251, 156, 12)',
+        'rgb(234, 197, 79)',
         
       ],
       borderColor: [
         'rgb(46, 144, 250)',
-        'rgb(251, 156, 12)',
+        'rgb(234, 197, 79)',
    
       ],
       borderWidth: 1,
@@ -102,7 +91,7 @@ export const data2 = {
 };
 const options2 = {
   responsive: true,
-  cutoutPercentage: 70,
+  cutoutPercentage: 70, // Điều chỉnh độ dày của biểu đồ, giá trị từ 0 đến 100
   plugins: {
     legend: {
       display: true,
@@ -113,9 +102,9 @@ const options2 = {
       },
     },
     title: {
-      // color:'black',
+      color:'black',
       display: true,
-      text: 'Users statistics diagram ',
+      text: 'User statistics diagram ',
       font: {
         size: 20,
       },
@@ -130,9 +119,9 @@ export const data = {
   labels,
   datasets: [
     {
-      label: 'Number of artworks',
+      label: 'Number of likes',
       data: ['30','20','30','40','50','60','70'],
-      backgroundColor: 'rgb(46, 144, 250)', 
+      backgroundColor: '#01b8ef', 
       boderColor:'black',// Màu của cột chính
       boderWidth:'1'
     },
@@ -141,55 +130,33 @@ export const data = {
 };
 export default function Admin() {
   return (
-    <Container style={{marginLeft:'260px'}}>
+    <Container maxWidth="lg">
       <AdminNavbar />
       <Box my={4}>
-        <Typography variant="h4" gutterBottom style={{fontWeight:'bold'}}>
+        <Typography variant="h4" gutterBottom>
           Overview
         </Typography>
         {/* Other sections will go here */}
         <div className='total'>
-          <Box className='infortotal'>
-          <Avatar sx={{ width: 70, height: 70 ,backgroundColor:'#ed8e00'}}
-                  style={{margin:'auto 20px'}}>
-          <AutoAwesomeIcon  sx={{ width: 40, height: 40, }}/>
-          </Avatar>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
-              Total Artwork:
-
-          </Typography>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
-            {Work.length}
-          </Typography>
+          <Box>
+            Total Users:
 
           </Box>
-          <Box className='infortotal'>
-          <Avatar sx={{ width: 70, height: 70 ,backgroundColor:'#15b79f'}}
-                  style={{margin:'auto 20px'}}>
-          <PeopleIcon  sx={{ width: 40, height: 40, }}/>
-          </Avatar>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
-              Total Users:
-
-          </Typography>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
-            {ListofUsers.length}
-          </Typography>
+          <Box>
+            Total Arts:
 
           </Box>
 
         </div>
-
-       {/* biểu đồ người dùng và biểu đồ art */}
         <div className='allchart'>
          <Box className='boxchart'>
-        <div className='chart'style={{width:'700px',margin:'auto', padding:'25px'}}>
+        <div className='chart'style={{width:'800px',margin:'auto', padding:'25px'}}>
         <Bar options={options} data={data} /></div></Box> 
 
 
       <Box className='boxdoughnut'>
         <div className='doughnut' style={{width:'350px'}}>
-          <h4>Total:{ListofUsers.length} Users</h4>
+          <h4>Total: 20 users</h4>
         <Doughnut options={options2} data={data2} />
 
         </div></Box>

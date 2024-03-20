@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.Development.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.json
 /Users/hendrix/Documents/GitHub/SWP391-Artix/backend/backend/bin/Debug/net8.0/backend
@@ -495,8 +494,6 @@ D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/refint/backend.dll
 D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.pdb
 D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/ref/backend.dll
-=======
->>>>>>> Tuyet
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.Development.json
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.json
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/bin/Debug/net8.0/backend

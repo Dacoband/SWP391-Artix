@@ -1,13 +1,11 @@
 .total{
     display: flex;
-   justify-content: space-between;
-    margin: 40px auto;
-    
+    justify-content: space-between;
 }
 .doughnut h4{
     z-index: 3;
     text-align: center;
-    transform: translateY(1000%);
+    transform: translateY(920%);
 }
 .allchart{
     display: flex;
@@ -16,24 +14,11 @@
 }
 .boxdoughnut{
     border: 2px solid #ECECEC;
-    border-radius: 10px;
+   
     padding: 0 20px 40px;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
 }
 .boxchart{
     border: 2px solid #ECECEC;
-    border-radius: 10px;
-    margin-right: 50px;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
-}
-
-.infortotal{
-    width: 47%;
-    border-radius: 10px;
-    height: 100px;
-    border: 2px solid #ECECEC;
-    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2); 
-    display: flex;
     
-
+    margin-right: 50px;
 }
