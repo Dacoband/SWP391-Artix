@@ -58,7 +58,7 @@ public class ArtworksController : ControllerBase
     {
         var recentArtworks = await _context.Artworks
             .OrderByDescending(a => a.ArtworkID) // Sử dụng ID nếu cần
-            .Take(4)
+            .Take(2)
             .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
         .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
         {
