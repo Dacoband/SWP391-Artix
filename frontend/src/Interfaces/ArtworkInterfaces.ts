@@ -7,7 +7,7 @@ export interface Artwork{
   likes: number,
   purchasable: false,
   price: number,
-  imageFile: string,
+  imageFile: string | null,
   artworkTag: [
     {
       "artworkTagID": number,

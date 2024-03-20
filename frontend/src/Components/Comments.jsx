@@ -109,7 +109,6 @@ const CommentInput = ({onComment}) =>{
       
     }}>
     <CustomizedTextField
-    id="comment"
     style={{width:'100%',}}
     value={commnetBody}
     onChange={(event)=> setCommentBody(event.target.value)}
