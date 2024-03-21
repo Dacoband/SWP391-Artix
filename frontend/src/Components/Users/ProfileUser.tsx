@@ -398,15 +398,12 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
                   <Button disabled={true} variant="contained"> <ShoppingBagIcon color='inherit' style={{ marginRight: '5px' }} />Commission Closed</Button>
                 }
                 {userInSession.creatorID !== user?.creatorID ?
-                  <Button variant="contained" color='error' href="" style={{ marginLeft: '20px' }}>Report</Button>
+                  <Button onClick={handleClickOpen} variant="contained" color='error' href="" style={{ marginLeft: '20px' }}>Report</Button>
                   :
                   ""
                 }
 
                 {/* Popup Report */}
-                
-                <Button variant="contained" color='error' href="" style={{ marginLeft: '20px' }} onClick={handleClickOpen}>
-                  Report</Button>
                   <Dialog
                   open={open}
                   onClose={handleClose}
@@ -426,7 +423,7 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
                   <DialogContent>
                   <DialogContentText>
                   If this user violates community standards, please report the reason to us,
-                   Artix will review and process as soon as possible.
+                   Artix's moderators will review and handle this as soon as possible.
                 </DialogContentText>
                 <TextField
                 autoFocus

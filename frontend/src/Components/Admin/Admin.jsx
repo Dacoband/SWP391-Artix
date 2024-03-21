@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, Box, Typography, Paper } from '@mui/material';
 import AdminNavbar from './NavigationAd';
 import MyLineChart from './Charts/LineChart';
@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import { Doughnut } from 'react-chartjs-2';
 import PeopleIcon from '@mui/icons-material/People';
 import { Work } from '../../share/ListofWork';
-import { ListofUsers } from '../../share/ListofUsers'; 
+import { ListofUsers } from '../../share/ListofUsers';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -16,9 +16,11 @@ import {
   BarElement,
   Title,
   Tooltip,
-  Legend,ArcElement,
+  Legend, ArcElement,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { GetArtListCount } from '../../API/ArtworkAPI/GET.tsx';
+import { GetCreatorList } from '../../API/UserAPI/GET.tsx';
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -29,7 +31,7 @@ ChartJS.register(
 );
 ChartJS.register(ArcElement, Tooltip, Legend);
 export const options = {
-  
+
   responsive: true,
   plugins: {
     legend: {
@@ -46,7 +48,7 @@ export const options = {
       font: {
         size: 20,
       },
-      
+
     },
   },
   scales: {
@@ -85,16 +87,16 @@ export const data2 = {
   datasets: [
     {
       label: '# of Votes',
-      data: [usernonvip,uservip],
+      data: [usernonvip, uservip],
       backgroundColor: [
         'rgb(46, 144, 250)',
         'rgb(251, 156, 12)',
-        
+
       ],
       borderColor: [
         'rgb(46, 144, 250)',
         'rgb(251, 156, 12)',
-   
+
       ],
       borderWidth: 1,
     },
@@ -126,80 +128,101 @@ const options2 = {
 const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
 
 export const data = {
-  
+
   labels,
   datasets: [
     {
       label: 'Number of artworks',
-      data: ['30','20','30','40','50','60','70'],
-      backgroundColor: 'rgb(46, 144, 250)', 
-      boderColor:'black',// Màu của cột chính
-      boderWidth:'1'
+      data: ['30', '20', '30', '40', '50', '60', '70'],
+      backgroundColor: 'rgb(46, 144, 250)',
+      boderColor: 'black',// Màu của cột chính
+      boderWidth: '1'
     },
-    
+
   ],
 };
+
+
+
 export default function Admin() {
+  const [artcount,setArtCount] = useState()
+  const [creatorcount,setCreatorCount] = useState([])
+  useEffect(()=>{
+    const getArtworkCount = async()=>{ 
+      let artCount = await GetArtListCount()
+      setArtCount(artCount)
+    }
+    const getCreatorCount = async()=>{ 
+      let creatorCount = await GetCreatorList()
+      setCreatorCount(creatorCount)
+    }
+    getArtworkCount()
+    getCreatorCount()
+  },[])
+
   return (
-    <Container style={{marginLeft:'260px'}}>
-      <AdminNavbar />
-      <Box my={4}>
-        <Typography variant="h4" gutterBottom style={{fontWeight:'bold'}}>
+    <>
+    <AdminNavbar />
+    <Container style={{ width:"60vw"}}>
+      
+      <Box my={4} >
+        <Typography variant="h4" gutterBottom style={{ fontWeight: 'bold' }}>
           Overview
         </Typography>
         {/* Other sections will go here */}
         <div className='total'>
           <Box className='infortotal'>
-          <Avatar sx={{ width: 70, height: 70 ,backgroundColor:'#ed8e00'}}
-                  style={{margin:'auto 20px'}}>
-          <AutoAwesomeIcon  sx={{ width: 40, height: 40, }}/>
-          </Avatar>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
+            <Avatar sx={{ width: 70, height: 70, backgroundColor: '#ed8e00' }}
+              style={{ margin: 'auto 20px' }}>
+              <AutoAwesomeIcon sx={{ width: 40, height: 40, }} />
+            </Avatar>
+            <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
               Total Artwork:
 
-          </Typography>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
-            {Work.length}
-          </Typography>
+            </Typography>
+            <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
+              {artcount}
+            </Typography>
 
           </Box>
           <Box className='infortotal'>
-          <Avatar sx={{ width: 70, height: 70 ,backgroundColor:'#15b79f'}}
-                  style={{margin:'auto 20px'}}>
-          <PeopleIcon  sx={{ width: 40, height: 40, }}/>
-          </Avatar>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
+            <Avatar sx={{ width: 70, height: 70, backgroundColor: '#15b79f' }}
+              style={{ margin: 'auto 20px' }}>
+              <PeopleIcon sx={{ width: 40, height: 40, }} />
+            </Avatar>
+            <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
               Total Users:
 
-          </Typography>
-          <Typography variant="h5" gutterBottom style={{fontWeight:'bold', color:'#666666',margin:'auto 10px'}}>
-            {ListofUsers.length}
-          </Typography>
+            </Typography>
+            <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
+              {creatorcount.length}
+            </Typography>
 
           </Box>
 
         </div>
 
-       {/* biểu đồ người dùng và biểu đồ art */}
+        {/* biểu đồ người dùng và biểu đồ art */}
         <div className='allchart'>
-         <Box className='boxchart'>
-        <div className='chart'style={{width:'700px',margin:'auto', padding:'25px'}}>
-        <Bar options={options} data={data} /></div></Box> 
+          <Box className='boxchart'>
+            <div className='chart' style={{ width: '700px', margin: 'auto', padding: '25px' }}>
+              <Bar options={options} data={data} /></div></Box>
 
 
-      <Box className='boxdoughnut'>
-        <div className='doughnut' style={{width:'350px'}}>
-          <h4>Total:{ListofUsers.length} Users</h4>
-        <Doughnut options={options2} data={data2} />
+          <Box className='boxdoughnut'>
+            <div className='doughnut' style={{ width: '350px' }}>
+              <h4>Total:{ListofUsers.length} Users</h4>
+              <Doughnut options={options2} data={data2} />
 
-        </div></Box>
+            </div></Box>
 
 
 
         </div>
 
-        
+
       </Box>
     </Container>
+    </>
   )
 }
