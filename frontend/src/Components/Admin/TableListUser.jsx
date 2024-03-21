@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { ListofUsers } from '../../share/ListofUsers';
@@ -21,10 +21,18 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import DialogActions from '@mui/material/DialogActions';
+import { GetCreatorListNoImage } from '../../API/UserAPI/GET.tsx';
 export default function TableListUser() {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
+  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [userList,setUserList] = useState([])
+  useEffect(() =>{
+    const getUserList = async() =>{
+      let userList = await GetCreatorListNoImage()
+      setUserList(userList)
+    }
+    getUserList()
+  },[])
   // Handle change page
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -37,7 +45,7 @@ export default function TableListUser() {
   };
 
   // Calculate the portion of users to display based on pagination
-  const paginatedUsers = ListofUsers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const paginatedUsers = userList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const [open, setOpen] = useState(false);
   const handleClose = () => {setOpen(false);};
@@ -61,16 +69,16 @@ export default function TableListUser() {
         <TableBody>
           {paginatedUsers.map((user) => (
             <TableRow
-              key={user.id}
+              key={user.creatorID}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {user.id}
+                {user.creatorID}
               </TableCell>
               {/* user.User là user Name */}
-              <TableCell align="left">{user.User}</TableCell>
+              <TableCell align="left">{user.userName}</TableCell>
               <TableCell align="left">{user.email}</TableCell>
-              <TableCell align="left">{user.Phone}</TableCell>
+              <TableCell align="left">{user.phone}</TableCell>
               <TableCell align="left">
                   {user.vip ? <VerifiedIcon color="success"/> : null}
                 </TableCell>
@@ -108,9 +116,9 @@ export default function TableListUser() {
   </Dialog>
     
       <TablePagination
-          rowsPerPageOptions={10}
+          rowsPerPageOptions={3}
           component="div"
-          count={ListofUsers.length}
+          count={userList.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

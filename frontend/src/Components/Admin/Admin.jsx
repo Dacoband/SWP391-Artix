@@ -20,13 +20,14 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { GetArtListCount, GetRecent7ArtList } from '../../API/ArtworkAPI/GET.tsx';
-import { GetCreatorListCount } from '../../API/UserAPI/GET.tsx';
+import { GetCreatorListCount, GetCreatorListNoImage } from '../../API/UserAPI/GET.tsx';
 
 
 export default function Admin() {
   const [artcount, setArtCount] = useState()
   const [creatorcount, setCreatorCount] = useState()
   const [nearest7arts, setNearest7Arts] = useState([])
+  const [creatorlist, setCreatorList] = useState([])
   useEffect(() => {
     const getArtworkCount = async () => {
       let artCount = await GetArtListCount()
@@ -41,6 +42,11 @@ export default function Admin() {
       let nearest7arts = await GetRecent7ArtList()
       setNearest7Arts(nearest7arts)
     }
+    const getCreatorDetails= async () => {
+      let creatorDetails = await GetCreatorListNoImage()
+      setCreatorList(creatorDetails)
+    }
+    getCreatorDetails()
     getNearest7Arts()
     getArtworkCount()
     getCreatorCount()
@@ -105,8 +111,8 @@ export default function Admin() {
 
   // sơ đồ 2
   // số lượng user vip ( vip =true)
-  const uservip = ListofUsers.filter(user => user.vip === true).length;
-  const usernonvip = ListofUsers.length - uservip;
+  const uservip = creatorlist.filter(user => user.vip === true).length;
+  const usernonvip = creatorlist.length - uservip;
   const data2 = {
     labels: ['Non-VIP Users', 'VIP Users'],
     datasets: [

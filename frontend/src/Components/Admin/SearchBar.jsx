@@ -103,8 +103,7 @@ export default function ExpandingSearchBarAdmin() {
 
     return (
         <div>
-            {searchBarComponentAdmin  }
-             
+            {searchBarComponentAdmin}
             {(!dataCreator || dataCreator.length === 0) && <TableListUser />}
             {dataCreator && dataCreator.length > 0  && <SearchResultsList dataCreator={dataCreator} />}
         </div>
