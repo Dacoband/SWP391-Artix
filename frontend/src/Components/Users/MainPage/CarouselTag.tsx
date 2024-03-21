@@ -1,8 +1,9 @@
-import React from 'react'
-import { ListTag } from '../../../share/ListofTag'
+import React, { useEffect, useState } from 'react'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { GetTagList } from '../../../API/TagAPI/GET.tsx';
+import { Tag } from '../../../Interfaces/TagInterface';
 
 export default function CarouselTag(){
   const settings = {
@@ -18,14 +19,34 @@ export default function CarouselTag(){
     draggable:true,
   };
   const colors = ["#82c87e", "#c07ec8", "#c89c7e", "#7E8DC8", "#C07EC8","#C87E8A"];
-  return (
-    <Slider {...settings}>
-      {ListTag.map((tag, index) => (
-        <div key={tag.id}>
-          <button className='itemtag' style={{ backgroundColor: colors[index % colors.length] }}>{tag.nameTag}</button>
+  const [tagList, SetTagList] = useState<Tag[]>([]);
+  useEffect(() => {
+    const fetchTags = async () => {
+      const tagList = await GetTagList()
+      SetTagList(tagList? tagList :[]);
+    };
+    fetchTags();
+  },[])
+
+  function TagList(){
+    return(
+      <>
+       <Slider {...settings}>
+        {tagList.map((tag, index) => (
+        <div key={tag.tagID}>
+          <button className='itemtag' style={{ backgroundColor: colors[index % colors.length] }}>{tag.tagName}</button>
         </div>
       ))}
-    </Slider>
+       </Slider>
+      </>
+    )
+  }
+
+  return (
+      tagList.length!==0 ?
+        <TagList/>
+      :
+      ""
   );
 }
 // export default function CarouselTag() {

@@ -97,7 +97,7 @@ transformOrigin={{
         aria-haspopup="true"
         aria-expanded={open ? 'true' : 'false'}
       >
-        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
+        <Avatar src={user?`data:image/jpeg;base64,${user.profilePicture}` : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
       </IconButton>
       {
         user===null?
