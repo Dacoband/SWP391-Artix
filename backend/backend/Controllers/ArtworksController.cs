@@ -50,6 +50,36 @@ public class ArtworksController : ControllerBase
 
         return Ok(artworks);
     }
+    [HttpGet("NotImage")]
+    public async Task<IActionResult> GetArtworksNotImage()
+    {
+        var artworks = await _context.Artworks
+            .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
+            .Take(5) // Lấy 5 artwork đầu tiên
+            .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
+            .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ArtworkTag = a.ArtworkTag
+            })
+            .ToListAsync();
+
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworks);
+    }
+
+
 
     [HttpGet("recent7artworks")]
     public async Task<IActionResult> GetRecent7Artworks()
@@ -78,6 +108,35 @@ public class ArtworksController : ControllerBase
 
         return Ok(recentArtworks);
     }
+
+    [HttpGet("recent7artworksNotImage")]
+    public async Task<IActionResult> GetRecent7ArtworksNotImage()
+    {
+        var recentArtworks = await _context.Artworks
+            .OrderByDescending(a => a.DateCreated) // Sắp xếp theo ngày tạo giảm dần (tức là ngày gần nhất đăng lên sẽ ở đầu)
+            .Take(7) // Chỉ lấy 7 artwork đầu tiên
+            .Select(a => new
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                
+            })
+            .ToListAsync();
+
+        if (recentArtworks == null || recentArtworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(recentArtworks);
+    }
+
     [HttpGet("recent-artwork-count")]
     public async Task<IActionResult> GetRecentArtworkCount()
     {
@@ -167,6 +226,36 @@ public class ArtworksController : ControllerBase
                 Purchasable = a.Purchasable,
                 Price = a.Price,
                 ImageFile = a.ImageFile,
+                ArtworkTag = a.ArtworkTag
+            })
+            .ToListAsync();
+
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworks);
+    }
+
+
+
+    [HttpGet("ByCreatorIDNotImage/{CreatorID}")]
+    public async Task<IActionResult> GetArtworkByCreatorIDNotImage(int CreatorID)
+    {
+        var artworks = await _context.Artworks
+            .Include(a => a.ArtworkTag)
+            .Where(a => a.CreatorID == CreatorID)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
                 ArtworkTag = a.ArtworkTag
             })
             .ToListAsync();
