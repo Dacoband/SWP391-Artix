@@ -51,6 +51,31 @@ public class ArtworksController : ControllerBase
         return Ok(artworks);
     }
 
+    [HttpGet("{artworkId}/tags")]
+    public async Task<IActionResult> GetArtworkTags(int artworkId)
+    {
+        var artworkTags = await _context.ArtworkTag
+            .Where(at => at.ArtworkID == artworkId)
+            .Join(_context.Tags,
+                at => at.TagID,
+                tag => tag.TagID,
+                (at, tag) => new
+                {
+                    TagID = tag.TagID,
+                    TagName = tag.TagName
+                })
+            .Distinct()
+            .ToListAsync();
+
+        if (artworkTags == null || artworkTags.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworkTags);
+    }
+
+
 
 
     [HttpGet("recent-artworks")]
