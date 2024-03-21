@@ -8,7 +8,7 @@ const top10arturl = `https://localhost:7233/api/artworks/Top10Liked`
 const random10arturl = `https://localhost:7233/api/artworks/random10`
 const artworkbycreatorurl = `https://localhost:7233/api/artworks/ByCreatorID/`
 const numberartworkurl = `https://localhost:7233/api/artworks/recent-artwork-count`
-const nearest7artworkurl = `https://localhost:7233/api/artworks/recent7artworks`
+const nearest7artworkurl = `https://localhost:7233/api/artworks/recent7artworksNotImage`
 
 export async function GetArtListCount() {
   try{
