@@ -108,6 +108,35 @@ public class ArtworksController : ControllerBase
 
         return Ok(recentArtworks);
     }
+
+    [HttpGet("recent7artworksNotImage")]
+    public async Task<IActionResult> GetRecent7ArtworksNotImage()
+    {
+        var recentArtworks = await _context.Artworks
+            .OrderByDescending(a => a.DateCreated) // Sắp xếp theo ngày tạo giảm dần (tức là ngày gần nhất đăng lên sẽ ở đầu)
+            .Take(7) // Chỉ lấy 7 artwork đầu tiên
+            .Select(a => new
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                
+            })
+            .ToListAsync();
+
+        if (recentArtworks == null || recentArtworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(recentArtworks);
+    }
+
     [HttpGet("recent-artwork-count")]
     public async Task<IActionResult> GetRecentArtworkCount()
     {
