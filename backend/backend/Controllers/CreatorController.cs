@@ -67,6 +67,51 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
+
+
+    [HttpGet("OnlyProfilePicture/{CreatorID}")]
+    public async Task<ActionResult<Creator>> GetOnlyProfilePictureByCreatorID(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+                
+                ProfilePicture = c.ProfilePicture
+            })
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
+    [HttpGet("OnlyBackgroundPicture/{CreatorID}")]
+    public async Task<ActionResult<Creator>> GetOnlyBackgroundPictureByCreatorID(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+
+                BackgroundPicture = c.BackgroundPicture
+            })
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
+
+
+
     [HttpGet("CountCreators")]
     public async Task<ActionResult<int>> GetCreatorCount()
     {

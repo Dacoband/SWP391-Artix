@@ -50,6 +50,36 @@ public class ArtworksController : ControllerBase
 
         return Ok(artworks);
     }
+    [HttpGet("NotImage")]
+    public async Task<IActionResult> GetArtworksNotImage()
+    {
+        var artworks = await _context.Artworks
+            .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
+            .Take(5) // Lấy 5 artwork đầu tiên
+            .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
+            .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ArtworkTag = a.ArtworkTag
+            })
+            .ToListAsync();
+
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworks);
+    }
+
+
 
     [HttpGet("recent7artworks")]
     public async Task<IActionResult> GetRecent7Artworks()
@@ -167,6 +197,36 @@ public class ArtworksController : ControllerBase
                 Purchasable = a.Purchasable,
                 Price = a.Price,
                 ImageFile = a.ImageFile,
+                ArtworkTag = a.ArtworkTag
+            })
+            .ToListAsync();
+
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworks);
+    }
+
+
+
+    [HttpGet("ByCreatorIDNotImage/{CreatorID}")]
+    public async Task<IActionResult> GetArtworkByCreatorIDNotImage(int CreatorID)
+    {
+        var artworks = await _context.Artworks
+            .Include(a => a.ArtworkTag)
+            .Where(a => a.CreatorID == CreatorID)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
                 ArtworkTag = a.ArtworkTag
             })
             .ToListAsync();
