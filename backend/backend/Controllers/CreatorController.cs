@@ -67,6 +67,13 @@ public class CreatorController : ControllerBase
 
         return creator;
     }
+    [HttpGet("CountCreators")]
+    public async Task<ActionResult<int>> GetCreatorCount()
+    {
+        int creatorCount = await _context.Creators.CountAsync();
+        return creatorCount;
+    }
+
 
 
     [HttpGet("BackgroundPictureByCreatorID/{CreatorID}")]
