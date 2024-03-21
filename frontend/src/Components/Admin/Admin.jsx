@@ -20,7 +20,8 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import { GetArtListCount } from '../../API/ArtworkAPI/GET.tsx';
-import { GetCreatorList } from '../../API/UserAPI/GET.tsx';
+import { GetCreatorListCount } from '../../API/UserAPI/GET.tsx';
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -30,7 +31,7 @@ ChartJS.register(
   Legend
 );
 ChartJS.register(ArcElement, Tooltip, Legend);
-export const options = {
+ const options = {
 
   responsive: true,
   plugins: {
@@ -82,7 +83,7 @@ export const options = {
 // số lượng user vip ( vip =true)
 const uservip = ListofUsers.filter(user => user.vip === true).length;
 const usernonvip = ListofUsers.length - uservip;
-export const data2 = {
+const data2 = {
   labels: ['Non-VIP Users', 'VIP Users'],
   datasets: [
     {
@@ -146,19 +147,148 @@ export const data = {
 
 export default function Admin() {
   const [artcount,setArtCount] = useState()
-  const [creatorcount,setCreatorCount] = useState([])
+  const [creatorcount,setCreatorCount] = useState()
+  const [nearest7arts,setNearest7Arts] = useState([])
   useEffect(()=>{
     const getArtworkCount = async()=>{ 
       let artCount = await GetArtListCount()
       setArtCount(artCount)
     }
     const getCreatorCount = async()=>{ 
-      let creatorCount = await GetCreatorList()
+      let creatorCount = await GetCreatorListCount()
       setCreatorCount(creatorCount)
     }
+
+    const getNearest7Arts = async()=>{ 
+      let nearest7arts = await getNearest7Arts()
+      setNearest7Arts(nearest7arts)
+    }
+
     getArtworkCount()
     getCreatorCount()
   },[])
+
+
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+  ChartJS.register(ArcElement, Tooltip, Legend);
+   const options = {
+  
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          font: {
+            size: 14,
+          },
+        },
+      },
+      title: {
+        display: true,
+        text: `Statistics on recent of artwork's performace`,
+        font: {
+          size: 20,
+        },
+  
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          color: '#ECECEC', // Màu của đường lưới trục X
+          lineWidth: 1, // Độ dày của đường lưới trục X
+        },
+        ticks: {
+          // color: 'theme.color2', // Màu của nhãn trục X
+          max: 10, // Số lượng thanh trục X
+        },
+      },
+      y: {
+        grid: {
+          color: '#ECECEC', // Màu của đường lưới trục Y
+          lineWidth: 1, // Độ dày của đường lưới trục Y
+        },
+        ticks: {
+          // color: 'black', // Màu của nhãn trục Y
+          max: 10, // Số lượng thanh trục Y
+        },
+      },
+    },
+  };
+  
+  
+  
+  // sơ đồ 2
+  // số lượng user vip ( vip =true)
+  const uservip = ListofUsers.filter(user => user.vip === true).length;
+  const usernonvip = ListofUsers.length - uservip;
+  const data2 = {
+    labels: ['Non-VIP Users', 'VIP Users'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [usernonvip, uservip],
+        backgroundColor: [
+          'rgb(46, 144, 250)',
+          'rgb(251, 156, 12)',
+  
+        ],
+        borderColor: [
+          'rgb(46, 144, 250)',
+          'rgb(251, 156, 12)',
+  
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+  const options2 = {
+    responsive: true,
+    cutoutPercentage: 70,
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          font: {
+            size: 15,
+          },
+        },
+      },
+      title: {
+        // color:'black',
+        display: true,
+        text: 'Users statistics diagram ',
+        font: {
+          size: 20,
+        },
+      },
+    },
+  };
+  // sơ đồ 1
+  const labels = nearest7arts.map(art => `ArtName: ${art.artworkName}`) 
+  const likes = nearest7arts.map(art => `likes: ${art.likes}`)
+   const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Number of likes on 7 most recent artworks',
+        data: likes,
+        backgroundColor: 'rgb(46, 144, 250)',
+        boderColor: 'black',// Màu của cột chính
+        boderWidth: '1'
+      },
+  
+    ],
+  };
+  
+  
 
   return (
     <>
@@ -195,7 +325,7 @@ export default function Admin() {
 
             </Typography>
             <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
-              {creatorcount.length}
+              {creatorcount}
             </Typography>
 
           </Box>
@@ -211,13 +341,10 @@ export default function Admin() {
 
           <Box className='boxdoughnut'>
             <div className='doughnut' style={{ width: '350px' }}>
-              <h4>Total:{ListofUsers.length} Users</h4>
+              <h4>Total:{creatorcount} Users</h4>
               <Doughnut options={options2} data={data2} />
 
             </div></Box>
-
-
-
         </div>
 
 
