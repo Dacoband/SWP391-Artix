@@ -8,7 +8,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
-using System.Net;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -27,6 +26,7 @@ public class ArtworksController : ControllerBase
     {
         var artworks = await _context.Artworks
             .OrderBy(a => a.DateCreated) // Sắp xếp theo ngày tạo
+            .Take(5) // Lấy 5 artwork đầu tiên
             .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
             .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
             {
@@ -83,7 +83,7 @@ public class ArtworksController : ControllerBase
     {
         var recentArtworks = await _context.Artworks
             .OrderByDescending(a => a.ArtworkID) // Sử dụng ID nếu cần
-            .Take(4)
+            .Take(2)
             .Include(a => a.ArtworkTag) // Kèm theo thông tin tag của artwork
         .Select(a => new Artworks // Tạo đối tượng DTO để chứa thông tin cần thiết
         {
@@ -103,6 +103,34 @@ public class ArtworksController : ControllerBase
         return recentArtworks;
     }
 
+    [HttpGet("ByCreatorID/{CreatorID}")]
+    public async Task<IActionResult> GetArtworkByCreatorID(int CreatorID)
+    {
+        var artworks = await _context.Artworks
+            .Include(a => a.ArtworkTag)
+            .Where(a => a.CreatorID == CreatorID)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ImageFile = a.ImageFile,
+                ArtworkTag = a.ArtworkTag
+            })
+            .ToListAsync();
+
+        if (artworks == null || artworks.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(artworks);
+    }
 
 
 
@@ -250,6 +278,14 @@ public class ArtworksController : ControllerBase
 
 
 
+
+
+
+
+
+
+
+
     //GET: API/artwork/{Top10Liked}
     [HttpGet("Top10Liked")]
     public async Task<ActionResult<IEnumerable<Artworks>>> GetTopLikedArtworks()
@@ -268,7 +304,7 @@ public class ArtworksController : ControllerBase
     }
 
     // GET: api/artworks/random11
-    [HttpGet("random11")]
+    [HttpGet("random10")]
     public async Task<IActionResult> GetRandom11Artworks()
     {
         // Lấy danh sách tất cả các artworks từ cơ sở dữ liệu
@@ -281,7 +317,7 @@ public class ArtworksController : ControllerBase
         }
 
         // Lấy 11 artworks ngẫu nhiên từ danh sách tất cả các artworks
-        var randomArtworks = GetRandomElements(allArtworks, 11);
+        var randomArtworks = GetRandomElements(allArtworks, 10);
 
         return Ok(randomArtworks);
     }
@@ -311,29 +347,26 @@ public class ArtworksController : ControllerBase
 
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteReport(int id)
+    public async Task<IActionResult> DeleteArtwork(int id)
     {
-        try
+        var artwork = await _context.Artworks.FindAsync(id);
+        if (artwork == null)
         {
-            var report = await _context.Reports.FindAsync(id);
-            if (report == null)
-            {
-                return NotFound();
-            }
+            return NotFound();
+        }
 
-            _context.Reports.Remove(report);
-            await _context.SaveChangesAsync();
-            return NoContent();
-        }
-        catch (Exception ex)
-        {
-            //_logger.LogError(ex, "An error occurred while deleting the report.");
-            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
-        }
+     
+        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
+        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
+        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
+
+        // Sau đó mới xóa bản ghi từ bảng Artworks
+        _context.Artworks.Remove(artwork);
+
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
-
-
-
 
 
 }

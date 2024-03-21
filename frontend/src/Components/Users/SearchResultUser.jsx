@@ -24,7 +24,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../../css/SearchResult.css';
 import PersonIcon from '@mui/icons-material/Person';
-export const SearchResult = ({ result, resultId }) => {
+export const SearchResultUser = ({ result, resultId }) => {
   const navigate = useNavigate();
 
   // console.log(result);

@@ -6,15 +6,15 @@ import HomePage from './MainPage/HomePage.tsx';
 import Page from './Page.jsx';
 import Footer from './Footer.jsx';
 import Menu from './Menu.jsx';
-import CreatePeople from './UserForms/CreatePeople.jsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
-import UploadArtwork from './UserForms/UploadArtwork.jsx';
-import ProfileUser from './ProfileUser.jsx';
-import ArtPost from '../ArtPost.jsx';
-import SeeMoreOfArt1 from './SeeMoreOfArt1.jsx';
-import SeeMoreUser from './SeeMoreUser.jsx';
-import SeeMoreForYou from './SeeMoreForYou.jsx';
+import UploadArtwork from './UserForms/UploadArtwork.tsx';
+import ProfileUser from './ProfileUser.tsx';
+import ArtPost from '../ArtPost.tsx';
+import SeeMoreOfArt1 from './SeeMoreOfArt1.tsx';
+import SeeMoreUser from './SeeMoreUser.tsx';
+// eslint-disable-next-line 
+import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
 export default function Users() {
@@ -25,7 +25,6 @@ export default function Users() {
       {/* <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}> */}
         <Routes>
           <Route path={`/`} element={<HomePage/>} />
-          <Route path={`create`} element={<CreatePeople />} />
           <Route path={`creatorform`} element={<UserInfoForm/>}/>
           <Route path={`artworkform`} element={<UploadArtwork/>}/>
           <Route path={`profile/:id`} element={<ProfileUser />}/>
@@ -36,10 +35,8 @@ export default function Users() {
 
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
-          <Route path={`randomword`} element={<SeeMoreForYou/>}/>
+          <Route path={`randomword`} element={<SeeMoreOfArt1/>}/>
           <Route path={`dashboarduser`} element={<DashboardUser/>}/>
-
-         
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}

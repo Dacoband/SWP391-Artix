@@ -11,10 +11,11 @@ import { CheckLogin } from '../../Login/Norm/NormalLogin.tsx'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { useAuth } from '../../Components/AuthenContext.tsx';
-import {useNavigate} from 'react-router-dom'
+import LoadingScreen from '../Users/LoadingScreen.jsx'
+import { useNavigate } from 'react-router-dom'
 
 export default function LoginForm({ disableOutsideClick, handleClick, backdrop, alternative }) {
-
+  const [isLoading, setIsloading] = useState(false)
   const { storeUserData } = useAuth();
   const navigate = useNavigate()
   const formik = useFormik(
@@ -30,23 +31,27 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
         password: Yup.string().required("What's the password?"),
       }),
       onSubmit: async (values) => {
-        try{
-        await CheckLogin(values,storeUserData)
-        const sessionRole = sessionStorage.getItem('userRole');
-        // await to ensure the CheckLogin finish its task before running the navigate action
-        if(sessionRole ===  "AD"){
-          navigate('/admin');
+        try {
+          setIsloading(true)
+          await CheckLogin(values, storeUserData)
+          const sessionRole = sessionStorage.getItem('userRole');
+          setIsloading(false)
+          // await to ensure the CheckLogin finish its task before running the navigate action
+          if (sessionRole === "AD") {
+            navigate('/admin');
+          }
+          else {
+            navigate('/characters');
+          }
+          window.dispatchEvent(new Event('userLoggedIn'));
+          if (disableOutsideClick) {
+            handleClick()
+          }
         }
-        else{
-        navigate('/characters');
+        catch (err) {
+          console.log(err);
         }
-        window.dispatchEvent(new Event('userLoggedIn'));
-        handleClick()
-      }
-      catch(err){
-        console.log(err);
-      }
-    },
+      },
     })
 
   const onClick = (event) => {
@@ -72,16 +77,19 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
     )
   }
   return (
-    // backdrop name as defined "backdrop" to generate the black background cover the screen
-    <div onClick={onClick} className={backdrop}>
-      <div onClick={onClick} className='card'>
-        <div className='loginForm'>
-          <Grid container spacing={2} component="form" onSubmit={formik.handleSubmit}>
-            <Grid item xs={12}>
-              <Typography variant="h5" component="h1" gutterBottom>
-                Please Login To Continue
-              </Typography>
-            </Grid>
+    <>
+      {isLoading ? <LoadingScreen /> : ""} {/*trigger a loading screen when handling inputted contents*/}
+
+      <div onClick={onClick}// backdrop name as defined "backdrop" to generate the black background cover the screen
+        className={backdrop}>
+        <div onClick={onClick} className='card'>
+          <div className='loginForm'>
+            <Grid container spacing={2} component="form" onSubmit={formik.handleSubmit}>
+              <Grid item xs={12}>
+                <Typography variant="h5" component="h1" gutterBottom>
+                  Please Login To Continue
+                </Typography>
+              </Grid>
               <Grid item xs={12}>
                 <TextField
                   className='emailField'
@@ -116,20 +124,20 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
                   Login
                 </Button>
               </Grid>
-            <Grid item xs={12}>
-              <Link to={`/createaccount`}>
-                <Button variant="outlined" fullWidth>
-                  Register Account
-                </Button></Link>
+              <Grid item xs={12}>
+                <Link to={`/createaccount`}>
+                  <Button variant="outlined" fullWidth>
+                    Register Account
+                  </Button></Link>
+              </Grid>
+              <Grid item xs={12}>
+                <LoginWithGoogle disableOutsideClick={disableOutsideClick} handleClick={handleClick} />
+              </Grid>
+              {alternative ? <LoginAsGuest /> : ""}
             </Grid>
-            <Grid item xs={12}>
-              <LoginWithGoogle disableOutsideClick={disableOutsideClick} handleClick={handleClick} />
-            </Grid>
-            {alternative ? <LoginAsGuest /> : ""}
-          </Grid>
-
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

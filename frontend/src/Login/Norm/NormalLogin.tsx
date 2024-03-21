@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React from 'react'
+import { Creator } from '../../Interfaces/UserInterface';
 
 
 const accounturl = 'https://localhost:7233/api/Account'
@@ -38,8 +39,13 @@ export async function CheckLogin(checkAccount:initialUser, storeUserData:any) {
       sessionStorage.setItem('userRole', userrole.roleName);
        // Once the user is verified, get additional user data.
       const creatorResponse = await axios.get(creatorurl + foundAccount.accountID);
-      const creatorData = creatorResponse.data;
-      storeUserData(creatorData);
+      const creatorData:Creator = creatorResponse.data;
+      const creatorWithoutTheImages = {
+        ...creatorData,
+        profilePicture:'',
+        backgroundPicture:''
+      }
+      storeUserData(creatorWithoutTheImages);
     } else {
       alert("No account found");
     }

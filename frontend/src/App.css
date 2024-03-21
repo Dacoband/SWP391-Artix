@@ -33,11 +33,13 @@
 }
 
 .loadingscreen {
+  position: fixed;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   z-index: 9999;
 
 }
@@ -66,7 +68,7 @@
 .btn {
   display: inline-block;
   font-size: 18px;
-  padding: 10px 10px ;
+  padding: 10px 3px 10px;
   background: none;
   /* color: #fff; */
 
@@ -505,10 +507,7 @@ a {
 }
 
 .backgrounduser {
-  background-attachment: fixed;
   background-repeat: no-repeat;
-  ;
-
   width: 100%;
   height: 300px;
   background-size: cover;
@@ -523,7 +522,6 @@ a {
 
 .avataruser {
   position: relative;
-  display: inline-block;
 }
 
 .avataruser img {
@@ -539,19 +537,6 @@ a {
 
   /* outline nên chỉnh theo dark mode */
 
-}
-
-.buttonavatar button {
-  background-color: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(10%, 100%);
-  z-index: 2;
-
-  /* width: 40px;
-  height: 40px;
-  border-radius: 50%; */
 }
 
 .infouser1 {
@@ -601,7 +586,6 @@ a {
 
 .navuser {
   margin-left: 110px;
-  z-index: 5;
 }
 
 .buttonSubcribe {
@@ -708,14 +692,6 @@ a {
 .contentpost {
   flex: 1;
   margin-left: 30px;
-  max-height: 500px;
-  overflow-y: auto ;
-}
-.tag-container {
-  display: flex;
-  flex-wrap: wrap;
-  /* max-height: 200px; /* Điều chỉnh chiều cao tối đa của khung chứa */
-  /* overflow-y: auto; Cho phép thanh cuộn dọc khi cần */ 
 }
 
 .infor-user-post {
@@ -752,3 +728,22 @@ a {
 
 /* End Art Post */
 
+/* BackgroundPictureButton */
+.backgroundPicture{
+  position: 'relative';
+  display: 'flex';
+  justify-content: 'center';
+  color: '#04a1fd';
+  background-color: '#1A1A2E';
+  border-radius: '10px';
+  font-size: '14px';
+  top: '80%';
+  left: '83%';
+  width: '15vw';
+  opacity: '20%';
+}
+.backgroundPicture:hover{
+  opacity: 100%;
+}
+
+/* End of BackgroundPictureButton */
