@@ -237,7 +237,9 @@
   display: flex;
   align-items: center;
 }
-
+.reply {
+  margin-top: 10px; /* Điều chỉnh giá trị này tùy theo khoảng cách bạn muốn */
+}
 /* END TESTICON */
 
 /* HomePage */
