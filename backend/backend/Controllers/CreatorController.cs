@@ -48,6 +48,27 @@ public class CreatorController : ControllerBase
         return creators;
     }
 
+
+    [HttpGet("GetID/UserName/Vip")]
+    public async Task<ActionResult<IEnumerable<Creator>>> Get3FeaturesCreators()
+    {
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                
+                UserName = c.UserName,
+                
+                VIP = c.VIP,
+                
+
+            })
+            .ToListAsync();
+
+        return creators;
+    }
+
+
     [HttpGet("ProfilePicture/{CreatorID}")]
     public async Task<ActionResult<Creator>> GetProfilePictureByCreatorID(int CreatorID)
     {
