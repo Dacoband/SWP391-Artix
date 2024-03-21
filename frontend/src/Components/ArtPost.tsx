@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { Work } from '../share/ListofWork.js';
+import CommentIcon from '@mui/icons-material/Comment';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import TestIcon from './TestIcon.jsx';
@@ -14,6 +14,7 @@ import { GetCreatorByID } from '../API/UserAPI/GET.tsx';
 import { Creator } from '../Interfaces/UserInterface.ts';
 import Chip from '@mui/material/Chip';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { Divider } from '@mui/material';
 
 
 export default function PostWork() {
@@ -30,7 +31,11 @@ export default function PostWork() {
       setCreator(creator)
     }
     getArtWork()
-  }, [id])
+  }, [])
+
+  useEffect(() => {
+
+  }, [])
 
   const handleClick = () => {
     console.info('You clicked the Chip.');
@@ -39,35 +44,31 @@ export default function PostWork() {
   return (
     <Box sx={{ paddingTop: '2%' }}>
       <div className='poswork'
-        style={{ backgroundColor: theme.backgroundColor, paddingBottom: '50px' }}
-      >
-        <div className='info-postwork'
-
+        style={{ backgroundColor: theme.backgroundColor, paddingBottom: '50px', color: theme.color }}
         >
-          <div className='imgpost'>
+        <div className='info-postwork'>
+          <div className='imgpost' style={{ backgroundColor: theme.hoverBackgroundColor}}>
             <img src={`data:image/jpeg;base64,${artwork?.imageFile}`} />
           </div>
+          <Divider orientation='vertical'/>
           <div className='contentpost'>
             <div className='infor-user-post'>
               <div className='avatar-user-post'>
                 <Stack direction="row" spacing={2}>
-                  <Avatar src={creator?.profilePicture}
+                  <Avatar src={`data:image/jpeg;base64,${creator?.profilePicture}`}
                     sx={{ width: 50, height: 50 }} />
-
                 </Stack></div>
               <div className='name-user-post'> {creator?.userName}</div>
             </div>
             <div className='content-post-img'>
-
-              <div>Name Work:{artwork?.artworkName}</div>
-              <div>Description:{artwork?.description}</div>
-
+              <div>Art Work: {artwork?.artworkName}</div>
+              <div>Description: {artwork?.description}</div>
               <h4 style={{ marginBottom: '5px', marginTop: '10px' }}>Tag:</h4>
               <div className='tag-container'>
                 {ListTag.map((tag, index) => (
                   <div key={tag.id} className='tag-item'>
                     <Stack direction="row" spacing={1}>
-                      <Chip label={tag.nameTag} variant="outlined" onClick={handleClick} style={{ backgroundColor: colors[index % colors.length], marginRight: '5px', marginBottom: '5px', color: 'white' }} />
+                      <Chip label={tag.nameTag} variant="filled" onClick={handleClick} style={{ backgroundColor: colors[index % colors.length], marginBottom: '5px', color: 'white' }} />
                     </Stack>
                   </div>
                 ))}
@@ -76,14 +77,19 @@ export default function PostWork() {
           </div >
         </div >
         <Box className="comment-section" >
-          <div style={{ display: 'flex', justifyContent: 'space-between', width: '68%' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', width: '60%' }}>
             <TestIcon />
+            <div className='button-comment'>
+              <a href="#comment" style={{ display: "flex" }}>
+                <CommentIcon sx={{ color: theme.color, fontSize: 35, marginRight: '5px' }} />
+                <h4 style={{ paddingTop: "5px" }} className='addfavourite'>Comment</h4>
+              </a>
+            </div>
             <div style={{ margin: 'auto 5px', }}>
               <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
-
             </div>
           </div>
-          <div>
+          <div id='"#comment"'>
             <Comments />
           </div>
         </Box>
