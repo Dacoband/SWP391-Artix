@@ -241,9 +241,21 @@ function a11yProps(index) {
     'aria-controls': `simple-tabpanel-${index}`,
   };
 }
-//Chart2- chỉnh biểu đồ
-export const options = {
-  
+
+export default function DashboardUser() {
+  const { theme } = useContext(ThemeContext)
+  const [value, setValue] = useState(0);
+  useEffect(() => {
+    //const getArtworks
+
+  },[])
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+
+  //Chart2- chỉnh biểu đồ
+ const options = {
   responsive: true,
   plugins: {
     legend: {
@@ -296,7 +308,9 @@ export const options = {
 // thông tin x/y của 10 tp gần nhất
 const labels = latestWorks.map((work, index) => index + 1) ;
 
-export const data = {
+
+
+const data = {
   
   labels,
   datasets: [
@@ -313,8 +327,7 @@ export const data = {
 // thông tin của x/y của 10 tác phẩm nhiều like nhất
 
 const labels2 = likeWorks.map((work, index) => index + 1) ;
-
-export const data2 = {
+ const data2 = {
   
   labels : labels2,
   datasets: [
@@ -330,13 +343,6 @@ export const data2 = {
 };
 
 
-export default function DashboardUser() {
-  const { theme } = useContext(ThemeContext)
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
   return (
     <div className='boxdashboard'>
        <Box className='box'
