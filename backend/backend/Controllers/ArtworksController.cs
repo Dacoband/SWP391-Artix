@@ -78,6 +78,23 @@ public class ArtworksController : ControllerBase
 
         return Ok(recentArtworks);
     }
+    [HttpGet("recent-artwork-count")]
+    public async Task<IActionResult> GetRecentArtworkCount()
+    {
+        // Lấy ngày hiện tại
+        var currentDate = DateTime.UtcNow;
+
+        // Lấy ngày 7 ngày trước
+        var sevenDaysAgo = currentDate.AddDays(-7);
+
+        // Đếm số artwork được đăng trong 7 ngày gần nhất
+        var recentArtworkCount = await _context.Artworks
+            .Where(a => a.DateCreated >= sevenDaysAgo && a.DateCreated <= currentDate)
+            .CountAsync();
+
+        return Ok(recentArtworkCount);
+    }
+
 
 
 
