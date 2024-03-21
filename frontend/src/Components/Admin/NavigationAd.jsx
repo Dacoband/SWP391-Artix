@@ -6,6 +6,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import ListItemButton from '@mui/material/ListItemButton';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthenContext.tsx';
 function AdminNavbar() {
   // The side drawer width
   const drawerWidth = 220;
@@ -16,6 +17,7 @@ function AdminNavbar() {
   //   { text: 'Reports', icon: <BarChartIcon /> },
     // Add more navigation items here
   // ];
+  const {logout} = useAuth();
   return (
     <div style={{ display: 'flex',}}>
       <Drawer
@@ -57,7 +59,7 @@ function AdminNavbar() {
             <ListItemText primary="Reports" />
           </ListItemButton></Link>
           {/* Log out */}
-          <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
+          <ListItemButton button style={{width:'220px',marginLeft:'10px'}} onClick={logout}>
             <ListItemIcon>
               <LogoutIcon style={{color:'#fdfdff'}} />
             </ListItemIcon>
