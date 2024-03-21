@@ -27,6 +27,8 @@ function AdminNavbar() {
         }}
         open
       >
+        <div style={{backgroundColor:'#121621',paddingTop:'50px',paddingBottom:'20px', width:'100%',display:'flex',justifyContent:'center'}}>
+        <img src='/sliderImages/icon_demo.png'  alt="Logo" style={{width:'120px'}}/></div>
         <List style={{backgroundColor:'#121621', height:'100%', color:'#fdfdff'}}>
           {/* Dashboard */}
           <Link to={`/admin`}>
