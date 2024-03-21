@@ -15,6 +15,8 @@ import { Creator } from '../Interfaces/UserInterface.ts';
 import Chip from '@mui/material/Chip';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Divider } from '@mui/material';
+import { Tag } from '../Interfaces/TagInterface';
+import { GetTagByArtId } from '../API/TagAPI/GET.tsx';
 
 
 export default function PostWork() {
@@ -23,6 +25,7 @@ export default function PostWork() {
   const { id } = useParams();
   const [artwork, setArtwork] = useState<Artwork>()
   const [creator, setCreator] = useState<Creator>()
+  const [tags, setTags] = useState<Tag[]>([])
   useEffect(() => {
     const getArtWork = async () => {
       const artwork = await GetArtById(id ? id : "1");
@@ -31,26 +34,44 @@ export default function PostWork() {
       setCreator(creator)
     }
     getArtWork()
-  }, [])
+  }, [id])
+
 
   useEffect(() => {
-
-  }, [])
+    const getTags = async () => {
+      let tags: Tag[] | undefined = await GetTagByArtId(id ? id : "0")
+      setTags(tags ? tags : [])
+    }
+    getTags()
+  }, [id])
 
   const handleClick = () => {
     console.info('You clicked the Chip.');
   };
 
+  function TagList() {
+    return (
+      <>
+        {tags.map((tag, index) => (
+          <div key={tag.tagID} className='tag-item'>
+            <Stack direction="row" spacing={1}>
+              <Chip label={tag.tagName} variant="filled" onClick={handleClick} style={{ backgroundColor: colors[index % colors.length], marginBottom: '5px', color: 'white' }} />
+            </Stack>
+          </div>
+        ))}
+      </>
+    )
+  }
   return (
     <Box sx={{ paddingTop: '2%' }}>
       <div className='poswork'
         style={{ backgroundColor: theme.backgroundColor, paddingBottom: '50px', color: theme.color }}
-        >
+      >
         <div className='info-postwork'>
-          <div className='imgpost' style={{ backgroundColor: theme.hoverBackgroundColor}}>
-            <img src={`data:image/jpeg;base64,${artwork?.imageFile}`} />
+          <div className='imgpost' style={{ backgroundColor: theme.hoverBackgroundColor }}>
+            <img alt={artwork?.artworkName} src={`data:image/jpeg;base64,${artwork?.imageFile}`} />
           </div>
-          <Divider orientation='vertical'/>
+          <Divider orientation='vertical' />
           <div className='contentpost'>
             <div className='infor-user-post'>
               <div className='avatar-user-post'>
@@ -65,13 +86,7 @@ export default function PostWork() {
               <div>Description: {artwork?.description}</div>
               <h4 style={{ marginBottom: '5px', marginTop: '10px' }}>Tag:</h4>
               <div className='tag-container'>
-                {ListTag.map((tag, index) => (
-                  <div key={tag.id} className='tag-item'>
-                    <Stack direction="row" spacing={1}>
-                      <Chip label={tag.nameTag} variant="filled" onClick={handleClick} style={{ backgroundColor: colors[index % colors.length], marginBottom: '5px', color: 'white' }} />
-                    </Stack>
-                  </div>
-                ))}
+                {tags.length !== 0 ? <TagList /> : ""}
               </div>
             </div >
           </div >
