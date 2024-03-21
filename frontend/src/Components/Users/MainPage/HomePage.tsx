@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CarouselTag from './CarouselTag.jsx';
+import CarouselTag from './CarouselTag.tsx';
 import RecommendedWorks from './RecommendedWorks.tsx';
 import RecommendedUsers from './RecommendedUsers.tsx';
 import ImgForyou from './ImgForyou.tsx';
