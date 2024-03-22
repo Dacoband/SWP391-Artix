@@ -32,7 +32,7 @@ export default function Menu() {
       const avatar = await GetCreatorByID(user? user.creatorID:'0')
       setAvatar(avatar)
     }
-    getAvatar()
+    if(user!==null){getAvatar()}
   },[])
   const disabledButtons = () => {
 
