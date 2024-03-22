@@ -1,13 +1,13 @@
 export interface Artwork{
-  artworkID: number,
-  creatorID: number,
+  artworkID: string,
+  creatorID: string,
   artworkName: string,
   description: string,
   dateCreated: Date,
   likes: number,
   purchasable: false,
   price: number,
-  imageFile: string | null,
+  imageFile: string,
   artworkTag: [
     {
       "artworkTagID": number,

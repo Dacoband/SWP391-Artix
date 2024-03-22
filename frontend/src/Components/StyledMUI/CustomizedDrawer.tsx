@@ -21,7 +21,7 @@ import CropOriginalIcon from '@mui/icons-material/CropOriginal';
 import {ThemeContext} from '../Themes/ThemeProvider.tsx'
 import AppLogo from './AppLogo.jsx';
 import CustomizedButton from './CustomizedListedButton.tsx';
-
+import { Link } from 'react-router-dom';
 export default function CustomizedDrawer() {
   const {theme} = useContext(ThemeContext)
   const [drawer, SetDrawer] = useState(false)
@@ -31,6 +31,11 @@ export default function CustomizedDrawer() {
 
   const HomePage = ['View All', 'Hot Topic', 'You Loved These', 'Explore']
   const Personal = ['Your Works', 'Your Commisions', 'Your Requests']
+  const linkListPersonal = [
+    '/chua',
+    'yourcommision',
+    '/ch'
+  ];
 
   const IconListHomePage = [
     <CollectionsIcon />,
@@ -75,7 +80,7 @@ export default function CustomizedDrawer() {
       <List>
         {Personal.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <CustomizedButton >
+            <CustomizedButton component={Link} to={linkListPersonal[index]} >
               <ListItemIcon sx={{color:theme.color}}>
                 {IconListPersonal[index]}
               </ListItemIcon>

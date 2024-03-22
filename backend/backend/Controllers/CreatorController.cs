@@ -33,6 +33,7 @@ public class CreatorController : ControllerBase
                 BackgroundPicture = c.BackgroundPicture,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
+                Email =c.Email,
                 Address = c.Address,
                 Phone = c.Phone,
                 LastLogDate = c.LastLogDate,
@@ -46,6 +47,125 @@ public class CreatorController : ControllerBase
 
         return creators;
     }
+
+
+    [HttpGet("GetID/UserName/Vip")]
+    public async Task<ActionResult<IEnumerable<Creator>>> Get3FeaturesCreators()
+    {
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                
+                UserName = c.UserName,
+                
+                VIP = c.VIP,
+
+                Email = c.Email,
+
+                Phone = c.Phone
+
+            })
+            .ToListAsync();
+
+        return creators;
+    }
+
+
+    [HttpGet("ProfilePicture/{CreatorID}")]
+    public async Task<ActionResult<Creator>> GetProfilePictureByCreatorID(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                ProfilePicture = c.ProfilePicture
+            })
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
+
+    [HttpGet("OnlyProfilePicture/{CreatorID}")]
+    public async Task<ActionResult<Creator>> GetOnlyProfilePictureByCreatorID(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+                
+                ProfilePicture = c.ProfilePicture
+            })
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
+    [HttpGet("OnlyBackgroundPicture/{CreatorID}")]
+    public async Task<ActionResult<Creator>> GetOnlyBackgroundPictureByCreatorID(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+
+                BackgroundPicture = c.BackgroundPicture
+            })
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
+
+
+
+    [HttpGet("CountCreators")]
+    public async Task<ActionResult<int>> GetCreatorCount()
+    {
+        int creatorCount = await _context.Creators.CountAsync();
+        return creatorCount;
+    }
+
+
+
+    [HttpGet("BackgroundPictureByCreatorID/{CreatorID}")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetBackgroundPictureByCreatorID(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                BackgroundPicture = c.BackgroundPicture
+            })
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(creator);
+    }
+
+
 
 
 
@@ -93,6 +213,7 @@ public class CreatorController : ControllerBase
                  BackgroundPicture = c.BackgroundPicture,
                  FirstName = c.FirstName,
                  LastName = c.LastName,
+                 Email = c.Email,
                  Address = c.Address,
                  Phone = c.Phone,
                  LastLogDate = c.LastLogDate,

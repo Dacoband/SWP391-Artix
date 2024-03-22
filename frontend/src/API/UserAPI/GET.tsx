@@ -1,9 +1,32 @@
 import React, { useEffect, useState } from 'react'
-import { Creator } from '../../Interfaces/UserInterface.tsx'
+import { Account, Creator } from '../../Interfaces/UserInterface.tsx'
 import axios from 'axios'
 
 
 const creatorurl = 'https://localhost:7233/api/Creator/'
+const accountemailurl = 'https://localhost:7233/api/Account/email/'
+const countcreatorurl = "https://localhost:7233/api/Creator/CountCreators"
+const creatorvipstatusurl = `https://localhost:7233/api/Creator/GetID/UserName/Vip`
+
+export async function GetCreatorListNoImage() {
+  try{
+      let creatorList:Creator[] = await axios.get(creatorvipstatusurl).then(response => response.data)
+      return creatorList
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+export async function GetCreatorListCount() {
+  try{
+      let creatorList:Creator[] = await axios.get(countcreatorurl).then(response => response.data)
+      return creatorList
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
 export async function GetCreatorList() {
   try{
       let creatorList:Creator[] = await axios.get(creatorurl).then(response => response.data)
@@ -14,10 +37,30 @@ export async function GetCreatorList() {
   }
 }
 
-export async function GetCreator(id:number) {
+export async function GetCreatorByAccountID(accountId:string) {
   try{
-      let creator:Creator = await axios.get(creatorurl+id).then(response => response.data)
+      let creator:Creator = await axios.get(creatorurl+accountId).then(response => response.data)
       return creator
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
+export async function GetCreatorByID(creatorId:string) {
+  try{
+      let creator:Creator = await axios.get(creatorurl+`ById/${creatorId}`).then(response => response.data)
+      return creator
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
+export async function GetAccountByEmail(email:string) {
+  try{
+      let account:Account = await axios.get(accountemailurl+`${email}`).then(response => response.data)
+      return account
       
   }catch(err){
     console.log(err)

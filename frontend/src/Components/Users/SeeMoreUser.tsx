@@ -30,8 +30,7 @@ export default function SeeMoreUser() {
     getArtList()
   }, [])
   const currentUsers = creatorList ?? [].slice(indexOfFirstUser, indexOfLastUser);
-
-
+  let paging = creatorList?.length? Math.ceil(creatorList.length / usersPerPage) : 0;
   const handleChangePage = (event, value) => {
     setCurrentPage(value);
   };
@@ -45,7 +44,7 @@ export default function SeeMoreUser() {
               <CardMedia
                 component="img"
                 height="140"
-                image={`${user.backgroundPicture}`}
+                image={`data:image/jpeg;base64,${user.backgroundPicture}`}
                 alt="backgroundImage"
               />
               <CardContent>
@@ -55,7 +54,7 @@ export default function SeeMoreUser() {
                     <div className='avartar'>
                       <Avatar
                         alt="Remy Sharp"
-                        src={`${user.profilePicture}`}
+                        src={`data:image/jpeg;base64,${user.profilePicture}`}
                         sx={{ width: 100, height: 100 }}
                         style={{ border: '3px solid white' }}
                       />
@@ -97,7 +96,7 @@ export default function SeeMoreUser() {
         </div>
         <div className='pagination'>
           {creatorList?.length!==0?<Pagination 
-          count={Math.ceil(creatorList.length / usersPerPage)} 
+          count={paging} 
           variant="outlined" 
           onChange={handleChangePage}/> : ""}
           </div>

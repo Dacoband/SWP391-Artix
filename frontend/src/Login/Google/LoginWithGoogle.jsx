@@ -35,7 +35,12 @@ export default function LoginWithGoogle({ disableOutsideClick, handleClick }) {
        // Once the user is verified, get additional user data.
       const creatorResponse = await axios.get(creatorurl + foundAccount.accountID);
       const creatorData = creatorResponse.data;
-      storeUserData(creatorData);
+      const creatorWithoutTheImages = {
+        ...creatorData,
+        profilePicture:'',
+        backgroundPicture:''
+      }
+      storeUserData(creatorWithoutTheImages);
         window.dispatchEvent(new Event('userLoggedIn'));
         if (userrole.roleName === "AD") {
           navigate('/admin');

@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState,useContext } from 'react';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import CommentIcon from '@mui/icons-material/Comment';
 import { ThemeContext } from './Themes/ThemeProvider.tsx';
 export default function TestIcon() {
   const { theme } = useContext(ThemeContext);
@@ -35,24 +34,35 @@ export default function TestIcon() {
   }, [isClicked]);
 
   return (
+
     <div className='hero'>
+
       <div className='button-favourite'>
-      <button className={`btn ${isClicked ? 'active' : ''}`} id="btn">
-      {isClicked ? (
-          <FavoriteIcon sx={{ fontSize: 35 }} style={{ color: '#ff1876' }} />
-        ) : (
-          <FavoriteBorderIcon  sx={{ backgroundColor:"none",fontSize: 35}} />
-        )}
-        {/* <FavoriteIcon style={{ color: isClicked ? '#ff1876' : '#000'}} /> */}
-        {Array.from({ length: 16 }).map((_, index) => (
-          <span key={index} ref={(el) => (spansRef.current[index] = el)}></span>
-        ))} 
-      </button><h4 className='addfavourite'>Add to Favourites</h4></div>
-      <div className='button-comment'>
-        <button className='iconcomment' ><CommentIcon sx={{color:theme.color, fontSize: 35,paddingTop:'5px',marginRight:'5px'}}/></button>
-        <h4 className='addfavourite'>Comment</h4>
+        <button 
+        style={{display: 'flex'}}
+        className={`btn ${isClicked ? 'active' : ''}`} id="btn">
+          {isClicked ? (
+            <FavoriteIcon sx={{ fontSize: 35 }} style={{ color: '#ff1876' }} />
+          ) : (
+            <FavoriteBorderIcon sx={{ color: theme.color, backgroundColor: "none", fontSize: 35 }} />
+          )}
+          {/* <FavoriteIcon style={{ color: isClicked ? '#ff1876' : '#000'}} /> */}
+          {Array.from({ length: 16 }).map((_, index) => (
+            <span key={index} ref={(el) => (spansRef.current[index] = el)}></span>
+          ))}
+       
+        <h4 className='addfavourite' style={{paddingTop:"5px",color:isClicked?"#ff1876" : theme.color}}>
+          {isClicked ? "Thanks For The Like!" : "Add To Favourites"}
+        </h4>
+        </button>
       </div>
     </div>
-    
+
+
+
+
+
+
+
   );
 }
