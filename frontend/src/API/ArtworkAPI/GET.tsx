@@ -9,7 +9,16 @@ const random10arturl = `https://localhost:7233/api/artworks/random10`
 const artworkbycreatorurl = `https://localhost:7233/api/artworks/ByCreatorID/`
 const numberartworkurl = `https://localhost:7233/api/artworks/recent-artwork-count`
 const nearest7artworkurl = `https://localhost:7233/api/artworks/recent7artworksNotImage`
+const artworkbycreatornoimageurl = `https://localhost:7233/api/artworks/ByCreatorIDNotImage/`
 
+export async function GetArtsNoImageByCreatorId(id:string) {
+  try{
+      let artwork:Artwork[] = await axios.get(artworkbycreatornoimageurl+id).then(response => response.data)
+      return artwork
+  }catch(err){
+    console.log(err)
+  }
+}
 export async function GetArtListCount() {
   try{
       let artList:number = await axios.get(numberartworkurl).then(response => response.data)
