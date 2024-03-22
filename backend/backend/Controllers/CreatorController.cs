@@ -60,7 +60,10 @@ public class CreatorController : ControllerBase
                 UserName = c.UserName,
                 
                 VIP = c.VIP,
-                
+
+                Email = c.Email,
+
+                Phone = c.Phone
 
             })
             .ToListAsync();

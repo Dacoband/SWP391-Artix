@@ -58,7 +58,7 @@ export default function ExpandingSearchBarAdmin() {
     
     const [input, setInput] = useState("");
     const [dataCreator, setDataCreator] = useState("");
-    const [searchEmpty, setSearchEmpty] = useState(false); // Thêm biến trạng thái cho tìm kiếm trống
+
     
     const fetchCreator = (value) => {
         axios.get(`https://localhost:7233/api/Creator`)
@@ -72,7 +72,7 @@ export default function ExpandingSearchBarAdmin() {
                     );
                 });
                 setDataCreator(filteredResults);
-                setSearchEmpty(false); // Đặt tìm kiếm trống thành false khi có kết quả
+               
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -103,9 +103,8 @@ export default function ExpandingSearchBarAdmin() {
 
     return (
         <div>
-            {searchBarComponentAdmin  }
-             
-             {searchEmpty && <TableListUser />}
+            {searchBarComponentAdmin}
+            {(!dataCreator || dataCreator.length === 0) && <TableListUser />}
             {dataCreator && dataCreator.length > 0  && <SearchResultsList dataCreator={dataCreator} />}
         </div>
     );

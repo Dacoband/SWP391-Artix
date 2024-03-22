@@ -31,5 +31,6 @@ export interface Creator {
   allowCommission: boolean | false,
   biography: string | "",
   followCount: number | 0,
-  email:string
+  email:string,
+  vip:number
 } // This is the Object Creator, having all the infomation.

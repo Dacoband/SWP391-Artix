@@ -8,7 +8,6 @@ export default function ListUser() {
        <Typography variant="h4" gutterBottom style={{fontWeight:'bold', marginTop:'40px'}}>
           List Of Users:
         </Typography>
-
         <ExpandingSearchBarAdmin/>
    </Container>
   );

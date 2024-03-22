@@ -8,7 +8,6 @@ import { Link, useParams } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import ChatIcon from '@mui/icons-material/Chat';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -33,6 +32,15 @@ import { PutCreatorBackgroundPicture, PutCreatorProfilePicture } from '../../API
 import { GetArtsByCreatorId } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
 import { PlaceHoldersImageCard } from './PlaceHolders.jsx'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -214,7 +222,38 @@ export default function ProfileUser() {
       </ImageList>
     )
   }
+//Popup Report
+const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
+  const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+   // Xử lý gửi báo cáo
+   const handleSubmitReport = (event) => {
+    event.preventDefault();
+    if (!reportReason) {
+      // Kiểm tra nếu lý do không được điền
+      alert("Please enter the reason for reporting.");
+      return;
+    }
+    // Nếu lý do đã được điền, đóng dialog báo cáo và mở dialog báo cáo thành công
+    handleClose();
+    handleClickOpen1();
+    // Thực hiện xử lý gửi báo cáo ở đây
+  };
 
   return (
     <div className=''>
@@ -342,7 +381,7 @@ export default function ProfileUser() {
       <div className='tabsBackground' style={{ backgroundColor: theme.backgroundColor }} >
         <div className='inforuser2'>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1 }} className='navofuser'>
+            <Box sx={{ borderBottom: '2px solid #ECECEC'  }} className='navofuser'>
               <div className='navuser'>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ color: theme.color2, zIndex: '7' }}>
                   <Tab label="Home" {...a11yProps(0)} style={{ color: theme.color2, }} />
@@ -359,10 +398,81 @@ export default function ProfileUser() {
                   <Button disabled={true} variant="contained"> <ShoppingBagIcon color='inherit' style={{ marginRight: '5px' }} />Commission Closed</Button>
                 }
                 {userInSession.creatorID !== user?.creatorID ?
-                  <Button variant="contained" color='error' href="" style={{ marginLeft: '20px' }}>Report</Button>
+                  <Button onClick={handleClickOpen} variant="contained" color='error' href="" style={{ marginLeft: '20px' }}>Report</Button>
                   :
                   ""
                 }
+
+                {/* Popup Report */}
+                  <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  PaperProps={{
+                  component: 'form',
+                  onSubmit: (event) => {
+                   event.preventDefault();
+                   const formData = new FormData(event.currentTarget);
+                   const formJson = Object.fromEntries(formData.entries());
+                  const email = formJson.email;
+                  console.log(email);
+                   handleClose();
+                  },
+                   }}
+                  >
+                  <DialogTitle>Report Information</DialogTitle>
+                  <DialogContent>
+                  <DialogContentText>
+                  If this user violates community standards, please report the reason to us,
+                   Artix's moderators will review and handle this as soon as possible.
+                </DialogContentText>
+                <TextField
+                autoFocus
+                required
+                margin="dense"
+                id="reportID"
+                label="Reason for being reported"
+               fullWidth
+               multiline
+               rows={4}
+               variant="outlined"
+               style={{marginTop:'25px'}}
+               value={reportReason}
+            onChange={(e) => setReportReason(e.target.value)}
+               
+              />
+               </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}  variant="outlined"  color="error">Cancel</Button>
+          <Button type="submit"  variant="outlined" onClick={handleSubmitReport} >Report</Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+    open={open1}
+    onClose={handleClose1}
+    aria-labelledby="alert-dialog-title"
+    aria-describedby="alert-dialog-description"
+    maxWidth="sm"
+    >
+    <DialogTitle id="alert-dialog-title">
+      {"Congraturation"}
+    </DialogTitle>
+    <DialogContent>
+      <DialogContentText id="alert-dialog-description">
+      <Alert severity="success">
+    <AlertTitle>Report this user as successful!</AlertTitle>
+    </Alert>
+      </DialogContentText>
+    </DialogContent>
+    <DialogActions>
+    
+      <Button autoFocus onClick={handleClose1}>
+       Close
+      </Button>
+      
+    </DialogActions>
+  </Dialog>
+      
               </div>
             </Box>
             <CustomTabPanel value={value} index={0} >
@@ -400,16 +510,17 @@ export default function ProfileUser() {
 
 
             </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-              {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}
+            <CustomTabPanel value={value} index={1} >
+              <div style={{marginLeft:'50px'}}>
+              {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}</div>
             </CustomTabPanel>
 
 
             <CustomTabPanel value={value} index={2}>
 
-              <Box sx={{ width: 1200, height: 450, overflow: 'visible' }}>
+              
                 {artworks.length !== 0 ? <AllImage /> : <PlaceHoldersImageCard />}
-              </Box>
+              
             </CustomTabPanel>
 
           </Box>
