@@ -302,7 +302,7 @@ public class ArtworksController : ControllerBase
     }
 
 
-    [HttpGet("total-likes/{creatorId}")]
+    [HttpGet("total-likes/{CreatorId}")]
     public async Task<ActionResult<int>> GetTotalLikesByCreatorId(int CreatorId)
     {
         try
@@ -545,6 +545,53 @@ public class ArtworksController : ControllerBase
         return randomArtworks;
     }
 
+
+    [HttpGet("recent-likes-summary")]
+    public async Task<IActionResult> GetRecentArtworkLikesSummary()
+    {
+        try
+        {
+            // Lấy ngày hiện tại
+            var currentDate = DateTime.UtcNow;
+
+            // Lấy ngày 7 ngày trước
+            var sevenDaysAgo = currentDate.AddDays(-7);
+
+            // Lấy danh sách ngày trong khoảng từ ngày 7 ngày trước đến ngày hiện tại
+            var dateRange = Enumerable.Range(0, 7).Select(offset => currentDate.AddDays(-offset).Date).ToList();
+
+            // Tạo danh sách để lưu trữ kết quả
+            var likeSummary = new List<ArtworkLikesByDate>();
+
+            // Duyệt qua từng ngày trong khoảng thời gian
+            foreach (var date in dateRange)
+            {
+                // Lấy tổng lượng like của các artworks được tạo vào ngày đó
+                var totalLikes = await _context.Artworks
+                    .Where(a => a.DateCreated.Date == date)
+                    .SumAsync(a => a.Likes);
+
+                // Thêm kết quả vào danh sách
+                likeSummary.Add(new ArtworkLikesByDate
+                {
+                    Date = date,
+                    TotalLikes = totalLikes
+                });
+            }
+
+            return Ok(likeSummary);
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+    public class ArtworkLikesByDate
+    {
+        public DateTime Date { get; set; }
+        public int TotalLikes { get; set; }
+    }
 
 
 
