@@ -3629,16 +3629,11 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\bolic\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\THY\\.nuget\\packages\\": {}
->>>>>>> d4c583c69653043daa8383821ad70ff701d1aa78
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "projectName": "backend",
       "projectPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
@@ -3647,16 +3642,6 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-      "projectUniqueName": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "projectName": "backend",
-      "projectPath": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\THY\\.nuget\\packages\\",
-      "outputPath": "D:\\SWP391-Artix\\backend\\backend\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\THY\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> d4c583c69653043daa8383821ad70ff701d1aa78
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3676,11 +3661,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -3767,11 +3747,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
->>>>>>> d4c583c69653043daa8383821ad70ff701d1aa78
       }
     }
   },
