@@ -39,6 +39,36 @@ public class CommissionFormController : ControllerBase
 
         return commissionForm;
     }
+    [HttpGet("ByReceiverId/{receiverId}")]
+    public async Task<ActionResult<IEnumerable<CommissionForm>>> GetCommissionFormsByReceiverId(int receiverId)
+    {
+        var commissionForms = await _context.CommissionForm
+            .Where(cf => cf.ReceiverID == receiverId)
+            .ToListAsync();
+
+        if (commissionForms == null || commissionForms.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return commissionForms;
+    }
+
+    [HttpGet("ByRequestorId/{requestorId}")]
+    public async Task<ActionResult<IEnumerable<CommissionForm>>> GetCommissionFormsByRequestorId(int requestorId)
+    {
+        var commissionForms = await _context.CommissionForm
+            .Where(cf => cf.RequestorID == requestorId)
+            .ToListAsync();
+
+        if (commissionForms == null || commissionForms.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return commissionForms;
+    }
+
 
     // POST: api/CommissionForm
     [HttpPost]
