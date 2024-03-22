@@ -2,24 +2,47 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
-import { Work } from '../../share/ListofWork';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import '../../css/SeeMoreOfArt1.css';
 import Pagination from '@mui/material/Pagination';
-export default function SeeMoreOfArt1() {
+import '../../css/SeeMoreForYou.css';
+import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
+import { Artwork } from '../../Interfaces/ArtworkInterfaces';
+import { PlaceHoldersImageCard } from './PlaceHolders.jsx';
+
+export default function SeeMoreForYou() {
     const { theme } = useContext(ThemeContext)
     const [currentPage, setCurrentPage] = useState(1);
     const imagesPerPage = 30;
+    const [artworkList, SetArtworkList] = useState<Artwork[]>([])
 
-    const indexOfLastImage = currentPage * imagesPerPage;
-    const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-    const currentImages = Work.slice(indexOfFirstImage, indexOfLastImage);
+    useEffect(() => {
+      const getArtworks = async () => {
+        let artworkList: Artwork[] | undefined = await GetArtList()
+        SetArtworkList(artworkList? artworkList:[])
+
+      }
+      getArtworks()
+    })
 
     const handleChangePage = (event, value) => {
         setCurrentPage(value);}
     
-
+    function ArtworkList(){
+      return (
+        <>
+          {artworkList.map((work:Artwork) => (
+            <ImageListItem key={work.artworkID}>
+              <img
+                src={`data:image/jpeg;base64,${work.imageFile}`}
+                alt={work.artworkName}
+                loading="lazy"
+              />
+            </ImageListItem>
+          ))}
+        </>
+      )
+    }
     
   return (
     <div className='seemorecommentwork'>
@@ -35,28 +58,18 @@ export default function SeeMoreOfArt1() {
           
         }}>
             <div className='content-recomment'>
-            <Typography variant='h5'>Recommended Works:</Typography>
+            <Typography variant='h5'>Random Works:</Typography>
             
             <div  className='listimage'>       
             <Box className= 'boxlistimage'>
                 <ImageList variant="masonry" cols={4} gap={7}>
-
-                {currentImages.map((work) => (
-                <ImageListItem key={work.id}>
-                    <img
-                     srcSet={`${work.img}`}
-                     src={`${work.img}`}
-                     alt={work.title}
-                     loading="lazy"
-                    />
-                </ImageListItem>
-                ))}
+                {artworkList.length!==0? <ArtworkList/>:<PlaceHoldersImageCard/>}
                </ImageList></Box>
             </div></div>
             <div className='pagination'>
-            <Pagination count={Math.ceil(Work.length / imagesPerPage)} variant="outlined" onChange={handleChangePage} /></div>
-
             
+            </div>
+
         </Box>
       
     </div>

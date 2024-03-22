@@ -1,3 +1,19 @@
+/* Custom scrollbar for webkit-based browsers */
+custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+}
+custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color); /* Track background */
+}
+custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color); /* Thumb color */
+}
+custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color); /* Thumb color when hovered */
+}
+
+/* End Customize Scrollbar */
+
 * {
   margin: 0;
   padding: 0;
@@ -33,11 +49,13 @@
 }
 
 .loadingscreen {
+  position: fixed;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   z-index: 9999;
 
 }
@@ -66,7 +84,7 @@
 .btn {
   display: inline-block;
   font-size: 18px;
-  padding: 10px 10px ;
+  padding: 10px 3px 10px;
   background: none;
   /* color: #fff; */
 
@@ -505,10 +523,7 @@ a {
 }
 
 .backgrounduser {
-  background-attachment: fixed;
   background-repeat: no-repeat;
-  ;
-
   width: 100%;
   height: 300px;
   background-size: cover;
@@ -523,7 +538,6 @@ a {
 
 .avataruser {
   position: relative;
-  display: inline-block;
 }
 
 .avataruser img {
@@ -533,25 +547,12 @@ a {
   border-radius: 100%;
   transform: translateY(-40%);
   margin-left: 100px;
-  outline: 4px solid #fff;
+
   position: relative;
   z-index: 1;
 
   /* outline nên chỉnh theo dark mode */
 
-}
-
-.buttonavatar button {
-  background-color: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(10%, 100%);
-  z-index: 2;
-
-  /* width: 40px;
-  height: 40px;
-  border-radius: 50%; */
 }
 
 .infouser1 {
@@ -601,7 +602,6 @@ a {
 
 .navuser {
   margin-left: 110px;
-  z-index: 5;
 }
 
 .buttonSubcribe {
@@ -689,13 +689,12 @@ a {
 }
 
 .imgpost {
-  border-radius: 5px;
+  border-top-left-radius:5px;
+  border-bottom-right-radius: 5px;
   height: 560px;
   width: 70%;
   display: flex;
   justify-content: center;
-  background-color: ghostwhite;
-
 }
 
 .imgpost img {
@@ -708,14 +707,10 @@ a {
 .contentpost {
   flex: 1;
   margin-left: 30px;
-  max-height: 500px;
-  overflow-y: auto ;
 }
-.tag-container {
-  display: flex;
-  flex-wrap: wrap;
-  /* max-height: 200px; /* Điều chỉnh chiều cao tối đa của khung chứa */
-  /* overflow-y: auto; Cho phép thanh cuộn dọc khi cần */ 
+
+.content-post-img{
+  margin-top: 2%;
 }
 
 .infor-user-post {
@@ -750,5 +745,29 @@ a {
   flex-direction: column;
 }
 
+.tag-item{
+  display: inline-block;
+  margin: 2px 2px 2px 2px;
+}
+
 /* End Art Post */
 
+/* BackgroundPictureButton */
+.backgroundPicture{
+  position: 'relative';
+  display: 'flex';
+  justify-content: 'center';
+  color: '#04a1fd';
+  background-color: '#1A1A2E';
+  border-radius: '10px';
+  font-size: '14px';
+  top: '80%';
+  left: '83%';
+  width: '15vw';
+  opacity: '20%';
+}
+.backgroundPicture:hover{
+  opacity: 100%;
+}
+
+/* End of BackgroundPictureButton */

@@ -1,6 +1,6 @@
 export interface Artwork{
-  artworkID: number,
-  creatorID: number,
+  artworkID: string,
+  creatorID: string,
   artworkName: string,
   description: string,
   dateCreated: Date,

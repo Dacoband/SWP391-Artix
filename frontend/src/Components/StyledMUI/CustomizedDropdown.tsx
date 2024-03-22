@@ -12,6 +12,7 @@ import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthenContext.tsx';
 import { Creator } from '../../Interfaces/UserInterface';
+import { LightDarkSwitch } from './CustomizedLightDarkSwitch.tsx';
 
 //Create an interface for your function to assign types to its props
 interface CustomizedDropdownProps{
@@ -71,15 +72,14 @@ transformOrigin={{
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
 <Typography variant='caption'>Account</Typography>
 </Divider>
-<MenuItem onClick={handleClickDropdown}><Link to={`profile/${user.accountID}`}>Profile</Link></MenuItem>
-<MenuItem onClick={handleClickDropdown}><Link to={`dashboarduser`}>My Dashboard</Link></MenuItem>
-<MenuItem onClick={handleClickDropdown}>My Account</MenuItem>
+<MenuItem ><Link to={`profile/${user.creatorID}`}>Profile</Link></MenuItem>
+<MenuItem ><Link to={`dashboarduser`}>My Dashboard</Link></MenuItem>
+<MenuItem >My Account</MenuItem>
 <Divider sx={{"&::before, &::after":{backgroundColor:theme.color}}} variant='middle'>
 <Typography variant='caption'>Theme</Typography>
 </Divider>
 <MenuItem onClick={toggleTheme}>
-  {dark ? "Dark" : "Light"}
-  <Switch  checked={dark} />
+  <LightDarkSwitch  checked={dark} />
   </MenuItem>
 <Divider sx={{"backgroundColor":{backgroundColor:theme.color}}} variant='middle'/>
 <MenuItem onClick={logout}>Logout</MenuItem>
@@ -97,7 +97,7 @@ transformOrigin={{
         aria-haspopup="true"
         aria-expanded={open ? 'true' : 'false'}
       >
-        <Avatar src={user? user.profilePicture : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
+        <Avatar src={user?`data:image/jpeg;base64,${user.profilePicture}` : ""} sx={{ width: 32, height: 32 }}>{user ? user.userName.charAt[0] : ""}</Avatar>
       </IconButton>
       {
         user===null?

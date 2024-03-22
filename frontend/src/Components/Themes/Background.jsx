@@ -13,7 +13,7 @@ export default function Background({children}) {
     }, 6000);
 
     return () => clearTimeout(timeout);
-  }, [listofimages]);
+  },);
 
   return (
     <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}>

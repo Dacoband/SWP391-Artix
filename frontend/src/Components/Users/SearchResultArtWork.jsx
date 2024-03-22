@@ -24,7 +24,7 @@
 import { useNavigate } from 'react-router-dom';
 import '../../css/SearchResult.css';
 import PersonIcon from '@mui/icons-material/Person';
-export const SearchResult = ({ result, resultId }) => {
+export const SearchResultsArtWork = ({ result, resultId }) => {
   const navigate = useNavigate();
 
   // console.log(result);
@@ -33,7 +33,7 @@ export const SearchResult = ({ result, resultId }) => {
     console.log("Xử lý chọn được kích hoạt");
     // if (result.type === "user") {
       // Nếu là userName, điều hướng đến trang profile
-      navigate(`profile/${resultId}`);
+      navigate(`artwork/${resultId}`);
     // } else if (result.type === "artwork") {
     //   // Nếu là tên artwork, điều hướng đến trang bài post
     //   navigate(`artwork/${result.artworkID}`);
