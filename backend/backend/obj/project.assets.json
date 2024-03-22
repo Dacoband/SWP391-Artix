@@ -936,6 +936,18 @@
           }
         }
       },
+      "PayPalCoreSDK/1.7.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "7.0.1"
+        },
+        "compile": {
+          "lib/net451/PayPalCoreSDK.dll": {}
+        },
+        "runtime": {
+          "lib/net451/PayPalCoreSDK.dll": {}
+        }
+      },
       "Pipelines.Sockets.Unofficial/2.2.8": {
         "type": "package",
         "dependencies": {
@@ -2955,6 +2967,22 @@
         "paypal.nuspec"
       ]
     },
+    "PayPalCoreSDK/1.7.1": {
+      "sha512": "hGOLo3X2vgOpOWJI91+vlBgr/Dchk3xZAF0bdIpKiAwjlRKMjzSC4zuT1eGwmQ8uVL1IaGBZwNGklyRHDniYlQ==",
+      "type": "package",
+      "path": "paypalcoresdk/1.7.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net20/PayPalCoreSDK.dll",
+        "lib/net35/PayPalCoreSDK.dll",
+        "lib/net40/PayPalCoreSDK.dll",
+        "lib/net45/PayPalCoreSDK.dll",
+        "lib/net451/PayPalCoreSDK.dll",
+        "paypalcoresdk.1.7.1.nupkg.sha512",
+        "paypalcoresdk.nuspec"
+      ]
+    },
     "Pipelines.Sockets.Unofficial/2.2.8": {
       "sha512": "zG2FApP5zxSx6OcdJQLbZDk2AVlN2BNQD6MorwIfV6gVj0RRxWPEp2LXAxqDGZqeNV1Zp0BNPcNaey/GXmTdvQ==",
       "type": "package",
@@ -3591,6 +3619,7 @@
       "Microsoft.EntityFrameworkCore.Relational >= 8.0.2",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.2",
       "PayPal >= 1.9.1",
+      "PayPalCoreSDK >= 1.7.1",
       "Pomelo.EntityFrameworkCore.MySql >= 8.0.0",
       "StackExchange.Redis >= 2.7.33",
       "StackExchange.Redis.Extensions >= 1.0.1",
@@ -3600,24 +3629,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\hanvu\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+<<<<<<< HEAD
+    "C:\\Users\\bolic\\.nuget\\packages\\": {}
+=======
+    "C:\\Users\\THY\\.nuget\\packages\\": {}
+>>>>>>> d4c583c69653043daa8383821ad70ff701d1aa78
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
+<<<<<<< HEAD
+      "projectUniqueName": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\hanvu\\.nuget\\packages\\",
-      "outputPath": "D:\\SWP_Artix\\SWP391-Artix\\backend\\backend\\obj\\",
+      "projectPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\bolic\\.nuget\\packages\\",
+      "outputPath": "D:\\FPT_Learning\\SWP391\\SWP391-Artix\\backend\\backend\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\hanvu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\bolic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+      "projectUniqueName": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
+      "projectName": "backend",
+      "projectPath": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\THY\\.nuget\\packages\\",
+      "outputPath": "D:\\SWP391-Artix\\backend\\backend\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\THY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> d4c583c69653043daa8383821ad70ff701d1aa78
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3625,7 +3664,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3681,6 +3719,10 @@
             "target": "Package",
             "version": "[1.9.1, )"
           },
+          "PayPalCoreSDK": {
+            "target": "Package",
+            "version": "[1.7.1, )"
+          },
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[8.0.0, )"
@@ -3725,7 +3767,11 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+<<<<<<< HEAD
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+>>>>>>> d4c583c69653043daa8383821ad70ff701d1aa78
       }
     }
   },
@@ -3736,6 +3782,16 @@
       "warningLevel": 1,
       "message": "Package 'PayPal 1.9.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
       "libraryId": "PayPal",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'PayPalCoreSDK 1.7.1' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net8.0'. This package may not be fully compatible with your project.",
+      "libraryId": "PayPalCoreSDK",
       "targetGraphs": [
         "net8.0"
       ]

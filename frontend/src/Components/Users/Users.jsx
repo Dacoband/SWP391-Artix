@@ -5,7 +5,7 @@ import HomePage from './MainPage/HomePage.tsx';
 // eslint-disable-next-line 
 import Page from './Page.jsx';
 import Footer from './Footer.jsx';
-import Menu from './Menu.jsx';
+import Menu from './Menu.tsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.tsx';

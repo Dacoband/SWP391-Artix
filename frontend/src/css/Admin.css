@@ -37,3 +37,20 @@
     
 
 }
+
+.nameworks-container {
+    background: #f8f9fa; /* light grey background */
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .namework {
+    color: #333; /* dark text color */
+    margin-bottom: 10px; /* space between items */
+  }
+  .namework strong {
+    display: block; /* make ID display on its own line */
+    color: #007bff; /* theme color for the ID */
+    margin-bottom: 5px; /* space between ID and name */
+  }

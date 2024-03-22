@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,17 +13,27 @@ import Popper from '@mui/material/Popper';
 import Fade from '@mui/material/Fade';
 import LoginForm from '../Forms/LoginForm.jsx';
 import { useHandleClick } from '../../CustomHooks/HandleClick.jsx';
+import { GetCreatorByID } from '../../API/UserAPI/GET.tsx';
+import { Creator } from '../../Interfaces/UserInterface';
 
 export default function Menu() {
   const { theme } = useContext(ThemeContext);
   // Attempt to retrieve the auth state from sessionStorage
   const savedAuth = sessionStorage.getItem('auth');
   // Check if there's any auth data saved and parse it
-  const user = savedAuth ? JSON.parse(savedAuth) : null;
+  const user:Creator = savedAuth ? JSON.parse(savedAuth) : null;
   // Now 'auth' contains your authentication state or null if there's nothing saved
 
   const [isOpen, handleClick] = useHandleClick()
+  const [avatar,setAvatar] = useState<Creator>()
 
+  useEffect(() =>{
+    const getAvatar = async() =>{
+      const avatar = await GetCreatorByID(user.creatorID)
+      setAvatar(avatar)
+    }
+    getAvatar()
+  },[])
   const disabledButtons = () => {
 
   }
@@ -37,9 +47,9 @@ export default function Menu() {
     <div>
       <Popper open={isOpen} transition>
         {({ TransitionProps, placement }) => (
-          <Fade {...TransitionProps} placement={placement}>
+          <Fade {...TransitionProps} >
             <Box>
-              <LoginForm handleClick={handleClick} backdrop={"backdrop"} />
+              <LoginForm handleClick={handleClick} backdrop={"backdrop"} disableOutsideClick={undefined} alternative={undefined} />
             </Box>
           </Fade>
         )}
@@ -54,11 +64,11 @@ export default function Menu() {
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               {user===null? <LoginButton /> : ""}
-              <Button onClick={user===null? () => handleClick() : () => disabledButtons()}
+              <Button onClick={user===null? () => handleClick : () => disabledButtons()}
                 color="inherit"><Link to={user!==null? "artworkform" : ""}>Publish Your Works</Link></Button>
               <CustomizedDropdown
                 handleClickAsGuest={handleClick}
-                user={user} />
+                user={avatar? avatar : user} />
             </Box>
           </Toolbar>
         </AppBar>

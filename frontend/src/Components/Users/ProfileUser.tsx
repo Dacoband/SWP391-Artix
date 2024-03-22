@@ -304,10 +304,12 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
               }
             </div>
           </div>
-          <CardContent className='infouser1'>
-            <div className='infousername'>
-              <div className='avataruser' >
-                <img src={user?.profilePicture ? "data:image/jpeg;base64," + user?.profilePicture : previewProfile} />
+          <CardContent className='infouser1' sx={{ backgroundColor: theme.backgroundColor, color: theme.color }}>
+            <div className='infousername' >
+              <div className='avataruser'>
+                <img
+                  style={{ outline: `4px solid ${theme.backgroundColor}` }}
+                  src={user?.profilePicture ? "data:image/jpeg;base64," + user?.profilePicture : previewProfile} />
                 <div className='buttonavatar'>
                   <div className='profilePicture'
                     style={{
@@ -388,18 +390,20 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
                 </Tabs>
               </div>
               <div className='buttonSubcribe'>
-                {user?.allowCommission===true?
+                {user?.allowCommission === true ?
                   <Link to={`commission`}>
                     <Button variant="contained" href=""> <ShoppingBagIcon style={{ marginRight: '5px' }} />Open For Commission</Button>
-                  </Link>   
+                  </Link>
                   :
-                  <Button disabled={true} variant="contained" href=""> <ShoppingBagIcon style={{ marginRight: '5px' }} />Commission Closed</Button>
+                  <Button disabled={true} variant="contained"> <ShoppingBagIcon color='inherit' style={{ marginRight: '5px' }} />Commission Closed</Button>
+                }
+                {userInSession.creatorID !== user?.creatorID ?
+                  <Button onClick={handleClickOpen} variant="contained" color='error' href="" style={{ marginLeft: '20px' }}>Report</Button>
+                  :
+                  ""
                 }
 
                 {/* Popup Report */}
-                
-                <Button variant="contained" color='error' href="" style={{ marginLeft: '20px' }} onClick={handleClickOpen}>
-                  Report</Button>
                   <Dialog
                   open={open}
                   onClose={handleClose}
@@ -419,7 +423,7 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
                   <DialogContent>
                   <DialogContentText>
                   If this user violates community standards, please report the reason to us,
-                   Artix will review and process as soon as possible.
+                   Artix's moderators will review and handle this as soon as possible.
                 </DialogContentText>
                 <TextField
                 autoFocus
@@ -490,7 +494,7 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
                     <h2 className='headintroduct'>About {user?.userName}:</h2>
                     <div className='contentintroduct'><CakeIcon className='iconintroduct' />Birday: TOBEADDED </div>
                     <div className='contentintroduct'><RoomIcon className='iconintroduct' />Location: {user?.address}</div>
-                    <div className='contentintroduct'><EmailIcon className='iconintroduct' />Email: TOBEADDED </div>
+                    <div className='contentintroduct'><EmailIcon className='iconintroduct' />Email: {user?.email} </div>
                     <div className='contentintroduct'><PhoneIcon className='iconintroduct' />Phone: {user?.phone}</div>
                     <div className='contentintroduct'> <AutoAwesomeIcon className='iconintroduct' />My Bio: {user?.biography}  </div>
                   </Box></div>

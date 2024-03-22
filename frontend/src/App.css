@@ -1,3 +1,19 @@
+/* Custom scrollbar for webkit-based browsers */
+custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* Adjust scrollbar width */
+}
+custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbar-track-color); /* Track background */
+}
+custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb-color); /* Thumb color */
+}
+custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover-color); /* Thumb color when hovered */
+}
+
+/* End Customize Scrollbar */
+
 * {
   margin: 0;
   padding: 0;
@@ -533,7 +549,7 @@ a {
   border-radius: 100%;
   transform: translateY(-40%);
   margin-left: 100px;
-  outline: 4px solid #fff;
+
   position: relative;
   z-index: 1;
 
@@ -675,13 +691,12 @@ a {
 }
 
 .imgpost {
-  border-radius: 5px;
+  border-top-left-radius:5px;
+  border-bottom-right-radius: 5px;
   height: 560px;
   width: 70%;
   display: flex;
   justify-content: center;
-  background-color: ghostwhite;
-
 }
 
 .imgpost img {
@@ -694,6 +709,10 @@ a {
 .contentpost {
   flex: 1;
   margin-left: 30px;
+}
+
+.content-post-img{
+  margin-top: 2%;
 }
 
 .infor-user-post {
@@ -733,6 +752,11 @@ a {
 }
 
 
+
+.tag-item{
+  display: inline-block;
+  margin: 2px 2px 2px 2px;
+}
 
 /* End Art Post */
 
