@@ -547,11 +547,6 @@ public class ArtworksController : ControllerBase
 
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> Main
-
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteArtwork(int id)
     {
