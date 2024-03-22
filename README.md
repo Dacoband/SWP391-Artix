@@ -75,9 +75,18 @@
       - If you are a guest, you do not have the right to buy, sell or post works on the website
       - User or Admin has the right to create products, add, remove, delete... (Only admin has the right to edit User rights.)
 
-## Process 3 Product Management
-• 
-    
+## Process 3 Artwork Management
+• Artists will be responsible for the management of their Artwork
+
+• Name
+
+• Description
+
+• Tag
+
+• Purchasable
+
+• Price (If Artwork unpurchasable, artist can not set price)
 
 ## Process 4 Get Product Details
 
