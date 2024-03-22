@@ -93,6 +93,7 @@ export default function CreateAccount() {
         roleID: "2", //Default role as creator (AT)
         email: values.email,
         password: values.password,
+        banAccount: false
       }
       let creator: Creator = {
         creatorID: "0",
@@ -109,7 +110,8 @@ export default function CreateAccount() {
         biography: values.biography,
         allowCommission: commission,
         followCount: 0,
-        email: values.email
+        email: values.email,
+        vip: false
       }
       console.log(account)
       console.log(creator)
