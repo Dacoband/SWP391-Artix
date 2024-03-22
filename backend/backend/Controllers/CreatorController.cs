@@ -150,6 +150,36 @@ public class CreatorController : ControllerBase
         return creators;
     }
 
+    [HttpGet("NotBackground")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetCreatorsNotBack()
+    {
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                AccountID = c.AccountID,
+                PaypalAccountID = c.PaypalAccountID,
+                UserName = c.UserName,
+                ProfilePicture = c.ProfilePicture,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Address = c.Address,
+                Phone = c.Phone,
+                LastLogDate = c.LastLogDate,
+                AllowCommission = c.AllowCommission,
+                Biography = c.Biography,
+                VIP = c.VIP,
+                FollowCounts = c.FollowCounts,
+
+            })
+            .ToListAsync();
+
+        return creators;
+    }
+
+
+
     [HttpGet("OnlyProfilePicture/{CreatorID}")]
     public async Task<ActionResult<Creator>> GetOnlyProfilePictureByCreatorID(int CreatorID)
     {
