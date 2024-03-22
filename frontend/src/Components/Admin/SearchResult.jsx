@@ -1,7 +1,7 @@
 
 // dungf cho searchuser
 import { useNavigate } from 'react-router-dom';
-import '../../css/SearchResult.css';
+import '../../css/SearchResultadmin.css';
 
 export const SearchResult = ({ result, resultId }) => {
   const navigate = useNavigate()
