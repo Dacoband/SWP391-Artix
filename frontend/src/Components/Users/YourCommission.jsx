@@ -58,7 +58,7 @@ export default function YourCommission() {
     };
   
  // MUI Step
- const steps = ['Accept requests', 'Work in progress', 'Submit a demo','Complete'];
+ const steps = ['Accept requests', 'Work in progress', 'Submit demo','Complete'];
  const [activeStep, setActiveStep] = React.useState(0);
  const [skipped, setSkipped] = React.useState(new Set());
 
@@ -185,7 +185,7 @@ export default function YourCommission() {
         maxWidth='md'
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Modal title
+        Track the process
         </DialogTitle>
         <IconButton
           aria-label="close"
