@@ -29,6 +29,7 @@ public class AccountController : ControllerBase
          RoleID = ac.RoleID,
          Password = ac.Password,
          Email = ac.Email,
+         BanAccount= ac.BanAccount,
      })
      .ToListAsync();
 
@@ -58,8 +59,9 @@ public class AccountController : ControllerBase
                 AccountID = ac.AccountID,
                 RoleID = ac.RoleID,
                 Password = ac.Password,
-                Email = ac.Email
-                // Other properties...
+                Email = ac.Email,
+
+                BanAccount = ac.BanAccount,
             })
             .FirstOrDefaultAsync();
 
