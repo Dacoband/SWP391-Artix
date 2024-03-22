@@ -566,19 +566,26 @@ public class ArtworksController : ControllerBase
             // Duyệt qua từng ngày trong khoảng thời gian
             foreach (var date in dateRange)
             {
-                // Lấy tổng lượng like của các artworks được tạo vào ngày đó
-                var totalLikes = await _context.Artworks
+                // Lấy thông tin của các artworks được tạo vào ngày đó
+                var artworks = await _context.Artworks
                     .Where(a => a.DateCreated.Date == date)
-                    .SumAsync(a => a.Likes);
+                    .ToListAsync();
 
-                // Thêm kết quả vào danh sách
-                likeSummary.Add(new ArtworkLikesByDate
+                // Tính tổng lượng like của các artworks
+                var totalLikes = artworks.Sum(a => a.Likes);
+
+                // Thêm thông tin của từng artwork vào danh sách kết quả
+                foreach (var artwork in artworks)
                 {
-                    Date = date,
-                    TotalLikes = totalLikes
-                });
+                    likeSummary.Add(new ArtworkLikesByDate
+                    {
+                        Date = date,
+                        TotalLikes = totalLikes,
+                        ArtworkID = artwork.ArtworkID,
+                        ArtworkName = artwork.ArtworkName
+                    });
+                }
             }
-
             return Ok(likeSummary);
         }
         catch (Exception ex)
@@ -591,7 +598,10 @@ public class ArtworksController : ControllerBase
     {
         public DateTime Date { get; set; }
         public int TotalLikes { get; set; }
+        public int ArtworkID { get; set; }
+        public string ArtworkName { get; set; }
     }
+
 
 
 
