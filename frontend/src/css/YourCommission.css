@@ -17,3 +17,7 @@
 .dialog{
     width: 800px;
 }
+.box h1{
+    padding-top: 30px;
+    margin-left: 100px;
+}

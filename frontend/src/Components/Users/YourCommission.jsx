@@ -24,19 +24,27 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 
+import CheckIcon from '@mui/icons-material/Check';
+import ClearIcon from '@mui/icons-material/Clear';
 export default function YourCommission() {
     const { theme } = useContext(ThemeContext)
    // Tạo một đối tượng trạng thái để lưu trạng thái của từng mục trong danh sách
    const [acceptedItems, setAcceptedItems] = useState({});
-
-   // Hàm xử lý khi nút "Accept" được nhấn cho một mục cụ thể
+   const[cancelItems,setCancelItems]=useState({});
+   // nhấn Accept để tiếp tục
    const handleAccept = (commissionID) => {
        setAcceptedItems((prevState) => ({
            ...prevState,
-           [commissionID]: true, // Đặt trạng thái của mục với commissionID tương ứng thành true
+           [commissionID]: true, 
        }));
    };
-
+   const handleCancel = (commissionID) => {
+    setCancelItems((prevState) => ({
+        ...prevState,
+        [commissionID]: true, 
+    }));
+};
+   
   //  MUI Dialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -87,6 +95,7 @@ export default function YourCommission() {
 
  const handleSkip = () => {
    if (!isStepOptional(activeStep)) {
+    //Mui 
      // You probably want to guard against something like this,
      // it should never occur unless someone's actively trying to break something.
      throw new Error("You can't skip a step that isn't optional.");
@@ -116,9 +125,9 @@ export default function YourCommission() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
-          
+          minHeight:'800px'
         }}>
-            <h2>Your Commissions:</h2>
+            <h1>Your Commissions:</h1>
             <div className='listcommission'style={{width:'100%',display:'flex', justifyContent:'center'}}>
 
 
@@ -136,15 +145,24 @@ export default function YourCommission() {
             
             <ListItemText>
               <div className='header'style={{display:'flex', marginBottom:'5px'}}>
-              <Avatar style={{background:theme.color}}><NotificationsActiveIcon/></Avatar>  
+              {!acceptedItems[commision.commissionID] && !cancelItems[commision.commissionID] && (  
+              <Avatar style={{background:theme.color}}><NotificationsActiveIcon/></Avatar> )} 
+               {acceptedItems[commision.commissionID] && (
+                  <Avatar style={{background:'#10AF27'}}><CheckIcon/></Avatar>)}
+
+              {cancelItems[commision.commissionID]&&(
+                <Avatar style={{background:'red'}}><ClearIcon/></Avatar> 
+                
+              )}
               {/* tên người đặt hàng */}
 
                  <h3 style={{margin:'auto 15px '}}>
-                   You are requesting an order from: {commision.userNamerequestor}
+                   You are requested an order from: {commision.userNamerequestor}
                 </h3>
                 </div>
                 <div className='contentcommission'>
                <div style={{fontWeight:'bold'}}>+ Phone number: {commision.phone}</div> 
+               <div style={{fontWeight:'bold'}}>+ Email: {commision.email}</div> 
 
                 <div>
                 <div> <div style={{fontWeight:'bold'}}> + Description: </div> 
@@ -156,16 +174,19 @@ export default function YourCommission() {
 
             </ListItemText></div>
             <div className='button'>
-                            {!acceptedItems[commision.commissionID] && (
+                            {!acceptedItems[commision.commissionID] && !cancelItems[commision.commissionID] && (
                              <>
-                            {/* Truyền commissionID của mục hiện tại vào hàm handleAccept */}
+                            
                          <Button variant="contained" style={{ marginRight: '20px' }} onClick={() => handleAccept(commision.commissionID)}>Accept</Button>
-                        <Button variant="contained" style={{ marginRight: '20px' }} color='error'>Cancel</Button>
+                        <Button variant="contained" style={{ marginRight: '20px' }} color='error' onClick={() => handleCancel(commision.commissionID)}>Cancel</Button>
                        </>
                       )}
                    {acceptedItems[commision.commissionID] && (
                   <Button variant="contained" onClick={handleClickOpen} >Track the process</Button>
                )}
+                  {cancelItems[commision.commissionID]&&(
+                    <Button style={{paddingRight:'40px',paddingLeft:'40px'}}variant="contained" disabled  >DENIED</Button>
+                  )}
               </div>
         </div>
       </ListItem>
@@ -221,10 +242,7 @@ export default function YourCommission() {
           <Typography sx={{ mt: 2, mb: 1 }}>
             All steps completed - you&apos;re finished
           </Typography>
-          {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-          </Box> */}
+         
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -239,11 +257,7 @@ export default function YourCommission() {
               Back
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {/* {isStepOptional(activeStep) && (
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )} */}
+            
 
             <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
