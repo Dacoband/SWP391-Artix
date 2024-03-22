@@ -113,16 +113,16 @@ public class CommissionFormController : ControllerBase
 
 
     [HttpGet("total-commission/{creatorId}")]
-    public async Task<ActionResult<double>> GetTotalCommissionByCreatorId(int creatorId)
+    public async Task<ActionResult<int>> GetTotalCommissionByCreatorId(int creatorId)
     {
         try
         {
-            // Tính tổng lượng nhận commission theo CreatorID
-            var totalCommission = await _context.CommissionForm
+            // Đếm số lượng commissionFormID theo CreatorID
+            var totalCommissionCount = await _context.CommissionForm
                 .Where(cf => cf.ReceiverID == creatorId)
-                .SumAsync(cf => cf.CommissionFormID); 
+                .CountAsync();
 
-            return totalCommission;
+            return totalCommissionCount;
         }
         catch (Exception ex)
         {
@@ -130,6 +130,7 @@ public class CommissionFormController : ControllerBase
             return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
         }
     }
+
 
     [HttpGet("total-sent-commission/{creatorId}")]
     public async Task<ActionResult<double>> GetTotalSentCommissionByCreatorId(int creatorId)

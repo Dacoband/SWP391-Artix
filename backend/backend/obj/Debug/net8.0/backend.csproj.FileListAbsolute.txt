@@ -495,7 +495,6 @@ D:/SWP_Artix/SWP391-Artix/backend/backend/obj/Debug/net8.0/ref/backend.dll
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/Debug/net8.0/ref/backend.dll
 <<<<<<< HEAD
-<<<<<<< HEAD
 =======
 D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\appsettings.Development.json
 D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\appsettings.json
@@ -623,7 +622,6 @@ D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.pdb
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\bin\Debug\net8.0\PayPalCoreSDK.dll
-=======
 >>>>>>> BaoNDG
 >>>>>>> 6b07a25ad4a3a188b049fa36a3ff6189a2ea2389
 D:/SWP391-Artix/backend/backend/bin/Debug/net8.0/appsettings.Development.json
@@ -752,13 +750,9 @@ D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.pdb
 D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 D:/SWP391-Artix/backend/backend/obj/Debug/net8.0/ref/backend.dll
 D:/FPT_Learning/SWP391/SWP391-Artix/backend/backend/bin/Debug/net8.0/PayPalCoreSDK.dll
-=======
->>>>>>> BaoNDG
 >>>>>>> 75737ecc22170d431c65036cb6b063876df85fd4
 >>>>>>> Main
-<<<<<<< HEAD
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/bin/Debug/net8.0/PayPalCoreSDK.dll
-=======
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.dll
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\refint\backend.dll
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.pdb
@@ -886,4 +880,3 @@ D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csp
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
 >>>>>>> 4574d2145ab9ad9a4af352b925abd7925d81a96c
->>>>>>> 6b07a25ad4a3a188b049fa36a3ff6189a2ea2389

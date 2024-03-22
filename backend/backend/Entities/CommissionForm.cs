@@ -10,7 +10,7 @@ namespace backend.Entities
         public int ReceiverID { get; set; } // FK
         public int RequestorID { get; set; } // FK
         public string Description { get; set; }
-        public Boolean  Accept  { get; set; }
-        public int Progress { get; set; }
+        public Boolean?  Accept  { get; set; }
+        public int? Progress { get; set; }
     }
 }
