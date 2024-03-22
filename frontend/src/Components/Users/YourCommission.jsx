@@ -58,8 +58,10 @@ export default function YourCommission() {
 
     const [open, setOpen] = React.useState(false);
   
-    const handleClickOpen = () => {
+    const handleClickOpen = (item) => {
       setOpen(true);
+      console.log(acceptedItems);
+      setActiveStep(parseInt(item))
     };
     const handleClose = () => {
       setOpen(false);
@@ -68,50 +70,16 @@ export default function YourCommission() {
  // MUI Step
  const steps = ['Accept requests', 'Work in progress', 'Submit demo','Complete'];
  const [activeStep, setActiveStep] = React.useState(0);
- const [skipped, setSkipped] = React.useState(new Set());
-
- const isStepOptional = (step) => {
-   return step === 1;
- };
-
- const isStepSkipped = (step) => {
-   return skipped.has(step);
- };
 
  const handleNext = () => {
-   let newSkipped = skipped;
-   if (isStepSkipped(activeStep)) {
-     newSkipped = new Set(newSkipped.values());
-     newSkipped.delete(activeStep);
-   }
-
+  
    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-   setSkipped(newSkipped);
+  
  };
 
  const handleBack = () => {
    setActiveStep((prevActiveStep) => prevActiveStep - 1);
  };
-
- const handleSkip = () => {
-   if (!isStepOptional(activeStep)) {
-    //Mui 
-     // You probably want to guard against something like this,
-     // it should never occur unless someone's actively trying to break something.
-     throw new Error("You can't skip a step that isn't optional.");
-   }
-
-   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-   setSkipped((prevSkipped) => {
-     const newSkipped = new Set(prevSkipped.values());
-     newSkipped.add(activeStep);
-     return newSkipped;
-   });
- };
-
- const handleReset = () => {
-   setActiveStep(0);
- }; 
 
     
   return (
@@ -182,7 +150,7 @@ export default function YourCommission() {
                        </>
                       )}
                    {acceptedItems[commision.commissionID] && (
-                  <Button variant="contained" onClick={handleClickOpen} >Track the process</Button>
+                  <Button variant="contained" onClick={()=>handleClickOpen(commision.status)}  >Track the process</Button>
                )}
                   {cancelItems[commision.commissionID]&&(
                     <Button style={{paddingRight:'40px',paddingLeft:'40px'}}variant="contained" disabled  >DENIED</Button>
@@ -227,9 +195,7 @@ export default function YourCommission() {
           const stepProps = {};
           const labelProps = {};
          
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
+        
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{label}</StepLabel>
@@ -246,7 +212,7 @@ export default function YourCommission() {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+          <Typography sx={{ mt: 2, mb: 1 }}> Step {activeStep + 1}</Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"
