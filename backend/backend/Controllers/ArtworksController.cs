@@ -302,7 +302,7 @@ public class ArtworksController : ControllerBase
     }
 
 
-    [HttpGet("total-likes/{creatorId}")]
+    [HttpGet("total-likes/{CreatorId}")]
     public async Task<ActionResult<int>> GetTotalLikesByCreatorId(int CreatorId)
     {
         try
