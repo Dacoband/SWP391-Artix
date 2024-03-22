@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 [ApiController]
 [Route("api/artworks")]
 public class ArtworksController : ControllerBase
@@ -299,6 +300,71 @@ public class ArtworksController : ControllerBase
 
         return Ok(artwork);
     }
+
+
+    [HttpGet("total-likes/{creatorId}")]
+    public async Task<ActionResult<int>> GetTotalLikesByCreatorId(int CreatorId)
+    {
+        try
+        {
+            // Tìm tất cả các tác phẩm của một tác giả dựa trên CreatorID
+            var artworks = await _context.Artworks.Where(a => a.CreatorID == CreatorId).ToListAsync();
+
+            // Tính tổng lượng like của tất cả các tác phẩm
+            int totalLikes = artworks.Sum(a => a.Likes);
+
+            return totalLikes;
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+    [HttpGet("recent-artworks-no-image/{CreatorId}")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetRecentArtworksWithoutImageByCreatorId(int CreatorId)
+    {
+        try
+        {
+            // Lấy 4 tác phẩm gần nhất không có hình ảnh của một tác giả dựa trên CreatorID
+            var recentArtworks = await _context.Artworks
+                .Where(a => a.CreatorID == CreatorId && a.ImageFile == null)
+                .OrderByDescending(a => a.DateCreated)
+                .Take(4)
+                .ToListAsync();
+
+            return recentArtworks;
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+    [HttpGet("recent-artworks-with-image/{CreatorId}")]
+    public async Task<ActionResult<IEnumerable<Artworks>>> GetRecentArtworksWithImageByCreatorId(int CreatorId)
+    {
+        try
+        {
+            // Lấy 4 tác phẩm gần nhất có hình ảnh của một tác giả dựa trên CreatorID
+            var recentArtworksWithImage = await _context.Artworks
+                .Where(a => a.CreatorID == CreatorId && a.ImageFile != null)
+                .OrderByDescending(a => a.DateCreated)
+                .Take(4)
+                .ToListAsync();
+
+            return recentArtworksWithImage;
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+
 
     // POST: api/artworks
 
