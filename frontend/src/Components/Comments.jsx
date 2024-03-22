@@ -68,7 +68,7 @@ const CommentItem =({comment})=>{
     <div className='commented'
       style={{borderColor:theme.color,}}
     >
-      <div>
+      <div className='buttonrepandcacel' style={{display:'flex'}}>
       <span>{comment.body}</span>
       {isReplying?(
          <CustomizedButton 
@@ -87,7 +87,7 @@ const CommentItem =({comment})=>{
            </CustomizedButton>
            )}
         </div>
-        <div>
+        <div >
           {isReplying && <CommentInput onComment={onComment}/>  }
           {comments.map(comment =>(
        
@@ -101,6 +101,7 @@ const CommentItem =({comment})=>{
 
 const CommentInput = ({onComment}) =>{
   const[commnetBody,setCommentBody]=useState("");
+  
   return(
     <div style={{
       display:'flex',

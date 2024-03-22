@@ -253,7 +253,9 @@ custom-scrollbar::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
 }
-
+.reply {
+  margin-top: 10px; /* Điều chỉnh giá trị này tùy theo khoảng cách bạn muốn */
+}
 /* END TESTICON */
 
 /* HomePage */
@@ -744,6 +746,12 @@ a {
   display: flex;
   flex-direction: column;
 }
+.tag-container {
+  display: flex;
+  flex-wrap: wrap; /* Cho phép các phần tử tự động xuống hàng khi không đủ width */
+}
+
+
 
 .tag-item{
   display: inline-block;

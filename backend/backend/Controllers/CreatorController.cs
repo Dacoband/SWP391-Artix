@@ -49,6 +49,36 @@ public class CreatorController : ControllerBase
     }
 
 
+    [HttpGet("VipCreators")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetVipCreators()
+    {
+        var vipCreators = await _context.Creators
+            .Where(c => c.VIP == true  )
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                AccountID = c.AccountID,
+                PaypalAccountID = c.PaypalAccountID,
+                UserName = c.UserName,
+                ProfilePicture = c.ProfilePicture,
+                BackgroundPicture = c.BackgroundPicture,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Address = c.Address,
+                Phone = c.Phone,
+                LastLogDate = c.LastLogDate,
+                AllowCommission = c.AllowCommission,
+                Biography = c.Biography,
+                VIP = c.VIP,
+                FollowCounts = c.FollowCounts,
+            })
+            .ToListAsync();
+
+        return vipCreators;
+    }
+
+
     [HttpGet("GetID/UserName/Vip")]
     public async Task<ActionResult<IEnumerable<Creator>>> Get3FeaturesCreators()
     {
@@ -60,7 +90,10 @@ public class CreatorController : ControllerBase
                 UserName = c.UserName,
                 
                 VIP = c.VIP,
-                
+
+                Email = c.Email,
+
+                Phone = c.Phone
 
             })
             .ToListAsync();
@@ -89,6 +122,33 @@ public class CreatorController : ControllerBase
         return creator;
     }
 
+
+    [HttpGet("NotProfile/NotBackground")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetCreatorsNotProAndBack()
+    {
+        var creators = await _context.Creators
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                AccountID = c.AccountID,
+                PaypalAccountID = c.PaypalAccountID,
+                UserName = c.UserName,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Address = c.Address,
+                Phone = c.Phone,
+                LastLogDate = c.LastLogDate,
+                AllowCommission = c.AllowCommission,
+                Biography = c.Biography,
+                VIP = c.VIP,
+                FollowCounts = c.FollowCounts,
+
+            })
+            .ToListAsync();
+
+        return creators;
+    }
 
     [HttpGet("OnlyProfilePicture/{CreatorID}")]
     public async Task<ActionResult<Creator>> GetOnlyProfilePictureByCreatorID(int CreatorID)

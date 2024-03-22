@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -38,6 +39,36 @@ public class CommissionFormController : ControllerBase
 
         return commissionForm;
     }
+    [HttpGet("ByReceiverId/{receiverId}")]
+    public async Task<ActionResult<IEnumerable<CommissionForm>>> GetCommissionFormsByReceiverId(int receiverId)
+    {
+        var commissionForms = await _context.CommissionForm
+            .Where(cf => cf.ReceiverID == receiverId)
+            .ToListAsync();
+
+        if (commissionForms == null || commissionForms.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return commissionForms;
+    }
+
+    [HttpGet("ByRequestorId/{requestorId}")]
+    public async Task<ActionResult<IEnumerable<CommissionForm>>> GetCommissionFormsByRequestorId(int requestorId)
+    {
+        var commissionForms = await _context.CommissionForm
+            .Where(cf => cf.RequestorID == requestorId)
+            .ToListAsync();
+
+        if (commissionForms == null || commissionForms.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return commissionForms;
+    }
+
 
     // POST: api/CommissionForm
     [HttpPost]
@@ -79,6 +110,48 @@ public class CommissionFormController : ControllerBase
 
         return NoContent();
     }
+
+
+    [HttpGet("total-commission/{creatorId}")]
+    public async Task<ActionResult<int>> GetTotalCommissionByCreatorId(int creatorId)
+    {
+        try
+        {
+            // Đếm số lượng commissionFormID theo CreatorID
+            var totalCommissionCount = await _context.CommissionForm
+                .Where(cf => cf.ReceiverID == creatorId)
+                .CountAsync();
+
+            return totalCommissionCount;
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+
+    [HttpGet("total-sent-commission/{creatorId}")]
+    public async Task<ActionResult<double>> GetTotalSentCommissionByCreatorId(int creatorId)
+    {
+        try
+        {
+            // Tính tổng lượng gửi commission theo CreatorID
+            var totalSentCommission = await _context.CommissionForm
+                .Where(cf => cf.RequestorID == creatorId)
+                .SumAsync(cf => cf.CommissionFormID); 
+
+            return totalSentCommission;
+        }
+        catch (Exception ex)
+        {
+            // Xử lý lỗi nếu có
+            return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
+        }
+    }
+
+
 
     // DELETE: api/CommissionForm/5
     [HttpDelete("{commissionId}")]

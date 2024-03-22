@@ -14,7 +14,7 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import axios from "axios"
 import Background from '../Themes/Background.jsx';
-import { ThemeContext } from '../Themes/ThemeProvider.tsx';
+import { ThemeContext, ThemeProvider } from '../Themes/ThemeProvider.tsx';
 import { Account, Creator } from '../../Interfaces/UserInterface.ts';
 import { PostCreator, PostUserAccount } from '../../API/UserAPI/POST.tsx';
 import { GetAccountByEmail } from '../../API/UserAPI/GET.tsx';
@@ -22,13 +22,15 @@ import CustomizedSwitch from '../StyledMUI/CustomizedSwitch.jsx'
 import { FormControlLabel } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LoadingScreen from '../Users/LoadingScreen.jsx';
+import CustomizedTextField from '../StyledMUI/CustomizedTextField.tsx';
 
 function LoginAsGuest() {
+  const { theme } = useContext(ThemeContext)
   return (
     <>
       <Grid item xs={12} sx={{ textAlign: 'center', paddingBottom: '5%' }}>
-        <Divider sx={{ "&::before, &::after": { backgroundColor: "lightgray" } }} variant='middle'>
-          <Typography variant='h6'>Alternative</Typography>
+        <Divider sx={{ "&::before, &::after": { backgroundColor: theme.color } }} variant='middle'>
+          <Typography variant='h6' sx={{color:theme.color}}>Alternative</Typography>
         </Divider>
         <Link className='guestBtn' style={{ fontStyle: "italic", color: "grey" }} to={`/`}>Already Have An Account? Login Here!</Link>
       </Grid>
@@ -135,17 +137,12 @@ export default function CreateAccount() {
       password: Yup.string().required("Password! Or we gonna steal your account.").min(5, "Must be 5 characters or more"),
       biography: Yup.string().required("Tell the community something about yourself")
     }),
-
-
-
   })
   return (
     <Background>
        {isLoading ? <LoadingScreen />  : ""}
       <div className='createaccount'>
         <div className='signupForm' style={{ marginTop: '2%' }}>
-         
-           
             <Box
               height={'auto'}
               width={'80%'}
@@ -160,12 +157,12 @@ export default function CreateAccount() {
                 <Grid className='formregister' container spacing={2}>
                   <Grid item xs={12}>
                     <div className='header'>
-                      <Typography variant="h5" component="h1" gutterBottom>
+                      <Typography sx={{color:theme.color}} variant="h4" component="h1" gutterBottom>
                         Register Account
                       </Typography></div>
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CustomizedTextField
                       id="email"
                       label="Email"
                       name="email"
@@ -177,7 +174,7 @@ export default function CreateAccount() {
                     </Typography>)}
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CustomizedTextField
 
                       id="passwword"
                       label="Password"
@@ -191,7 +188,7 @@ export default function CreateAccount() {
                   </Grid>
 
                   <Grid item xs={6}>
-                    <TextField
+                    <CustomizedTextField
 
                       id="firstName"
                       label="First Name (Optional)"
@@ -204,7 +201,7 @@ export default function CreateAccount() {
                     </Typography>)}
                   </Grid>
                   <Grid item xs={6}>
-                    <TextField
+                    <CustomizedTextField
                       id="lastName"
                       label="Last Name (Optional)"
                       name="lastName"
@@ -216,7 +213,7 @@ export default function CreateAccount() {
                     </Typography>)}
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CustomizedTextField
                       id="userName"
                       label="User Name"
                       name="userName"
@@ -241,7 +238,7 @@ export default function CreateAccount() {
                     />
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CustomizedTextField
                       id="phone"
                       label="Your Phone (Optional)"
                       name="phone"
@@ -253,7 +250,7 @@ export default function CreateAccount() {
                     </Typography>)}
                   </Grid>
                   <Grid item xs={12}>
-                    <TextField
+                    <CustomizedTextField
                       id="address"
                       label="Address (Optional)"
                       name="address"
@@ -266,7 +263,7 @@ export default function CreateAccount() {
                   </Grid>
 
                   <Grid item xs={12}>
-                    <TextField
+                    <CustomizedTextField
                       id="biography"
                       label="Biography"
                       name="biography"

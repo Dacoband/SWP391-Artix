@@ -5,7 +5,7 @@ import HomePage from './MainPage/HomePage.tsx';
 // eslint-disable-next-line 
 import Page from './Page.jsx';
 import Footer from './Footer.jsx';
-import Menu from './Menu.jsx';
+import Menu from './Menu.tsx';
 import Background from '../Themes/Background.jsx';
 import UserInfoForm from './UserForms/CreateUserInfo.jsx';
 import UploadArtwork from './UserForms/UploadArtwork.tsx';
@@ -17,6 +17,7 @@ import SeeMoreUser from './SeeMoreUser.tsx';
 import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
+import YourCommission from './YourCommission.jsx';
 export default function Users() {
   return (
     <div>
@@ -37,6 +38,7 @@ export default function Users() {
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
           <Route path={`randomword`} element={<SeeMoreOfArt1/>}/>
           <Route path={`dashboarduser`} element={<DashboardUser/>}/>
+          <Route path={`yourcommision`} element={<YourCommission/>}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
