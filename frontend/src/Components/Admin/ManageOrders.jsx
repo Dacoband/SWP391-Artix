@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../css/ManageOrders.css'
+
 import { Container, Box, Typography, Paper, Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';

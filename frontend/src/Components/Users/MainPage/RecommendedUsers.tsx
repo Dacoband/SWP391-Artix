@@ -68,11 +68,11 @@ const uniqueSets = createUniqueSets(top12Users, 4, 3);
                 <Card >
                   <CardActionArea>
                     <CardMedia >
-<<<<<<< HEAD
+
                       <div className="inforuser" style={{ background: theme.backgroundColor, color: theme.color }}>
-=======
-                      <div className="inforuser" style={{ background: theme.backgroundColor2, color: theme.color4 }}>
->>>>>>> Tuyet
+{/* 
+                      <div className="inforuser" style={{ background: theme.backgroundColor2, color: theme.color4 }}> */}
+
                         <div className="imguser">
                           <img
                             src={user.profilePicture?
