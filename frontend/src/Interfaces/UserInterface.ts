@@ -14,6 +14,7 @@ export interface Account {
   roleID:string,
   password:string,
   email:string,
+  banAccount:boolean
 }
 
 export interface Creator {
@@ -32,5 +33,5 @@ export interface Creator {
   biography: string | "",
   followCount: number | 0,
   email:string,
-  vip:number
+  vip:boolean
 } // This is the Object Creator, having all the infomation.

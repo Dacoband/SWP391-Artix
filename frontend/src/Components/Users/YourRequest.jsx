@@ -1,7 +1,7 @@
 
 import { ThemeContext } from '../Themes/ThemeProvider.tsx';
 import Box from '@mui/material/Box';
-import '../../css/YourCommission.css';
+import '../../css/YourRequest.css';
 import React, { useContext, useEffect, useState } from 'react'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -26,24 +26,16 @@ import StepLabel from '@mui/material/StepLabel';
 
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
-export default function YourCommission() {
+import { colors } from '@mui/material';
+
+export default function YourRequest() {
     const { theme } = useContext(ThemeContext)
-   // Tạo một đối tượng trạng thái để lưu trạng thái của từng mục trong danh sách
+    // Tạo một đối tượng trạng thái để lưu trạng thái của từng mục trong danh sách
    const [acceptedItems, setAcceptedItems] = useState({});
-   const[cancelItems,setCancelItems]=useState({});
+  
    // nhấn Accept để tiếp tục
-   const handleAccept = (commissionID) => {
-       setAcceptedItems((prevState) => ({
-           ...prevState,
-           [commissionID]: true, 
-       }));
-   };
-   const handleCancel = (commissionID) => {
-    setCancelItems((prevState) => ({
-        ...prevState,
-        [commissionID]: true, 
-    }));
-};
+   
+   
    
   //  MUI Dialog
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -71,19 +63,9 @@ export default function YourCommission() {
  const steps = ['Accept requests', 'Work in progress', 'Submit demo','Complete'];
  const [activeStep, setActiveStep] = React.useState(0);
 
- const handleNext = () => {
-  
-   setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  
- };
 
- const handleBack = () => {
-   setActiveStep((prevActiveStep) => prevActiveStep - 1);
- };
-
-    
   return (
-    <div className='yourCommission'>
+    <div className='yourRequest'>
          <Box className='box'
         sx={{
           color: theme.color,
@@ -93,9 +75,11 @@ export default function YourCommission() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
-          minHeight:'800px'
+          minHeight:'700px'
         }}>
-            <h1>Your Commissions:</h1>
+
+
+            <h1>Your Request:</h1>
             <div className='listcommission'style={{width:'100%',display:'flex', justifyContent:'center', paddingBottom:'40px'}}>
 
 
@@ -107,33 +91,29 @@ export default function YourCommission() {
              marginTop: '30px'}}>
                {commission.map((commision)=>(
                 <div>
-                <ListItem alignItems="flex-start" key={commision.commissionID} >
+                <ListItem alignItems="flex-start"
+                   
+                   key={commision.commissionID} >
                   <div className='onecommission'>
             <div className='content'>
             
             <ListItemText>
               <div className='header'style={{display:'flex', marginBottom:'5px'}}>
-              {!acceptedItems[commision.commissionID] && !cancelItems[commision.commissionID] && (  
-              <Avatar style={{background:theme.color}}><NotificationsActiveIcon/></Avatar> )} 
-               {acceptedItems[commision.commissionID] && (
-                  <Avatar style={{background:'#10AF27'}}><CheckIcon/></Avatar>)}
-
-              {cancelItems[commision.commissionID]&&(
-                <Avatar style={{background:'red'}}><ClearIcon/></Avatar> 
-                
-              )}
+              {commision.accept === true ? <Avatar style={{background:'#10AF27'}}><CheckIcon/></Avatar> : 
+              (commision.accept === false ? <Avatar style={{background:'red'}}><ClearIcon/></Avatar> :
+              <Avatar style={{background:theme.color}}><NotificationsActiveIcon/></Avatar>)}
+             
               {/* tên người đặt hàng */}
 
                  <h3 style={{margin:'auto 15px '}}>
-                   You are requested an order from: {commision.userNamerequestor}
+                   You are requesting an order from: {commision.userNamereceiver}
                 </h3>
                 </div>
                 <div className='contentcommission'>
-               <div style={{fontWeight:'bold'}}>+ Phone number: {commision.phone}</div> 
-               <div style={{fontWeight:'bold'}}>+ Email: {commision.email}</div> 
+                  {/* yêu cầu của chinhsh người đặt hàng */}
 
                 <div>
-                <div> <div style={{fontWeight:'bold'}}> + Description: </div> 
+                <div> <div style={{fontWeight:'bold'}}> Description: </div> 
                 <span> {commision.description}</span>
                 </div>
                 </div>
@@ -142,19 +122,15 @@ export default function YourCommission() {
 
             </ListItemText></div>
             <div className='button'>
-                            {!acceptedItems[commision.commissionID] && !cancelItems[commision.commissionID] && (
-                             <>
-                            
-                         <Button variant="contained" style={{ marginRight: '20px' }} onClick={() => handleAccept(commision.commissionID)}>Accept</Button>
-                        <Button variant="contained" style={{ marginRight: '20px' }} color='error' onClick={() => handleCancel(commision.commissionID)}>Cancel</Button>
-                       </>
-                      )}
-                   {acceptedItems[commision.commissionID] && (
-                  <Button variant="contained" onClick={()=>handleClickOpen(commision.status)}  >Track the process</Button>
-               )}
-                  {cancelItems[commision.commissionID]&&(
-                    <Button style={{paddingRight:'40px',paddingLeft:'40px'}}variant="contained" disabled  >DENIED</Button>
-                  )}
+
+              {commision.accept === true ? 
+              <Button variant="contained"  style={{backgroundColor:'#10AF27'}} onClick={()=>handleClickOpen(commision.status)}  >Track the process</Button> : 
+              (commision.accept === false ? 
+              <Button style={{paddingRight:'40px',paddingLeft:'40px'}}variant="contained" disabled  >Commission Declined</Button> :
+              <Button style={{paddingRight:'40px',paddingLeft:'40px', backgroundColor:'#1976d2', color:'white'}}variant="contained" disabled  >Waiting To Be Accepted</Button> )}
+                           
+                  
+                  
               </div>
         </div>
       </ListItem>
@@ -189,9 +165,9 @@ export default function YourCommission() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-        <Box sx={{ width: '85%',margin:'auto' }}>
+        <Box sx={{ width: '85%',margin:'auto', paddingBottom:'30px', paddingTop:'30px' }}>
       <Stepper activeStep={activeStep}>
-        {steps.map((label, index) => {
+        {steps.map((label) => {
           const stepProps = {};
           const labelProps = {};
          
@@ -203,45 +179,17 @@ export default function YourCommission() {
           );
         })}
       </Stepper>
-      {activeStep === steps.length ? (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
-          </Typography>
-         
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}> Step {activeStep + 1}</Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-            <Button
-              color="inherit"
-              disabled={activeStep === 0}
-              onClick={handleBack}
-              sx={{ mr: 1 }}
-            >
-              Back
-            </Button>
-            <Box sx={{ flex: '1 1 auto' }} />
-            
 
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
-          </Box>
-        </React.Fragment>
-      )}
     </Box>
         </DialogContent>
-        <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Save changes
-          </Button>
-        </DialogActions>
       </BootstrapDialog>
-    
-
-        </Box>
-    </div>
+               
+            
+            
+            
+            
+            
+            
+            </Box></div>
   )
 }

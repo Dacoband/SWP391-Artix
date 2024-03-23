@@ -29,10 +29,10 @@ export default function Menu() {
 
   useEffect(() =>{
     const getAvatar = async() =>{
-      const avatar = await GetCreatorByID(user.creatorID)
+      const avatar = await GetCreatorByID(user? user.creatorID:'0')
       setAvatar(avatar)
     }
-    getAvatar()
+    if(user!==null){getAvatar()}
   },[])
   const disabledButtons = () => {
 

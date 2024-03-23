@@ -101,6 +101,23 @@ public class AccountController : ControllerBase
     }
 
 
+    [HttpPut("{accountId}")]
+    public async Task<IActionResult> BanAccount(int accountId)
+    {
+        var account = await _context.Account.FirstOrDefaultAsync(ac => ac.AccountID == accountId);
+
+        if (account == null)
+        {
+            return NotFound(); // Trả về mã lỗi 404 nếu không tìm thấy tài khoản
+        }
+
+        account.BanAccount = true; // Cập nhật trạng thái BanAccount thành true
+
+        _context.Account.Update(account);
+        await _context.SaveChangesAsync();
+
+        return NoContent(); // Trả về mã trạng thái 204 nếu cập nhật thành công
+    }
 
 
     [HttpPut("{id}")]

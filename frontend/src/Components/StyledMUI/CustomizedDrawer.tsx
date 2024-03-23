@@ -34,7 +34,7 @@ export default function CustomizedDrawer() {
   const linkListPersonal = [
     '/chua',
     'yourcommision',
-    '/ch'
+    'yourrequest'
   ];
 
   const IconListHomePage = [

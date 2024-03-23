@@ -8,3 +8,8 @@ export default function AppLogo() {
     
   )
 }
+export function Watermark(){
+  return(
+  <img className='watermark' src = "/sliderImages/icon_demo.png" alt="App Icon" />
+  )
+}

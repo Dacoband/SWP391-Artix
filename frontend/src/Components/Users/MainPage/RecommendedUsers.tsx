@@ -68,7 +68,11 @@ const uniqueSets = createUniqueSets(top12Users, 4, 3);
                 <Card >
                   <CardActionArea>
                     <CardMedia >
-                      <div className="inforuser" style={{ background: theme.backgroundColor2, color: theme.color }}>
+<<<<<<< HEAD
+                      <div className="inforuser" style={{ background: theme.backgroundColor, color: theme.color }}>
+=======
+                      <div className="inforuser" style={{ background: theme.backgroundColor2, color: theme.color4 }}>
+>>>>>>> Tuyet
                         <div className="imguser">
                           <img
                             src={user.profilePicture?
@@ -81,8 +85,8 @@ const uniqueSets = createUniqueSets(top12Users, 4, 3);
                           />
                         </div>
                         <div className="contentuser">
-                          <h2>{user.userName}</h2>
-                          <h4>Follower: {user.followCount}</h4>
+                          <h1>{user.userName}</h1>
+                          <h2>Follower: {user.followCount??0}</h2>
                         </div>
                       </div>
                     </CardMedia>
