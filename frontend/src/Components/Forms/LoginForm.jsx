@@ -45,7 +45,7 @@ export default function LoginForm({ disableOutsideClick, handleClick, backdrop, 
           }
           window.dispatchEvent(new Event('userLoggedIn'));
           if (disableOutsideClick) {
-            handleClick()
+            const click = handleClick
           }
         }
         catch (err) {

@@ -19,7 +19,7 @@ import {
   Legend, ArcElement,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
-import { GetArtListCount, GetRecent7ArtList } from '../../API/ArtworkAPI/GET.tsx';
+import { GetArtListCount, GetRecent7ArtList, GetRecentArtListLikeCount } from '../../API/ArtworkAPI/GET.tsx';
 import { GetCreatorListCount, GetCreatorListNoImage } from '../../API/UserAPI/GET.tsx';
 
 
@@ -39,7 +39,7 @@ export default function Admin() {
     }
 
     const getNearest7Arts = async () => {
-      let nearest7arts = await GetRecent7ArtList()
+      let nearest7arts = await GetRecentArtListLikeCount()
       setNearest7Arts(nearest7arts)
     }
     const getCreatorDetails= async () => {
@@ -157,12 +157,12 @@ export default function Admin() {
   };
   // sơ đồ 1
   const labels = nearest7arts.map(art => art.artworkID)
-  const likesList = nearest7arts.map(art => art.likes)
+  const likesList = nearest7arts.map(art => art.totalLikes)
   const data = {
     labels,
     datasets: [
       {
-        label: 'Number of likes on 7 most recent artworks',
+        label: 'Number Of Likes On Recent Artworks',
         data: likesList,
         backgroundColor: 'rgb(46, 144, 250)',
         boderColor: 'black',// Màu của cột chính

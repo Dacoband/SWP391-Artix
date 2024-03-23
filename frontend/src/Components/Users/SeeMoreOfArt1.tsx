@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { Typography } from '@mui/material';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import '../../css/SeeMoreOfArt1.css';
 import Pagination from '@mui/material/Pagination';
 import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
@@ -32,9 +33,9 @@ export default function SeeMoreOfArt1() {
       SetArtworkList(currentImages ? currentImages : [])
     }
     getArtworks()
-  },[])
+  }, [])
 
-  const handleClick = (artworkID) =>{
+  const handleClick = (artworkID) => {
     redirect(`../artwork/${artworkID}`)
   }
 
@@ -43,9 +44,26 @@ export default function SeeMoreOfArt1() {
       <>
         {artworkList.map((work: Artwork) => (
           <ImageListItem key={work.artworkID}>
+            {work.purchasable ?
+              <AttachMoneyIcon style={{
+                position: 'absolute',
+                backgroundColor: 'green', // Hex code for a yellow color
+                color: 'white', // Icon color
+                borderRadius: '50%', // Makes the background rounded
+                padding: 'auto', // Adjust padding to manage the size of the rounded background
+                margin: '5px', // Make the icon floating inside the image
+                fontSize: '40px', // Adjust the size of the icon as needed
+                // Add other styling properties as required for your specific icon
+                bottom: 0,
+                right: 0,
+                zIndex: 2 // Ensure it's above the image
+              }} 
+              fontSize='large'
+              />
+              : ""}
             <img
-              style={{cursor: 'pointer'}}
-              onClick={() => handleClick(work.artworkID) }
+              style={{ cursor: 'pointer' }}
+              onClick={() => handleClick(work.artworkID)}
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
@@ -57,7 +75,7 @@ export default function SeeMoreOfArt1() {
   }
 
   return (
-    <div className='seemorecommentwork' style={{marginBottom:'10%'}}>
+    <div className='seemorecommentwork' style={{ marginBottom: '10%' }}>
       <Box className='box'
         sx={{
           color: theme.color,
@@ -74,14 +92,14 @@ export default function SeeMoreOfArt1() {
           <div className='listimage'>
             <Box className='boxlistimage'>
               <ImageList variant="masonry" cols={4} gap={7}>
-              {artworkList.length !== 0 ? <ArtWorkList /> : <PlaceHoldersImageCard />}
+                {artworkList.length !== 0 ? <ArtWorkList /> : <PlaceHoldersImageCard />}
               </ImageList></Box>
           </div></div>
         <div className='pagination'>
-          
-          </div>
-      
-            </Box>
-          </div>
-          )
+
+        </div>
+
+      </Box>
+    </div>
+  )
 }

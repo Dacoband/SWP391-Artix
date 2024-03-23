@@ -16,7 +16,7 @@ import SeeMoreUser from './SeeMoreUser.tsx';
 // eslint-disable-next-line 
 import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
-import CommissionForm from './CommissionForm.jsx';
+import CommissionForm from './CommissionForm.tsx';
 import YourCommission from './YourCommission.jsx';
 import YourRequest from './YourRequest.jsx';
 import TransactionHistory from './TransactionHistory.jsx';

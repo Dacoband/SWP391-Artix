@@ -62,7 +62,7 @@ export default function SeeMoreUser() {
                     {user.userName}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Followers: {user.followCount} | Likes: TO BE ADDED
+                    Followers: {user.followCount} | Likes: TOBEADDED
                   </Typography></div>
               </CardContent>
             </CardActionArea>
