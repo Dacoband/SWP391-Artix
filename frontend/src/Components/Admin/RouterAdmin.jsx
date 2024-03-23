@@ -4,6 +4,7 @@ import Admin from './Admin';
 import AdminNavbar from './NavigationAd'
 import ListUser from './ListUser'
 import Report from'./Report'
+import ManageOrders from './ManageOrders';
 export default function RouterAdmin() {
   return (
     <div>
@@ -12,6 +13,7 @@ export default function RouterAdmin() {
           <Route path={`/`} element={<Admin/>} />
           <Route path={`listuser`} element={<ListUser />} />
           <Route path={`report`} element={<Report/>}/>
+          <Route path={`manageorders`} element={<ManageOrders/>}/>
           </Routes>
           <Outlet />
     </div>

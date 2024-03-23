@@ -16,18 +16,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import { green } from '@mui/material/colors';
-import Button from '@mui/material/Button';
-import WarningIcon from '@mui/icons-material/Warning';
+
 import TablePagination from '@mui/material/TablePagination';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import DialogActions from '@mui/material/DialogActions';
+
 import { Order } from '../../share/Order.js';
 // MUI Tab
 function CustomTabPanel(props) {
@@ -178,7 +169,7 @@ export default function TransactionHistory() {
           <TableRow style={{backgroundColor:'#0b81ff'}}>
             
             <TableCell  style={{color:'white'}} align="left">Name Customer</TableCell>
-            <TableCell style={{color:'white'}} align="left">Artist</TableCell>
+            <TableCell style={{color:'white'}} align="left">Customer Name</TableCell>
             <TableCell style={{color:'white'}} align="left">Pice</TableCell>
             <TableCell style={{color:'white'}} align="left">Date</TableCell>
             <TableCell style={{color:'white'}} align="left">Status</TableCell>
