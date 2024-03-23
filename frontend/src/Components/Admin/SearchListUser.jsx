@@ -42,11 +42,11 @@ import DialogActions from '@mui/material/DialogActions';
 import { GetCreatorListNoImage } from '../../API/UserAPI/GET.tsx';
 
 export const SearchResultsList = ({ dataCreator }) => {
-    // console.log(dataCreator);
-    // const [page, setPage] = useState(0);
-    // const [rowsPerPage, setRowsPerPage] = useState(4);
-    // const [userList,setUserList] = useState([])
-    // Handle change page
+  // console.log(dataCreator);
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(4);
+  // const [userList,setUserList] = useState([])
+  // Handle change page
   // const handleChangePage = (event, newPage) => {
   //   setPage(newPage);
   // };
@@ -61,84 +61,73 @@ export const SearchResultsList = ({ dataCreator }) => {
   // const paginatedUsers = userList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const [open, setOpen] = useState(false);
-  const handleClose = () => {setOpen(false);};
-      return (
-        
-           <div style={{ height: 'auto', width: '100%', marginTop: '40px'}}>
-   
-   <TableContainer component={Paper} style={{marginBottom:'70px'}}>
-   <Table sx={{ minWidth: 650 }} aria-label="simple table" >
-        <TableHead>
-          <TableRow style={{backgroundColor:'#0b81ff'}}>
-            <TableCell style={{color:'white'}}>ID</TableCell>
-            <TableCell  style={{color:'white'}} align="left">User Name</TableCell>
-            <TableCell style={{color:'white',width:'350px'}} align="left">Email</TableCell>
-            <TableCell style={{color:'white'}} align="left">Phone</TableCell>
-            <TableCell style={{color:'white'}} align="left">Vip</TableCell>
-            <TableCell style={{color:'white',width:'100px'}} align="left">Ban Account</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {dataCreator.map((dataCreator, id) => (
-            <div key={id}>
-            <TableRow
-              key={dataCreator.creatorID}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {dataCreator.creatorID}
-              </TableCell>
-              {/* user.User là user Name */}
-              <TableCell align="left">{dataCreator.userName}</TableCell>
-              <TableCell align="left">{dataCreator.email}</TableCell>
-              <TableCell align="left">{dataCreator.phone}</TableCell>
-              <TableCell align="left">
-                  {dataCreator.vip ? <VerifiedIcon color="success"/> : null}
-                </TableCell>
-              <TableCell align="left">
-                 <Button variant="contained" color="error" onClick={ ()=>{setOpen(true)}}>
-                 <WarningIcon/>
-               </Button></TableCell>
-            </TableRow></div>
-          ))}
-        </TableBody>
-      </Table>
-      
-      <Dialog
-    open={open}
-    onClose={handleClose}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-    >
-    <DialogTitle id="alert-dialog-title">
-      {"Congraturation"}
-    </DialogTitle>
-    <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-      <Alert severity="success">
-    <AlertTitle>You want to ban this account ?</AlertTitle>
-    </Alert>
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-      {/* chỗ này gắn hàm vô : onClick={()=>handleDelete()}*/}
-      <Button  >yes</Button>
-      <Button autoFocus onClick={handleClose}>
-       No
-      </Button>
-    </DialogActions>
-  </Dialog>
-    
-    </TableContainer>
+  const handleClose = () => { setOpen(false); };
+  return (
+
+    <div style={{ height: 'auto', width: '100%', marginTop: '40px' }}>
+      <TableContainer component={Paper} style={{ marginBottom: '70px' }}>
+        <Table sx={{ minWidth: 800 }} aria-label="simple table" >
+          <TableHead style={{ display: 'flex', flexDirection: 'column',backgroundColor: '#0b81ff' }}>
+            <TableRow style={{ display: 'flex', justifyContent: 'space-around', }}>
+              <TableCell style={{ color: 'white',width: '0' }} align="left">ID</TableCell>
+              <TableCell style={{ color: 'white',width: '100px' }} align="left">User Name</TableCell>
+              <TableCell style={{ color: 'white',width: '300px' }} align="left">Email</TableCell>
+              <TableCell style={{ color: 'white',width: '100px' }} align="left">Phone</TableCell>
+              <TableCell style={{ color: 'white',width: '50px' }} align="left">Vip</TableCell>
+              <TableCell style={{ color: 'white',width: '50px' }} align="left">Ban Account</TableCell></TableRow>
+          </TableHead>
+          <TableBody style={{ display: 'flex', flexDirection: 'column', }} >
+            {dataCreator.map((dataCreator, id) => (
+              <div>
+                <TableRow style={{ display: 'flex', justifyContent: 'space-around', }}>
+                  <TableCell sx={{ width: '0' }} align="left">{dataCreator.creatorID}</TableCell>
+                  <TableCell sx={{ width: '100px' }} align="left">{dataCreator.userName}</TableCell>
+                  <TableCell sx={{ width: '300px' }} align="left">{dataCreator.email}</TableCell>
+                  <TableCell sx={{ width: '100px' }} align="left">{dataCreator.phone}</TableCell>
+                  <TableCell sx={{ width: '50px' }} align="left">{dataCreator.vip ? <VerifiedIcon color="success" /> : null}</TableCell>
+                  <TableCell sx={{ width: '50px' }} align="left"><Button variant="contained" color="error" onClick={() => { setOpen(true) }}><WarningIcon /> </Button>
+                  </TableCell>
+                </TableRow>
+              </div>
+            ))}
+          </TableBody>
+        </Table>
+
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            {"Congraturation"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <Alert severity="success">
+                <AlertTitle>You want to ban this account ?</AlertTitle>
+              </Alert>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            {/* chỗ này gắn hàm vô : onClick={()=>handleDelete()}*/}
+            <Button  >yes</Button>
+            <Button autoFocus onClick={handleClose}>
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
+
+      </TableContainer>
 
 
 
 
 
-          
-          
-          </div>
-      
-          )}
 
-          
+
+    </div>
+
+  )
+}
+

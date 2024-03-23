@@ -566,7 +566,7 @@ public class ArtworksController : ControllerBase
             // Duyệt qua từng ngày trong khoảng thời gian
             foreach (var date in dateRange)
             {
-<<<<<<< HEAD
+
                 // Lấy thông tin của các artworks được tạo vào ngày đó
                 var artworks = await _context.Artworks
                     .Where(a => a.DateCreated.Date == date)
@@ -587,21 +587,7 @@ public class ArtworksController : ControllerBase
                     });
                 }
             }
-=======
-                // Lấy tổng lượng like của các artworks được tạo vào ngày đó
-                var totalLikes = await _context.Artworks
-                    .Where(a => a.DateCreated.Date == date)
-                    .SumAsync(a => a.Likes);
 
-                // Thêm kết quả vào danh sách
-                likeSummary.Add(new ArtworkLikesByDate
-                {
-                    Date = date,
-                    TotalLikes = totalLikes
-                });
-            }
-
->>>>>>> Tuyet
             return Ok(likeSummary);
         }
         catch (Exception ex)
@@ -614,16 +600,12 @@ public class ArtworksController : ControllerBase
     {
         public DateTime Date { get; set; }
         public int TotalLikes { get; set; }
-<<<<<<< HEAD
+
         public int ArtworkID { get; set; }
         public string ArtworkName { get; set; }
     }
 
 
-=======
-    }
-
->>>>>>> Tuyet
 
 
     [HttpDelete("{id}")]
