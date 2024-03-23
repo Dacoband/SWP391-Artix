@@ -7,8 +7,7 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import Avatar from '@mui/material/Avatar';
 import { Doughnut } from 'react-chartjs-2';
 import PeopleIcon from '@mui/icons-material/People';
-import { Work } from '../../share/ListofWork';
-import { ListofUsers } from '../../share/ListofUsers';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -28,6 +27,7 @@ export default function Admin() {
   const [creatorcount, setCreatorCount] = useState()
   const [nearest7arts, setNearest7Arts] = useState([])
   const [creatorlist, setCreatorList] = useState([])
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     const getArtworkCount = async () => {
       let artCount = await GetArtListCount()
@@ -39,10 +39,12 @@ export default function Admin() {
     }
 
     const getNearest7Arts = async () => {
+      setLoading(true)
       let nearest7arts = await GetRecentArtListLikeCount()
+      setLoading(false)
       setNearest7Arts(nearest7arts)
     }
-    const getCreatorDetails= async () => {
+    const getCreatorDetails = async () => {
       let creatorDetails = await GetCreatorListNoImage()
       setCreatorList(creatorDetails)
     }
@@ -106,11 +108,6 @@ export default function Admin() {
       },
     },
   };
-
-
-
-  // sơ đồ 2
-  // số lượng user vip ( vip =true)
   const uservip = creatorlist.filter(user => user.vip === true).length;
   const usernonvip = creatorlist.length - uservip;
   const data2 = {
@@ -156,8 +153,8 @@ export default function Admin() {
     },
   };
   // sơ đồ 1
-  const labels = nearest7arts.map(art => art.artworkID)
-  const likesList = nearest7arts.map(art => art.totalLikes)
+  const labels = nearest7arts ? nearest7arts.map(art => art.artworkID) : []
+  const likesList = nearest7arts ? nearest7arts.map(art => art.totalLikes) : []
   const data = {
     labels,
     datasets: [
@@ -216,18 +213,29 @@ export default function Admin() {
 
           {/* biểu đồ người dùng và biểu đồ art */}
           <div className='allchart'>
+            {loading===true ?
+              <CircularProgress
+                color='primary'
+                size={100}
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '40%',
+                }}
+              />
+              : ""}
             <Box className='boxchart'>
               <div className='chart' style={{ width: '700px', margin: 'auto', padding: '25px' }}>
                 <Bar options={options} data={data} />
               </div>
               <div className='nameworks-container'>
-                  {nearest7arts.map((work, index) => (
-                    <div className='namework' key={index}>
-                      {work.artworkID}: {work.artworkName}
-                      {/* {work.date} */}
-                    </div>
-                  ))}
-                </div>
+                {nearest7arts.map((work, index) => (
+                  <div className='namework' key={index}>
+                    {work.artworkID}: {work.artworkName}
+                    {/* {work.date} */}
+                  </div>
+                ))}
+              </div>
             </Box>
 
 
@@ -235,7 +243,7 @@ export default function Admin() {
               <div className='doughnut' style={{ width: '350px' }}>
                 <h4>Total:{creatorcount} Users</h4>
                 <Doughnut options={options2} data={data2} />
-                
+
               </div>
             </Box>
           </div>
