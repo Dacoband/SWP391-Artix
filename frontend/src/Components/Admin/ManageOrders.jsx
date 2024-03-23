@@ -13,7 +13,7 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-
+import PaymentIcon from '@mui/icons-material/Payment'; 
 export default function ManageOrders() {
   //Mui Table page
   const [value, setValue] = useState(0);
@@ -52,6 +52,7 @@ const handleAccept = (id) => {
 };
 //Backdrop Mui
 const [open, setOpen] = React.useState(false);
+const [open2, setOpen2] = React.useState(false);
 const [selectedOrderID, setSelectedOrderID] = useState(null);
 const handleClose = () => {
   setOpen(false);
@@ -59,6 +60,10 @@ const handleClose = () => {
 const handleOpen = (id) => {
   setSelectedOrderID(id);
   setOpen(true);
+};
+const handleOpen2 = (id) => {
+  setSelectedOrderID(id);
+  setOpen2(true);
 };
 
 
@@ -76,8 +81,11 @@ const handleOpen = (id) => {
             <TableCell style={{color:'white'}} align="left">Customer Name</TableCell>
             <TableCell style={{color:'white'}} align="left">Artist</TableCell>
             <TableCell style={{color:'white'}} align="left">Pice</TableCell>
-            <TableCell style={{color:'white'}} align="left">Date</TableCell>
+            <TableCell style={{color:'white'}} align="left">Cost</TableCell>
             <TableCell style={{color:'white'}} align="left">Transaction image</TableCell>
+            <TableCell style={{color:'white'}} align="left">Date</TableCell>
+            <TableCell style={{color:'white'}} align="left">Account Artist</TableCell>
+            
             <TableCell style={{color:'white'}} align="left">Status</TableCell>
 
             
@@ -95,9 +103,13 @@ const handleOpen = (id) => {
               {/* userNamereceiver là của người bán */}
               <TableCell align="left">{order.userNamerequestor}</TableCell>
               <TableCell align="left">{order.userNamereceiver}</TableCell>
-              <TableCell align="left">{order.price}</TableCell>
-              <TableCell align="left">{order.date}</TableCell>
+              <TableCell align="left">{order.price}$</TableCell>
+              <TableCell align="left">{order.price *0.9}$</TableCell>
               <TableCell align="left"> <Button onClick={() => handleOpen(order.id)}><PhotoIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
+              <TableCell align="left">{order.date}</TableCell>
+              <TableCell align="left"><Button onClick={() => handleOpen(order.id)}><PaymentIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
+             
+             
               <TableCell align="left">
               {order.complete ? (
                 <Button color='success'>Complete</Button>
@@ -123,10 +135,19 @@ const handleOpen = (id) => {
             <Button onClick={handleClose} style={{fontSize:'50px', transform: 'translateY(-350px) translateX(800px)', color:'white'}}>X</Button>
              <img src={order.image} style={{maxWidth:'700px'}}/>
            </Backdrop>
+           <Backdrop
+             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+             open2={open && selectedOrderID === order.id}
+             onClick={handleClose}
+           >
+            <Button onClick={handleClose} style={{fontSize:'50px', transform: 'translateY(-350px) translateX(800px)', color:'white'}}>X</Button>
+             <img src={order.image} style={{maxWidth:'700px'}}/>
+           </Backdrop>
             
             </TableRow>
 
           ))}
+          
         </TableBody>
       </Table>
       <TablePagination
