@@ -75,7 +75,7 @@ export default function YourRequest() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
-          minHeight:'700px'
+          minHeight:'600px'
         }}>
 
 
