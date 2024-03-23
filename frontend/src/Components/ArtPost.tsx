@@ -17,6 +17,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Divider } from '@mui/material';
 import { Tag } from '../Interfaces/TagInterface';
 import { GetTagByArtId } from '../API/TagAPI/GET.tsx';
+import { Watermark } from './StyledMUI/AppLogo.jsx';
 
 
 export default function PostWork() {
@@ -68,6 +69,7 @@ export default function PostWork() {
         style={{ backgroundColor: theme.backgroundColor, paddingBottom: '50px', color: theme.color }}
       >
         <div className='info-postwork'>
+          {artwork?.purchasable?<Watermark />:""}
           <div className='imgpost' style={{ backgroundColor: theme.hoverBackgroundColor }}>
             <img alt={artwork?.artworkName} src={`data:image/jpeg;base64,${artwork?.imageFile}`} />
           </div>
@@ -101,7 +103,9 @@ export default function PostWork() {
               </a>
             </div>
             <div style={{ margin: 'auto 5px', }}>
-              <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
+            {artwork?.purchasable? 
+            <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
+            :""}
             </div>
           </div>
           <div id='"#comment"'>

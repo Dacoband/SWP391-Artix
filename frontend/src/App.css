@@ -1,15 +1,22 @@
 /* Custom scrollbar for webkit-based browsers */
 custom-scrollbar::-webkit-scrollbar {
-  width: 8px; /* Adjust scrollbar width */
+  width: 8px;
+  /* Adjust scrollbar width */
 }
+
 custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--scrollbar-track-color); /* Track background */
+  background: var(--scrollbar-track-color);
+  /* Track background */
 }
+
 custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--scrollbar-thumb-color); /* Thumb color */
+  background: var(--scrollbar-thumb-color);
+  /* Thumb color */
 }
+
 custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: var(--scrollbar-thumb-hover-color); /* Thumb color when hovered */
+  background: var(--scrollbar-thumb-hover-color);
+  /* Thumb color when hovered */
 }
 
 /* End Customize Scrollbar */
@@ -17,6 +24,22 @@ custom-scrollbar::-webkit-scrollbar-thumb:hover {
 * {
   margin: 0;
   padding: 0;
+}
+
+.watermark {
+  position: absolute;
+  scale: 120%;
+  top: 25%;
+  left: 15%;
+  transform: rotate(-10deg);
+  opacity: 0.3;
+  /* Low opacity */
+  pointer-events: none;
+  /* Ensures the watermark doesn't interfere with interaction */
+  user-select: none;
+  /* Prevents the user from selecting the watermark */
+  z-index: 10;
+  /* Adjust as necessary to ensure the watermark is above the image */
 }
 
 .background {
@@ -253,9 +276,12 @@ custom-scrollbar::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
 }
+
 .reply {
-  margin-top: 10px; /* Điều chỉnh giá trị này tùy theo khoảng cách bạn muốn */
+  margin-top: 10px;
+  /* Điều chỉnh giá trị này tùy theo khoảng cách bạn muốn */
 }
+
 /* END TESTICON */
 
 /* HomePage */
@@ -691,7 +717,7 @@ a {
 }
 
 .imgpost {
-  border-top-left-radius:5px;
+  border-top-left-radius: 5px;
   border-bottom-right-radius: 5px;
   height: 560px;
   width: 70%;
@@ -711,7 +737,7 @@ a {
   margin-left: 30px;
 }
 
-.content-post-img{
+.content-post-img {
   margin-top: 2%;
 }
 
@@ -746,14 +772,16 @@ a {
   display: flex;
   flex-direction: column;
 }
+
 .tag-container {
   display: flex;
-  flex-wrap: wrap; /* Cho phép các phần tử tự động xuống hàng khi không đủ width */
+  flex-wrap: wrap;
+  /* Cho phép các phần tử tự động xuống hàng khi không đủ width */
 }
 
 
 
-.tag-item{
+.tag-item {
   display: inline-block;
   margin: 2px 2px 2px 2px;
 }
@@ -761,7 +789,7 @@ a {
 /* End Art Post */
 
 /* BackgroundPictureButton */
-.backgroundPicture{
+.backgroundPicture {
   position: 'relative';
   display: 'flex';
   justify-content: 'center';
@@ -774,7 +802,8 @@ a {
   width: '15vw';
   opacity: '20%';
 }
-.backgroundPicture:hover{
+
+.backgroundPicture:hover {
   opacity: 100%;
 }
 
