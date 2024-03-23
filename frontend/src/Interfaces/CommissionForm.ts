@@ -1,7 +1,14 @@
-export interface CommissionForm {
-    commissionFormID: 0,
-    commissionID: 0,
-    receiverID: 0,
-    requestorID: 0,
-    description: string
+export interface ICommissionForm {
+    commissionFormID: number|0,
+    commissionID: number|0,
+    receiverID: string|number,
+    requestorID: string|number,
+    description: string|""
+    accept: boolean|null,
+    progress: 0,
+}
+
+export interface ICommissionID {
+    commissionID: string|number,
+   
 }

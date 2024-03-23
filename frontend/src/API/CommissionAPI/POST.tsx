@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CommissionForm } from '../../Interfaces/CommissionForm'
+import { ICommissionForm, ICommissionID } from '../../Interfaces/CommissionForm'
 
 const commissionIdurl = "https://localhost:7233/api/Commission"
 const commissionFromCreate = "https://localhost:7233/api/CommissionForm"
@@ -11,9 +11,8 @@ const headers = {
   };
 export async function GetCommissionID() {
     try{
-        
-        const value = {commissionID:0}
-        let id:number = await axios.post(commissionIdurl,value,{headers}).then(response => response.data)
+        const value = {commissionID:"0"}
+        let id:ICommissionID = await axios.post(commissionIdurl,value,{headers}).then(response => response.data)
         return id
         
     }catch(err){
@@ -21,10 +20,10 @@ export async function GetCommissionID() {
     }
 }
 
-export async function CreateCommissionForm(value:CommissionForm) {
+export async function CreateCommissionForm(value) {
     try{
-        let tag:CommissionForm = await axios.post(commissionFromCreate,value,{headers}).then(response => response.data)
-        return tag
+        let response = await axios.post(commissionFromCreate,value,{headers}).then(response => response.data)
+        return response
         
     }catch(err){
       console.log(err)

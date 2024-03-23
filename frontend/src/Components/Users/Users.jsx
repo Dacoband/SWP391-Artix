@@ -16,7 +16,7 @@ import SeeMoreUser from './SeeMoreUser.tsx';
 // eslint-disable-next-line 
 import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
-import CommissionForm from './CommissionForm.jsx';
+import CommissionForm from './CommissionForm.tsx';
 import YourCommission from './YourCommission.jsx';
 export default function Users() {
   return (

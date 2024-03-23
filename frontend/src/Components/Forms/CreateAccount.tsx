@@ -49,7 +49,7 @@ export default function CreateAccount() {
     const { name, value, checked, type } = event.target;
     setCommission(type === 'checkbox' ? checked : value);
   };
-
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false);
   // Call this function when the form is submitted successfully
   const handleOpenSnackbar = () => {
@@ -66,7 +66,6 @@ export default function CreateAccount() {
   // Account Creation Started Here!
   const { theme } = useContext(ThemeContext)
   const [accountID, setAccountID] = useState("")
-  const navigate = useNavigate()
   const formik = useFormik({
     validateOnChange: false,
     validateOnBlur: false,
