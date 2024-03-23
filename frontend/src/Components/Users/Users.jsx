@@ -17,8 +17,8 @@ import SeeMoreUser from './SeeMoreUser.tsx';
 import SeeMoreForYou from './SeeMoreForYou.tsx';
 import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.tsx';
-import YourCommission from './YourCommission.jsx';
-import YourRequest from './YourRequest.jsx';
+import YourCommission from './YourCommission.tsx';
+import YourRequest from './YourRequest.tsx';
 import TransactionHistory from './TransactionHistory.jsx';
 export default function Users() {
   return (

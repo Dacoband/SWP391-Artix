@@ -10,7 +10,7 @@ import { Artwork } from '../../../Interfaces/ArtworkInterfaces.ts';
 import {GetRandom10Arts, GetTop10Arts } from '../../../API/ArtworkAPI/GET.tsx';
 import { Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { GetCreatorList } from '../../../API/UserAPI/GET.tsx';
+import {GetCreatorListNoBackground } from '../../../API/UserAPI/GET.tsx';
 
 export default function HomePage() {
   // Attempt to retrieve the auth state from sessionStorage
@@ -49,7 +49,7 @@ export default function HomePage() {
         //Get random artwork
     }
     const getCreatorList = async () =>{
-      let creatorList: Creator[] | undefined = await GetCreatorList()
+      let creatorList: Creator[] | undefined = await GetCreatorListNoBackground()
       setCreatorList(creatorList? creatorList : [])
     }
     getCreatorList()

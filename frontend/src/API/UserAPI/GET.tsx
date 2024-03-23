@@ -4,6 +4,7 @@ import axios from 'axios'
 
 
 const creatorurl = 'https://localhost:7233/api/Creator/'
+const creatonobackgroundimageurl = `https://localhost:7233/api/Creator/NotBackground`
 const accountemailurl = 'https://localhost:7233/api/Account/email/'
 const countcreatorurl = "https://localhost:7233/api/Creator/CountCreators"
 const creatorvipstatusurl = `https://localhost:7233/api/Creator/GetID/UserName/Vip`
@@ -17,9 +18,20 @@ export async function GetCreatorListNoImage() {
     console.log(err)
   }
 }
+
+export async function GetCreatorListNoBackground() {
+  try{
+      let creatorList:Creator[] = await axios.get(creatorurl).then(response => response.data)
+      return creatorList
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
 export async function GetCreatorListCount() {
   try{
-      let creatorList:Creator[] = await axios.get(countcreatorurl).then(response => response.data)
+      let creatorList:Creator[] = await axios.get(creatonobackgroundimageurl).then(response => response.data)
       return creatorList
       
   }catch(err){
