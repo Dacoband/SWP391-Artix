@@ -96,7 +96,7 @@ export default function YourCommission() {
           minHeight:'800px'
         }}>
             <h1>Your Commissions:</h1>
-            <div className='listcommission'style={{width:'100%',display:'flex', justifyContent:'center'}}>
+            <div className='listcommission'style={{width:'100%',display:'flex', justifyContent:'center', paddingBottom:'40px'}}>
 
 
             <List sx={{ width: '100%', maxWidth: 1000, bgcolor: 'background.paper' }} 
