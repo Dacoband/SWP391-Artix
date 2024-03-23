@@ -1,5 +1,23 @@
 .yourCommission{
-    transform: translateY(20%);
-    margin-bottom: 30px;
+    transform: translateY(4%);
+    margin-bottom: 100px;
    
+}
+.onecommissio{
+    display: flex;
+}
+.button{
+    text-align: right;
+    margin-bottom: 15px;
+}
+.contentcommission{
+    margin-left: 52px;
+    color: #262626;
+}
+.dialog{
+    width: 800px;
+}
+.box h1{
+    padding-top: 30px;
+    margin-left: 100px;
 }
