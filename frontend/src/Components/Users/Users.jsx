@@ -19,6 +19,7 @@ import DashboardUser from './DashboardUser.jsx';
 import CommissionForm from './CommissionForm.jsx';
 import YourCommission from './YourCommission.jsx';
 import YourRequest from './YourRequest.jsx';
+import TransactionHistory from './TransactionHistory.jsx';
 export default function Users() {
   return (
     <div>
@@ -41,6 +42,7 @@ export default function Users() {
           <Route path={`dashboarduser`} element={<DashboardUser/>}/>
           <Route path={`yourcommision`} element={<YourCommission/>}/>
           <Route path={`yourrequest`} element={<YourRequest/>}/>
+          <Route path={`transaction`} element={<TransactionHistory/>}/>
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}

@@ -1,4 +1,7 @@
-.yourRequest{
+.box h1{
+    margin-bottom: 25px;
+}
+.transaction{
     transform: translateY(40px);
     margin-bottom: 100px;
 }
