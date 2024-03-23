@@ -177,7 +177,7 @@ public class CommissionFormController : ControllerBase
     }
 
 
-    [HttpGet("ByRequestorIDAddEmailAndPhone/{requestorID}")]
+    [HttpGet("ByRequestorIDAddEmailAndPhone/{requesterid}")]
     public IActionResult GetCommissionFormsByRequesterID(int requesterid)
     {
         var commissionForms = _context.CommissionForm
