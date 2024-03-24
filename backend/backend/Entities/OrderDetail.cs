@@ -10,6 +10,7 @@ namespace backend.Entities
         public int ArtWorkID { get; set; }
         public DateTime DateOfPurchase { get; set; }
         public double Price { get; set; }
+        public string  PurchaseConfirmationImage  { get; set; }
 
     }
 }

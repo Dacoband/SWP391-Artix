@@ -25,28 +25,35 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Order>> GetOrder(int id)
+    [HttpGet("creator/{creatorID}")]
+    public ActionResult<IEnumerable<Order>> GetOrdersByCreatorID(int creatorID)
     {
-        var order = await _context.Orders.FindAsync(id);
-
-        if (order == null)
+        var orders = _context.Orders.Where(o => o.CreatorID == creatorID).ToList();
+        if (orders.Count > 0)
         {
-            return NotFound();
+            return Ok(orders);
         }
-
-        return order;
+        return NotFound();
     }
-
     // POST: api/Orders
     [HttpPost]
-    public async Task<ActionResult<Order>> PostOrder(Order order)
+    public ActionResult<Order> PostOrder([FromBody] Order order)
     {
-        _context.Orders.Add(order);
-        await _context.SaveChangesAsync();
+        
+            // Kiểm tra xem CreatorID có tồn tại trong bảng Creators không
+            var creatorExists = _context.Creators.Any(c => c.CreatorID == order.CreatorID);
+            if (!creatorExists)
+            {
+                return NotFound("CreatorID không tồn tại trong bảng Creators.");
+            }
 
-        return CreatedAtAction(nameof(GetOrder), new { id = order.OrderID }, order);
-    }
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
+            return Ok(order);
+        }
+        
+    
 
     // DELETE: api/Orders/5
     [HttpDelete("{id}")]
