@@ -66,6 +66,36 @@ public class OrderDetailController : ControllerBase
         return Ok(orderDetail.PurchaseConfirmationImage);
     }
 
+    [HttpGet("ByBuyer/{buyerId}")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByBuyerId(int buyerId)
+    {
+        var orders = await _context.Orders
+            .Where(o => o.BuyerID == buyerId)
+            .ToListAsync();
+
+        if (orders == null)
+        {
+            return NotFound();
+        }
+
+        return orders;
+    }
+    [HttpGet("BySeller/{sellerId}")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetOrdersBySellerId(int sellerId)
+    {
+        var orders = await _context.Orders
+            .Where(o => o.SellerID == sellerId)
+            .ToListAsync();
+
+        if (orders == null)
+        {
+            return NotFound();
+        }
+
+        return orders;
+    }
+
+
     [HttpGet("All")]
     public async Task<ActionResult<IEnumerable<OrderDetailDTO>>> GetAllOrderDetails()
     {
