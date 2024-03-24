@@ -7,8 +7,8 @@ namespace backend.Entities
     {
         [Key]
         public int OrderID { get; set; }
-        public int SellerID  { get; set; }
+        public int? SellerID  { get; set; }
         public Boolean Confirmation  { get; set; }
-        public int BuyerID { get; set; }
+        public int? BuyerID { get; set; }
     }
 }
