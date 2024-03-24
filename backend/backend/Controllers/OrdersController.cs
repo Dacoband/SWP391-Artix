@@ -206,7 +206,7 @@ public class OrdersController : ControllerBase
 public class OrderWithAccountIDDTO
 {
     public int OrderID { get; set; }
-    public int CreatorID { get; set; }
+    public int? CreatorID { get; set; }
     public bool Confirmation { get; set; }
     public int? AccountID { get; set; }
 
