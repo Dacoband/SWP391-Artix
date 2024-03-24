@@ -51,6 +51,33 @@ public class ArtworksController : ControllerBase
 
         return Ok(artworks);
     }
+    [HttpGet("ArtworkNotImageFile/{ArtworkID}")]
+    public async Task<IActionResult> GetArtwork(int ArtworkID)
+    {
+        var artwork = await _context.Artworks
+            .Where(a => a.ArtworkID == ArtworkID)
+            .Select(a => new Artworks
+            {
+                ArtworkID = a.ArtworkID,
+                CreatorID = a.CreatorID,
+                ArtworkName = a.ArtworkName,
+                Description = a.Description,
+                DateCreated = a.DateCreated,
+                Likes = a.Likes,
+                Purchasable = a.Purchasable,
+                Price = a.Price,
+                ArtworkTag = a.ArtworkTag
+            })
+            .FirstOrDefaultAsync();
+
+        if (artwork == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(artwork);
+    }
+
     [HttpGet("NotImage")]
     public async Task<IActionResult> GetArtworksNotImage()
     {
