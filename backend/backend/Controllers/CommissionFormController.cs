@@ -81,38 +81,46 @@ public class CommissionFormController : ControllerBase
     }
 
     // PUT: api/CommissionForm/5
-    [HttpPut("{commissionId}")]
-    public async Task<IActionResult> PutCommissionForm(int commissionId, CommissionForm commissionForm)
+    [HttpPut("{id}")]
+    public IActionResult PutCommissionForm(int id, CommissionForm commissionForm)
     {
-        if (commissionId != commissionForm.CommissionFormID
-            )
+        if (id != commissionForm.CommissionFormID)
         {
             return BadRequest();
         }
 
-        _context.Entry(commissionForm).State = EntityState.Modified;
+        var existingCommissionForm = _context.CommissionForm.Find(id);
+
+        if (existingCommissionForm == null)
+        {
+            return NotFound();
+        }
+
+        // Update the properties of existingCommissionForm with the values from commissionForm
+        existingCommissionForm.CommissionID = commissionForm.CommissionID;
+        existingCommissionForm.ReceiverID = commissionForm.ReceiverID;
+        existingCommissionForm.RequestorID = commissionForm.RequestorID;
+        existingCommissionForm.Description = commissionForm.Description;
+        existingCommissionForm.Accept = commissionForm.Accept;
+        existingCommissionForm.Progress = commissionForm.Progress;
+
+        _context.CommissionForm.Update(existingCommissionForm);
 
         try
         {
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
-        catch (DbUpdateConcurrencyException)
+        catch (Exception)
         {
-            if (!CommissionFormExists(commissionId))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
+            return BadRequest();
         }
 
         return NoContent();
     }
 
 
-    [HttpGet("total-commission/{creatorId}")]
+
+[HttpGet("total-commission/{creatorId}")]
     public async Task<ActionResult<int>> GetTotalCommissionByCreatorId(int creatorId)
     {
         try
@@ -130,6 +138,87 @@ public class CommissionFormController : ControllerBase
             return StatusCode((int)HttpStatusCode.InternalServerError, "An error occurred while processing your request.");
         }
     }
+
+
+
+
+
+    [HttpGet("ByReceiverIDAddEmailAndPhone/{receiverID}")]
+    public IActionResult GetCommissionFormsByReceiverID(int receiverID)
+    {
+        var commissionForms = _context.CommissionForm
+            .Where(cf => cf.ReceiverID == receiverID)
+            .Select(cf => new
+            {
+                cf.CommissionFormID,
+                cf.CommissionID,
+                cf.ReceiverID,
+                cf.RequestorID,
+                cf.Description,
+                cf.Accept,
+                cf.Progress,
+                RequestorEmail = _context.Creators
+                    .Where(c => c.CreatorID == cf.RequestorID)
+                    .Select(c => c.Email)
+                    .FirstOrDefault(), // Lấy email của người tạo yêu cầu
+                RequestorPhone = _context.Creators
+                    .Where(c => c.CreatorID == cf.RequestorID)
+                    .Select(c => c.Phone)
+                    .FirstOrDefault(), // Lấy số điện thoại của người tạo yêu cầu
+                RequestorUserName = _context.Creators
+                    .Where(c => c.CreatorID == cf.RequestorID)
+                    .Select(c => c.UserName)
+                    .FirstOrDefault()
+            })
+            .ToList();
+
+        if (commissionForms == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(commissionForms);
+    }
+
+
+    [HttpGet("ByRequestorIDAddEmailAndPhone/{requesterid}")]
+    public IActionResult GetCommissionFormsByRequesterID(int requesterid)
+    {
+        var commissionForms = _context.CommissionForm
+            .Where(cf => cf.RequestorID == requesterid)
+            .Select(cf => new
+            {
+                cf.CommissionFormID,
+                cf.CommissionID,
+                cf.ReceiverID,
+                cf.RequestorID,
+                cf.Description,
+                cf.Accept,
+                cf.Progress,
+                RequestorEmail = _context.Creators
+                    .Where(c => c.CreatorID == cf.ReceiverID)
+                    .Select(c => c.Email)
+                    .FirstOrDefault(), // Lấy email của người tạo yêu cầu
+                RequestorPhone = _context.Creators
+                    .Where(c => c.CreatorID == cf.ReceiverID)
+                    .Select(c => c.Phone)
+                    .FirstOrDefault(), // Lấy số điện thoại của người tạo yêu cầu
+                RequestorUserName = _context.Creators
+                    .Where(c => c.CreatorID == cf.ReceiverID)
+                    .Select(c => c.UserName)
+                    .FirstOrDefault()
+            })
+            .ToList();
+
+        if (commissionForms == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(commissionForms);
+    }
+
+
 
 
     [HttpGet("total-sent-commission/{creatorId}")]

@@ -15,43 +15,46 @@ import SeeMoreOfArt1 from './SeeMoreOfArt1.tsx';
 import SeeMoreUser from './SeeMoreUser.tsx';
 // eslint-disable-next-line 
 import SeeMoreForYou from './SeeMoreForYou.tsx';
-import DashboardUser from './DashboardUser.jsx';
+import DashboardUser from './DashboardUser.tsx';
 import CommissionForm from './CommissionForm.tsx';
-import YourCommission from './YourCommission.jsx';
-import YourRequest from './YourRequest.jsx';
+import YourCommission from './YourCommission.tsx';
+import YourRequest from './YourRequest.tsx';
 import TransactionHistory from './TransactionHistory.jsx';
 import Payment from './Payment.jsx';
+import ProtectedRoute from '../../ProtectedRoutes/ProtectedRoute.tsx';
 export default function Users() {
   return (
     <div>
       <Menu />
       <Background>
-      {/* <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}> */}
+        {/* <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}> */}
         <Routes>
-          <Route path={`/`} element={<HomePage/>} />
-          <Route path={`creatorform`} element={<UserInfoForm/>}/>
-          <Route path={`artworkform`} element={<UploadArtwork/>}/>
-          <Route path={`profile/:id`} element={<ProfileUser />}/>
-          
-          <Route path={`profile/:id/commission`} element={<CommissionForm/>}/>
-          
-          <Route path={`artwork/:id`} element={<ArtPost />}/>
-          <Route path={`artwork/:id/payment`} element={<Payment />}/>
+          <Route path={`/`} element={<HomePage />} />
+          <Route path={`creatorform`} element={<UserInfoForm />} />
+          <Route path={`profile/:id`} element={<ProfileUser />} />
 
-          <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
-          <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
-          <Route path={`randomword`} element={<SeeMoreOfArt1/>}/>
-          <Route path={`dashboarduser`} element={<DashboardUser/>}/>
-          <Route path={`yourcommision`} element={<YourCommission/>}/>
-          <Route path={`yourrequest`} element={<YourRequest/>}/>
-          <Route path={`transaction`} element={<TransactionHistory/>}/>
+          <Route path={`artwork/:id`} element={<ArtPost />} />
+          <Route element={<ProtectedRoute allowedRoles={['AT','AD']} />}>
+            <Route path={`artwork/:id/payment`} element={<Payment />} />
+            <Route path={`yourcommision`} element={<YourCommission />} />
+            <Route path={`yourrequest`} element={<YourRequest />} />
+            <Route path={`transaction`} element={<TransactionHistory />} />
+            <Route path={`artworkform`} element={<UploadArtwork />} />
+            <Route path={`profile/:id/commission`} element={<CommissionForm />} />
+            <Route path={`dashboarduser`} element={<DashboardUser />} />
+          </Route>
+          <Route path={`artwordrecomment`} element={<SeeMoreOfArt1 />} />
+          <Route path={`userrecomment`} element={<SeeMoreUser />} />
+          <Route path={`randomword`} element={<SeeMoreOfArt1 />} />
+
+
           {/* <Route path={`payment`} element={<Payment/>}/> */}
-         
+
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}
-      {/* </div> */}
-      <Footer/>
+        {/* </div> */}
+        <Footer />
       </Background>
     </div>
   )
