@@ -58,10 +58,7 @@ public class OrdersController : ControllerBase
 
 
     // GET: api/Orders/5
-<<<<<<< HEAD
-=======
 
->>>>>>> Main
     [HttpGet("AccountID/{AccountID}")]
     public ActionResult<IEnumerable<Order>> GetOrdersByAccountID(int AccountID)
     {

@@ -12,7 +12,7 @@ const headers = {
 
 export async function PutOrderHeader(values:OrderHeader,id:string) {
     try{
-        let form:OrderHeader = await axios.post(createorderheaderurl+id,values,{headers}).then(response => response.data)
+        let form:OrderHeader = await axios.put(createorderheaderurl+id,values,{headers}).then(response => response.data)
         return form
     }catch(err){
       console.log(err)

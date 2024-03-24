@@ -1,5 +1,5 @@
 export interface OrderHeader {
-    orderID: string | undefined
+    orderID: string
     creatorID: string | undefined
     confirmation: boolean | false
 }
