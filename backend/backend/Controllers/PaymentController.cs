@@ -52,35 +52,29 @@ public class PaymentController : ControllerBase
     // POST: api/PayPalAccount
 
     [HttpPost]
-    public ActionResult<string> PostQrCode([FromBody] int accountID, [FromBody] string qrCode)
+    public ActionResult<string> PostQrCode([FromBody] Payment  qrCodeDTO)
     {
-        var account = _context.Account.FirstOrDefault(a => a.AccountID == accountID);
-        if (account != null)
+        try
         {
-            var payment = _context.Payment.FirstOrDefault(p => p.AccountID == accountID);
-            if (payment == null)
+            var account = _context.Account.FirstOrDefault(a => a.AccountID == qrCodeDTO.AccountID);
+            if (account != null)
             {
-                payment = new Payment
+                var payment = new Payment
                 {
-                    AccountID = accountID,
-                    QrCode = qrCode
+                    QrCode = qrCodeDTO.QrCode,
+                    AccountID = qrCodeDTO.AccountID
                 };
                 _context.Payment.Add(payment);
                 _context.SaveChanges();
                 return Ok(payment.QrCode);
             }
-            else
-            {
-                // Nếu đã tồn tại thanh toán cho tài khoản này, cập nhật mã QR
-                payment.QrCode = qrCode;
-                _context.SaveChanges();
-                return Ok(payment.QrCode);
-            }
+            return NotFound();
         }
-        return NotFound();
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal server error: " + ex.Message);
+        }
     }
-
-
 
 
 
