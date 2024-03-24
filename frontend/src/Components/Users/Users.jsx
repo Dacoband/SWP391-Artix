@@ -46,6 +46,10 @@ export default function Users() {
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1 />} />
           <Route path={`userrecomment`} element={<SeeMoreUser />} />
           <Route path={`randomword`} element={<SeeMoreForYou/>} />
+          <Route path={`artwordrecomment/artwork/:id`} element={<ArtPost />} />
+          <Route path={`randomword/artwork/:id`} element={<ArtPost />} />
+          
+
 
 
           {/* <Route path={`payment`} element={<Payment/>}/> */}
