@@ -169,11 +169,13 @@ export default function ProfileUser() {
       <ImageList variant="masonry" cols={3} gap={8}>
         {artworks.map((work) => (
           <ImageListItem key={work.artworkID}>
+            <Link to={`../artwork//${work.artworkID}`}>
             <img
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
             />
+            </Link>
           </ImageListItem>
         ))}
       </ImageList>
@@ -184,12 +186,14 @@ export default function ProfileUser() {
       <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible' }} cols={4}>
         {artworks.map((work) => (
           <ImageListItem key={work.artworkID}>
+            <Link to={`../artwork//${work.artworkID}`}>
             <img
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
               style={{ height: '200px' }}
             />
+            </Link>
             <ImageListItemBar
               title={work.price}
               subtitle={work.artworkName}
@@ -212,11 +216,13 @@ export default function ProfileUser() {
       <ImageList variant="masonry" cols={4} gap={8}>
         {artworks.map((work) => (
           <ImageListItem key={work.artworkID}>
+            <Link to={`../artwork/${work.artworkID}`}>
             <img
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
             />
+            </Link>
           </ImageListItem>
         ))}
       </ImageList>
@@ -360,10 +366,6 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
               </div> </div>
 
             <div className='buttonheaderuser'  >
-
-              <Button className='buttonchat' style={{ marginRight: '20px', height: '40px' }} variant="contained" href="#contained-buttons" >
-                <ChatIcon /> Chat</Button>
-
               {isFollowing == true && (
                 <Button className='follow' style={{ width: '120px', height: '40px' }} variant="contained" href="#contained-buttons" onClick={() => handleClick()}>
                   + Follow
