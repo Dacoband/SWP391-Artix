@@ -13,9 +13,12 @@ import { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import PaymentIcon from '@mui/icons-material/Payment'; 
-import { OrderDetails, OrderDetailsExtended, OrderHeader } from '../../Interfaces/OrderInterfaces.ts';
-import { GetOrderDetailList, GetOrderDetailListNoImage, GetOrderDetailListNoImageExtended, GetOrderDetaiPaymentlID } from '../../API/OrderAPI/GET.tsx';
+import { OrderDetails, OrderDetailsExtended, OrderHeader, OrderHeaderExtended } from '../../Interfaces/OrderInterfaces.ts';
+import { GetOrderDetailList, GetOrderDetailListNoImage, GetOrderDetailListNoImageExtended, GetOrderDetaiPaymentlID, GetOrderHeaderByID } from '../../API/OrderAPI/GET.tsx';
 import { Payment } from '../../Interfaces/PaymentIntrerfaces.ts'
+import { GetPaymentAccount } from '../../API/PaymentAPI/GET.tsx';
+import { GetCreatorByID } from '../../API/UserAPI/GET.tsx';
+import { Creator } from '../../Interfaces/UserInterface.ts';
 export default function ManageOrders() {
   const [orderList,setOderList] = useState<OrderDetailsExtended[]>()
   const [orderHeader,setOrderHeader] = useState<OrderHeader>()
@@ -37,7 +40,9 @@ export default function ManageOrders() {
     }
 
     const handleGetQR = async(id:string)=>{
-      let bill:string|undefined = await GetOrderDetaiPaymentlID(id)
+      let orderHeader:OrderHeaderExtended = await GetOrderHeaderByID(id)
+      let payment:Payment = await GetPaymentAccount(orderHeader.accountID)
+      SetPayment(payment)
       SetBill(bill)
     }
 
@@ -90,7 +95,7 @@ const handleOpen = (orderDetailID) => {
   setOpen(true);
 };
 
-// handle fro seeing the qr to pay the creator
+// handle for seeing the qr to pay the creator
 const handleOpen2 = (orderDetailID) => {
   setSelectedOrderID(orderDetailID);
   setOpen2(true);
@@ -137,7 +142,7 @@ const handleOpen2 = (orderDetailID) => {
               <TableCell align="left">{order.price??0 * 0.9}$</TableCell>
               <TableCell align="left"> <Button onClick={() => {handleOpen(order.orderDetailID);handleGetBill(order.orderDetailID)}}><PhotoIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
               <TableCell align="left">{order.dateOfPurchase?.toString()}</TableCell>
-              <TableCell align="left"><Button onClick={() => handleOpen2(order.orderDetailID)}><PaymentIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
+              <TableCell align="left"><Button onClick={() => {handleOpen2(order.orderDetailID);handleGetQR(order.orderID)}}><PaymentIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
              
              {/* Payment For Creator  */}
               <TableCell align="left">
@@ -172,7 +177,7 @@ const handleOpen2 = (orderDetailID) => {
              onClick={handleClose}
            >
             <Button onClick={handleClose} style={{fontSize:'50px', transform: 'translateY(-350px) translateX(800px)', color:'white'}}>X</Button>
-             <img src={order.image} style={{maxWidth:'700px'}}/>
+             <img src={`data:image/jpeg;base64,${payment}`} style={{maxWidth:'700px',height:'90vh'}}/>
            </Backdrop>
             
             </TableRow>

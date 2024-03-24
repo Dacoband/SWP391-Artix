@@ -11,6 +11,16 @@ const getorderdetailpaymenturl =`https://localhost:7233/api/OrderDetail/Purchase
 
 const getextendedorderdetail = `https://localhost:7233/api/OrderDetail/All`
 
+export async function GetOrderHeaderByID(id:string) {
+    try{
+        let form:OrderHeader = await axios.get(orderheaderurlbyid+id).then(response => response.data)
+        return form
+        
+    }catch(err){
+      console.log(err)
+    }
+  }
+
 export async function GetOrderDetailListNoImageExtended() {
     
     try{

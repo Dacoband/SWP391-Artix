@@ -14,7 +14,7 @@ export async function GetPaymentAdmin() {
   }
   export async function GetPaymentAccount(id:string) {
     try{
-        let form:Payment[] = await axios.get(getpaymentaccounturl+id).then(response => response.data)
+        let form:Payment = await axios.get(getpaymentaccounturl+id).then(response => response.data)
         return form
         
     }catch(err){

@@ -4,6 +4,13 @@ export interface OrderHeader {
     confirmation: boolean | false
 }
 
+export interface OrderHeaderExtended {
+    orderID: string | undefined
+    creatorID: string | undefined
+    confirmation: boolean | false
+    accountID:string
+}
+
 export interface OrderDetails {
     orderDetailID: string
     orderID: string

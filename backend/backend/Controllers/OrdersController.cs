@@ -25,9 +25,7 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/5
-<<<<<<< HEAD
 
-=======
     [HttpGet("{id}")]
     public async Task<ActionResult<Order>> GetOrder(int id)
     {
@@ -58,7 +56,6 @@ public class OrdersController : ControllerBase
 
 
     // GET: api/Orders/5
->>>>>>> d120d4f8599b2fed24e4347a4b2f1a95c895623f
     [HttpGet("AccountID/{AccountID}")]
     public ActionResult<IEnumerable<Order>> GetOrdersByAccountID(int AccountID)
     {
