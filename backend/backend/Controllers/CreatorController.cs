@@ -27,7 +27,7 @@ public class CreatorController : ControllerBase
             {
                 CreatorID = c.CreatorID,
                 AccountID = c.AccountID,
-                PaypalAccountID = c.PaypalAccountID,
+                PaymentID = c.PaymentID,
                 UserName = c.UserName,
                 ProfilePicture = c.ProfilePicture,
                 BackgroundPicture = c.BackgroundPicture,
@@ -58,7 +58,7 @@ public class CreatorController : ControllerBase
             {
                 CreatorID = c.CreatorID,
                 AccountID = c.AccountID,
-                PaypalAccountID = c.PaypalAccountID,
+                PaymentID  = c.PaymentID,
                 UserName = c.UserName,
                 ProfilePicture = c.ProfilePicture,
                 BackgroundPicture = c.BackgroundPicture,
@@ -131,7 +131,7 @@ public class CreatorController : ControllerBase
             {
                 CreatorID = c.CreatorID,
                 AccountID = c.AccountID,
-                PaypalAccountID = c.PaypalAccountID,
+                PaymentID = c.PaymentID,
                 UserName = c.UserName,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
@@ -158,7 +158,7 @@ public class CreatorController : ControllerBase
             {
                 CreatorID = c.CreatorID,
                 AccountID = c.AccountID,
-                PaypalAccountID = c.PaypalAccountID,
+                PaymentID = c.PaymentID,
                 UserName = c.UserName,
                 ProfilePicture = c.ProfilePicture,
                 FirstName = c.FirstName,
@@ -294,7 +294,7 @@ public class CreatorController : ControllerBase
              {
                  CreatorID = c.CreatorID,
                  AccountID = c.AccountID,
-                 PaypalAccountID = c.PaypalAccountID,
+                 PaymentID = c.PaymentID,
                  UserName = c.UserName,
                  ProfilePicture = c.ProfilePicture,
                  BackgroundPicture = c.BackgroundPicture,
