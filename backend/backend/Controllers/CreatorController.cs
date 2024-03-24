@@ -534,13 +534,14 @@ public class CreatorController : ControllerBase
         _context.Orders.RemoveRange(orders);
         await _context.SaveChangesAsync();
         // Xóa tất cả các bản ghi trong bảng Reports có CreatorID là creator.Id
-        var reports = await _context.Reports.Where(r => r.CreatorID == id).ToListAsync();
+        var reports = await _context.Reports.Where(r => r.ReporterID == id).ToListAsync();
         foreach (var report in reports)
         {
             var moderators = await _context.Moderators.Where(m => m.ReportID == report.ReportID).ToListAsync();
             _context.Moderators.RemoveRange(moderators);
         }
         _context.Reports.RemoveRange(reports);
+
 
         // Xóa tất cả các bản ghi trong bảng OrderDetail có CreatorID là creator.Id
         

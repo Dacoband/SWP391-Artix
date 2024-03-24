@@ -164,7 +164,11 @@ public class CommissionFormController : ControllerBase
                 RequestorPhone = _context.Creators
                     .Where(c => c.CreatorID == cf.RequestorID)
                     .Select(c => c.Phone)
-                    .FirstOrDefault() // Lấy số điện thoại của người tạo yêu cầu
+                    .FirstOrDefault(), // Lấy số điện thoại của người tạo yêu cầu
+                RequestorUserName = _context.Creators
+                    .Where(c => c.CreatorID == cf.RequestorID)
+                    .Select(c => c.UserName)
+                    .FirstOrDefault()
             })
             .ToList();
 
@@ -198,7 +202,11 @@ public class CommissionFormController : ControllerBase
                 RequestorPhone = _context.Creators
                     .Where(c => c.CreatorID == cf.ReceiverID)
                     .Select(c => c.Phone)
-                    .FirstOrDefault() // Lấy số điện thoại của người tạo yêu cầu
+                    .FirstOrDefault(), // Lấy số điện thoại của người tạo yêu cầu
+                RequestorUserName = _context.Creators
+                    .Where(c => c.CreatorID == cf.ReceiverID)
+                    .Select(c => c.UserName)
+                    .FirstOrDefault()
             })
             .ToList();
 
