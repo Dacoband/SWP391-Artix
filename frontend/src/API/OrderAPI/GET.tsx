@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { OrderDetails, OrderHeader } from '../../Interfaces/OrderInterfaces';
+import { OrderDetails, OrderDetailsExtended, OrderHeader } from '../../Interfaces/OrderInterfaces';
 
 const getordernoImageurl = `https://localhost:7233/api/OrderDetail/GetNotImage`
 
@@ -8,6 +8,18 @@ const getorderlisturl = `https://localhost:7233/api/OrderDetail/`
 const orderheaderurlbyid = `https://localhost:7233/api/Order/`
 
 const getorderdetailpaymenturl =`https://localhost:7233/api/OrderDetail/PurchaseConfirmationImage/`
+
+const getextendedorderdetail = `https://localhost:7233/api/OrderDetail/All`
+
+export async function GetOrderDetailListNoImageExtended() {
+    
+    try{
+        let form:OrderDetailsExtended[] = await axios.get(getextendedorderdetail).then(response => response.data)
+        return form
+    }catch(err){
+      console.log(err)
+    }
+  }
 
 export async function GetOrderDetailListNoImage() {
     

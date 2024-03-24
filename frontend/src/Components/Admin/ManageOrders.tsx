@@ -13,18 +13,18 @@ import { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import PaymentIcon from '@mui/icons-material/Payment'; 
-import { OrderDetails, OrderHeader } from '../../Interfaces/OrderInterfaces.ts';
-import { GetOrderDetailList, GetOrderDetailListNoImage, GetOrderDetaiPaymentlID } from '../../API/OrderAPI/GET.tsx';
+import { OrderDetails, OrderDetailsExtended, OrderHeader } from '../../Interfaces/OrderInterfaces.ts';
+import { GetOrderDetailList, GetOrderDetailListNoImage, GetOrderDetailListNoImageExtended, GetOrderDetaiPaymentlID } from '../../API/OrderAPI/GET.tsx';
 import { Payment } from '../../Interfaces/PaymentIntrerfaces.ts'
 export default function ManageOrders() {
-  const [orderList,setOderList] = useState<OrderDetails[]>()
+  const [orderList,setOderList] = useState<OrderDetailsExtended[]>()
   const [orderHeader,setOrderHeader] = useState<OrderHeader>()
   const [payment,SetPayment] = useState<Payment>()
   const [bill,SetBill] = useState<string>()
 
   useEffect(() =>{
     const getOrderList = async() =>{
-      let orderList:OrderDetails[]|undefined = await GetOrderDetailListNoImage()
+      let orderList:OrderDetailsExtended[]|undefined = await GetOrderDetailListNoImageExtended()
       setOderList(orderList)
      // let orderHeader:OrderHeader[]|undefined = await GetO()
     }
@@ -32,6 +32,11 @@ export default function ManageOrders() {
   },[])
 
     const handleGetBill = async(id:string)=>{
+      let bill:string|undefined = await GetOrderDetaiPaymentlID(id)
+      SetBill(bill)
+    }
+
+    const handleGetQR = async(id:string)=>{
       let bill:string|undefined = await GetOrderDetaiPaymentlID(id)
       SetBill(bill)
     }
@@ -123,11 +128,11 @@ const handleOpen2 = (orderDetailID) => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {order.artWorkID}
+                {order.artworkName}
               </TableCell>
               {/* userNamereceiver là của người bán */}
-              <TableCell align="left">{order.artWorkID}</TableCell>
-              <TableCell align="left">{order.artWorkID}</TableCell>
+              <TableCell align="left">{order.creatorFirstName}</TableCell>
+              <TableCell align="left">{order.creatorUsername}</TableCell>
               <TableCell align="left">{order.price}$</TableCell>
               <TableCell align="left">{order.price??0 * 0.9}$</TableCell>
               <TableCell align="left"> <Button onClick={() => {handleOpen(order.orderDetailID);handleGetBill(order.orderDetailID)}}><PhotoIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
