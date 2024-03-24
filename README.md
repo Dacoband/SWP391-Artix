@@ -100,8 +100,6 @@
 
 • The Review of the work
 
-• Add wishlist
-
 ## Process 5 Cart Management
 
 • Create a cart if the cart is empty
