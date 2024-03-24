@@ -5,10 +5,10 @@ export interface OrderHeader {
 }
 
 export interface OrderDetails {
-    orderDetailID: string | undefined
-    orderID: string | undefined
+    orderDetailID: string
+    orderID: string
     artWorkID: string | undefined
     dateOfPurchase: Date | string | undefined
     price: number | undefined
-    purchaseConfirmationImage: string | undefined | null
+    purchaseConfirmationImage: string | null
 }

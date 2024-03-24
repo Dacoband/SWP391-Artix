@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Container, Box, Typography, Paper, Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -13,20 +13,28 @@ import { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import PaymentIcon from '@mui/icons-material/Payment'; 
-import { OrderDetails } from '../../Interfaces/OrderInterfaces.js';
-import { GetOrderDetailList } from '../../API/OrderAPI/GET.tsx';
+import { OrderDetails, OrderHeader } from '../../Interfaces/OrderInterfaces.ts';
+import { GetOrderDetailList, GetOrderDetailListNoImage, GetOrderDetaiPaymentlID } from '../../API/OrderAPI/GET.tsx';
 import { Payment } from '../../Interfaces/PaymentIntrerfaces.ts'
 export default function ManageOrders() {
   const [orderList,setOderList] = useState<OrderDetails[]>()
+  const [orderHeader,setOrderHeader] = useState<OrderHeader>()
   const [payment,SetPayment] = useState<Payment>()
+  const [bill,SetBill] = useState<string>()
+
   useEffect(() =>{
     const getOrderList = async() =>{
-      let orderList:OrderDetails[]|undefined = await GetOrderDetailList()
+      let orderList:OrderDetails[]|undefined = await GetOrderDetailListNoImage()
       setOderList(orderList)
+     // let orderHeader:OrderHeader[]|undefined = await GetO()
     }
     getOrderList()
   },[])
 
+    const handleGetBill = async(id:string)=>{
+      let bill:string|undefined = await GetOrderDetaiPaymentlID(id)
+      SetBill(bill)
+    }
 
   //Mui Table page
   const [value, setValue] = useState(0);
@@ -48,11 +56,11 @@ const handleChangeRowsPerPage = event => {
   setRowsPerPage(+event.target.value);
   setPage(0); // Reset page number back to 0 when changing rows per page
 };
-const sortedOrders = Order.sort((a, b) => new Date(b.date) - new Date(a.date));
+const sortedOrders = orderList?.sort((a, b) => parseInt(b.orderID) - parseInt(a.orderID));
 
 
 // Calculate the portion of users to display based on pagination
-const paginatedUsers = sortedOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+const paginatedUsers = sortedOrders?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 // Accpet
 const [acceptedItems, setAcceptedItems] = useState({});
 //ID của đơn hàng
@@ -69,13 +77,17 @@ const [open2, setOpen2] = React.useState(false);
 const [selectedOrderID, setSelectedOrderID] = useState(null);
 const handleClose = () => {
   setOpen(false);
+  setOpen2(false);
 };
-const handleOpen = (id) => {
-  setSelectedOrderID(id);
+// handle for seeing the bill
+const handleOpen = (orderDetailID) => {
+  setSelectedOrderID(orderDetailID);
   setOpen(true);
 };
-const handleOpen2 = (id) => {
-  setSelectedOrderID(id);
+
+// handle fro seeing the qr to pay the creator
+const handleOpen2 = (orderDetailID) => {
+  setSelectedOrderID(orderDetailID);
   setOpen2(true);
 };
 
@@ -105,32 +117,32 @@ const handleOpen2 = (id) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {paginatedUsers.map((order) => (
+          {orderList?.map((order) => (
             <TableRow
-              key={order.id}
+              key={order.orderID}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {order.artworkName}
+                {order.artWorkID}
               </TableCell>
               {/* userNamereceiver là của người bán */}
-              <TableCell align="left">{order.userNamerequestor}</TableCell>
-              <TableCell align="left">{order.userNamereceiver}</TableCell>
+              <TableCell align="left">{order.artWorkID}</TableCell>
+              <TableCell align="left">{order.artWorkID}</TableCell>
               <TableCell align="left">{order.price}$</TableCell>
-              <TableCell align="left">{order.price *0.9}$</TableCell>
-              <TableCell align="left"> <Button onClick={() => handleOpen(order.id)}><PhotoIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
-              <TableCell align="left">{order.date}</TableCell>
-              <TableCell align="left"><Button onClick={() => handleOpen(order.id)}><PaymentIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
+              <TableCell align="left">{order.price??0 * 0.9}$</TableCell>
+              <TableCell align="left"> <Button onClick={() => {handleOpen(order.orderDetailID);handleGetBill(order.orderDetailID)}}><PhotoIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
+              <TableCell align="left">{order.dateOfPurchase?.toString()}</TableCell>
+              <TableCell align="left"><Button onClick={() => handleOpen2(order.orderDetailID)}><PaymentIcon fontSize="large" style={{marginLeft:'40px',color:'black'}}/></Button></TableCell>
              
-             
+             {/* Payment For Creator  */}
               <TableCell align="left">
-              {order.complete ? (
+              { orderHeader?.orderID?(
                 <Button color='success'>Complete</Button>
                ) : (
                 <div>
-                 {!acceptedItems[order.id] && (
-                <Button  onClick={() => handleAccept(order.id)}>Accept</Button>)}
-                {acceptedItems[order.id] && (
+                 {!acceptedItems[order.orderDetailID??1] && (
+                <Button  onClick={() => handleAccept(order.orderID)}>Accept</Button>)}
+                {acceptedItems[order.orderID??0] && (
                   <Button color='success'>Complete</Button>
                )}
 
@@ -139,18 +151,19 @@ const handleOpen2 = (id) => {
                 </TableCell>
              
 
-             {/* Backdrop */}
+             {/* Backdrop for bill image */}
                 <Backdrop
              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-             open={open && selectedOrderID === order.id}
+             open={open && selectedOrderID === order.orderDetailID}
              onClick={handleClose}
            >
             <Button onClick={handleClose} style={{fontSize:'50px', transform: 'translateY(-350px) translateX(800px)', color:'white'}}>X</Button>
-             <img src={order.image} style={{maxWidth:'700px'}}/>
+             <img src={`${bill}`} style={{maxWidth:'700px',height:'90vh'}}/>
            </Backdrop>
+                  {/* Backdrop for creator QR image */}
            <Backdrop
              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-             open2={open && selectedOrderID === order.id}
+             open={open2 && selectedOrderID === order.orderDetailID}
              onClick={handleClose}
            >
             <Button onClick={handleClose} style={{fontSize:'50px', transform: 'translateY(-350px) translateX(800px)', color:'white'}}>X</Button>
@@ -179,7 +192,3 @@ const handleOpen2 = (id) => {
 </Container>
   )
 }
-function useEffect(arg0: () => void, arg1: never[]) {
-  throw new Error('Function not implemented.');
-}
-
