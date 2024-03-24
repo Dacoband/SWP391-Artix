@@ -212,20 +212,20 @@ function UploadArtwork() {
                             //Formik Fields requires you to provide a context with FormikProvider with the difined 'formik' as value
                             >
                                 <div className='tagField' >
-                                    <FieldArray
+                                    <FieldArray 
                                         name="artworkTag"
                                         render={arrayHelpers => (
                                             <>
                                                 {formik.values.artworkTag.map((tag, index) => (
                                                     <div key={index}>
-                                                        <Select
+                                                        <Select style={{ color: theme.color}}
                                                             name={`artworkTag.${index}.tagID`}
                                                             value={tag.tagID}
                                                             onChange={formik.handleChange}
                                                         >
                                                             {listOfTags?.map((tag:Tag) => {
                                                                 return (
-                                                                    <MenuItem
+                                                                    <MenuItem 
                                                                         key={tag.tagID} value={tag.tagID}>
                                                                         {tag.tagName}
                                                                     </MenuItem>
@@ -233,7 +233,7 @@ function UploadArtwork() {
                                                             })}
 
                                                         </Select>
-                                                        <CustomizedButton
+                                                        <CustomizedButton style={{ color: theme.color,}}
 
                                                             onClick={() => arrayHelpers.remove(index)}
                                                         >
@@ -242,6 +242,7 @@ function UploadArtwork() {
                                                     </div>
                                                 ))}
                                                 <CustomizedButton
+                                                 style={{ color: theme.color,}}
 
                                                     onClick={() => {
                                                         arrayHelpers.push({

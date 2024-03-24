@@ -9,7 +9,9 @@ import '../../css/SeeMoreForYou.css';
 import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces';
 import { PlaceHoldersImageCard } from './PlaceHolders.jsx';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
+import { Link } from 'react-router-dom';
 export default function SeeMoreForYou() {
     const { theme } = useContext(ThemeContext)
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,13 +34,43 @@ export default function SeeMoreForYou() {
       return (
         <>
           {artworkList.map((work:Artwork) => (
+            <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
+
             <ImageListItem key={work.artworkID}>
+              {work.purchasable ?
+                <AttachMoneyIcon style={{
+                  position: 'absolute',
+                  backgroundColor: 'green', // Hex code for a yellow color
+                  color: 'white', // Icon color
+                  borderRadius: '50%', // Makes the background rounded
+                  padding: 'auto', // Adjust padding to manage the size of the rounded background
+                  margin: '5px', // Make the icon floating inside the image
+                  fontSize: '40px', // Adjust the size of the icon as needed
+                  // Add other styling properties as required for your specific icon
+                  bottom: 0,
+                  right: 0,
+                  zIndex: 2 // Ensure it's above the image
+                }} 
+                fontSize='large'
+                />
+                : ""}
               <img
+                style={{ cursor: 'pointer' }}
+                // onClick={() => handleClick(work.artworkID)}
                 src={`data:image/jpeg;base64,${work.imageFile}`}
                 alt={work.artworkName}
                 loading="lazy"
               />
-            </ImageListItem>
+            </ImageListItem></Link>
+            // <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
+            // <ImageListItem key={work.artworkID}>
+
+            //   <img
+            //     src={`data:image/jpeg;base64,${work.imageFile}`}
+            //     alt={work.artworkName}
+            //     loading="lazy"
+            //   />
+            // </ImageListItem></Link>
           ))}
         </>
       )

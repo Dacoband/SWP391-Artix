@@ -11,6 +11,7 @@ import { GetArtList } from '../../API/ArtworkAPI/GET.tsx';
 import { Artwork } from '../../Interfaces/ArtworkInterfaces';
 import { PlaceHoldersImageCard } from './PlaceHolders.jsx';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export default function SeeMoreOfArt1() {
   const { theme } = useContext(ThemeContext)
   const [currentPage, setCurrentPage] = useState(1);
@@ -35,14 +36,16 @@ export default function SeeMoreOfArt1() {
     getArtworks()
   }, [])
 
-  const handleClick = (artworkID) => {
-    redirect(`../artwork/${artworkID}`)
-  }
+  // const handleClick = (artworkID) => {
+  //   redirect(`../artwork/${artworkID}`)
+  // }
 
   function ArtWorkList() {
     return (
       <>
         {artworkList.map((work: Artwork) => (
+          <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
+
           <ImageListItem key={work.artworkID}>
             {work.purchasable ?
               <AttachMoneyIcon style={{
@@ -63,12 +66,13 @@ export default function SeeMoreOfArt1() {
               : ""}
             <img
               style={{ cursor: 'pointer' }}
-              onClick={() => handleClick(work.artworkID)}
+              // onClick={() => handleClick(work.artworkID)}
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
             />
-          </ImageListItem>
+          </ImageListItem></Link>
+
         ))}
       </>
     )
