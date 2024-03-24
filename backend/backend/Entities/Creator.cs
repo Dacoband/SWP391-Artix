@@ -8,7 +8,7 @@ namespace backend.Entities
         [Key]
         public int? CreatorID { get; set; } // PK
         public int? AccountID { get; set; }
-        public int? PaymentID  { get; set; } // FK
+        public int? PaymentID { get; set; } // FK
         public string UserName { get; set; }
         public string?  ProfilePicture { get; set; } // Có thể 
         public string? BackgroundPicture { get; set; }
