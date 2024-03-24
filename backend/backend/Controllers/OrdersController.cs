@@ -25,6 +25,7 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/5
+
     [HttpGet("AccountID/{AccountID}")]
     public ActionResult<IEnumerable<Order>> GetOrdersByAccountID(int AccountID)
     {
@@ -44,6 +45,9 @@ public class OrdersController : ControllerBase
         }
         return NotFound("Không tìm thấy Creator cho AccountID này.");
     }
+
+
+
     // POST: api/Orders
     [HttpPost]
     public ActionResult<Order> PostOrder([FromBody] Order order)
