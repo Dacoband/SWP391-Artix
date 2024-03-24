@@ -65,46 +65,95 @@ public class OrderDetailController : ControllerBase
 
         return Ok(orderDetail.PurchaseConfirmationImage);
     }
+    // GET: api/OrderDetail/orderID
+    [HttpGet("{orderId}")]
+    public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetailsByOrderId(int orderId)
+    {
+        var orderDetails = await _context.OrderDetail
+            .Where(od => od.OrderID == orderId)
+            .ToListAsync();
+
+        if (orderDetails == null || orderDetails.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(orderDetails);
+    }
+
+
+    [HttpGet("ByBuyer/{buyerId}")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetOrdersByBuyerId(int buyerId)
+    {
+        var orders = await _context.Orders
+            .Where(o => o.BuyerID == buyerId)
+            .ToListAsync();
+
+        if (orders == null)
+        {
+            return NotFound();
+        }
+
+        return orders;
+    }
+    [HttpGet("BySeller/{sellerId}")]
+    public async Task<ActionResult<IEnumerable<Order>>> GetOrdersBySellerId(int sellerId)
+    {
+        var orders = await _context.Orders
+            .Where(o => o.SellerID == sellerId)
+            .ToListAsync();
+
+        if (orders == null)
+        {
+            return NotFound();
+        }
+
+        return orders;
+    }
+
 
     [HttpGet("All")]
-    public async Task<ActionResult<IEnumerable<OrderDetail>>> GetAllOrderDetails()
+    public async Task<ActionResult<IEnumerable<OrderDetailDTO>>> GetAllOrderDetails()
     {
         var orderDetails = await _context.OrderDetail
     .Join(
-        _context.Orders, // Bảng Order
-        od => od.OrderID, // Khóa ngoại của OrderDetail
-        o => o.OrderID, // Khóa chính của Order
-        (od, o) => new { OrderDetail = od, Order = o }) // Select vào một anonymous object
+        _context.Orders,
+        od => od.OrderID,
+        o => o.OrderID,
+        (od, o) => new { OrderDetail = od, Order = o })
     .Join(
-        _context.Creators, // Bảng Creator
-        join => join.Order.CreatorID, // Khóa ngoại của Order
-        c => c.CreatorID, // Khóa chính của Creator
-        (join, c) => new { OrderDetail = join.OrderDetail, Creator = c }) // Select vào một anonymous object
+        _context.Creators, // Bảng Creators đầu tiên, liên quan đến Seller
+        join => join.Order.SellerID,
+        seller => seller.CreatorID, // Đổi tên bí danh của bảng Creators này thành seller
+        (join, seller) => new { join.OrderDetail, join.Order, Seller = seller })
     .Join(
-        _context.Artworks, // Bảng Artwork
-        join => join.OrderDetail.ArtWorkID, // Khóa ngoại của OrderDetail
-        a => a.ArtworkID, // Khóa chính của Artwork
-        (join, a) => new { join.OrderDetail, join.Creator, Artwork = a }) // Select vào một anonymous object
+        _context.Creators, // Bảng Creators thứ hai, liên quan đến Buyer
+        join => join.Order.BuyerID,
+        buyer => buyer.CreatorID, // Đổi tên bí danh của bảng Creators này thành buyer
+        (join, buyer) => new { join.OrderDetail, join.Seller, Buyer = buyer })
+    .Join(
+        _context.Artworks,
+        join => join.OrderDetail.ArtWorkID,
+        a => a.ArtworkID,
+        (join, a) => new { join.OrderDetail, join.Seller, join.Buyer, Artwork = a })
     .Select(join => new OrderDetailDTO
     {
         OrderDetailID = join.OrderDetail.OrderDetailID,
         OrderID = join.OrderDetail.OrderID,
-        CreatorUsername = join.Creator.UserName,
-        CreatorFirstName = join.Creator.FirstName,
-        ArtworkName = join.Artwork.ArtworkName,
-        ArtWorkID = join.Artwork.ArtworkID,
+        ArtWorkID = join.OrderDetail.ArtWorkID,
+        BuyerName = join.Buyer.UserName,
+        SellerName = join.Seller.UserName,
         DateOfPurchase = join.OrderDetail.DateOfPurchase,
         Price = join.OrderDetail.Price,
-        
-        // Các thông tin khác từ OrderDetail
+        PurchaseConfirmationImage = join.OrderDetail.PurchaseConfirmationImage
     })
     .ToListAsync();
 
         return Ok(orderDetails);
-
     }
-    // POST: api/OrderDetail
-    [HttpPost]
+
+        // POST: api/OrderDetail
+        [HttpPost]
     public async Task<ActionResult<OrderDetail>> PostOrderDetail(OrderDetail orderDetail)
     {
         _context.OrderDetail.Add(orderDetail);
@@ -138,12 +187,10 @@ public class OrderDetailDTO
 {
     public int OrderDetailID { get; set; }
     public int OrderID { get; set; }
-    public string CreatorUsername { get; set; } // Thêm thuộc tính này
-    public string CreatorFirstName { get; set; } // Đảm bảo rằng bạn đã có thuộc tính này trong lớp OrderDetailDTO
-    public string ArtworkName { get; set; }
-
     public int ArtWorkID { get; set; }
-    public DateTime DateOfPurchase { get; set; }
+    public string BuyerName { get; set; }
+    public string SellerName { get; set; }
+    public DateTime  DateOfPurchase { get; set; }
     public double Price { get; set; }
-    
+    public string PurchaseConfirmationImage { get; set; }
 }
