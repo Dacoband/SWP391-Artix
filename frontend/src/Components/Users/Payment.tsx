@@ -15,6 +15,7 @@ import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
 import { Creator } from '../../Interfaces/UserInterface.ts';
 import { GetTagByArtId } from '../../API/TagAPI/GET.tsx';
 import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 export default function Payment() {
   const { theme } = useContext(ThemeContext)
   // Up ảnh
@@ -98,12 +99,13 @@ export default function Payment() {
               <div>Step 2: Enter the description with this format:</div>
               <Typography variant="h6" color="error">[Your User Name] + [Account Email] + [Name Of The Artwork] + [Price]</Typography>
               <div style={{ marginBottom: '5%' }}>Step 3: Screenshot your payment and post it in the button below. </div>
+
               <CustomizedImageButton
                 name="imageFile"
                 onChange={handleImageChange}
                 fullWidth
               />
-              <Button variant='contained' disabled={preview??false}
+              <Button variant='contained' disabled={!preview}>Submit Payment</Button>
             </div>
           </div>
 
@@ -116,7 +118,10 @@ export default function Payment() {
                 `data:image/jpeg;base64,${adminQR}`
                 :
                 `/images/loadingImages.gif`
-              } style={{ width: '350px' }} /></div>
+              } style={{ width: '350px',height:"400px",margin:"2% 2% 2% 2%" }} />
+
+              {preview && (<img src={`${preview}`} style={{ width: '350px',height:"400px",margin:"2% 2% 2% 2%" }} />)}
+            </div>
             <h3>Account owner: Artix's Administrator</h3>
           </div>
         </Box>
