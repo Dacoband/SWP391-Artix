@@ -25,7 +25,40 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/5
+<<<<<<< HEAD
 
+=======
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Order>> GetOrder(int id)
+    {
+        var order = await _context.Orders.FindAsync(id);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        return order;
+    }
+
+    // GET: api/Orders/CreatorID/5
+    [HttpGet("CreatorID/{CreatorID}")]
+    public ActionResult<IEnumerable<Order>> GetOrdersByCreatorID(int CreatorID)
+    {
+        // Tìm các đơn hàng dựa trên CreatorID
+        var orders = _context.Orders.Where(o => o.CreatorID == CreatorID).ToList();
+
+        if (orders.Count > 0)
+        {
+            return Ok(orders);
+        }
+
+        return NotFound("Không tìm thấy đơn hàng cho CreatorID này.");
+    }
+
+
+    // GET: api/Orders/5
+>>>>>>> d120d4f8599b2fed24e4347a4b2f1a95c895623f
     [HttpGet("AccountID/{AccountID}")]
     public ActionResult<IEnumerable<Order>> GetOrdersByAccountID(int AccountID)
     {
@@ -64,9 +97,56 @@ public class OrdersController : ControllerBase
             _context.SaveChanges();
 
             return Ok(order);
+    }
+    // PUT: api/Orders/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutOrder(int id, [FromBody] Order order)
+    {
+        if (id != order.OrderID)
+        {
+            return BadRequest("Invalid ID");
         }
-        
-    
+
+        var existingOrder = await _context.Orders.FindAsync(id);
+
+        if (existingOrder == null)
+        {
+            return NotFound();
+        }
+
+        // Cập nhật các trường của đơn hàng từ dữ liệu đầu vào
+        existingOrder.CreatorID = order.CreatorID;
+        existingOrder.Confirmation = order.Confirmation;
+
+        _context.Entry(existingOrder).State = EntityState.Modified;
+
+        try
+        {
+            await _context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!OrderExists(id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                throw;
+            }
+        }
+
+        return Ok("Order updated successfully");
+    }
+
+    // Phương thức kiểm tra xem một đơn hàng có tồn tại trong DB không
+    private bool OrderExists(int id)
+    {
+        return _context.Orders.Any(e => e.OrderID == id);
+    }
+
+
+
 
     // DELETE: api/Orders/5
     [HttpDelete("{id}")]
