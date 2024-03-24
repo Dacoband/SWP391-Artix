@@ -636,27 +636,43 @@ public class ArtworksController : ControllerBase
 
 
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteArtwork(int id)
+    
+    [HttpDelete("{artworkId}")]
+    public async Task<IActionResult> DeleteArtwork(int artworkId)
     {
-        var artwork = await _context.Artworks.FindAsync(id);
-        if (artwork == null)
-        {
-            return NotFound();
+        
+            // Kiểm tra xem tác phẩm tồn tại hay không
+            var artwork = await _context.Artworks.FindAsync(artworkId);
+            if (artwork == null)
+            {
+                return NotFound("Artwork not found.");
+            }
+
+            // Xóa các dữ liệu liên quan trước
+            // Ví dụ: Xóa các bình luận liên quan đến tác phẩm
+            var comments = await _context.Comments.Where(c => c.ArtWorkID == artworkId).ToListAsync();
+            _context.Comments.RemoveRange(comments);
+
+            var artworkTags = await _context.ArtworkTag.Where(at => at.ArtworkID == artworkId).ToListAsync();
+            _context.ArtworkTag.RemoveRange(artworkTags);
+
+            // Ví dụ: Xóa các báo cáo liên quan đến tác phẩm
+            var reports = await _context.Reports.Where(r => r.ReportedCreatorID == artworkId).ToListAsync();
+            _context.Reports.RemoveRange(reports);
+
+            // Ví dụ: Xóa các thông báo liên quan đến tác phẩm
+            var notifications = await _context.Notification.Where(n => n.ArtWorkID == artworkId).ToListAsync();
+            _context.Notification.RemoveRange(notifications);
+            // Tiếp tục xóa các dữ liệu liên quan khác nếu cần
+
+            // Sau khi xóa các dữ liệu liên quan, xóa tác phẩm
+            _context.Artworks.Remove(artwork);
+            await _context.SaveChangesAsync();
+
+            return Ok("Artwork deleted successfully.");
         }
-
-     
-        // Xóa các bản ghi từ bảng ArtworkTag liên quan đến Artworks
-        var relatedArtworkTags = _context.ArtworkTag.Where(at => at.ArtworkID == id);
-        _context.ArtworkTag.RemoveRange(relatedArtworkTags);
-
-        // Sau đó mới xóa bản ghi từ bảng Artworks
-        _context.Artworks.Remove(artwork);
-
-        await _context.SaveChangesAsync();
-
-        return NoContent();
-    }
+        
+    
 
 
 }
