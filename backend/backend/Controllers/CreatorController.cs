@@ -149,6 +149,39 @@ public class CreatorController : ControllerBase
 
         return creators;
     }
+    [HttpGet("NotProfile/NotBackground/{CreatorID}")]
+    public async Task<ActionResult<IEnumerable<Creator>>> GetCreatorsNotProAndBack(int CreatorID)
+    {
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == CreatorID)
+            .Select(c => new Creator
+            {
+                CreatorID = c.CreatorID,
+                AccountID = c.AccountID,
+                PaymentID = c.PaymentID,
+                UserName = c.UserName,
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Email = c.Email,
+                Address = c.Address,
+                Phone = c.Phone,
+                LastLogDate = c.LastLogDate,
+                AllowCommission = c.AllowCommission,
+                Biography = c.Biography,
+                VIP = c.VIP,
+                FollowCounts = c.FollowCounts,
+
+            })
+            .ToListAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        return creator;
+    }
+
 
     [HttpGet("NotBackground")]
     public async Task<ActionResult<IEnumerable<Creator>>> GetCreatorsNotBack()

@@ -39,6 +39,8 @@ public class OrdersController : ControllerBase
         return order;
     }
 
+
+
     // GET: api/Orders/CreatorID/5
     [HttpGet("CreatorID/{CreatorID}")]
     public ActionResult<IEnumerable<Order>> GetOrdersByCreatorID(int CreatorID)
@@ -56,6 +58,10 @@ public class OrdersController : ControllerBase
 
 
     // GET: api/Orders/5
+<<<<<<< HEAD
+=======
+
+>>>>>>> Main
     [HttpGet("AccountID/{AccountID}")]
     public ActionResult<IEnumerable<Order>> GetOrdersByAccountID(int AccountID)
     {
@@ -76,10 +82,43 @@ public class OrdersController : ControllerBase
         return NotFound("Không tìm thấy Creator cho AccountID này.");
     }
 
+    [HttpGet("HaveAccount/{orderID}")]
+    public async Task<ActionResult<OrderWithAccountIDDTO>> GetOrderHaveAccountID(int orderID)
+    {
+        // Lấy thông tin đơn đặt hàng
+        var order = await _context.Orders.FindAsync(orderID);
+
+        if (order == null)
+        {
+            return NotFound();
+        }
+
+        // Lấy thông tin accountID từ bảng Creator dựa vào CreatorID của đơn đặt hàng
+        var creator = await _context.Creators
+            .Where(c => c.CreatorID == order.CreatorID)
+            .FirstOrDefaultAsync();
+
+        if (creator == null)
+        {
+            return NotFound();
+        }
+
+        // Tạo DTO chứa thông tin của đơn đặt hàng và accountID từ bảng Creator
+        var orderWithAccountIDDTO = new OrderWithAccountIDDTO
+        {
+            OrderID = order.OrderID,
+            CreatorID = order.CreatorID,
+            Confirmation = order.Confirmation,
+            AccountID = creator.AccountID // Thêm thông tin accountID vào DTO
+        };
+
+        return orderWithAccountIDDTO;
+    }
 
 
-    // POST: api/Orders
-    [HttpPost]
+
+// POST: api/Orders
+       [HttpPost]
     public ActionResult<Order> PostOrder([FromBody] Order order)
     {
         
@@ -95,6 +134,9 @@ public class OrdersController : ControllerBase
 
             return Ok(order);
     }
+
+
+
     // PUT: api/Orders/5
     [HttpPut("{id}")]
     public async Task<IActionResult> PutOrder(int id, [FromBody] Order order)
@@ -160,4 +202,11 @@ public class OrdersController : ControllerBase
 
         return NoContent();
     }
+}
+public class OrderWithAccountIDDTO
+{
+    public int OrderID { get; set; }
+    public int CreatorID { get; set; }
+    public bool Confirmation { get; set; }
+    public int? AccountID { get; set; }
 }
