@@ -8,6 +8,17 @@ const creatonobackgroundimageurl = `https://localhost:7233/api/Creator/NotBackgr
 const accountemailurl = 'https://localhost:7233/api/Account/email/'
 const countcreatorurl = "https://localhost:7233/api/Creator/CountCreators"
 const creatorvipstatusurl = `https://localhost:7233/api/Creator/GetID/UserName/Vip`
+const gettotalartworklikesbycreatorurl = `https://localhost:7233/api/artworks/total-likes/`
+
+export async function GetTotalLikeByCreatorID(id:string|number) {
+  try{
+      let total:number = await axios.get(gettotalartworklikesbycreatorurl+id).then(response => response.data)
+      return total
+      
+  }catch(err){
+    console.log(err)
+  }
+}
 
 export async function GetCreatorListNoImage() {
   try{
