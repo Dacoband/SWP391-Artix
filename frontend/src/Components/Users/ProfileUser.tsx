@@ -168,15 +168,16 @@ export default function ProfileUser() {
     return (
       <ImageList variant="masonry" cols={3} gap={8}>
         {artworks.map((work) => (
-          <ImageListItem key={work.artworkID}>
-            <Link to={`../artwork//${work.artworkID}`}>
-            <img
-              src={`data:image/jpeg;base64,${work.imageFile}`}
-              alt={work.artworkName}
-              loading="lazy"
-            />
-            </Link>
-          </ImageListItem>
+          <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
+            <ImageListItem key={work.artworkID}>
+              <img
+                src={`data:image/jpeg;base64,${work.imageFile}`}
+                alt={work.artworkName}
+                loading="lazy"
+              />
+
+            </ImageListItem>
+          </Link>
         ))}
       </ImageList>
     )
@@ -186,13 +187,13 @@ export default function ProfileUser() {
       <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible' }} cols={4}>
         {artworks.map((work) => (
           <ImageListItem key={work.artworkID}>
-            <Link to={`../artwork//${work.artworkID}`}>
-            <img
-              src={`data:image/jpeg;base64,${work.imageFile}`}
-              alt={work.artworkName}
-              loading="lazy"
-              style={{ height: '200px' }}
-            />
+            <Link to={`../artwork/${work.artworkID}`}>
+              <img
+                src={`data:image/jpeg;base64,${work.imageFile}`}
+                alt={work.artworkName}
+                loading="lazy"
+                style={{ height: '200px' }}
+              />
             </Link>
             <ImageListItemBar
               title={work.price}
@@ -217,19 +218,20 @@ export default function ProfileUser() {
         {artworks.map((work) => (
           <ImageListItem key={work.artworkID}>
             <Link to={`../artwork/${work.artworkID}`}>
-            <img
-              src={`data:image/jpeg;base64,${work.imageFile}`}
-              alt={work.artworkName}
-              loading="lazy"
-            />
-            </Link>
-          </ImageListItem>
-        ))}
-      </ImageList>
+              <img
+                src={`data:image/jpeg;base64,${work.imageFile}`}
+                alt={work.artworkName}
+                loading="lazy"
+              />
+            </Link >
+          </ImageListItem >
+        ))
+        }
+      </ImageList >
     )
   }
-//Popup Report
-const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
+  //Popup Report
+  const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
   const handleClickOpen = () => {
@@ -247,8 +249,8 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
   const handleClose1 = () => {
     setOpen1(false);
   };
-   // Xử lý gửi báo cáo
-   const handleSubmitReport = (event) => {
+  // Xử lý gửi báo cáo
+  const handleSubmitReport = (event) => {
     event.preventDefault();
     if (!reportReason) {
       // Kiểm tra nếu lý do không được điền
@@ -383,7 +385,7 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
       <div className='tabsBackground' style={{ backgroundColor: theme.backgroundColor }} >
         <div className='inforuser2'>
           <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: '2px solid #ECECEC'  }} className='navofuser'>
+            <Box sx={{ borderBottom: '2px solid #ECECEC' }} className='navofuser'>
               <div className='navuser'>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" style={{ color: theme.color2, zIndex: '7' }}>
                   <Tab label="Home" {...a11yProps(0)} style={{ color: theme.color2, }} />
@@ -406,75 +408,75 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
                 }
 
                 {/* Popup Report */}
-                  <Dialog
+                <Dialog
                   open={open}
                   onClose={handleClose}
                   PaperProps={{
-                  component: 'form',
-                  onSubmit: (event) => {
-                   event.preventDefault();
-                   const formData = new FormData(event.currentTarget);
-                   const formJson = Object.fromEntries(formData.entries());
-                  const email = formJson.email;
-                  console.log(email);
-                   handleClose();
-                  },
-                   }}
-                  >
+                    component: 'form',
+                    onSubmit: (event) => {
+                      event.preventDefault();
+                      const formData = new FormData(event.currentTarget);
+                      const formJson = Object.fromEntries(formData.entries());
+                      const email = formJson.email;
+                      console.log(email);
+                      handleClose();
+                    },
+                  }}
+                >
                   <DialogTitle>Report Information</DialogTitle>
                   <DialogContent>
-                  <DialogContentText>
-                  If this user violates community standards, please report the reason to us,
-                   Artix's moderators will review and handle this as soon as possible.
-                </DialogContentText>
-                <TextField
-                autoFocus
-                required
-                margin="dense"
-                id="reportID"
-                label="Reason for being reported"
-               fullWidth
-               multiline
-               rows={4}
-               variant="outlined"
-               style={{marginTop:'25px'}}
-               value={reportReason}
-            onChange={(e) => setReportReason(e.target.value)}
-               
-              />
-               </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}  variant="outlined"  color="error">Cancel</Button>
-          <Button type="submit"  variant="outlined" onClick={handleSubmitReport} >Report</Button>
-        </DialogActions>
-      </Dialog>
+                    <DialogContentText>
+                      If this user violates community standards, please report the reason to us,
+                      Artix's moderators will review and handle this as soon as possible.
+                    </DialogContentText>
+                    <TextField
+                      autoFocus
+                      required
+                      margin="dense"
+                      id="reportID"
+                      label="Reason for being reported"
+                      fullWidth
+                      multiline
+                      rows={4}
+                      variant="outlined"
+                      style={{ marginTop: '25px' }}
+                      value={reportReason}
+                      onChange={(e) => setReportReason(e.target.value)}
 
-      <Dialog
-    open={open1}
-    onClose={handleClose1}
-    aria-labelledby="alert-dialog-title"
-    aria-describedby="alert-dialog-description"
-    maxWidth="sm"
-    >
-    <DialogTitle id="alert-dialog-title">
-      {"Congraturation"}
-    </DialogTitle>
-    <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-      <Alert severity="success">
-    <AlertTitle>Report this user as successful!</AlertTitle>
-    </Alert>
-      </DialogContentText>
-    </DialogContent>
-    <DialogActions>
-    
-      <Button autoFocus onClick={handleClose1}>
-       Close
-      </Button>
-      
-    </DialogActions>
-  </Dialog>
-      
+                    />
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose} variant="outlined" color="error">Cancel</Button>
+                    <Button type="submit" variant="outlined" onClick={handleSubmitReport} >Report</Button>
+                  </DialogActions>
+                </Dialog>
+
+                <Dialog
+                  open={open1}
+                  onClose={handleClose1}
+                  aria-labelledby="alert-dialog-title"
+                  aria-describedby="alert-dialog-description"
+                  maxWidth="sm"
+                >
+                  <DialogTitle id="alert-dialog-title">
+                    {"Congraturation"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                      <Alert severity="success">
+                        <AlertTitle>Report this user as successful!</AlertTitle>
+                      </Alert>
+                    </DialogContentText>
+                  </DialogContent>
+                  <DialogActions>
+
+                    <Button autoFocus onClick={handleClose1}>
+                      Close
+                    </Button>
+
+                  </DialogActions>
+                </Dialog>
+
               </div>
             </Box>
             <CustomTabPanel value={value} index={0} >
@@ -513,16 +515,16 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1} >
-              <div style={{marginLeft:'120px'}}>
-              {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}</div>
+              <div style={{ marginLeft: '120px' }}>
+                {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}</div>
             </CustomTabPanel>
 
 
             <CustomTabPanel value={value} index={2}>
 
-              
-                {artworks.length !== 0 ? <AllImage /> : <PlaceHoldersImageCard />}
-              
+
+              {artworks.length !== 0 ? <AllImage /> : <PlaceHoldersImageCard />}
+
             </CustomTabPanel>
 
           </Box>

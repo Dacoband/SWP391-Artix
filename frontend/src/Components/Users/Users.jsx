@@ -42,6 +42,7 @@ export default function Users() {
             <Route path={`artworkform`} element={<UploadArtwork />} />
             <Route path={`profile/:id/commission`} element={<CommissionForm />} />
             <Route path={`dashboarduser`} element={<DashboardUser />} />
+            <Route path={`profile/:id/artwork/:id`} element={<ArtPost />} />
           </Route>
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1 />} />
           <Route path={`userrecomment`} element={<SeeMoreUser />} />

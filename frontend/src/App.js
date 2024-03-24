@@ -13,25 +13,13 @@ function App() {
   console.log(role)
   return (
     <div className='App'>
-        {/* <Menu />
-        <div className="background" style={{ backgroundImage: `url('${listofimages[currentIndex]}')`, transition: theme.transition }}>
-        <Routes>
-          <Route path='/' element={<Page />}> </Route>
-          <Route path='/Details/:id' element={<PeopleDetail />}></Route>
-          <Route path='/Update/:id' element={<UpdatePeople />}></Route>
-          <Route path='/Create' element={<CreatePeople />}></Route>
-        </Routes>
-        </div>
-        <Footer /> 
-        These are later use :>
-        */}
+      
         <Routes>
           <Route path='/' element={<FrontPage/>}/>
           <Route path='/unauthorized' element={<Unauthorized/>}/>
           <Route element={<ProtectedRoute allowedRoles={['AD']}/>}>
             <Route path="/admin/*" element={<RouterAdmin/>}></Route>
           </Route>
-          <Route path="/mod" element={<Mod/>}></Route>
           <Route path="/createaccount" element={<CreateAccount/>}/>
           <Route path="/characters/*" element={<Users/>}></Route>
         </Routes>
