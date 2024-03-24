@@ -22,9 +22,10 @@ import { OrderDetails, OrderHeader } from '../../Interfaces/OrderInterfaces.ts';
 import { PostOrderDetail, PostOrderHeader } from '../../API/OrderAPI/POST.tsx';
 export default function Payment() {
   const { theme } = useContext(ThemeContext)
-  // Up ảnh
-  //  t copy sai hay sao á
-  // ktra lại giúp nhaa
+  const savedAuth = sessionStorage.getItem('auth');
+  // Check if there's any auth data saved and parse it
+  const user:Creator = savedAuth ? JSON.parse(savedAuth) : null;
+  // Now 'auth' contains your authentication state or null if there's nothing saved
   const { id } = useParams();
   const [preview, setPreview] = useState<string | null | undefined>(null);
   const [adminQR, setAdminQR] = useState<String | null | undefined>(null);
@@ -93,7 +94,8 @@ export default function Payment() {
     try {
       let orderHeader: OrderHeader = {
         orderID: '0',
-        creatorID: creator?.creatorID,
+        sellerID: creator?.creatorID,
+        buyerID:user.creatorID,
         confirmation: false
       }
       const order = await PostOrderHeader(orderHeader)

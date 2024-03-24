@@ -1,6 +1,7 @@
 export interface OrderHeader {
     orderID: string
-    creatorID: string | undefined
+    sellerID: string | undefined
+    buyerID:string | undefined
     confirmation: boolean | false
 }
 
