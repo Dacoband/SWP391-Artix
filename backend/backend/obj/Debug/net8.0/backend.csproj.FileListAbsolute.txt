@@ -388,7 +388,6 @@ D:/SWP_Artix/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.MvcApplicatio
 D:/SWP_Artix/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.MvcApplicationPartsAssemblyInfo.cache
 D:/SWP_Artix/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.sourcelink.json
 >>>>>>> Tuyet
-<<<<<<< HEAD
 D:\SWP_Artix\SWP391-Artix\backend\backend\bin\Debug\net8.0\appsettings.Development.json
 D:\SWP_Artix\SWP391-Artix\backend\backend\bin\Debug\net8.0\appsettings.json
 D:\SWP_Artix\SWP391-Artix\backend\backend\bin\Debug\net8.0\backend.exe
@@ -515,7 +514,6 @@ D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\refint\backend.dll
 D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.pdb
 D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
-=======
 D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\appsettings.Development.json
 D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\appsettings.json
 D:\SWP391-Artix\backend\backend\bin\Debug\net8.0\backend.exe
@@ -642,4 +640,3 @@ D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\refint\backend.dll
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.pdb
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
->>>>>>> Main
