@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Entities;
 
+
 [ApiController]
 [Route("api/[controller]")]
 public class OrdersController : ControllerBase
@@ -104,7 +105,7 @@ public class OrdersController : ControllerBase
         var orderWithAccountIDDTO = new OrderWithAccountIDDTO
         {
             OrderID = order.OrderID,
-            CreatorID = order.SellerID,
+            SellerID = order.SellerID,
             Confirmation = order.Confirmation,
             AccountID = creator.AccountID ,
             BuyerID =order.BuyerID// Thêm thông tin accountID vào DTO
@@ -206,7 +207,7 @@ public class OrdersController : ControllerBase
 public class OrderWithAccountIDDTO
 {
     public int OrderID { get; set; }
-    public int? CreatorID { get; set; }
+    public int? SellerID { get; set; }
     public bool Confirmation { get; set; }
     public int? AccountID { get; set; }
 
