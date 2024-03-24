@@ -65,6 +65,22 @@ public class OrderDetailController : ControllerBase
 
         return Ok(orderDetail.PurchaseConfirmationImage);
     }
+    // GET: api/OrderDetail/orderID
+    [HttpGet("{orderId}")]
+    public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetailsByOrderId(int orderId)
+    {
+        var orderDetails = await _context.OrderDetail
+            .Where(od => od.OrderID == orderId)
+            .ToListAsync();
+
+        if (orderDetails == null || orderDetails.Count == 0)
+        {
+            return NotFound();
+        }
+
+        return Ok(orderDetails);
+    }
+
 
     [HttpGet("All")]
     public async Task<ActionResult<IEnumerable<OrderDetailDTO>>> GetAllOrderDetails()
