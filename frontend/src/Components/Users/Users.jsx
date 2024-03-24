@@ -20,6 +20,7 @@ import CommissionForm from './CommissionForm.tsx';
 import YourCommission from './YourCommission.tsx';
 import YourRequest from './YourRequest.tsx';
 import TransactionHistory from './TransactionHistory.jsx';
+import Payment from './Payment.jsx';
 export default function Users() {
   return (
     <div>
@@ -35,6 +36,7 @@ export default function Users() {
           <Route path={`profile/:id/commission`} element={<CommissionForm/>}/>
           
           <Route path={`artwork/:id`} element={<ArtPost />}/>
+          <Route path={`artwork/:id/payment`} element={<Payment />}/>
 
           <Route path={`artwordrecomment`} element={<SeeMoreOfArt1/>}/>
           <Route path={`userrecomment`} element={<SeeMoreUser/>}/>
@@ -43,6 +45,8 @@ export default function Users() {
           <Route path={`yourcommision`} element={<YourCommission/>}/>
           <Route path={`yourrequest`} element={<YourRequest/>}/>
           <Route path={`transaction`} element={<TransactionHistory/>}/>
+          {/* <Route path={`payment`} element={<Payment/>}/> */}
+         
         </Routes>
         <Outlet />
         {/* Outlet is use to render child components */}

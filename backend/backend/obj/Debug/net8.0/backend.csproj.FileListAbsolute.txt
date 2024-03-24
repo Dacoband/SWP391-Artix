@@ -125,6 +125,7 @@
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/Debug/net8.0/ref/backend.dll
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.AssemblyReference.cache
 D:\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.GeneratedMSBuildEditorConfig.editorconfig
@@ -379,3 +380,13 @@ D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csp
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 D:\FPT_Learning\SWP391\SWP391-Artix\backend\backend\obj\Debug\net8.0\ref\backend.dll
 >>>>>>> Main
+=======
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.AssemblyReference.cache
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.GeneratedMSBuildEditorConfig.editorconfig
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.AssemblyInfoInputs.cache
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.AssemblyInfo.cs
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.csproj.CoreCompileInputs.cache
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.MvcApplicationPartsAssemblyInfo.cs
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.MvcApplicationPartsAssemblyInfo.cache
+D:\SWP_Artix\SWP391-Artix\backend\backend\obj\Debug\net8.0\backend.sourcelink.json
+>>>>>>> Tuyet
