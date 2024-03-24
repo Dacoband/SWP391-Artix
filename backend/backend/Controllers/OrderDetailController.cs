@@ -129,7 +129,7 @@ public class OrderDetailController : ControllerBase
         SellerName = join.Seller.UserName,
         DateOfPurchase = join.OrderDetail.DateOfPurchase,
         Price = join.OrderDetail.Price,
-        PurchaseConfirmationImage = join.OrderDetail.PurchaseConfirmationImage
+        
     })
     .ToListAsync();
 
@@ -176,5 +176,5 @@ public class OrderDetailDTO
     public string SellerName { get; set; }
     public DateTime  DateOfPurchase { get; set; }
     public double Price { get; set; }
-    public string PurchaseConfirmationImage { get; set; }
+    
 }
