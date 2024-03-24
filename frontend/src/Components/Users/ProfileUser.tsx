@@ -168,13 +168,14 @@ export default function ProfileUser() {
     return (
       <ImageList variant="masonry" cols={3} gap={8}>
         {artworks.map((work) => (
+           <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
           <ImageListItem key={work.artworkID}>
             <img
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
             />
-          </ImageListItem>
+          </ImageListItem></Link>
         ))}
       </ImageList>
     )
@@ -183,6 +184,7 @@ export default function ProfileUser() {
     return (
       <ImageList sx={{ width: 1200, height: 'auto', overflow: 'visible' }} cols={4}>
         {artworks.map((work) => (
+           <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
           <ImageListItem key={work.artworkID}>
             <img
               src={`data:image/jpeg;base64,${work.imageFile}`}
@@ -202,7 +204,7 @@ export default function ProfileUser() {
                 </IconButton>
               }
             />
-          </ImageListItem>
+          </ImageListItem></Link>
         ))}
       </ImageList>
     )
@@ -211,13 +213,14 @@ export default function ProfileUser() {
     return (
       <ImageList variant="masonry" cols={4} gap={8}>
         {artworks.map((work) => (
+           <Link key={work.artworkID} to={`artwork/${work.artworkID}`}>
           <ImageListItem key={work.artworkID}>
             <img
               src={`data:image/jpeg;base64,${work.imageFile}`}
               alt={work.artworkName}
               loading="lazy"
             />
-          </ImageListItem>
+          </ImageListItem></Link>
         ))}
       </ImageList>
     )
