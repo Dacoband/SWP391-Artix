@@ -17,7 +17,7 @@ namespace backend.Entities
         // Các DbSet
         public DbSet<Creator> Creators { get; set; }
         public DbSet<Tags> Tags { get; set; }
-        public DbSet<PaypalAccount> PayPalAccount { get; set; }
+        public DbSet<Payment> Payment { get; set; }
         public DbSet<Roles> Roles { get; set; }
         public DbSet<Account> Account { get; set; }
         public DbSet<Moderators> Moderators { get; set; }
