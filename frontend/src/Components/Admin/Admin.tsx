@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Box, Typography, Paper } from '@mui/material';
-import AdminNavbar from './NavigationAd';
-import MyLineChart from './Charts/LineChart';
+import AdminNavbar from './NavigationAd.jsx';
+import MyLineChart from './Charts/LineChart.jsx';
 import '../../css/Admin.css';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import Avatar from '@mui/material/Avatar';
 import { Doughnut } from 'react-chartjs-2';
 import PeopleIcon from '@mui/icons-material/People';
-import { Work } from '../../share/ListofWork';
-import { ListofUsers } from '../../share/ListofUsers';
+import CircularProgress from '@mui/material/CircularProgress';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -21,13 +20,16 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { GetArtListCount, GetRecent7ArtList, GetRecentArtListLikeCount } from '../../API/ArtworkAPI/GET.tsx';
 import { GetCreatorListCount, GetCreatorListNoImage } from '../../API/UserAPI/GET.tsx';
+import { Creator } from '../../Interfaces/UserInterface.ts';
+import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
 
 
 export default function Admin() {
-  const [artcount, setArtCount] = useState()
-  const [creatorcount, setCreatorCount] = useState()
-  const [nearest7arts, setNearest7Arts] = useState([])
-  const [creatorlist, setCreatorList] = useState([])
+  const [artcount, setArtCount] = useState<number>()
+  const [creatorcount, setCreatorCount] = useState<Creator[]>()
+  const [nearest7arts, setNearest7Arts] = useState<Artwork[]>()
+  const [creatorlist, setCreatorList] = useState<Creator[]>()
+  const [loading, setLoading] = useState(false)
   useEffect(() => {
     const getArtworkCount = async () => {
       let artCount = await GetArtListCount()
@@ -39,12 +41,14 @@ export default function Admin() {
     }
 
     const getNearest7Arts = async () => {
+      setLoading(true)
       let nearest7arts = await GetRecentArtListLikeCount()
-      setNearest7Arts(nearest7arts)
+      setLoading(false)
+      setNearest7Arts(nearest7arts??[])
     }
-    const getCreatorDetails= async () => {
+    const getCreatorDetails = async () => {
       let creatorDetails = await GetCreatorListNoImage()
-      setCreatorList(creatorDetails)
+      setCreatorList(creatorDetails??[])
     }
     getCreatorDetails()
     getNearest7Arts()
@@ -106,13 +110,8 @@ export default function Admin() {
       },
     },
   };
-
-
-
-  // sơ đồ 2
-  // số lượng user vip ( vip =true)
-  const uservip = creatorlist.filter(user => user.vip === true).length;
-  const usernonvip = creatorlist.length - uservip;
+  const uservip = creatorlist?.filter(user => user.vip === true).length;
+  const usernonvip = creatorlist? (creatorlist.length - uservip??0):(0);
   const data2 = {
     labels: ['Non-VIP Users', 'VIP Users'],
     datasets: [
@@ -156,8 +155,8 @@ export default function Admin() {
     },
   };
   // sơ đồ 1
-  const labels = nearest7arts.map(art => art.artworkID)
-  const likesList = nearest7arts.map(art => art.totalLikes)
+  const labels = nearest7arts ? nearest7arts.map(art => art.artworkID) : []
+  const likesList = nearest7arts ? nearest7arts.map(art => art.likes) : []
   const data = {
     labels,
     datasets: [
@@ -203,39 +202,44 @@ export default function Admin() {
                 <PeopleIcon sx={{ width: 40, height: 40, }} />
               </Avatar>
               <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
-                Total Users:
-
+                Total Users: {creatorcount?.length}
               </Typography>
-              <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
-                {creatorcount}
-              </Typography>
-
             </Box>
 
           </div>
 
           {/* biểu đồ người dùng và biểu đồ art */}
           <div className='allchart'>
+            {loading===true ?
+              <CircularProgress
+                color='primary'
+                size={100}
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '40%',
+                }}
+              />
+              : ""}
             <Box className='boxchart'>
               <div className='chart' style={{ width: '700px', margin: 'auto', padding: '25px' }}>
                 <Bar options={options} data={data} />
               </div>
               <div className='nameworks-container'>
-                  {nearest7arts.map((work, index) => (
-                    <div className='namework' key={index}>
-                      {work.artworkID}: {work.artworkName}
-                      {/* {work.date} */}
-                    </div>
-                  ))}
-                </div>
+                {nearest7arts?.map((work, index) => (
+                  <div className='namework' key={index}>
+                    {work.artworkID}: {work.artworkName}
+                    {/* {work.date} */}
+                  </div>
+                ))}
+              </div>
             </Box>
 
 
             <Box className='boxdoughnut'>
               <div className='doughnut' style={{ width: '350px' }}>
-                <h4>Total:{creatorcount} Users</h4>
+                <h4>Total Users:{creatorcount?.length}</h4>
                 <Doughnut options={options2} data={data2} />
-                
               </div>
             </Box>
           </div>

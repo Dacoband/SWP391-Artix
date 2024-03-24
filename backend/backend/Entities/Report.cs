@@ -6,8 +6,8 @@ namespace backend.Entities
     {
         [Key]
         public int ReportID { get; set; }
-        public int ArtWorkID { get; set; }
-        public int CommentID { get; set; }
-        public int CreatorID { get; set; }
+        public int ReporterID { get; set; }
+        public int ReportedCreatorID { get; set; }
+        public string Description { get; set; }
     }
 }

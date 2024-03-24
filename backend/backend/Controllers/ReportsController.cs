@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using backend.Entities;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -36,6 +35,34 @@ public class ReportsController : ControllerBase
 
         return report;
     }
+    [HttpGet("GetAllReportJoinUserName")]
+    public IActionResult GetAllReport()
+    {
+        var AllReport = _context.Reports
+            .Select(cf => new
+            {
+                cf.ReportID,
+                cf.ReporterID,
+                cf.ReportedCreatorID,
+                cf.Description,
+  
+                UserNameReproted = _context.Creators
+                    .Where(c => c.CreatorID == cf.ReportedCreatorID)
+                    .Select(c => c.UserName)
+                    .FirstOrDefault(), // Lấy email của người tạo yêu cầu
+            })
+            .ToList();
+
+        if (AllReport == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(AllReport);
+    }
+
+
+
 
     // POST: api/Reports
     [HttpPost]
@@ -56,7 +83,16 @@ public class ReportsController : ControllerBase
             return BadRequest();
         }
 
-        _context.Entry(report).State = EntityState.Modified;
+        var existingReport = await _context.Reports.FindAsync(id);
+
+        if (existingReport == null)
+        {
+            return NotFound();
+        }
+
+        existingReport.ReporterID = report.ReporterID;
+        existingReport.ReportedCreatorID = report.ReportedCreatorID;
+        existingReport.Description = report.Description;
 
         try
         {

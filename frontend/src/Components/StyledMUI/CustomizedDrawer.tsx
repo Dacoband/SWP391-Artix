@@ -22,6 +22,7 @@ import {ThemeContext} from '../Themes/ThemeProvider.tsx'
 import AppLogo from './AppLogo.jsx';
 import CustomizedButton from './CustomizedListedButton.tsx';
 import { Link } from 'react-router-dom';
+import RestoreIcon from '@mui/icons-material/Restore';
 export default function CustomizedDrawer() {
   const {theme} = useContext(ThemeContext)
   const [drawer, SetDrawer] = useState(false)
@@ -30,9 +31,9 @@ export default function CustomizedDrawer() {
   }
 
   const HomePage = ['View All', 'Hot Topic', 'You Loved These', 'Explore']
-  const Personal = ['Your Works', 'Your Commisions', 'Your Requests']
+  const Personal = ['Transaction History', 'Your Commisions', 'Your Requests']
   const linkListPersonal = [
-    '/chua',
+    'transaction',
     'yourcommision',
     'yourrequest'
   ];
@@ -44,7 +45,7 @@ export default function CustomizedDrawer() {
     <ExploreIcon/>,
   ]
   const IconListPersonal = [
-    <CropOriginalIcon/>,
+    <RestoreIcon/>,
     <MarkunreadMailboxRoundedIcon/>,
     <DesignServicesRoundedIcon/>
   ]

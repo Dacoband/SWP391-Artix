@@ -18,7 +18,7 @@ import { Divider } from '@mui/material';
 import { Tag } from '../Interfaces/TagInterface';
 import { GetTagByArtId } from '../API/TagAPI/GET.tsx';
 import { Watermark } from './StyledMUI/AppLogo.jsx';
-
+import { Link } from 'react-router-dom';
 
 export default function PostWork() {
   const colors = ["#82c87e", "#c07ec8", "#c89c7e", "#7E8DC8", "#C07EC8", "#C87E8A"];
@@ -104,8 +104,10 @@ export default function PostWork() {
             </div>
             <div style={{ margin: 'auto 5px', }}>
             {artwork?.purchasable? 
+           <Link to={`payment`}>
             <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
-            :""}
+           </Link>
+           :""}
             </div>
           </div>
           <div id='"#comment"'>

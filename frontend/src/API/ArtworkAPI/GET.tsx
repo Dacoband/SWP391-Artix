@@ -12,6 +12,7 @@ const nearest7artworkurl = `https://localhost:7233/api/artworks/recent7artworksN
 const artworkbycreatornoimageurl = `https://localhost:7233/api/artworks/ByCreatorIDNotImage/`
 const recentartworks = 'https://localhost:7233/api/artworks/recent-likes-summary'
 
+
 export async function GetArtsNoImageByCreatorId(id:string) {
   try{
       let artwork:Artwork[] = await axios.get(artworkbycreatornoimageurl+id).then(response => response.data)
