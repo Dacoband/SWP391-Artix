@@ -117,10 +117,10 @@ public class OrdersController : ControllerBase
         var orderWithAccountIDDTO = new OrderWithAccountIDDTO
         {
             OrderID = order.OrderID,
-            SellerID = order.SellerID ?? 0,
+            SellerID = order.SellerID ,
             Confirmation = order.Confirmation,
             AccountID = order.SellerID != null ? creator.AccountID ?? 0 : 0,
-            BuyerID = order.BuyerID ?? 0 // Thêm thông tin accountID vào DTOm thông tin accountID vào DTO
+            BuyerID = order.BuyerID 
 
         };
 
