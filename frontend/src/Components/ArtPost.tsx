@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import CommentIcon from '@mui/icons-material/Comment';
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import TestIcon from './TestIcon.jsx';
 import Comments from './Comments.jsx';
 import Box from '@mui/material/Box';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import { ListTag } from '../share/ListofTag.js';
 import { ThemeContext } from './Themes/ThemeProvider.tsx';
 import { GetArtById } from '../API/ArtworkAPI/GET.tsx';
@@ -14,11 +16,12 @@ import { GetCreatorByID } from '../API/UserAPI/GET.tsx';
 import { Creator } from '../Interfaces/UserInterface.ts';
 import Chip from '@mui/material/Chip';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import { Divider } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 import { Tag } from '../Interfaces/TagInterface';
 import { GetTagByArtId } from '../API/TagAPI/GET.tsx';
 import { Watermark } from './StyledMUI/AppLogo.jsx';
 import { Link } from 'react-router-dom';
+import { DeleteArtById } from '../API/ArtworkAPI/DELETE.tsx';
 
 export default function PostWork() {
   const colors = ["#82c87e", "#c07ec8", "#c89c7e", "#7E8DC8", "#C07EC8", "#C87E8A"];
@@ -27,12 +30,20 @@ export default function PostWork() {
   const [artwork, setArtwork] = useState<Artwork>()
   const [creator, setCreator] = useState<Creator>()
   const [tags, setTags] = useState<Tag[]>([])
+  const savedAuth = sessionStorage.getItem('auth');
+  const savedUser: Creator = savedAuth ? JSON.parse(savedAuth) : null;
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
   useEffect(() => {
+    
     const getArtWork = async () => {
+      setLoading(true)
       const artwork = await GetArtById(id ? id : "1");
       setArtwork(artwork)
       const creator = await GetCreatorByID(artwork ? artwork.creatorID : "1")
       setCreator(creator)
+      setLoading(false)
     }
     getArtWork()
   }, [id])
@@ -50,6 +61,16 @@ export default function PostWork() {
     console.info('You clicked the Chip.');
   };
 
+  const handleDelete = async()=>{
+    try{
+      setLoading(true)
+      const response = await DeleteArtById(artwork?.artworkID??"")
+      console.log(response.data)
+      setLoading(false)
+    }catch(err){
+      console.log(err)
+    }
+  }
   function TagList() {
     return (
       <>
@@ -65,11 +86,17 @@ export default function PostWork() {
   }
   return (
     <Box sx={{ paddingTop: '2%' }}>
+       <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 100 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className='poswork'
         style={{ backgroundColor: theme.backgroundColor, paddingBottom: '50px', color: theme.color }}
       >
         <div className='info-postwork'>
-          {artwork?.purchasable?<Watermark />:""}
+          {artwork?.purchasable ? <Watermark /> : ""}
           <div className='imgpost' style={{ backgroundColor: theme.hoverBackgroundColor }}>
             <img alt={artwork?.artworkName} src={`data:image/jpeg;base64,${artwork?.imageFile}`} />
           </div>
@@ -102,12 +129,17 @@ export default function PostWork() {
                 <h4 style={{ paddingTop: "5px" }} className='addfavourite'>Comment</h4>
               </a>
             </div>
+            {creator?.creatorID === savedUser.creatorID ?
+              <Button onClick={handleDelete} variant='contained' color='error' >Delete Artwork</Button>
+              :
+              ""
+            }
             <div style={{ margin: 'auto 5px', }}>
-            {artwork?.purchasable? 
-           <Link to={`payment`}>
-            <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
-           </Link>
-           :""}
+              {artwork?.purchasable ?
+                <Link to={`payment`}>
+                  <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
+                </Link>
+                : ""}
             </div>
           </div>
           <div id='"#comment"'>

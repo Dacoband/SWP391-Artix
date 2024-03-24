@@ -139,8 +139,8 @@ export default function ManageOrders() {
             <TableRow style={{ backgroundColor: '#0b81ff' }}>
 
               <TableCell style={{ color: 'white' }} align="left">Name Artwork</TableCell>
-              <TableCell style={{ color: 'white' }} align="left">Customer Name</TableCell>
-              <TableCell style={{ color: 'white' }} align="left">Artist</TableCell>
+              <TableCell style={{ color: 'white' }} align="left">Buyer Name</TableCell>
+              <TableCell style={{ color: 'white' }} align="left">Seller Name</TableCell>
               <TableCell style={{ color: 'white' }} align="left">Pice</TableCell>
               <TableCell style={{ color: 'white' }} align="left">Cost</TableCell>
               <TableCell style={{ color: 'white' }} align="left">Transaction image</TableCell>
