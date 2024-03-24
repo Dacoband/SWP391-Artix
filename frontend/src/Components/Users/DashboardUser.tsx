@@ -129,12 +129,12 @@ export default function DashboardUser() {
     scales: {
       x: {
         grid: {
-          color: '#ECECEC', // Màu của đường lưới trục X
-          lineWidth: 1, // Độ dày của đường lưới trục X
+          color: '#ECECEC',
+          lineWidth: 1, 
         },
         ticks: {
-          // color: 'theme.color2', // Màu của nhãn trục X
-          max: 10, // Số lượng thanh trục X
+         
+          max: 10, 
         },
       },
       y: {
@@ -143,7 +143,7 @@ export default function DashboardUser() {
           lineWidth: 1, // Độ dày của đường lưới trục Y
         },
         ticks: {
-          // color: 'black', // Màu của nhãn trục Y
+        
           max: 10, // Số lượng thanh trục Y
         },
       },
@@ -154,7 +154,7 @@ export default function DashboardUser() {
   // Sắp xếp danh sách tác phẩm theo thời gian từ mới nhất đến cũ nhất
   const sortedWork = artworkDatas?.sort((a, b) => new Date(b.dateCreated).getTime() - new Date(a.dateCreated).getTime());
   // Lấy 10 tác phẩm mới nhất
-  const latestWorks = artworkDatas?.slice(0, 10);
+  const latestWorks = sortedWork?.slice(0, 10);
   // lấy lượt like
   const sortedWork2 = artworkDatas?.sort((a, b) => b.likes - a.likes);
   const likeWorks = sortedWork2?.slice(0, 10);
@@ -166,7 +166,7 @@ export default function DashboardUser() {
 
   const data = {
 
-    labels,
+    labels: labels?.slice(0, 10),
     datasets: [
       {
         label: 'Number of likes',
@@ -186,7 +186,7 @@ export default function DashboardUser() {
     labels: labels2,
     datasets: [
       {
-        label: 'Số lượt like',
+        label: 'Number of likes',
         data: likeWorks?.map(work => work.likes),
         backgroundColor: '#01b8ef',
         boderColor: 'black',// Màu của cột chính
@@ -204,7 +204,7 @@ export default function DashboardUser() {
           color: theme.color,
           backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
           transition: theme.transition,
-          width: '85%',
+          width: '90%',
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
@@ -270,9 +270,10 @@ export default function DashboardUser() {
             <div className='line'>
               <Typography variant='h6' className='line1'> Total commission received: {commissionRecieved.length}   </Typography>
               <Typography variant='h6' className='line1'>Total commission sent :  {commissionSent.length}    </Typography>
+              <Typography variant='h6' className='line1'>Your post number: {artworkDatas?.length}  </Typography>
             </div>
             <div className='line'>
-              <Typography variant='h6' className='line1'>Your post number: {artworkDatas?.length}  </Typography>
+              
               <Typography variant='h6' className='line1'>Total number of likes: {totalLikes ?? 0} </Typography>
               <Typography variant='h6' className='line1'>Number of works sold: TOBEADDED </Typography>
               <Typography variant='h6' className='line1'>Number of works bought: TOBEADDED </Typography>

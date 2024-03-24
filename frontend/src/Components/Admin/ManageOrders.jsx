@@ -51,8 +51,8 @@ const handleAccept = (id) => {
   }));
 };
 //Backdrop Mui
-const [open, setOpen] = React.useState(false);
-const [open2, setOpen2] = React.useState(false);
+const [open, setOpen] = useState(false);
+const [open2, setOpen2] = useState(false);
 const [selectedOrderID, setSelectedOrderID] = useState(null);
 const handleClose = () => {
   setOpen(false);
@@ -137,7 +137,7 @@ const handleOpen2 = (id) => {
            </Backdrop>
            <Backdrop
              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-             open2={open && selectedOrderID === order.id}
+             open={open2 && selectedOrderID === order.id}
              onClick={handleClose}
            >
             <Button onClick={handleClose} style={{fontSize:'50px', transform: 'translateY(-350px) translateX(800px)', color:'white'}}>X</Button>
