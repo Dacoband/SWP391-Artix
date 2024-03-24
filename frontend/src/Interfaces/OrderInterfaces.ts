@@ -28,7 +28,7 @@ export interface OrderDetailsExtended {
     dateOfPurchase: Date | string | undefined
     price: number | undefined
     purchaseConfirmationImage: string | null
-    creatorUsername: string,
-    creatorFirstName: string,
+    buyerName: string,
+    sellerName: string,
     artworkName: string,
 }

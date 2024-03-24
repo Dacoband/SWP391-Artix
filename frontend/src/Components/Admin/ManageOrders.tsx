@@ -138,7 +138,7 @@ export default function ManageOrders() {
           <TableHead>
             <TableRow style={{ backgroundColor: '#0b81ff' }}>
 
-              <TableCell style={{ color: 'white' }} align="left">Name Artwork</TableCell>
+              <TableCell style={{ color: 'white' }} align="left">Order ID</TableCell>
               <TableCell style={{ color: 'white' }} align="left">Buyer Name</TableCell>
               <TableCell style={{ color: 'white' }} align="left">Seller Name</TableCell>
               <TableCell style={{ color: 'white' }} align="left">Pice</TableCell>
@@ -157,11 +157,11 @@ export default function ManageOrders() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {order.artworkName}
+                  {order.orderID}
                 </TableCell>
                 {/* userNamereceiver là của người bán */}
-                <TableCell align="left">{order.creatorFirstName}</TableCell>
-                <TableCell align="left">{order.creatorUsername}</TableCell>
+                <TableCell align="left">{order.buyerName}</TableCell>
+                <TableCell align="left">{order.sellerName}</TableCell>
                 <TableCell align="left">{order.price}$</TableCell>
                 <TableCell align="left">{order.price ?? 0 * 0.9}$</TableCell>
                 <TableCell align="left"> <Button onClick={() => { handleOpen(order.orderDetailID); handleGetBill(order.orderDetailID) }}><PhotoIcon fontSize="large" style={{ marginLeft: '40px', color: 'black' }} /></Button></TableCell>

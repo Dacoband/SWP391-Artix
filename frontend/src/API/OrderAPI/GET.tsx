@@ -13,6 +13,30 @@ const getorderdetailpaymenturl =`https://localhost:7233/api/OrderDetail/Purchase
 
 const getextendedorderdetail = `https://localhost:7233/api/OrderDetail/All`
 
+const getorderbysellerurl =`https://localhost:7233/api/OrderDetail/BySeller/`
+
+const getorderbybuyerurl =`https://localhost:7233/api/OrderDetail/ByBuyer/`
+
+export async function GetOrderDetailBySeller(id:string) {
+    
+    try{
+        let form:OrderDetailsExtended[] = await axios.get(getorderbysellerurl+id).then(response => response.data)
+        return form
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  export async function GetOrderDetailByBuyer(id:string) {
+    
+    try{
+        let form:OrderDetailsExtended[] = await axios.get(getorderbybuyerurl+id).then(response => response.data)
+        return form
+    }catch(err){
+      console.log(err)
+    }
+  }
+
 export async function GetOrderHeader() {
     try{
         let form:OrderHeader[] = await axios.get(orderheaderurl).then(response => response.data)

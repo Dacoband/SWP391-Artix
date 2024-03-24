@@ -19,7 +19,7 @@ import DashboardUser from './DashboardUser.tsx';
 import CommissionForm from './CommissionForm.tsx';
 import YourCommission from './YourCommission.tsx';
 import YourRequest from './YourRequest.tsx';
-import TransactionHistory from './TransactionHistory.jsx';
+import TransactionHistory from './TransactionHistory.tsx';
 import Payment from './Payment.tsx';
 import ProtectedRoute from '../../ProtectedRoutes/ProtectedRoute.tsx';
 export default function Users() {
