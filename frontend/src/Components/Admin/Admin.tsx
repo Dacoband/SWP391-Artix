@@ -27,8 +27,8 @@ import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
 export default function Admin() {
   const [artcount, setArtCount] = useState<number>()
   const [creatorcount, setCreatorCount] = useState<Creator[]>()
-  const [nearest7arts, setNearest7Arts] = useState<Artwork[]>([])
-  const [creatorlist, setCreatorList] = useState<Creator[]>([])
+  const [nearest7arts, setNearest7Arts] = useState<Artwork[]>()
+  const [creatorlist, setCreatorList] = useState<Creator[]>()
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const getArtworkCount = async () => {
@@ -110,8 +110,8 @@ export default function Admin() {
       },
     },
   };
-  const uservip = creatorlist.filter(user => user.vip === true).length;
-  const usernonvip = creatorlist.length - uservip;
+  const uservip = creatorlist?.filter(user => user.vip === true).length;
+  const usernonvip = creatorlist? (creatorlist.length - uservip??0):(0);
   const data2 = {
     labels: ['Non-VIP Users', 'VIP Users'],
     datasets: [
@@ -202,7 +202,7 @@ export default function Admin() {
                 <PeopleIcon sx={{ width: 40, height: 40, }} />
               </Avatar>
               <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
-                Total Users:  {creatorcount?.length}
+                Total Users: {creatorcount?.length}
               </Typography>
             </Box>
 
@@ -226,7 +226,7 @@ export default function Admin() {
                 <Bar options={options} data={data} />
               </div>
               <div className='nameworks-container'>
-                {nearest7arts.map((work, index) => (
+                {nearest7arts?.map((work, index) => (
                   <div className='namework' key={index}>
                     {work.artworkID}: {work.artworkName}
                     {/* {work.date} */}
@@ -240,7 +240,6 @@ export default function Admin() {
               <div className='doughnut' style={{ width: '350px' }}>
                 <h4>Total Users:{creatorcount?.length}</h4>
                 <Doughnut options={options2} data={data2} />
-
               </div>
             </Box>
           </div>
