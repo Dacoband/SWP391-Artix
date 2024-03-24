@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Box, Typography, Paper } from '@mui/material';
-import AdminNavbar from './NavigationAd';
-import MyLineChart from './Charts/LineChart';
+import AdminNavbar from './NavigationAd.jsx';
+import MyLineChart from './Charts/LineChart.jsx';
 import '../../css/Admin.css';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 import Avatar from '@mui/material/Avatar';
@@ -20,13 +20,15 @@ import {
 import { Bar } from 'react-chartjs-2';
 import { GetArtListCount, GetRecent7ArtList, GetRecentArtListLikeCount } from '../../API/ArtworkAPI/GET.tsx';
 import { GetCreatorListCount, GetCreatorListNoImage } from '../../API/UserAPI/GET.tsx';
+import { Creator } from '../../Interfaces/UserInterface.ts';
+import { Artwork } from '../../Interfaces/ArtworkInterfaces.ts';
 
 
 export default function Admin() {
-  const [artcount, setArtCount] = useState()
-  const [creatorcount, setCreatorCount] = useState()
-  const [nearest7arts, setNearest7Arts] = useState([])
-  const [creatorlist, setCreatorList] = useState([])
+  const [artcount, setArtCount] = useState<number>()
+  const [creatorcount, setCreatorCount] = useState<Creator[]>()
+  const [nearest7arts, setNearest7Arts] = useState<Artwork[]>()
+  const [creatorlist, setCreatorList] = useState<Creator[]>()
   const [loading, setLoading] = useState(false)
   useEffect(() => {
     const getArtworkCount = async () => {
@@ -42,11 +44,11 @@ export default function Admin() {
       setLoading(true)
       let nearest7arts = await GetRecentArtListLikeCount()
       setLoading(false)
-      setNearest7Arts(nearest7arts)
+      setNearest7Arts(nearest7arts??[])
     }
     const getCreatorDetails = async () => {
       let creatorDetails = await GetCreatorListNoImage()
-      setCreatorList(creatorDetails)
+      setCreatorList(creatorDetails??[])
     }
     getCreatorDetails()
     getNearest7Arts()
@@ -108,8 +110,8 @@ export default function Admin() {
       },
     },
   };
-  const uservip = creatorlist.filter(user => user.vip === true).length;
-  const usernonvip = creatorlist.length - uservip;
+  const uservip = creatorlist?.filter(user => user.vip === true).length;
+  const usernonvip = creatorlist? (creatorlist.length - uservip??0):(0);
   const data2 = {
     labels: ['Non-VIP Users', 'VIP Users'],
     datasets: [
@@ -154,7 +156,7 @@ export default function Admin() {
   };
   // sơ đồ 1
   const labels = nearest7arts ? nearest7arts.map(art => art.artworkID) : []
-  const likesList = nearest7arts ? nearest7arts.map(art => art.totalLikes) : []
+  const likesList = nearest7arts ? nearest7arts.map(art => art.likes) : []
   const data = {
     labels,
     datasets: [
@@ -200,13 +202,8 @@ export default function Admin() {
                 <PeopleIcon sx={{ width: 40, height: 40, }} />
               </Avatar>
               <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
-                Total Users:
-
+                Total Users: {creatorcount?.length}
               </Typography>
-              <Typography variant="h5" gutterBottom style={{ fontWeight: 'bold', color: '#666666', margin: 'auto 10px' }}>
-                {creatorcount}
-              </Typography>
-
             </Box>
 
           </div>
@@ -229,7 +226,7 @@ export default function Admin() {
                 <Bar options={options} data={data} />
               </div>
               <div className='nameworks-container'>
-                {nearest7arts.map((work, index) => (
+                {nearest7arts?.map((work, index) => (
                   <div className='namework' key={index}>
                     {work.artworkID}: {work.artworkName}
                     {/* {work.date} */}
@@ -241,9 +238,8 @@ export default function Admin() {
 
             <Box className='boxdoughnut'>
               <div className='doughnut' style={{ width: '350px' }}>
-                <h4>Total:{creatorcount} Users</h4>
+                <h4>Total Users:{creatorcount?.length}</h4>
                 <Doughnut options={options2} data={data2} />
-
               </div>
             </Box>
           </div>

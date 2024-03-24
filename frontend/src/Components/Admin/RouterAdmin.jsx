@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes, Outlet } from "react-router-dom";
-import Admin from './Admin';
+import Admin from './Admin.tsx';
 import AdminNavbar from './NavigationAd'
 import ListUser from './ListUser'
 import Report from'./Report'

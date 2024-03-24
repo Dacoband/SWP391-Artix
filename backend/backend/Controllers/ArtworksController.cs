@@ -573,7 +573,7 @@ public class ArtworksController : ControllerBase
                     .ToListAsync();
 
                 // Tính tổng lượng like của các artworks
-                var totalLikes = artworks.Sum(a => a.Likes);
+                var likes = artworks.Sum(a => a.Likes);
 
                 // Thêm thông tin của từng artwork vào danh sách kết quả
                 foreach (var artwork in artworks)
@@ -581,7 +581,7 @@ public class ArtworksController : ControllerBase
                     likeSummary.Add(new ArtworkLikesByDate
                     {
                         Date = date,
-                        TotalLikes = totalLikes,
+                        likes = likes,
                         ArtworkID = artwork.ArtworkID,
                         ArtworkName = artwork.ArtworkName
                     });
@@ -601,7 +601,7 @@ public class ArtworksController : ControllerBase
     public class ArtworkLikesByDate
     {
         public DateTime Date { get; set; }
-        public int TotalLikes { get; set; }
+        public int likes { get; set; }
 
         public int ArtworkID { get; set; }
         public string ArtworkName { get; set; }
