@@ -20,7 +20,7 @@ import CommissionForm from './CommissionForm.tsx';
 import YourCommission from './YourCommission.tsx';
 import YourRequest from './YourRequest.tsx';
 import TransactionHistory from './TransactionHistory.jsx';
-import Payment from './Payment.jsx';
+import Payment from './Payment.tsx';
 import ProtectedRoute from '../../ProtectedRoutes/ProtectedRoute.tsx';
 export default function Users() {
   return (
