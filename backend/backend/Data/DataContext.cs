@@ -8,6 +8,7 @@ namespace backend.Entities
     public class ApplicationDbContext : DbContext
     {
         private readonly IConfiguration Configuration;
+        internal IEnumerable<object> or;
 
         public ApplicationDbContext(IConfiguration configuration)
         {
