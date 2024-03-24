@@ -7,7 +7,8 @@ export interface OrderHeader {
 
 export interface OrderHeaderExtended {
     orderID: string | undefined
-    creatorID: string | undefined
+    sellerID: string | undefined
+    buyerID:string | undefined
     confirmation: boolean | false
     accountID:string
 }

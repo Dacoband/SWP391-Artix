@@ -64,8 +64,9 @@ export default function ManageOrders() {
     try {
       let orderHeader: OrderHeaderExtended = await GetOrderHeaderByID(id)
       const updateOrderHeader: OrderHeader = {
+        buyerID:orderHeader.buyerID,
+        sellerID:orderHeader.sellerID,
         orderID: orderHeader.orderID,
-        creatorID: orderHeader.creatorID,
         confirmation: true
       }
       const response = await PutOrderHeader(updateOrderHeader, orderHeader.orderID)
