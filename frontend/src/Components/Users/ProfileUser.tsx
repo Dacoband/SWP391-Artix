@@ -511,7 +511,7 @@ const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
 
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1} >
-              <div style={{marginLeft:'50px'}}>
+              <div style={{marginLeft:'120px'}}>
               {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}</div>
             </CustomTabPanel>
 

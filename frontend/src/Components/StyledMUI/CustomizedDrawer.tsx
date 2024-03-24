@@ -35,7 +35,16 @@ export default function CustomizedDrawer() {
   const linkListPersonal = [
     'transaction',
     'yourcommision',
-    'yourrequest'
+    'yourrequest',
+    `randomword`
+
+  ];
+  const linkListHomePage = [
+    `/characters`,
+    `artwordrecomment`,
+    `artwordrecomment`,
+
+
   ];
 
   const IconListHomePage = [
@@ -66,7 +75,7 @@ export default function CustomizedDrawer() {
       <List>
         {HomePage.map((text, index) => (
           <ListItem key={text} disablePadding>
-            <CustomizedButton >
+            <CustomizedButton  component={Link} to={linkListHomePage[index]} >
               <ListItemIcon sx={{color:theme.color}}>
                   {IconListHomePage[index]}
               </ListItemIcon>

@@ -60,7 +60,7 @@ export default function CustomizedDropdown({ user, handleClickAsGuest }: Customi
         </Divider>
         <MenuItem ><Link to={`profile/${user.creatorID}`}>Profile</Link></MenuItem>
         <MenuItem ><Link to={`dashboarduser`}>My Dashboard</Link></MenuItem>
-        <MenuItem >My Account</MenuItem>
+        {/* <MenuItem >My Account</MenuItem> */}
         <Divider sx={{ "&::before, &::after": { backgroundColor: theme.color } }} variant='middle'>
           <Typography variant='caption'>Theme</Typography>
         </Divider>
