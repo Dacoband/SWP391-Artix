@@ -25,15 +25,24 @@ public class OrdersController : ControllerBase
     }
 
     // GET: api/Orders/5
-    [HttpGet("creator/{creatorID}")]
-    public ActionResult<IEnumerable<Order>> GetOrdersByCreatorID(int creatorID)
+    [HttpGet("AccountID/{AccountID}")]
+    public ActionResult<IEnumerable<Order>> GetOrdersByAccountID(int AccountID)
     {
-        var orders = _context.Orders.Where(o => o.CreatorID == creatorID).ToList();
-        if (orders.Count > 0)
+        // Tìm creator dựa trên AccountID
+        var creator = _context.Creators.FirstOrDefault(c => c.AccountID == AccountID);
+
+        if (creator != null)
         {
-            return Ok(orders);
+            // Lấy danh sách các đơn hàng dựa trên CreatorID
+            var orders = _context.Orders.Where(o => o.CreatorID == creator.CreatorID).ToList();
+
+            if (orders.Count > 0)
+            {
+                return Ok(orders);
+            }
+            return NotFound("Không tìm thấy đơn hàng cho AccountID này.");
         }
-        return NotFound();
+        return NotFound("Không tìm thấy Creator cho AccountID này.");
     }
     // POST: api/Orders
     [HttpPost]
