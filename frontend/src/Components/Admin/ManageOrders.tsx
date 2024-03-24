@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Container, Box, Typography, Paper, Button } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,7 +13,21 @@ import { useState } from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import PaymentIcon from '@mui/icons-material/Payment'; 
+import { OrderDetails } from '../../Interfaces/OrderInterfaces.js';
+import { GetOrderDetailList } from '../../API/OrderAPI/GET.tsx';
+import { Payment } from '../../Interfaces/PaymentIntrerfaces.ts'
 export default function ManageOrders() {
+  const [orderList,setOderList] = useState<OrderDetails[]>()
+  const [payment,SetPayment] = useState<Payment>()
+  useEffect(() =>{
+    const getOrderList = async() =>{
+      let orderList:OrderDetails[]|undefined = await GetOrderDetailList()
+      setOderList(orderList)
+    }
+    getOrderList()
+  },[])
+
+
   //Mui Table page
   const [value, setValue] = useState(0);
   const handleChange = (event, newValue) => {
@@ -166,3 +179,7 @@ const handleOpen2 = (id) => {
 </Container>
   )
 }
+function useEffect(arg0: () => void, arg1: never[]) {
+  throw new Error('Function not implemented.');
+}
+
