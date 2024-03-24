@@ -557,7 +557,7 @@ public class CreatorController : ControllerBase
         _context.Notification.RemoveRange(notifications);
 
         // Xóa tất cả các bản ghi trong bảng Orders có CreatorID là creator.Id
-        var orders = await _context.Orders.Where(o => o.CreatorID == id).ToListAsync();
+        var orders = await _context.Orders.Where(o => o.SellerID == id).ToListAsync();
         foreach (var order in orders)
         {
             // Tìm và xóa tất cả các bản ghi trong bảng OrderDetail có OrderID là ID của đơn đặt hàng hiện tại
