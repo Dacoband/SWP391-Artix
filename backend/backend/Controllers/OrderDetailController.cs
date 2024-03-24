@@ -65,6 +65,44 @@ public class OrderDetailController : ControllerBase
 
         return Ok(orderDetail.PurchaseConfirmationImage);
     }
+
+    [HttpGet("All")]
+    public async Task<ActionResult<IEnumerable<OrderDetail>>> GetAllOrderDetails()
+    {
+        var orderDetails = await _context.OrderDetail
+    .Join(
+        _context.Orders, // Bảng Order
+        od => od.OrderID, // Khóa ngoại của OrderDetail
+        o => o.OrderID, // Khóa chính của Order
+        (od, o) => new { OrderDetail = od, Order = o }) // Select vào một anonymous object
+    .Join(
+        _context.Creators, // Bảng Creator
+        join => join.Order.CreatorID, // Khóa ngoại của Order
+        c => c.CreatorID, // Khóa chính của Creator
+        (join, c) => new { OrderDetail = join.OrderDetail, Creator = c }) // Select vào một anonymous object
+    .Join(
+        _context.Artworks, // Bảng Artwork
+        join => join.OrderDetail.ArtWorkID, // Khóa ngoại của OrderDetail
+        a => a.ArtworkID, // Khóa chính của Artwork
+        (join, a) => new { join.OrderDetail, join.Creator, Artwork = a }) // Select vào một anonymous object
+    .Select(join => new OrderDetailDTO
+    {
+        OrderDetailID = join.OrderDetail.OrderDetailID,
+        OrderID = join.OrderDetail.OrderID,
+        CreatorUsername = join.Creator.UserName,
+        CreatorFirstName = join.Creator.FirstName,
+        ArtworkName = join.Artwork.ArtworkName,
+        ArtWorkID = join.Artwork.ArtworkID,
+        DateOfPurchase = join.OrderDetail.DateOfPurchase,
+        Price = join.OrderDetail.Price,
+        
+        // Các thông tin khác từ OrderDetail
+    })
+    .ToListAsync();
+
+        return Ok(orderDetails);
+
+    }
     // POST: api/OrderDetail
     [HttpPost]
     public async Task<ActionResult<OrderDetail>> PostOrderDetail(OrderDetail orderDetail)
@@ -90,4 +128,22 @@ public class OrderDetailController : ControllerBase
 
         return NoContent();
     }
+}
+
+
+
+
+
+public class OrderDetailDTO
+{
+    public int OrderDetailID { get; set; }
+    public int OrderID { get; set; }
+    public string CreatorUsername { get; set; } // Thêm thuộc tính này
+    public string CreatorFirstName { get; set; } // Đảm bảo rằng bạn đã có thuộc tính này trong lớp OrderDetailDTO
+    public string ArtworkName { get; set; }
+
+    public int ArtWorkID { get; set; }
+    public DateTime DateOfPurchase { get; set; }
+    public double Price { get; set; }
+    
 }
