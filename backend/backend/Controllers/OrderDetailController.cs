@@ -37,7 +37,34 @@ public class OrderDetailController : ControllerBase
 
         return orderDetail;
     }
+    [HttpGet("GetNotImage")]
+    public async Task<ActionResult<IEnumerable<OrderDetail>>> GetOrderDetailsNotImage()
+    {
+        var orderDetails = await _context.OrderDetail
+            .Select(o => new OrderDetail
+            {
+                OrderDetailID = o.OrderDetailID,
+                OrderID = o.OrderID,
+                ArtWorkID = o.ArtWorkID,
+                DateOfPurchase = o.DateOfPurchase,
+                Price = o.Price
+            })
+            .ToListAsync();
 
+        return Ok(orderDetails);
+    }
+    [HttpGet("PurchaseConfirmationImage/{OrderDetailID}")]
+    public async Task<ActionResult<string>> GetPurchaseConfirmationImage(int OrderDetailID)
+    {
+        var orderDetail = await _context.OrderDetail.FindAsync(OrderDetailID);
+
+        if (orderDetail == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(orderDetail.PurchaseConfirmationImage);
+    }
     // POST: api/OrderDetail
     [HttpPost]
     public async Task<ActionResult<OrderDetail>> PostOrderDetail(OrderDetail orderDetail)
