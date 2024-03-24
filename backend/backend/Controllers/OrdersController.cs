@@ -46,7 +46,7 @@ public class OrdersController : ControllerBase
     public ActionResult<IEnumerable<Order>> GetOrdersByCreatorID(int CreatorID)
     {
         // Tìm các đơn hàng dựa trên CreatorID
-        var orders = _context.Orders.Where(o => o.CreatorID == CreatorID).ToList();
+        var orders = _context.Orders.Where(o => o.SellerID == CreatorID).ToList();
 
         if (orders.Count > 0)
         {
@@ -68,7 +68,7 @@ public class OrdersController : ControllerBase
         if (creator != null)
         {
             // Lấy danh sách các đơn hàng dựa trên CreatorID
-            var orders = _context.Orders.Where(o => o.CreatorID == creator.CreatorID).ToList();
+            var orders = _context.Orders.Where(o => o.SellerID == creator.CreatorID).ToList();
 
             if (orders.Count > 0)
             {
@@ -92,7 +92,7 @@ public class OrdersController : ControllerBase
 
         // Lấy thông tin accountID từ bảng Creator dựa vào CreatorID của đơn đặt hàng
         var creator = await _context.Creators
-            .Where(c => c.CreatorID == order.CreatorID)
+            .Where(c => c.CreatorID == order.SellerID)
             .FirstOrDefaultAsync();
 
         if (creator == null)
@@ -104,9 +104,11 @@ public class OrdersController : ControllerBase
         var orderWithAccountIDDTO = new OrderWithAccountIDDTO
         {
             OrderID = order.OrderID,
-            CreatorID = order.CreatorID,
+            CreatorID = order.SellerID,
             Confirmation = order.Confirmation,
-            AccountID = creator.AccountID // Thêm thông tin accountID vào DTO
+            AccountID = creator.AccountID ,
+            BuyerID =order.BuyerID// Thêm thông tin accountID vào DTO
+
         };
 
         return orderWithAccountIDDTO;
@@ -120,7 +122,7 @@ public class OrdersController : ControllerBase
     {
         
             // Kiểm tra xem CreatorID có tồn tại trong bảng Creators không
-            var creatorExists = _context.Creators.Any(c => c.CreatorID == order.CreatorID);
+            var creatorExists = _context.Creators.Any(c => c.CreatorID == order.SellerID);
             if (!creatorExists)
             {
                 return NotFound("CreatorID không tồn tại trong bảng Creators.");
@@ -151,8 +153,9 @@ public class OrdersController : ControllerBase
         }
 
         // Cập nhật các trường của đơn hàng từ dữ liệu đầu vào
-        existingOrder.CreatorID = order.CreatorID;
+        existingOrder.SellerID = order.SellerID;
         existingOrder.Confirmation = order.Confirmation;
+        existingOrder.BuyerID = order.BuyerID;
 
         _context.Entry(existingOrder).State = EntityState.Modified;
 
@@ -206,4 +209,6 @@ public class OrderWithAccountIDDTO
     public int CreatorID { get; set; }
     public bool Confirmation { get; set; }
     public int? AccountID { get; set; }
+
+    public int? BuyerID { get; set; }
 }
