@@ -301,7 +301,7 @@ public class ArtworksController : ControllerBase
 
     // GET: api/artworks/{id}
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetArtwork(int id)
+    public async Task<IActionResult> GetArtworkById(int id)
     {
         var artwork = await _context.Artworks
             .Include(a => a.ArtworkTag)
