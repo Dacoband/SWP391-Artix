@@ -1,0 +1,32 @@
+.contentpay{
+    display: flex;
+    margin: 50px 100px;
+    justify-content: space-between;
+}
+.box h1{
+    font-size: 35px;
+}
+.orderDetail{
+    width: 55%;
+    border-right:1px solid black ;
+}
+.inforQR{
+    width: 45%;
+}
+.image{
+    display: flex;
+    justify-content: center;
+   
+}
+.imagecontent h3{
+    text-align: center ;
+
+}
+.inforpay{
+    font-size: 20px;
+}
+.guide{
+    margin-top: 20px;
+    font-size: 20px;
+    padding-right: 20px;
+}

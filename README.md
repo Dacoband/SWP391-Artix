@@ -27,6 +27,8 @@
     - [Process 6](#process-6-payment-management)
   - ### Technologies
   - ### Use Case Diagram
+    - ### **Diagram:**
+      ![Diagram](UsecaseDiagram/Artix-Diagram.png)
   - ### Design Figma - Draw GUIs
     - ### **Login & Sign Up :**
       - Login Page :
@@ -97,8 +99,6 @@
 • Information
 
 • The Review of the work
-
-• Add wishlist
 
 ## Process 5 Cart Management
 

@@ -10,6 +10,8 @@ const artworkbycreatorurl = `https://localhost:7233/api/artworks/ByCreatorID/`
 const numberartworkurl = `https://localhost:7233/api/artworks/recent-artwork-count`
 const nearest7artworkurl = `https://localhost:7233/api/artworks/recent7artworksNotImage`
 const artworkbycreatornoimageurl = `https://localhost:7233/api/artworks/ByCreatorIDNotImage/`
+const recentartworks = 'https://localhost:7233/api/artworks/recent-likes-summary'
+
 
 export async function GetArtsNoImageByCreatorId(id:string) {
   try{
@@ -19,6 +21,17 @@ export async function GetArtsNoImageByCreatorId(id:string) {
     console.log(err)
   }
 }
+
+export async function GetRecentArtListLikeCount() {
+  try{
+      let artList:Artwork[] = await axios.get(recentartworks).then(response => response.data)
+      return artList
+      
+  }catch(err){
+    console.log(err)
+  }
+}
+
 export async function GetArtListCount() {
   try{
       let artList:number = await axios.get(numberartworkurl).then(response => response.data)

@@ -23,7 +23,8 @@
 //   };
 import { useNavigate } from 'react-router-dom';
 import '../../css/SearchResult.css';
-import PersonIcon from '@mui/icons-material/Person';
+
+import PaletteIcon from '@mui/icons-material/Palette';
 export const SearchResultsArtWork = ({ result, resultId }) => {
   const navigate = useNavigate();
 
@@ -42,7 +43,7 @@ export const SearchResultsArtWork = ({ result, resultId }) => {
 
   return (
     <div className="search-result" onClick={handleSelect}>
-     <PersonIcon/> {result}
+     <PaletteIcon/> {result}
     </div>
   );
 };

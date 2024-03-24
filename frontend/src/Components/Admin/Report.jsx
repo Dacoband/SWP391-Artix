@@ -45,7 +45,7 @@ export default function Report() {
 
 
   return (
-    <Container style={{marginLeft:'260px'}}>
+    <Container style={{marginLeft:'350px'}}>
     <Typography variant="h4" gutterBottom style={{fontWeight:'bold', marginTop:'40px'}}>
           List Of Report:
         </Typography>

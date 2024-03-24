@@ -17,7 +17,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Divider } from '@mui/material';
 import { Tag } from '../Interfaces/TagInterface';
 import { GetTagByArtId } from '../API/TagAPI/GET.tsx';
-
+import { Watermark } from './StyledMUI/AppLogo.jsx';
+import { Link } from 'react-router-dom';
 
 export default function PostWork() {
   const colors = ["#82c87e", "#c07ec8", "#c89c7e", "#7E8DC8", "#C07EC8", "#C87E8A"];
@@ -68,6 +69,7 @@ export default function PostWork() {
         style={{ backgroundColor: theme.backgroundColor, paddingBottom: '50px', color: theme.color }}
       >
         <div className='info-postwork'>
+          {artwork?.purchasable?<Watermark />:""}
           <div className='imgpost' style={{ backgroundColor: theme.hoverBackgroundColor }}>
             <img alt={artwork?.artworkName} src={`data:image/jpeg;base64,${artwork?.imageFile}`} />
           </div>
@@ -101,7 +103,11 @@ export default function PostWork() {
               </a>
             </div>
             <div style={{ margin: 'auto 5px', }}>
-              <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
+            {artwork?.purchasable? 
+           <Link to={`payment`}>
+            <Chip icon={<AttachMoneyIcon />} label={artwork?.price} onClick={handleClick} style={{ fontSize: '20px', padding: '20px', fontWeight: '600', backgroundColor: '#61dafb' }} />
+           </Link>
+           :""}
             </div>
           </div>
           <div id='"#comment"'>

@@ -7,6 +7,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthenContext.tsx';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 function AdminNavbar() {
   // The side drawer width
   const drawerWidth = 220;
@@ -58,6 +59,16 @@ function AdminNavbar() {
             </ListItemIcon>
             <ListItemText primary="Reports" />
           </ListItemButton></Link>
+          {/* ManageOrders */}
+          <Link to={'manageorders'}>
+          <ListItemButton button style={{width:'220px',marginLeft:'10px'}}>
+            <ListItemIcon>
+              <ManageAccountsIcon style={{color:'#fdfdff'}} />
+            </ListItemIcon>
+            <ListItemText primary="Manage Orders" />
+          </ListItemButton></Link>
+
+
           {/* Log out */}
           <ListItemButton button style={{width:'220px',marginLeft:'10px'}} onClick={logout}>
             <ListItemIcon>
@@ -65,6 +76,8 @@ function AdminNavbar() {
             </ListItemIcon>
             <ListItemText primary="Log out" />
           </ListItemButton>
+
+          
 
 
           

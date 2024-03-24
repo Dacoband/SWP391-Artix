@@ -2,7 +2,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import FrontPage from './Components/FrontPage.jsx';
-import Admin from './Components/Admin/Admin.jsx'
 import Mod from './Components/Mods/Mod.jsx';
 import Users from './Components/Users/Users.jsx';
 import CreateAccount from './Components/Forms/CreateAccount.tsx';

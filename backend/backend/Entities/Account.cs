@@ -11,6 +11,6 @@ namespace backend.Entities
         public int RoleID { get; set; } // FK
         public string? Password { get; set; }
         public string? Email { get; set; }
-        public  Boolean BanAccount { get; set; }
+        public  Boolean? BanAccount { get; set; }
     }
 }
