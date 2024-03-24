@@ -67,6 +67,7 @@ export default function PostWork() {
       const response = await DeleteArtById(artwork?.artworkID??"")
       console.log(response.data)
       setLoading(false)
+      navigate(`/characters/profile/${savedUser.creatorID}`)
     }catch(err){
       console.log(err)
     }
