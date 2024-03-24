@@ -1,14 +1,14 @@
 export interface OrderHeader {
-    orderID: string | number
-    accountID: string | number
+    orderID: string | undefined
+    creatorID: string | undefined
     confirmation: boolean | false
 }
 
 export interface OrderDetails {
-    orderDetailID: string | number
-    orderID: string | number
-    artWorkID: string | number
-    dateOfPurchase: Date | string
-    price: number
-    purchaseConfirmationImage: string
+    orderDetailID: string | undefined
+    orderID: string | undefined
+    artWorkID: string | undefined
+    dateOfPurchase: Date | string | undefined
+    price: number | undefined
+    purchaseConfirmationImage: string | undefined | null
 }
