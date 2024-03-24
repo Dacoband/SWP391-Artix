@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "D:\\SWP391-Artix\\backend\\backend\\backend.csproj": {}
   },
   "projects": {
@@ -13,37 +12,20 @@
         "projectPath": "D:\\SWP391-Artix\\backend\\backend\\backend.csproj",
         "packagesPath": "C:\\Users\\THY\\.nuget\\packages\\",
         "outputPath": "D:\\SWP391-Artix\\backend\\backend\\obj\\",
-=======
-    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {}
-  },
-  "projects": {
-    "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-        "projectName": "backend",
-        "projectPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/backend.csproj",
-        "packagesPath": "/Users/hendrix/.nuget/packages/",
-        "outputPath": "/Volumes/Ze_Data/Document/ReactProjects/SWP391-Artix/backend/backend/obj/",
->>>>>>> 4e0b5d5cedc8a964a7d844fd8f6c0c1ac513b258
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\THY\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
-=======
-          "/Users/hendrix/.nuget/NuGet/NuGet.Config"
->>>>>>> 4e0b5d5cedc8a964a7d844fd8f6c0c1ac513b258
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -147,11 +129,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
->>>>>>> 4e0b5d5cedc8a964a7d844fd8f6c0c1ac513b258
         }
       }
     }
