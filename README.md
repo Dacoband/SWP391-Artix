@@ -28,7 +28,7 @@
   - ### Technologies
   - ### Use Case Diagram
     - ### **Diagram:**
-      ![Diagram](UsecaseDiagram/Artix-Diagram.png)
+      ![Diagram](UsecaseDiagram/ArtixD.png)
   - ### Design Figma - Draw GUIs
     - ### **Login & Sign Up :**
       - Login Page :
