@@ -126,6 +126,4 @@
 
 • Apply discount code
 
-• Cancel payment
-
 • Check whether the payment is successful or not sent by the web side that accepts the payment (if successful, go back to the payment details page and show a successful payment popup to the customer/ if it fails, go back to the cart page and show payment failed)
