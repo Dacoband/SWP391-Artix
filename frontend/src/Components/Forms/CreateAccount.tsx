@@ -21,7 +21,7 @@ import { GetAccountByEmail } from '../../API/UserAPI/GET.tsx';
 import CustomizedSwitch from '../StyledMUI/CustomizedSwitch.jsx'
 import { FormControlLabel } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LoadingScreen from '../Users/LoadingScreen.jsx';
+import LoadingScreen from '../LoadingScreens/LoadingScreenSpokes.jsx';
 import CustomizedTextField from '../StyledMUI/CustomizedTextField.tsx';
 
 function LoginAsGuest() {

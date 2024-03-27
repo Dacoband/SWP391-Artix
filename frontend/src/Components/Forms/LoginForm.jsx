@@ -11,7 +11,7 @@ import { CheckLogin } from '../../Login/Norm/NormalLogin.tsx'
 import { useFormik } from 'formik'
 import * as Yup from "yup";
 import { useAuth } from '../../Components/AuthenContext.tsx';
-import LoadingScreen from '../Users/LoadingScreen.jsx'
+import LoadingScreen from '../LoadingScreens/LoadingScreenSpokes.jsx'
 import { useNavigate } from 'react-router-dom'
 
 export default function LoginForm({ disableOutsideClick, handleClick, backdrop, alternative }) {
