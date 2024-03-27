@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Entities;
 
+
 [ApiController]
 [Route("api/[controller]")]
 public class OrdersController : ControllerBase
@@ -90,24 +91,36 @@ public class OrdersController : ControllerBase
             return NotFound();
         }
 
-        // Lấy thông tin accountID từ bảng Creator dựa vào CreatorID của đơn đặt hàng
+        // Lấy thông tin accountID từ bảng Creator dựa vào SellerID của đơn đặt hàng
         var creator = await _context.Creators
             .Where(c => c.CreatorID == order.SellerID)
             .FirstOrDefaultAsync();
 
-        if (creator == null)
+        // Kiểm tra nếu SellerID không hợp lệ hoặc không có thông tin Creator tương ứng
+        if (order.SellerID != null && creator == null)
         {
-            return NotFound();
+            return BadRequest("Invalid SellerID or corresponding Creator not found");
+        }
+
+        // Lấy thông tin accountID từ bảng Creator dựa vào BuyerID của đơn đặt hàng
+        creator = await _context.Creators
+            .Where(c => c.CreatorID == order.BuyerID)
+            .FirstOrDefaultAsync();
+
+        // Kiểm tra nếu BuyerID không hợp lệ hoặc không có thông tin Creator tương ứng
+        if (order.BuyerID != null && creator == null)
+        {
+            return BadRequest("Invalid BuyerID or corresponding Creator not found");
         }
 
         // Tạo DTO chứa thông tin của đơn đặt hàng và accountID từ bảng Creator
         var orderWithAccountIDDTO = new OrderWithAccountIDDTO
         {
             OrderID = order.OrderID,
-            CreatorID = order.SellerID,
+            SellerID = order.SellerID ,
             Confirmation = order.Confirmation,
-            AccountID = creator.AccountID ,
-            BuyerID =order.BuyerID// Thêm thông tin accountID vào DTO
+            AccountID = order.SellerID != null ? creator.AccountID ?? 0 : 0,
+            BuyerID = order.BuyerID 
 
         };
 
@@ -206,7 +219,7 @@ public class OrdersController : ControllerBase
 public class OrderWithAccountIDDTO
 {
     public int OrderID { get; set; }
-    public int? CreatorID { get; set; }
+    public int? SellerID { get; set; }
     public bool Confirmation { get; set; }
     public int? AccountID { get; set; }
 
