@@ -79,6 +79,13 @@ export default function ProfileUser() {
   const [artworks, setArtworks] = useState<Artwork[]>([])
   const [previewProfile, setPreviewProfile] = useState<string>();
   const [previewBackground, setPreviewBackground] = useState<string>();
+    //Popup Report
+    const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
+    const [open, setOpen] = useState(false);
+    const [open1, setOpen1] = useState(false);
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
   let { id } = useParams()
   const { theme } = useContext(ThemeContext)
 
@@ -230,13 +237,7 @@ export default function ProfileUser() {
       </ImageList >
     )
   }
-  //Popup Report
-  const [reportReason, setReportReason] = useState(""); // Lý do báo cáo
-  const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+
 
 
   const handleClickOpen1 = () => {
@@ -511,24 +512,15 @@ export default function ProfileUser() {
                   </div>
                 </div>
               </div>
-
-
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1} >
               <div style={{ marginLeft: '120px' }}>
                 {artworks.length !== 0 ? <CostImage /> : <PlaceHoldersImageCard />}</div>
             </CustomTabPanel>
-
-
             <CustomTabPanel value={value} index={2}>
-
-
               {artworks.length !== 0 ? <AllImage /> : <PlaceHoldersImageCard />}
-
             </CustomTabPanel>
-
-          </Box>
-
+          </Box>  
         </div>
       </div>
     </div>
