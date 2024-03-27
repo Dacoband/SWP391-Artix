@@ -124,7 +124,7 @@ export default function TransactionHistory() {
           margin: 'auto',
           borderRadius: '5px',
           marginBottom: '15px',
-          minHeight: '700px'
+          minHeight: '900px'
         }}>
 
         <h1>Transaction History:</h1>
