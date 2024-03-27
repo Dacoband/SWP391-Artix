@@ -34,6 +34,7 @@ export default function Payment() {
   const [loading, setLoading] = useState(false)
   const [sendCompleted, setSendCompleted] = useState(false)
   const [open, setOpen] = useState(false);
+  const [blobImage, setBlobImage] = useState();
   const navigate = useNavigate()
   const handleCloseSnackbar = (event?: React.SyntheticEvent | Event, reason?: string) => {
     // Ignore close events from clicking away
@@ -62,7 +63,7 @@ export default function Payment() {
   })
 
 
-  const [blobImage, setBlobImage] = useState();
+
   //Covert Blob to Base64 string to easily view the image
   function blobToBase64(blob, callback) {
     const reader = new FileReader();
@@ -122,13 +123,14 @@ export default function Payment() {
 
 
   return (
+    <div style={{paddingTop:'4%',}}>
     <Box className='box'
       sx={{
         color: theme.color,
         backgroundColor: `rgba(${theme.rgbBackgroundColor},0.97)`,
         transition: theme.transition,
         width: '90%',
-        margin: 'auto',
+        margin: 'auto', 
         borderRadius: '5px',
         marginBottom: '15px',
         minHeight: '600px'
@@ -186,5 +188,6 @@ export default function Payment() {
         </Alert>
       </Snackbar>
     </Box>
+    </div>
   )
 }
