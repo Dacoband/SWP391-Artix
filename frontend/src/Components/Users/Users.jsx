@@ -32,8 +32,7 @@ export default function Users() {
           <Route path={`/`} element={<HomePage />} />
           <Route path={`creatorform`} element={<UserInfoForm />} />
           <Route path={`profile/:id`} element={<ProfileUser />} />
-
-          <Route path={`artwork/:id`} element={<ArtPost />} />
+  <Route path={`artwork/:id`} element={<ArtPost />} />
           <Route element={<ProtectedRoute allowedRoles={['AT','AD']} />}>
             <Route path={`artwork/:id/payment`} element={<Payment />} />
             <Route path={`yourcommision`} element={<YourCommission />} />
