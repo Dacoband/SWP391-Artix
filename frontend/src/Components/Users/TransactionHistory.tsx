@@ -82,9 +82,9 @@ export default function TransactionHistory() {
   useEffect(() => {
     const orderYouBuyandSell = async () => {
       setLoading(true)
-      let orderByBuyer: OrderDetailsExtended[] = await GetOrderDetailByBuyer(user.creatorID)
+      let orderByBuyer: OrderDetailsExtended[] = await GetOrderDetailByBuyer(user?.creatorID)
       setOrderByBuyer(orderByBuyer)
-      let orderBySeller: OrderDetailsExtended[] = await GetOrderDetailBySeller(user.creatorID)
+      let orderBySeller: OrderDetailsExtended[] = await GetOrderDetailBySeller(user?.creatorID)
       setOrderBySeller(orderBySeller)
       let orderHeader: OrderHeader[] | undefined = await GetOrderHeader()
       setOrderHeader(orderHeader)
@@ -151,9 +151,9 @@ export default function TransactionHistory() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {orderByBuyer.map((order) => (
+                  {orderByBuyer?.map((order) => (
                     <TableRow
-                      key={order.id}
+                      key={order.orderID}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
@@ -203,7 +203,7 @@ export default function TransactionHistory() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {orderBySeller.map((order) => (
+                  {orderBySeller?.map((order) => (
                     <TableRow
                       key={order.orderID}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
