@@ -3,7 +3,6 @@ import { Route, Routes, Outlet } from "react-router-dom"
 // eslint-disable-next-line
 import HomePage from './MainPage/HomePage.tsx';
 // eslint-disable-next-line 
-import Page from './Page.jsx';
 import Footer from './Footer.jsx';
 import Menu from './Menu.tsx';
 import Background from '../Themes/Background.jsx';
