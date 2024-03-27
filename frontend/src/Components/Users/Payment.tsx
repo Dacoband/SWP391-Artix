@@ -131,7 +131,7 @@ export default function Payment() {
         margin: 'auto',
         borderRadius: '5px',
         marginBottom: '15px',
-        minHeight: '800px'
+        minHeight: '900px'
       }}>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 100 }}
